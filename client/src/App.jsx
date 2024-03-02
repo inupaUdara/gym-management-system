@@ -6,19 +6,21 @@ import SignUp from "./pages/SignUp";
 import Dashboard from "./pages/Dashboard";
 import EmployeeLogin from "./pages/EmployeeLogin";
 import AdminDashboard from "./pages/AdminDashboard";
+import Payment from "./pages/Payment";
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/about" element={<About/>}/>
-        <Route path="/sign-in" element={<SignIn/>}/>
-        <Route path="/sign-up" element={<SignUp/>}/>
-        <Route path="/employee-login" element={<EmployeeLogin/>}/>
-        <Route path="/admin-dashboard" element={<AdminDashboard/>}/>
-        <Route path="/dashboard" element={<Dashboard/>}/>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/employee-login" element={<EmployeeLogin />} />
+        <Route path="/admin-dashboard" element={<AdminDashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/payment" element={<Payment />} />
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
