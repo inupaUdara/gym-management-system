@@ -3,26 +3,40 @@ import bcryptjs from "bcryptjs";
 import { errorHandler } from "../utills/error.js";
 import jwt from "jsonwebtoken";
 export const create = async (req, res, next) => {
-  const { name, email, password } = req.body;
+  const { firstname, lastname, address , email, nic, phone, role} = req.body;
 
   if (
-    !name ||
+    !firstname ||
+    !lastname ||
+    !address ||
     !email ||
-    !password ||
-    name === "" ||
+    !nic ||
+    !phone ||
+    !role ||
+    firstname === "" ||
+    lastname === "" ||
+    address === "" ||
     email === "" ||
-    password === ""
+    nic === ""  ||
+    phone === "" ||
+    role === ""
   ) {
     next(errorHandler(400, "All fields are required"));
   }
 
-  const hashedPassword = bcryptjs.hashSync(password, 10);
-  const nameToUsername = name.split(" ").join("") +  + Math.random().toString(9).slice(-4);
+  const hashedPassword = bcryptjs.hashSync(nic, 10);
+  const fullName = firstname + lastname;
+  const nameToUsername = fullName.split(" ").join("") +  + Math.random().toString(9).slice(-4);
   const newEmployee = new Employee({
-    name,
-    username: nameToUsername,
+    firstname,
+    lastname,
+    address,
     email,
+    nic,
+    phone,
+    username: nameToUsername,
     password: hashedPassword,
+    role,
   });
   try {
     await newEmployee.save();
@@ -33,14 +47,14 @@ export const create = async (req, res, next) => {
 };
 
 export const login = async (req, res, next) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  if (!username || !password || username === "" || password === "") {
+  if (!email || !password || email === "" || password === "") {
     next(errorHandler(400, "All fields are required"));
   }
 
   try {
-    const validEmployee = await Employee.findOne({ username });
+    const validEmployee = await Employee.findOne({ email });
     if (!validEmployee) {
       next(errorHandler(404, "User not found"));
     }
@@ -54,6 +68,7 @@ export const login = async (req, res, next) => {
     const token = jwt.sign(
       {
         empId: validEmployee._id,
+        isAdmin: validEmployee.isAdmin
       },
       process.env.JWT_SECRET_EMP
     );

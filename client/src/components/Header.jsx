@@ -1,31 +1,74 @@
 import { Link } from "react-router-dom";
-
+import { useSelector } from "react-redux";
+import { Avatar, Dropdown, DropdownDivider } from "flowbite-react";
+import logo from "../assets/cjgym.png";
 export default function Header() {
+  const { currentUser } = useSelector((state) => state.user);
   return (
-    <header className="bg-slate-200 shadow-md">
-      <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
+    <header className="border-b-2 border-b-black bg-gradient-to-r from-[#1f1f1f] to-[#4c0000] shadow-md relative">
+      <div className="flex justify-between items-center max-w-6xl mx-auto p-6">
         <Link to="/">
-          <h1 className="font-bold text-sm sm:text-xl flex flex-wrap">
-            <span className="text-slate-700">CJ</span>
-            <span className="text-slate-500">Gym</span>
-          </h1>
+          {/* <h2 className="font-light text-sm sm:text-xl flex flex-wrap text-[#D4D4D4]">
+            CJ Gym & Fitness Centre
+          </h2> */}
+          <img src={logo} alt="logo" className="w-40"/>
         </Link>
 
-        <ul className="flex gap-4">
+        <ul className="flex gap-10">
           <Link to="/">
-            <li className="hidden sm:inline text-slate-700 hover:underline">
+            <li className="hidden sm:inline text-[#D4D4D4] hover:underline">
               Home
             </li>
           </Link>
           <Link to="/about">
-            <li className="hidden sm:inline text-slate-700 hover:underline">
+            <li className="hidden sm:inline text-[#D4D4D4] hover:underline">
               About
             </li>
           </Link>
-          <Link to="/sign-in">
-            <li className=" text-slate-700 hover:underline">Sign in</li>
+          <Link to="#">
+            <li className="hidden sm:inline text-[#D4D4D4] hover:underline">
+              Memberships
+            </li>
+          </Link>
+          <Link to="#">
+            <li className="hidden sm:inline text-[#D4D4D4] hover:underline">
+              Shop
+            </li>
           </Link>
         </ul>
+
+        {currentUser ? (
+          <div className="">
+          <Dropdown
+            arrowIcon={false}
+            inline
+            label={
+              <Avatar alt="user" img={currentUser.profilePicture} rounded />
+            }
+            style={{ zIndex: 9 }}
+          >
+            <Dropdown.Header>
+              <span className="block text-sm">@{currentUser.username}</span>
+              <span className="block text-sm font-medium truncate">
+                {currentUser.email}
+              </span>
+            </Dropdown.Header>
+            <Link to={"/dashboard?tab=profile"}>
+              <Dropdown.Item>Profile</Dropdown.Item>
+            </Link>
+            <DropdownDivider />
+            <Dropdown.Item>Sign out</Dropdown.Item>
+          </Dropdown>
+          </div>
+        ) : (
+          <ul>
+            <Link to="/sign-in" className="flex gap-4">
+              <li className=" text-[#D4D4D4] hover:underline font-semibold">
+                Sign in
+              </li>
+            </Link>
+          </ul>
+        )}
       </div>
     </header>
   );
