@@ -38,7 +38,7 @@ export default function Header() {
         </ul>
 
         {currentUser ? (
-          <div className="">
+          
           <Dropdown
             arrowIcon={false}
             inline
@@ -53,13 +53,13 @@ export default function Header() {
                 {currentUser.email}
               </span>
             </Dropdown.Header>
-            <Link to={"/dashboard?tab=profile"}>
+            <Link to={"/admin-dashboard?tab=profile"}>
               <Dropdown.Item>Profile</Dropdown.Item>
             </Link>
             <DropdownDivider />
             <Dropdown.Item>Sign out</Dropdown.Item>
           </Dropdown>
-          </div>
+          
         ) : (
           <ul>
             <Link to="/sign-in" className="flex gap-4">

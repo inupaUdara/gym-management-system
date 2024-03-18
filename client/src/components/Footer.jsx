@@ -22,19 +22,7 @@ export default function FooterCom() {
             </Link>
           </div>
           <div className="grid grid-cols-2 gap-8 sm: mt-4 sm:grid-cols-3 sm:gap-6">
-            <div>
-              <Footer.Title title="about" className="text-[#d4d4d4]"/>
-              <Footer.LinkGroup col>
-                <Footer.Link
-                  href="/about"
-                  target="_self"
-                  rel="noopener noreferrer"
-                  className="text-[#d4d4d4]"
-                >
-                  CJ Gym & Fitness Centre
-                </Footer.Link>
-              </Footer.LinkGroup>
-            </div>
+            
             <div>
               <Footer.Title title="Quick Links" className="text-[#d4d4d4]"/>
               <Footer.LinkGroup col>
