@@ -9,7 +9,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import Header from "./components/Header";
 import AdminPrivateRoute from "./components/AdminPrivateRoute";
 import FooterCom from "./components/Footer";
-
+import Payment from "./pages/Payment";
 
 export default function App() {
   return (
@@ -20,13 +20,14 @@ export default function App() {
         <Route path="/about" element={<About />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/employee-login" element={<EmployeeLogin />} />
-        
+        <Route path="/employee-login" element={<EmployeeLogin />} />        
         <Route element={<AdminPrivateRoute />}>
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
         </Route>
-
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/admin-dashboard" element={<AdminDashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/payment" element={<Payment />} />
       </Routes>
       <FooterCom />
     </BrowserRouter>
