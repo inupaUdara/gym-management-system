@@ -1,3 +1,4 @@
+
 import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
 import { Button } from "flowbite-react";
@@ -7,6 +8,7 @@ export default function Home() {
 
   return (
     <>
+      <div>Home</div>
       <Header />
       <div>
         Home
