@@ -2,9 +2,10 @@ import homebg from "../assets/homebg.png";
 import Header from "../components/Header";
 
 export default function Home() {
+  const navigate = useNavigate();
+
   return (
-    <>
-      <div className="w-full h-screen bg-[url('./assets/homebg.png')] bg-center bg-cover">
+        <div className="w-full h-screen bg-[url('./assets/homebg.png')] bg-center bg-cover">
         {/* <img
           src={homebg}
           alt="homebg"

@@ -22,16 +22,17 @@ export default function App() {
         <Route path="/about" element={<About />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/employee-login" element={<EmployeeLogin />} />
-        
+        <Route path="/employee-login" element={<EmployeeLogin />} />        
         <Route element={<AdminPrivateRoute />}>
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route path="/view-employee-details/:empId" element={<AdminViewEmployeeDetails />} />
           <Route path="/view-instructor-request/:leaveId/:empId" element={<ManagerInstructorLeave />} />
 
         </Route>
-
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/admin-dashboard" element={<AdminDashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/payment" element={<Payment />} />
       </Routes>
       <FooterCom />
     </BrowserRouter>
