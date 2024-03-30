@@ -2,7 +2,7 @@ import { Modal, Table, Button } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
-
+import { Link } from "react-router-dom";
 
 export default function AdminDasManagers() {
   const { currentUser } = useSelector((state) => state.user);
@@ -86,13 +86,18 @@ export default function AdminDasManagers() {
                   <Table.Cell>
                     {new Date(employee.createdAt).toLocaleDateString()}
                   </Table.Cell>
+                  
                   <Table.Cell>
+                  <Link to={`/view-employee-details/${employee._id}`}>
                     <img
                       src={employee.profilePicture}
                       alt={employee.username}
                       className='w-10 h-10 object-cover bg-gray-500 rounded-full'
                     />
+                    </Link>
                   </Table.Cell>
+                  
+                  
                   <Table.Cell>{employee.firstname}</Table.Cell>
                   <Table.Cell>{employee.lastname}</Table.Cell>
                   <Table.Cell>{employee.username}</Table.Cell>

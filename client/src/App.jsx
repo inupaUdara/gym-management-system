@@ -9,6 +9,8 @@ import AdminDashboard from "./pages/AdminDashboard";
 import Header from "./components/Header";
 import AdminPrivateRoute from "./components/AdminPrivateRoute";
 import FooterCom from "./components/Footer";
+import AdminViewEmployeeDetails from "./components/AdminViewEmployeeDetails";
+import ManagerInstructorLeave from "./components/ManagerInstructorLeave";
 
 
 export default function App() {
@@ -24,6 +26,9 @@ export default function App() {
         
         <Route element={<AdminPrivateRoute />}>
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route path="/view-employee-details/:empId" element={<AdminViewEmployeeDetails />} />
+          <Route path="/view-instructor-request/:leaveId/:empId" element={<ManagerInstructorLeave />} />
+
         </Route>
 
         <Route path="/dashboard" element={<Dashboard />} />

@@ -129,7 +129,7 @@ export default function AdminDashSideBar() {
         )}
         
 
-        {currentUser.isAdmin && (
+        {currentUser.role === "Admin" && (
           <div
             className={`p-2.5 my-2 mx-2  flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
               activeTab === "emp" ? "bg-[#707070]" : ""

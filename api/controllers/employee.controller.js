@@ -19,8 +19,10 @@ export const getEmployees = async (req, res, next) => {
     const startIndex = parseInt(req.query.startIndex) || 0;
     const limit = parseInt(req.query.limit) || 9;
     const sortDirection = req.query.sort === 'asc' ? 1 : -1;
-    const role = req.query.role;
-    const employees = await Employee.find({role})
+    const employees = await Employee.find({
+      ...(req.query.role && { role: req.query.role }),
+      ...(req.query.empId && { _id: req.query.empId })
+    })
       .sort({ createdAt: sortDirection })
       .skip(startIndex)
       .limit(limit);

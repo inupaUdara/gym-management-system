@@ -32,7 +32,9 @@ export const getLeaves = async (req, res, next) => {
 
     try {
         const sortDirection = req.query.sort === 'asc' ? 1 : -1;
-        const leaves = await Leave.find()
+        const leaves = await Leave.find({
+            ...(req.query.leaveId && { _id: req.query.leaveId })
+        })
             .sort({ createdAt: sortDirection });
 
         res.status(200).json({leaves});
