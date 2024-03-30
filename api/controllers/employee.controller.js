@@ -52,3 +52,16 @@ export const getEmployees = async (req, res, next) => {
     next(error);
   }
 }
+
+
+export const deleteEmployee = async (req, res, next) => {
+  if (!req.user.isAdmin && req.user.id !== req.params.empId) {
+    return next(errorHandler(403, "You are not allowed to delete this user"));
+  }
+  try {
+    await Employee.findByIdAndDelete(req.params.empId);
+    res.status(200).json("Employee has been deleted");
+  } catch (error) {
+    next(error);
+  }
+};
