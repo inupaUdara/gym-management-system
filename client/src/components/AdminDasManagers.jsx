@@ -2,14 +2,14 @@ import { Modal, Table, Button } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
-import { FaCheck, FaTimes } from 'react-icons/fa';
+import { Link } from "react-router-dom";
 
 export default function AdminDasManagers() {
   const { currentUser } = useSelector((state) => state.user);
   const [employees, setUsers] = useState([]);
   const [showMore, setShowMore] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [userIdToDelete, setUserIdToDelete] = useState('');
+  const [empIdToDelete, setUserIdToDelete] = useState('');
   useEffect(() => {
     const fetchEmployees = async () => {
       try {
@@ -46,22 +46,22 @@ export default function AdminDasManagers() {
     }
   };
 
-  // const handleDeleteUser = async () => {
-  //   try {
-  //       const res = await fetch(`/api/user/delete/${userIdToDelete}`, {
-  //           method: 'DELETE',
-  //       });
-  //       const data = await res.json();
-  //       if (res.ok) {
-  //           setUsers((prev) => prev.filter((user) => user._id !== userIdToDelete));
-  //           setShowModal(false);
-  //       } else {
-  //           console.log(data.message);
-  //       }
-  //   } catch (error) {
-  //       console.log(error.message);
-  //   }
-  // };
+  const handleDeleteEmployee = async () => {
+    try {
+        const res = await fetch(`/api/employee/deleteemployee/${empIdToDelete}`, {
+            method: 'DELETE',
+        });
+        const data = await res.json();
+        if (res.ok) {
+            setUsers((prev) => prev.filter((employee) => employee._id !== empIdToDelete));
+            setShowModal(false);
+        } else {
+            console.log(data.message);
+        }
+    } catch (error) {
+        console.log(error.message);
+    }
+  };
 
   return (
     <div className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
@@ -69,30 +69,35 @@ export default function AdminDasManagers() {
         <>
           <Table hoverable className='shadow-md'>
             <Table.Head>
-              <Table.HeadCell>Date of register</Table.HeadCell>
-              <Table.HeadCell>Profile picture</Table.HeadCell>
-              <Table.HeadCell>First name</Table.HeadCell>
-              <Table.HeadCell>Last name</Table.HeadCell>
-              <Table.HeadCell>Username</Table.HeadCell>
-              <Table.HeadCell>Address</Table.HeadCell>
-              <Table.HeadCell>Email</Table.HeadCell>
-              <Table.HeadCell>NIC</Table.HeadCell>
-              <Table.HeadCell>Phone</Table.HeadCell>
-              <Table.HeadCell>Delete</Table.HeadCell>
+              <Table.HeadCell className='bg-[#1f1f1f] text-[#d4d4d4]'>Profile picture</Table.HeadCell>
+              <Table.HeadCell className='bg-[#1f1f1f] text-[#d4d4d4]'>First name</Table.HeadCell>
+              <Table.HeadCell className='bg-[#1f1f1f] text-[#d4d4d4]'>Last name</Table.HeadCell>
+              <Table.HeadCell className='bg-[#1f1f1f] text-[#d4d4d4]'>Username</Table.HeadCell>
+              <Table.HeadCell className='bg-[#1f1f1f] text-[#d4d4d4]'>Address</Table.HeadCell>
+              <Table.HeadCell className='bg-[#1f1f1f] text-[#d4d4d4]'>Date of register</Table.HeadCell>
+              <Table.HeadCell className='bg-[#1f1f1f] text-[#d4d4d4]'>Email</Table.HeadCell>
+              <Table.HeadCell className='bg-[#1f1f1f] text-[#d4d4d4]'>NIC</Table.HeadCell>
+              <Table.HeadCell className='bg-[#1f1f1f] text-[#d4d4d4]'>Phone</Table.HeadCell>
+              <Table.HeadCell className='bg-[#1f1f1f] text-[#d4d4d4]'>Delete</Table.HeadCell>
             </Table.Head>
             {employees.map((employee) => (
               <Table.Body className='divide-y' key={employee._id}>
-                <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
+                <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800 text-[#1f1f1f]'>
                   <Table.Cell>
                     {new Date(employee.createdAt).toLocaleDateString()}
                   </Table.Cell>
+                  
                   <Table.Cell>
+                  <Link to={`/view-employee-details/${employee._id}`}>
                     <img
                       src={employee.profilePicture}
                       alt={employee.username}
                       className='w-10 h-10 object-cover bg-gray-500 rounded-full'
                     />
+                    </Link>
                   </Table.Cell>
+                  
+                  
                   <Table.Cell>{employee.firstname}</Table.Cell>
                   <Table.Cell>{employee.lastname}</Table.Cell>
                   <Table.Cell>{employee.username}</Table.Cell>
@@ -141,7 +146,7 @@ export default function AdminDasManagers() {
               Are you sure you want to delete this user?
             </h3>
             <div className='flex justify-center gap-4'>
-              <Button color='failure'>
+              <Button color='failure' onClick={handleDeleteEmployee}>
                 Yes, I'm sure
               </Button>
               <Button color='gray' onClick={() => setShowModal(false)}>

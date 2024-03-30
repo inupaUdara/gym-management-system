@@ -4,6 +4,7 @@ import Cover_Image from "../assets/coverphoto.jpg";
 import { Alert, Spinner } from "flowbite-react";
 import { useDispatch, useSelector } from "react-redux";
 import { signInStart, signInSuccess, signInFailure } from "../redux/user/userSlice";
+import Header from "../components/Header";
 export default function EmployeeLogin() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
@@ -45,13 +46,14 @@ export default function EmployeeLogin() {
   }
 
   return (
-    
+    <>
+    <Header/>
     <div className="w-full h-screen flex">
       <div className="hidden md:relative md:w-1/2 h-screen md:flex flex-col">
         <div className="absolute top-[50%] left-[10%] flex flex-col"></div>
         <img src={Cover_Image} className="w-full h-full object-cover" />
       </div>
-      <div className="w-full md:w-1/2 h-full bg-[#1f1f1f] flex flex-col p-20 justify-center">
+      <div className="w-full md:w-1/2 h-screen bg-[#1f1f1f] flex flex-col p-20 justify-center">
         <div className="w-full flex flex-col max-w-[550px] m-auto">
           <div className="w-full flex flex-col mb-2">
             <h1 className="text-2xl font-normal text-[#d4d4d4] my-8">
@@ -103,5 +105,6 @@ export default function EmployeeLogin() {
         </div>
       </div>
     </div>
+    </>
   );
 }

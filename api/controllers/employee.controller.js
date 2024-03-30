@@ -19,8 +19,10 @@ export const getEmployees = async (req, res, next) => {
     const startIndex = parseInt(req.query.startIndex) || 0;
     const limit = parseInt(req.query.limit) || 9;
     const sortDirection = req.query.sort === 'asc' ? 1 : -1;
-    const role = req.query.role;
-    const employees = await Employee.find({role})
+    const employees = await Employee.find({
+      ...(req.query.role && { role: req.query.role }),
+      ...(req.query.empId && { _id: req.query.empId })
+    })
       .sort({ createdAt: sortDirection })
       .skip(startIndex)
       .limit(limit);
@@ -52,3 +54,16 @@ export const getEmployees = async (req, res, next) => {
     next(error);
   }
 }
+
+
+export const deleteEmployee = async (req, res, next) => {
+  if (!req.user.isAdmin && req.user.id !== req.params.empId) {
+    return next(errorHandler(403, "You are not allowed to delete this user"));
+  }
+  try {
+    await Employee.findByIdAndDelete(req.params.empId);
+    res.status(200).json("Employee has been deleted");
+  } catch (error) {
+    next(error);
+  }
+};

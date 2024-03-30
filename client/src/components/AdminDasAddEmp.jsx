@@ -5,13 +5,21 @@ export default function AdminDasAddEmp() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
   const [loading, setLoading] = useState(false);
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.firstname || !formData.lastname || !formData.address || !formData.phone  || !formData.email || !formData.nic) {
+    if (
+      !formData.firstname ||
+      !formData.lastname ||
+      !formData.address ||
+      !formData.phone ||
+      !formData.email ||
+      !formData.nic
+    ) {
       return setError("All fiel are required");
     }
     try {
@@ -32,6 +40,7 @@ export default function AdminDasAddEmp() {
       setLoading(false);
       if (res.ok) {
         navigate("/admin-dashboard");
+        setSuccess("Employee added successfully");
       }
     } catch (error) {
       setError(error.message);
@@ -40,7 +49,7 @@ export default function AdminDasAddEmp() {
   };
   return (
     <div className="flex-grow w-full min-h-[60vh] bg-[#d4d4d4] p-10 md:p-20 justify-center">
-      <div className=" max-w-[600px] mx-auto rounded-md p-10">
+      <div className=" max-w-[600px] mx-auto rounded-md p-10 bg-white shadow-lg">
         <div className="flex flex-col mb-2">
           <h3 className="text-2xl font-semibold mb-4 text-[#03001C] text-center">
             Employee Registration
@@ -124,16 +133,21 @@ export default function AdminDasAddEmp() {
                   onChange={handleChange}
                 />
               </div>
-
             </div>
-            <label htmlFor="" className="text-[#1f1f1f] mt-3">Role</label>
-            <select className="mt-3 rounded-md bg-[#707070] text-[#d4d4d4]" id="role"
-            onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-          >
-            <option id="none">Select a role</option>
-            <option id="manager">Manager</option>
-            <option id="instructor">Instructor</option>
-          </select>
+            <label htmlFor="" className="text-[#1f1f1f] mt-3">
+              Role
+            </label>
+            <select
+              className="mt-3 rounded-md bg-[#707070] text-[#d4d4d4]"
+              id="role"
+              onChange={(e) =>
+                setFormData({ ...formData, role: e.target.value })
+              }
+            >
+              <option id="none">Select a role</option>
+              <option id="manager">Manager</option>
+              <option id="instructor">Instructor</option>
+            </select>
           </div>
           <div className="flex flex-col my-4">
             <button
@@ -156,6 +170,12 @@ export default function AdminDasAddEmp() {
           <Alert className="mt-5 p-2" color="failure">
             {error}
           </Alert>
+        )}
+        {success && (
+          <Alert className="mt-5 p-2" color="success">
+            {success}
+          </Alert>
+        
         )}
       </div>
     </div>
