@@ -100,6 +100,12 @@ export default function ManagerInstructorLeave() {
             <p>Phone:</p>
             <p className="font-semibold">{employee && employee.phone}</p>
           </div>
+          <hr color="#707070"/>
+          <div className="text-center mb-5 mt-3">
+            <h1 className="text-xl font-bold uppercase">
+              Leave Details 
+            </h1>
+          </div>
           <div className="flex flex-row justify-between">
             <p>Leave Type:</p>
             <p className="font-semibold">{LeaveIns && LeaveIns.leaveType}</p>
