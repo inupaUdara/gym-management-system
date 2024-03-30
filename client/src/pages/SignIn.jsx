@@ -1,7 +1,12 @@
+import Header from "../components/Header";
+
 
 
 export default function SignIn() {
   return (
-    <div>SignIn</div>
+    <>
+      <Header/>
+      <div>Sign in</div>
+    </>
   )
 }

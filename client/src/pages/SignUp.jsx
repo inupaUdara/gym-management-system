@@ -1,7 +1,11 @@
+import Header from "../components/Header";
 
 
 export default function SignUp() {
   return (
-    <div>SignUp</div>
+    <>
+      <Header/>
+      <div>Sign up</div>
+    </>
   )
 }
