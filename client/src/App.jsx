@@ -13,7 +13,7 @@ import FooterCom from "./components/Footer";
 import AdminViewEmployeeDetails from "./components/AdminViewEmployeeDetails";
 import ManagerInstructorLeave from "./components/ManagerInstructorLeave";
 
-=======
+
 import Payment from "./pages/Payment";
 
 
