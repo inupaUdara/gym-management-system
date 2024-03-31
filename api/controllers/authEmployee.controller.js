@@ -68,7 +68,9 @@ export const login = async (req, res, next) => {
     const token = jwt.sign(
       {
         empId: validEmployee._id,
-        isAdmin: validEmployee.isAdmin
+        isAdmin: validEmployee.isAdmin,
+        role: validEmployee.role,
+        username: validEmployee.username,
       },
       process.env.JWT_SECRET_EMP
     );
