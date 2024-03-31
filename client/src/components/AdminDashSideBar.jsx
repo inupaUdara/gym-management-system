@@ -37,21 +37,21 @@ export default function AdminDashSideBar() {
 
   
 
-  const handleSignout = async () => {
-    try {
-      const res = await fetch("api/employee/signout", {
-        method: "POST",
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        console.log(data.message);
-      } else {
-        dispatch(signoutSuccess());
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handleSignout = async () => {
+  //   try {
+  //     const res = await fetch("api/employee/signout", {
+  //       method: "POST",
+  //     });
+  //     const data = await res.json();
+  //     if (!res.ok) {
+  //       console.log(data.message);
+  //     } else {
+  //       dispatch(signoutSuccess());
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <div className="h-full w-full md:w-56 drop-shadow-2xl border-b-white">
@@ -185,13 +185,13 @@ export default function AdminDashSideBar() {
           </div>
         )}
 
-        <div
+        {/* <div
           className="p-2.5 my-2 mx-2  flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white"
           onClick={handleSignout}
         >
           <HiArrowSmRight color="#D4D4D4" />
           <span className="text-[15px] ml-4 text-gray-200">Sign Out</span>
-        </div>
+        </div> */}
       </div>
     </div>
   );

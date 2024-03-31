@@ -1,11 +1,30 @@
 import { Link, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Avatar, Dropdown, DropdownDivider } from "flowbite-react";
 import logo from "../assets/cjgym.png";
+import { signoutSuccess } from "../redux/user/userSlice";
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
   const location = useLocation();
   const isHomePage = location.pathname === "/";
+  const dispatch = useDispatch();
+
+  const handleSignoutEmp = async () => {
+    try {
+      const res = await fetch('/api/employee/signout', {
+        method: 'POST',
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        console.log(data.message);
+      } else {
+        dispatch(signoutSuccess());
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
 
   return (
     // [url("./assets/homebg.png")]
@@ -61,7 +80,7 @@ export default function Header() {
               <Dropdown.Item>Profile</Dropdown.Item>
             </Link>
             <DropdownDivider />
-            <Dropdown.Item>Sign out</Dropdown.Item>
+            <Dropdown.Item onClick={handleSignoutEmp}>Sign out</Dropdown.Item>
           </Dropdown>
           
         ) : (
