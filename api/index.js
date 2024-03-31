@@ -5,6 +5,7 @@ import employeeRoutes from "./routes/employee.route.js";
 import authEmployeeRoutes from "./routes/authEmployee.route.js";
 import leaveRoutes from "./routes/leave.route.js";
 import cookieParser from "cookie-parser";
+import SubpackageRoutes from "./routes/subpackage_route.js";
 dotenv.config();
 
 mongoose
@@ -27,6 +28,7 @@ app.listen(3000, () => {
 app.use("/api/employee", employeeRoutes);
 app.use("/api/authemployee", authEmployeeRoutes);
 app.use("/api/leave", leaveRoutes);
+app.use("/api/subpackage", SubpackageRoutes);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;

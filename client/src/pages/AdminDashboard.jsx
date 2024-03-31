@@ -11,6 +11,7 @@ import Header from "../components/Header";
 import InstructorViewLeaveRequest from "../components/InstructorViewLeaveRequest";
 import ManagerInstructorLeave from "../components/ManagerInstructorLeave";
 import AdminViewEmployeeDetails from "../components/AdminViewEmployeeDetails";
+import AdminSubscriptionPanel from "../components/AdminSubscriptionPanel";
 export default function AdminDashboard() {
   const location = useLocation();
   const [tab,setTab] = useState('');
@@ -49,8 +50,7 @@ export default function AdminDashboard() {
       {tab === 'instructor-request' && <InstructorDasRequests/>}
       {tab === 'view-request'  && <ManagerViewLeave/>}
       {tab === 'view-instructors-request' && <InstructorViewLeaveRequest/>}
-      {/* {tab === 'view-instructor-request' && leaveId && <ManagerInstructorLeave/>}
-      {tab === 'view-employee-details' && empId && <AdminViewEmployeeDetails/>} */}
+      {tab === "admin-subscripition-panel" && <AdminSubscriptionPanel/> }
     </div>
     </>
     
