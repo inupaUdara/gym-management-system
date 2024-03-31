@@ -1,12 +1,22 @@
+
 import aboutCover from "../assets/aboutCover.png";
 import workoutCover from "../assets/workoutCover.png";
 import membershipCover from "../assets/membershipCover.png";
 import mealCover from "../assets/mealCover.png";
 import Header from "../components/Header";
 
+
+import Header from "../components/Header";
+import { useNavigate } from "react-router-dom";
+import { Button } from "flowbite-react";
+
+
 export default function Home() {
+  const navigate = useNavigate();
+
   return (
     <>
+
       <div className="w-full h-screen bg-[linear-gradient(to_right_bottom,rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('./assets/homebg.png')] bg-center bg-cover">
         {/* <img
           src={homebg}
@@ -115,6 +125,20 @@ export default function Home() {
             </button>
           </div>
         </div>
+
+      <div>Home</div>
+      <Header />
+      <div>
+        Home
+        <Button
+          onClick={() => {
+            navigate("./Payment");
+          }}
+          color="purple"
+        >
+          Payments
+        </Button>
+
       </div>
     </>
   );
