@@ -3,7 +3,7 @@ import bcryptjs from "bcryptjs";
 import { errorHandler } from "../utills/error.js";
 import jwt from "jsonwebtoken";
 export const create = async (req, res, next) => {
-  const { firstname, lastname, address , email, nic, phone, role} = req.body;
+  const { firstname, lastname, address , email, nic, phone, role, shift} = req.body;
 
   if (
     !firstname ||
@@ -13,13 +13,15 @@ export const create = async (req, res, next) => {
     !nic ||
     !phone ||
     !role ||
+    !shift ||
     firstname === "" ||
     lastname === "" ||
     address === "" ||
     email === "" ||
     nic === ""  ||
     phone === "" ||
-    role === ""
+    role === "" ||
+    shift === ""
   ) {
     next(errorHandler(400, "All fields are required"));
   }

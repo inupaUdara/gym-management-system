@@ -1,15 +1,22 @@
 import { useEffect, useState } from "react"
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Header from "./Header";
 import AdminDashSideBar from "./AdminDashSideBar";
+import { Select } from "flowbite-react";
+import EmployeeContact from "./EmployeeContact";
 export default function ManagerInstructorLeave() {
   const { leaveId } = useParams();
   const { empId } = useParams();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(null);
   const [LeaveIns, setLeaveIns] = useState(null);
   const [employee, setEmployee] = useState(null);
+  const [leaveData, setLeaveData] = useState({});
+  const [contact, setContact] = useState(false);
+  const navigate = useNavigate();
 
+  console.log(leaveData);
   useEffect(() => {
     // const urlParams = new URLSearchParams(location.search);
     // const idFromUrl = urlParams.get('leaveId');
@@ -27,6 +34,7 @@ export default function ManagerInstructorLeave() {
           return;
         }
         if (res.ok) {
+          setLeaveData(data.leaves[0]);
           setLeaveIns(data.leaves[0]);
           setLoading(false);
           setError(false);
@@ -64,6 +72,32 @@ export default function ManagerInstructorLeave() {
       };
       fetchEmployee();
     },[empId],);
+
+    const handleUpdateStatus = async (e) => {
+      e.preventDefault();
+      try {
+        const res = await fetch(`/api/leave/updateLeave/${leaveData._id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(leaveData),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          setError(data.message);
+          return;
+        }
+  
+        if (res.ok) {
+          setError(null);
+          setSuccess("Leave request State updated successfully. Refresh the page to see changes.")
+          navigate(`/view-instructor-request/${data._id}/${data.employeeId}`);
+        }
+      } catch (error) {
+        setError("Something went wrong");
+      }
+    }
   
 
   return (
@@ -74,7 +108,7 @@ export default function ManagerInstructorLeave() {
         <AdminDashSideBar/>
       </div>
     <div className="flex-grow w-full min-h-[60vh] bg-[#d4d4d4] p-10 md:p-20 justify-center">
-      <div className="max-w-[500px] mx-auto rounded-md p-10 bg-white shadow-lg">
+      <div className="max-w-[600px] mx-auto rounded-md p-10 bg-white shadow-lg">
         <div className="flex items-center justify-center">
           <img
             src={employee && employee.profilePicture}
@@ -125,13 +159,38 @@ export default function ManagerInstructorLeave() {
           <div className="flex flex-row justify-between">
             <p>Status:</p>
             <p className="font-semibold">{LeaveIns && LeaveIns.status}</p>
+            
+          </div>
+          <div className="flex flex-row justify-between mt-5 items-center">
+          <p>Change Status:</p>
+          <Select
+            onChange={(e) => 
+              setLeaveData({ ...leaveData, status: e.target.value})
+            }
+            value={leaveData.status}>
+            
+            <option value="Approve">Approve</option>
+            <option value="Reject">Reject</option>
+            <option value="Pending">Pending</option>
+            
+
+            </Select>
+            <button className="bg-[#a80000] text-[#d4d4d4] p-2 rounded-lg font-semibold hover:opacity-80"
+          onClick={handleUpdateStatus}>
+            Update Status
+          </button>
           </div>
         </div>
-        <div className="flex items-center justify-center">
-          <button className="bg-[#a80000] text-[#d4d4d4] p-2 rounded-md font-semibold">
-            Contact
-          </button>
+        <div className="flex flex-col items-center justify-center mt-7 gap-3">
+          
+          <button onClick={() => setContact(true)}
+          className="bg-[#1f1f1f] text-white rounded-lg uppercase hover:opacity-80 p-2"
+          >
+          Contact
+         </button>
+         {contact && <EmployeeContact employee={employee}/>}
         </div>
+        {success && <p className="text-green-500 text-center mt-5">{success}</p>}
       </div>
     </div>
     </div>
