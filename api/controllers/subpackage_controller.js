@@ -45,3 +45,22 @@ export const getSubPackage = async (req, res, next) => {
         next(errorHandler(500,{message: error.message}));
     }
 }
+
+//get all packages from db by id
+export const getIdSubPackage = async (req, res, next) => {
+    try {
+        
+        const { id } = req.params;
+        const NwSubPackage = await SubPackage.findById(id);
+
+
+        if(!NwSubPackage) {
+            return res.status(404).json({message: 'Subsciption Package not found'});
+        }
+        return res.status(200).json(NwSubPackage);
+
+    } catch (error) {
+        console.log(error.message);
+        next(errorHandler(500,{message: error.message}));
+    }
+}
