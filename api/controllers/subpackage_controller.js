@@ -64,3 +64,45 @@ export const getIdSubPackage = async (req, res, next) => {
         next(errorHandler(500,{message: error.message}));
     }
 }
+
+//update the book
+export const updateSubPackage = async (req, res, next) => {
+    try {
+        if(!req.body.subPackageName || !req.body.price || !req.body.validTime || !req.body.description || !req.body.note1 || !req.body.note2 || !req.body.note3){
+            return res.status(400).send({
+                message: `Send all required fields: subPackageName, price, validTime, description, note1, note2, note3`,
+            });
+        }
+
+        const { id } = req.params;
+        const result = await SubPackage.findByIdAndUpdate(id, req.body);
+
+        if(!result) {
+            return res.status(404).json({message: `Package not Found`});
+        }
+        return res.status(200).json({message: `Package updated sucessfully`});
+
+    } catch (error) {
+        console.log(error.message);
+        next(errorHandler(500,{message: error.message}));
+    }
+}
+
+//delete the package
+export const deleteSubPackage = async (req, res, next) => {
+    try {
+        
+        const { id } = req.params;
+        const result = await SubPackage.findByIdAndDelete(id);
+
+        if(!result) {
+            return res.status(404).json({ message: `Package not Found` });
+        }
+        return res.status(200).json({message: `Package deleted sucessfully`});
+
+
+    } catch (error) {
+        console.log(error.message);
+        next(errorHandler(500,{message: error.message}));
+    }
+}
