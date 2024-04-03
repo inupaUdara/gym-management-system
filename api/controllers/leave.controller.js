@@ -70,3 +70,28 @@ export const deleteLeave = async (req, res, next) => {
         next(error)
     }
 }
+
+
+export const updateLeave = async (req, res, next) => {
+    if(!req.user.role === 'Admin' || !req.user.role === 'Manager' || !req.user.role === 'Instructor'){
+        next(errorHandler(403, "You are not access to leaves"));
+    }
+
+    try {
+        const updatedLeave = await Leave.findByIdAndUpdate(req.params.leaveId, 
+            {
+                $set: {
+                    leaveType: req.body.leaveType,
+                    startDate: req.body.startDate,
+                    endDate: req.body.endDate,
+                    reason: req.body.reason,
+                    status: req.body.status,
+                },
+            },
+            { new: true });
+        res.status(200).json(updatedLeave);
+        
+    } catch (error) {
+        next(error);
+    }
+}
