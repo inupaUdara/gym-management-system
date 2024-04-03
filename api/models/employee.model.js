@@ -41,7 +41,7 @@ const employeeSchema = new mongoose.Schema({
         type: String,
         default: "employee",
     },
-    Shift: {
+    shift: {
         type: String,
         default: "none",
     },

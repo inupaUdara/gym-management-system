@@ -33,7 +33,7 @@ export default function AdminDasManagers() {
   const handleShowMore = async () => {
     const startIndex = employees.length;
     try {
-      const res = await fetch(`/api/employee/getemployee?role=Manager?startIndex=${startIndex}`);
+      const res = await fetch(`/api/employee/getemployee?role=Manager&startIndex=${startIndex}`);
       const data = await res.json();
       if (res.ok) {
         setUsers((prev) => [...prev, ...data.employees]);

@@ -71,7 +71,7 @@ export default function AdminDashSideBar() {
         {currentUser.role === "Instructor" && (
           
           <div
-            className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
+            className={`p-2.5 my-1 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
               activeTab === "request" ? "bg-[#707070]" : ""
             }` } onClick={() =>  toggleDropdownReq()}
            
@@ -88,7 +88,7 @@ export default function AdminDashSideBar() {
         )}
         {isOpenReq && (
           <div
-            className="text-left text-sm font-light mt-2 w-4/5 mx-auto text-[#D4D4D4]"
+            className="text-left text-sm font-light w-4/5 mx-auto text-[#D4D4D4] p-2"
             id="submenu"
           >
             <Link to="/admin-dashboard?tab=instructor-request">
@@ -163,7 +163,7 @@ export default function AdminDashSideBar() {
 
         {isOpenEmp && (
           <div
-            className="text-left text-sm font-light mt-2 w-4/5 mx-auto text-[#D4D4D4] p-2"
+            className="text-left text-sm font-light mt-1 w-4/5 mx-auto text-[#D4D4D4] p-2"
             id="submenu"
           >
             <Link

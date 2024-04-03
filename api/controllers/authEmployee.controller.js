@@ -13,18 +13,16 @@ export const create = async (req, res, next) => {
     !nic ||
     !phone ||
     !role ||
-    !shift ||
     firstname === "" ||
     lastname === "" ||
     address === "" ||
     email === "" ||
     nic === ""  ||
-    phone === "" ||
-    role === "" ||
-    shift === ""
+    role === "" 
   ) {
-    next(errorHandler(400, "All fields are required"));
+    next(errorHandler(400, "All are required"));
   }
+  console.log(req.body);
 
   const hashedPassword = bcryptjs.hashSync(nic, 10);
   const fullName = firstname + lastname;
@@ -39,6 +37,7 @@ export const create = async (req, res, next) => {
     username: nameToUsername,
     password: hashedPassword,
     role,
+    shift,	
   });
   try {
     await newEmployee.save();

@@ -30,22 +30,25 @@ export default function AdminDasInstructors() {
     }
   }, [currentUser._id]);
 
+  
+
   const handleShowMore = async () => {
     const startIndex = employees.length;
     try {
       const res = await fetch(
-        `/api/employee/getemployee?role=Instructor?startIndex=${startIndex}`
+        `/api/employee/getemployee?role=Instructor&startIndex=${startIndex}`
       );
       const data = await res.json();
       if (res.ok) {
         setUsers((prev) => [...prev, ...data.employees]);
-        if (data.employees.length < 9) {
+        if (data.employees.length < 10) {
           setShowMore(false);
         }
       }
     } catch (error) {
       console.log(error.message);
     }
+    console.log(startIndex)
   };
 
   const handleDeleteEmployee = async () => {

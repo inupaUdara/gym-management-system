@@ -1,8 +1,9 @@
-import { Alert, Spinner, Select, Textarea } from "flowbite-react";
+import { Alert, Spinner, Select, Textarea, Modal, Button } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { MdOutlinePendingActions } from "react-icons/md";
+import { HiOutlineExclamationCircle } from "react-icons/hi";
 export default function AdminDasAddEmp() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
@@ -11,6 +12,8 @@ export default function AdminDasAddEmp() {
   const [loading, setLoading] = useState(false);
   const { currentUser } = useSelector((state) => state.user);
   const [LeavesIns, setLeavesIns] = useState([]);
+  const [leaveIdToDelete, setLeaveIdToDelete] = useState("");
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const fetchLeavesIns = async () => {
@@ -57,6 +60,26 @@ export default function AdminDasAddEmp() {
       setLoading(false);
     }
   };
+
+  const handleDeleteLeave = async () => {
+    try {
+      const res = await fetch(`/api/leave/deleteleave/${leaveIdToDelete}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setLeavesIns((prev) =>
+          prev.filter((leave) => leave._id !== leaveIdToDelete)
+        );
+        setShowModal(false);
+      } else {
+        console.log(data.message);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <div className="flex-grow w-full min-h-[60vh] bg-[#d4d4d4] p-5 md:p-10">
       <div className="max-w-[900px] mx-auto rounded-md p-5 flex flex-col lg:flex-row bg-white shadow-lg  justify-center">
@@ -179,7 +202,12 @@ export default function AdminDasAddEmp() {
                       <p className="text-[#1f1f1f] font-semibold"> {leave.status}</p>
                     </div>
                   </div>
-                  <p className="text-red-500">Delete</p>
+                  {leave.status === "Pending" ? (
+                    <p className="text-red-500" onClick={() => {
+                      setShowModal(true);
+                      setLeaveIdToDelete(leave._id);
+                    }}>Delete</p>
+                    ) : leave.status === "Approve" ? ( <p className="text-green-500">Leave request is approved</p>) :(<p className="text-red-500">Leave request is rejected</p>)}
                 </div>
               ))}
             </>
@@ -188,6 +216,30 @@ export default function AdminDasAddEmp() {
           )}
         </div>
       </div>
+      <Modal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        popup
+        size="md"
+      >
+        <Modal.Header />
+        <Modal.Body>
+          <div className="text-center">
+            <HiOutlineExclamationCircle className="h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto" />
+            <h3 className="mb-5 text-lg text-gray-500 dark:text-gray-400">
+              Are you sure you want to delete this user?
+            </h3>
+            <div className="flex justify-center gap-4">
+              <Button color="failure" onClick={handleDeleteLeave}>
+                Yes, I'm sure
+              </Button>
+              <Button color="gray" onClick={() => setShowModal(false)}>
+                No, cancel
+              </Button>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 }

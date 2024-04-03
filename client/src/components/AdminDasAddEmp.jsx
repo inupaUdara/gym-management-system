@@ -35,7 +35,7 @@ export default function AdminDasAddEmp() {
       const data = await res.json();
       if (data.success === false) {
         setLoading(false);
-        return setError("User already exists");
+        return setError(data.message);
       }
       setLoading(false);
       if (res.ok) {
@@ -147,23 +147,23 @@ export default function AdminDasAddEmp() {
               }
             >
               
-              <option id="manager">Manager</option>
-              <option id="instructor">Instructor</option>
+              <option value="Manager">Manager</option>
+              <option value="Instructor">Instructor</option>
             </select>
             {formData.role === "Instructor" && (
               <>
             <label htmlFor="" className="text-[#1f1f1f] mt-3">Shift</label>
             <select
               className="mt-3 rounded-md bg-[#d4d4d4] text-[#1f1f1f]"
-              id="role"
+              id="shift"
               onChange={(e) =>
                 setFormData({ ...formData, shift: e.target.value })
               }
             >
               
-              <option id="6am-11am">6.00 AM to 12.00 PM</option>
-              <option id="12pm-5pm">12.00 PM to 5.00 PM</option>
-              <option id="5pm-10pm">5.00 AM to 9.00 PM</option>
+              <option value="6am-11am">6.00 AM to 12.00 PM</option>
+              <option value="12pm-5pm">12.00 PM to 5.00 PM</option>
+              <option value="5pm-10pm">5.00 PM to 9.00 PM</option>
             </select>
             </>)}
             
