@@ -35,7 +35,9 @@ export default function AdminDasAddEmp() {
       const data = await res.json();
       if (data.success === false) {
         setLoading(false);
+        setSuccess(null);
         return setError(data.message);
+        
       }
       setLoading(false);
       if (res.ok) {
@@ -45,6 +47,7 @@ export default function AdminDasAddEmp() {
     } catch (error) {
       setError(error.message);
       setLoading(false);
+      setSuccess(null);
     }
   };
 
@@ -146,7 +149,7 @@ export default function AdminDasAddEmp() {
                 setFormData({ ...formData, role: e.target.value })
               }
             >
-              
+              <option>Select the role</option>
               <option value="Manager">Manager</option>
               <option value="Instructor">Instructor</option>
             </select>
@@ -160,7 +163,7 @@ export default function AdminDasAddEmp() {
                 setFormData({ ...formData, shift: e.target.value })
               }
             >
-              
+              <option>Select the shift</option>
               <option value="6am-11am">6.00 AM to 12.00 PM</option>
               <option value="12pm-5pm">12.00 PM to 5.00 PM</option>
               <option value="5pm-10pm">5.00 PM to 9.00 PM</option>

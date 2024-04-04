@@ -5,6 +5,9 @@ import jwt from "jsonwebtoken";
 export const create = async (req, res, next) => {
   const { firstname, lastname, address , email, nic, phone, role, shift} = req.body;
 
+  const nicRegex = /^(?:[0-9]{9}[VvXx]||[0-9]{12})$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   if (
     !firstname ||
     !lastname ||
@@ -22,7 +25,20 @@ export const create = async (req, res, next) => {
   ) {
     next(errorHandler(400, "All are required"));
   }
-  console.log(req.body);
+  
+
+  // Check NIC validity
+  if (!nicRegex.test(nic)) {
+    next(errorHandler(400, "NIC is invalid"));
+   // Return to avoid further execution
+  }
+
+  // Check email validity
+  if (!emailRegex.test(email)) {
+    next(errorHandler(400, "Email is invalid"));
+    // Return to avoid further execution
+  }
+  
 
   const hashedPassword = bcryptjs.hashSync(nic, 10);
   const fullName = firstname + lastname;

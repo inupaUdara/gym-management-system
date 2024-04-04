@@ -85,7 +85,7 @@ export default function Header() {
           
         ) : (
           <ul>
-            <Link to="/employee-login" className="flex gap-4">
+            <Link to="/sign-in" className="flex gap-4">
               <li className=" text-[#D4D4D4] font-extrabold text-xl  rounded-lg hover:text-white">
                 Sign in
               </li>
