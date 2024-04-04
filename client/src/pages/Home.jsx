@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import homebg from "../assets/homebg.png";
 import Header from "../components/Header";
 
@@ -25,6 +26,5 @@ export default function Home() {
           </div>
         </div>
       </div>
-    </>
   );
 }
