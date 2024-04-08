@@ -12,6 +12,7 @@ import InstructorViewLeaveRequest from "../components/InstructorViewLeaveRequest
 import ManagerInstructorLeave from "../components/ManagerInstructorLeave";
 import AdminViewEmployeeDetails from "../components/AdminViewEmployeeDetails";
 import AdminInstructorShifts from "../components/AdminInstructorShifts";
+import MemberDashProfile from "../components/MemberDashProfile";
 export default function AdminDashboard() {
   const location = useLocation();
   const [tab,setTab] = useState('');
@@ -45,6 +46,7 @@ export default function AdminDashboard() {
       
       {tab === 'addemployee' && <AdminDasAddEmp/>}
       {tab === 'profile' && <DasProfile/>}
+      {tab === 'member-profile' && <MemberDashProfile/>}
       {tab === 'admin-instructors' && <AdminDasInstructors/>}
       {tab === 'admin-managers' && <AdminDasManagers/>}
       {tab === 'instructor-request' && <InstructorDasRequests/>}

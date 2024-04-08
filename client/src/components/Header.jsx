@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Avatar, Dropdown, DropdownDivider } from "flowbite-react";
 import logo from "../assets/cjgym.png";
@@ -8,6 +8,7 @@ export default function Header() {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSignoutEmp = async () => {
     try {
@@ -15,6 +16,9 @@ export default function Header() {
         method: 'POST',
       });
       const data = await res.json();
+
+      
+      
       if (!res.ok) {
         console.log(data.message);
       } else {
@@ -29,7 +33,7 @@ export default function Header() {
   return (
     // [url("./assets/homebg.png")]
     <header className={`border-b-2 border-b-black shadow-md relative ${isHomePage ? 'bg-transparent shadow-none border-none' : 'bg-gradient-to-r from-[#1f1f1f] to-[#4c0000]'}`}>
-      <div className="flex justify-between items-center max-w-7xl mx-auto p-6">
+      <div className="flex items-center justify-between p-6 mx-auto max-w-7xl">
         <Link to="/">
           {/* <h2 className="font-light text-sm sm:text-xl flex flex-wrap text-[#D4D4D4]">
             CJ Gym & Fitness Centre
@@ -76,7 +80,7 @@ export default function Header() {
                 {currentUser.email}
               </span>
             </Dropdown.Header>
-            <Link to={"/admin-dashboard?tab=profile"}>
+            <Link to={currentUser.role ? "/admin-dashboard?tab=profile" : "/admin-dashboard?tab=member-profile"}>
               <Dropdown.Item>Profile</Dropdown.Item>
             </Link>
             <DropdownDivider />

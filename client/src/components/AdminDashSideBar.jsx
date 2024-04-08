@@ -54,9 +54,10 @@ export default function AdminDashSideBar() {
   // };
 
   return (
-    <div className="h-full w-full md:w-56 drop-shadow-2xl border-b-white">
+    <div className="w-full h-full md:w-56 drop-shadow-2xl border-b-white">
       <div className="flex-col h-full overflow-x-hidden overflow-y-auto text-center bg-[#1f1f1f]">
-        <Link to="/admin-dashboard?tab=profile">
+        {currentUser.role && (
+          <Link to="/admin-dashboard?tab=profile">
           <div
             className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
               activeTab === "profile" ? "bg-[#707070]" : ""
@@ -68,6 +69,21 @@ export default function AdminDashSideBar() {
             <span className="text-[15px] ml-4 text-[#D4D4D4]">Profile</span>
           </div>
         </Link>
+        )}
+        {!currentUser.role && (
+          <Link to="/admin-dashboard?tab=member-profile">
+          <div
+            className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
+              activeTab === "member-profile" ? "bg-[#707070]" : ""
+            }`}
+           
+          >
+            <HiUser color="#D4D4D4" />
+
+            <span className="text-[15px] ml-4 text-[#D4D4D4]">Profile</span>
+          </div>
+        </Link>
+        )}
         {currentUser.role === "Instructor" && (
           
           <div
@@ -77,7 +93,7 @@ export default function AdminDashSideBar() {
            
           >
             <MdSchedule color="#D4D4D4" />
-            <div className="flex justify-between w-full items-center">
+            <div className="flex items-center justify-between w-full">
             <span className="text-[15px] ml-4 text-[#D4D4D4]">Requests</span>
             <span className="text-sm rotate-180" id="arrow">
                 {isOpenReq ? <IoIosArrowUp /> : <IoIosArrowDown />}
@@ -152,7 +168,7 @@ export default function AdminDashSideBar() {
             onClick={() =>  toggleDropdownEmp()}
           >
             <HiOutlineUserGroup color="#D4D4D4" />
-            <div className="flex justify-between w-full items-center">
+            <div className="flex items-center justify-between w-full">
               <span className="text-[15px] ml-4 text-[#D4D4D4]">Employees</span>
               <span className="text-sm rotate-180" id="arrow">
               {isOpenEmp ? <IoIosArrowUp /> : <IoIosArrowDown />}
