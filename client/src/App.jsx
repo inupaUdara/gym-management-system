@@ -9,6 +9,11 @@ import AdminDashboard from "./pages/AdminDashboard";
 import Header from "./components/Header";
 import AdminPrivateRoute from "./components/AdminPrivateRoute";
 import FooterCom from "./components/Footer";
+import CreateSubPackage from "./pages/subPackagePages/CreateSubPackage";
+
+import EditSubPackage from "./pages/subPackagePages/EditSubPackage";
+import ShowSubPackage from "./pages/subPackagePages/ShowSubPackage";
+
 
 import AdminViewEmployeeDetails from "./components/AdminViewEmployeeDetails";
 import ManagerInstructorLeave from "./components/ManagerInstructorLeave";
@@ -38,7 +43,13 @@ export default function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/payment" element={<Payment />} />
       </Routes>
+      <Routes>
+          <Route path="/subpackages/create" element={ <CreateSubPackage /> }/>
+          <Route path="/subpackages/details/:id" element={ <ShowSubPackage /> }/>
+          <Route path="/subpackages/edit/:id" element={ <EditSubPackage /> }/>
+      </Routes>
       <FooterCom />
     </BrowserRouter>
+
   );
 }

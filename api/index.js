@@ -6,6 +6,7 @@ import authEmployeeRoutes from "./routes/authEmployee.route.js";
 import leaveRoutes from "./routes/leave.route.js";
 import cookieParser from "cookie-parser";
 import SubpackageRoutes from "./routes/subpackage_route.js";
+import cors from 'cors';
 dotenv.config();
 
 mongoose
@@ -20,6 +21,8 @@ mongoose
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
+
+app.use(cors());
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
