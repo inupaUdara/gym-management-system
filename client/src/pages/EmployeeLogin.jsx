@@ -37,7 +37,7 @@ export default function EmployeeLogin() {
 
       if(res.ok){
         dispatch(signInSuccess(data));
-        navigate('/admin-dashboard');
+        navigate('/admin-dashboard?tab=dashboard-comp');
       }
     } catch (error) {
       dispatch(signInFailure(error.message));

@@ -26,9 +26,11 @@ export default function AdminInstructorShifts() {
   return (
     
     <div className="md:mx-auto">
+      <h1 className="text-center m-5 font-bold text-2xl uppercase">Instructors Shifts</h1>
       <div className="flex flex-col gap-3 p-3 lg:flex-row">
       {currentUser.isAdmin && employees.length > 0 ? (
         <>
+        
         <div  className="bg-white shadow-md border hover:shadow-lg transition-shadow overflow-hidden rounded-lg w-full  md:w-[330px]">
         <h1 className="text-center p-3 font-semibold">5.00 AM to 9.00 PM</h1>
         {employees.map((employee) => (

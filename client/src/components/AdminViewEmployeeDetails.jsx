@@ -59,7 +59,7 @@ export default function AdminViewEmployeeDetails() {
           <img
             src={employee && employee.profilePicture}
             alt={employee && employee.username}
-            className="mt-10 p-3 rounded-full w-32 border-4 object-center"
+            className="mt-10 p-3 rounded-full w-32 h-32 border-4 object-center"
           />
         </div>
         <div className="flex flex-col mt-5 p-2">
