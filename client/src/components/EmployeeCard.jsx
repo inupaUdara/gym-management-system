@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 export default function EmployeeCard({ employee }) {
     return (
-        <div className='group relative w-full border border-teal-500 hover:border-2 h-[400px] overflow-hidden rounded-lg sm:w-[430px] transition-all'>
+        <div className='group relative w-full border border-[#1f1f1f] hover:border-2 h-[400px] overflow-hidden rounded-lg sm:w-[430px] transition-all'>
           <Link to={`/view-employee-details/${employee._id}`}>
             <img
               src={employee.profilePicture}
@@ -15,9 +15,9 @@ export default function EmployeeCard({ employee }) {
             <span className='italic text-sm'>{employee.role}</span>
             <Link
               to={`/view-employee-details/${employee._id}`}
-              className='z-10 group-hover:bottom-0 absolute bottom-[-200px] left-0 right-0 border border-teal-500 text-teal-500 hover:bg-teal-500 hover:text-white transition-all duration-300 text-center py-2 rounded-md !rounded-tl-none m-2'
+              className='z-10 group-hover:bottom-0 absolute bottom-[-200px] left-0 right-0 border border-[#1f1f1f] text-[#1f1f1f] hover:bg-[#1f1f1f] hover:text-white transition-all duration-300 text-center py-2 rounded-md !rounded-tl-none m-2'
             >
-              Read article
+              View
             </Link>
           </div>
         </div>
