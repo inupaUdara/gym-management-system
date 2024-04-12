@@ -152,7 +152,7 @@ export default function AdminDasManagers() {
           )}
         </>
       ) : (
-        <p>You have no users yet!</p>
+        <p>You have no managers yet!</p>
       )}
       <Modal
         show={showModal}

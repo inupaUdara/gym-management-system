@@ -193,14 +193,14 @@ export default function AdminDashSideBar() {
 
         {isOpenEmp && (
           <div
-            className="text-left text-sm font-light mt-1 w-4/5 mx-auto text-[#D4D4D4] p-2"
+            className="text-left text-sm font-light w-4/5 mx-auto text-[#D4D4D4] p-2"
             id="submenu"
           >
             <Link
               to="/admin-dashboard?tab=search-employee"
             >
               <h1
-                className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
+                className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md
               ${activeTab === "search-employee" ? "bg-[#707070]" : ""}`}
                 
               >

@@ -4,12 +4,14 @@ import { FaUserTie } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Table } from "flowbite-react";
+import { MdOutlinePendingActions } from "react-icons/md";
 export default function DashboardComponent() {
   const [instructors, setInstructors] = useState([]);
   const [totalInstructors, setTotalInstructors] = useState(0);
   const [lastMonthInstructors, setLastMonthInstructors] = useState(0);
   const [managers, setManagers] = useState([]);
   const [totalManagers, setTotalManagers] = useState(0);
+  const [totalPendingReq, setTotalPendingReq] = useState(0);
   const [lastMonthManagers, setLastMonthManagers] = useState(0);
   const { currentUser } = useSelector((state) => state.user);
   console.log(totalManagers);
@@ -34,9 +36,20 @@ export default function DashboardComponent() {
       }
     }
 
+    const fetchPendingLeave = async () => {
+      const res = await fetch(
+        `/api/leave/getleave?status=Pending`
+      );
+      const data = await res.json();
+      if (res.ok) {
+        setTotalPendingReq(data.AllTotalLeavesByStatus);
+      }
+    }
+
     if(currentUser.isAdmin) {
       fetchInstructors();
       fetchManagers();
+      fetchPendingLeave();
     }
 
   }, [currentUser]);
@@ -80,26 +93,20 @@ export default function DashboardComponent() {
               <div className="text-[#707070]">Last month</div>
             </div>
         </div>
-        {/* <div className="flex flex-col p-3 justify-between gap-4 md:w-72 w-full rounded-md shadow-md">
+        <div className="flex flex-col p-3 justify-between gap-4 md:w-72 w-full rounded-md shadow-md bg-white">
           <div className="flex justify-between">
             <div className="">
-              <h3 className="text-[#1f1f1f] text-md uppercase">Total Instructors</h3>
-              <p className="text-2xl font-semibold">{totalInstructors}</p>
+              <h3 className="text-[#1f1f1f] text-md uppercase">Total Pending Leaves</h3>
+              <p className="text-2xl font-semibold">{totalPendingReq}</p>
               
             </div>
-            <HiOutlineUserGroup className="bg-teal-600 text-white rounded-full text-5xl p-3 shadow-lg"/>
+            <MdOutlinePendingActions className="bg-teal-600 text-white rounded-full text-5xl p-3 shadow-lg"/>
             
           </div>
-          <div className="flex gap-2 text-sm">
-              <span className="text-green-500 flex items-center">
-                <HiArrowNarrowUp/>
-                <p>{lastMonthInstructors}</p>
-              </span>
-              <div className="text-[#707070]">Last month</div>
-            </div>
-        </div> */}
+          
+        </div>
       </div>
-      <div className="flex-wrap flex gap-4 py-3 mx-auto justify-center">
+      <div className="flex-wrap flex gap-4 py-3 mx-auto justify-center w-full">
         <div className="flex flex-col w-full md:w-auto shadow-md p-2 rounded-md bg-white">
           <div className="flex justify-between p-3 text-sm font-semibold">
             <h1 className="text-center p-2 uppercase">Instructors</h1>

@@ -78,6 +78,7 @@ export const getEmployees = async (req, res, next) => {
     const employees = await Employee.find({
       ...(req.query.role && { role: req.query.role }),
       ...(req.query.empId && { _id: req.query.empId }),
+      ...(req.query.shift && { shift: req.query.shift }),
       ...(req.query.searchTerm && {
         $or: [
           { firstname: { $regex: req.query.searchTerm, $options: 'i' } },
@@ -102,6 +103,10 @@ export const getEmployees = async (req, res, next) => {
       { role: req.query.role}
     );
 
+    const totalShiftEmployees = await Employee.countDocuments({
+      shift: req.query.shift,
+    });
+
     const now = new Date();
 
     const oneMonthAgo = new Date(
@@ -117,6 +122,7 @@ export const getEmployees = async (req, res, next) => {
     res.status(200).json({
       employees: employeesWithoutPassword,
       totalEmployees,
+      totalShiftEmployees,
       lastMonthEmployees,
     });
   } catch (error) {

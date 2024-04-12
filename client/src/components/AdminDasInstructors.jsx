@@ -156,7 +156,7 @@ export default function AdminDasInstructors() {
           )}
         </>
       ) : (
-        <p>You have no users yet!</p>
+        <p>You have no instructors yet!</p>
       )}
       <Modal
         show={showModal}

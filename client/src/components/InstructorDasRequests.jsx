@@ -18,7 +18,7 @@ export default function AdminDasAddEmp() {
   useEffect(() => {
     const fetchLeavesIns = async () => {
       try {
-        const res = await fetch(`/api/leave/getleavein/${currentUser.empId}`);
+        const res = await fetch(`/api/leave/getleavein/${currentUser._id}`);
         const data = await res.json();
         if (res.ok) {
           setLeavesIns(data.leaves);
@@ -52,8 +52,9 @@ export default function AdminDasAddEmp() {
       }
       setLoading(false);
       if (res.ok) {
-        navigate("/admin-dashboard?tab=instructor-request");
-        setSuccess("Leave request submitted successfully. Please refresh the page to see your request");
+        setSuccess("Leave request submitted successfully.");
+        navigate("/admin-dashboard?tab=view-instructors-request");
+        
       }
     } catch (error) {
       setError(error.message);
@@ -81,12 +82,12 @@ export default function AdminDasAddEmp() {
   };
 
   return (
-    <div className="flex-grow w-full min-h-[60vh] bg-[#d4d4d4] p-5 md:p-10">
-      <div className="max-w-[900px] mx-auto rounded-md p-5 flex flex-col lg:flex-row bg-white shadow-lg  justify-center">
-        <div className="rounded-md p-5 mx-4 max-h-[800px] lg:w-3/4">
+    <div className="flex-grow w-full min-h-[60vh] bg-[#d4d4d4] p-5 md:p-8">
+      <div className="max-w-[600px] mx-auto rounded-md p-2 flex flex-col lg:flex-row bg-white shadow-lg  justify-center">
+        <div className="rounded-md p-1 mx-4 max-h-[800px] lg:w-3/4">
           <form onSubmit={handleSubmit}>
             <div className="flex flex-col mb-2">
-              <h3 className="text-2xl font-semibold mb-4 text-[#03001C] text-center">
+              <h3 className="text-2xl font-bold mb-4 mt-4 text-[#03001C] text-center">
                 Request a Leave
               </h3>
             </div>
@@ -95,7 +96,7 @@ export default function AdminDasAddEmp() {
                 Leave Type
               </label>
               <select
-                className="mt-3 rounded-md bg-[#707070] text-[#d4d4d4]"
+                className="mt-3 rounded-md bg-[#d4d4d4] text-[#1f1f1f]"
                 onChange={(e) =>
                   setFormData({ ...formData, leaveType: e.target.value })
                 }
@@ -114,7 +115,7 @@ export default function AdminDasAddEmp() {
               </label>
               <input
                 type="date"
-                className="text-[#d4d4d4] text-sm py-2 my-2 rounded-md bg-[#707070] focus:outline-none placeholder:text-[#d4d4d4] focus:ring-[#03001C]"
+                className="text-[#1f1f1f] text-sm py-2 my-2 rounded-md bg-[#d4d4d4] focus:outline-none placeholder:text-[#1f1f1f] focus:ring-[#03001C]"
                 onChange={(e) =>
                   setFormData({ ...formData, startDate: e.target.value })
                 }
@@ -125,7 +126,7 @@ export default function AdminDasAddEmp() {
               </label>
               <input
                 type="date"
-                className="text-[#d4d4d4] text-sm py-2 my-2 rounded-md bg-[#707070] focus:outline-none placeholder:text-[#d4d4d4] focus:ring-[#03001C]"
+                className="text-[#1f1f1f] text-sm py-2 my-2 rounded-md bg-[#d4d4d4] focus:outline-none placeholder:text-[#1f1f1f] focus:ring-[#03001C]"
                 onChange={(e) =>
                   setFormData({ ...formData, endDate: e.target.value })
                 }
@@ -133,9 +134,9 @@ export default function AdminDasAddEmp() {
               <label htmlFor="" className="text-[#1f1f1f] mt-3">
                 Reason
               </label>
-              <Textarea
+              <textarea
                 type="text"
-                className="h-60 text-[#d4d4d4] text-sm py-2 my-2 rounded-md bg-[#707070] focus:outline-none placeholder:text-[#d4d4d4] focus:ring-[#03001C]"
+                className="h-60 text-[#1f1f1f] text-sm py-2 my-2 rounded-md bg-[#d4d4d4] focus:outline-none placeholder:text-[#1f1f1f] focus:ring-[#03001C]"
                 placeholder="Enter reason for leave"
                 onChange={(e) =>
                   setFormData({ ...formData, reason: e.target.value })
@@ -170,7 +171,7 @@ export default function AdminDasAddEmp() {
             </Alert>
           )}
         </div>
-        <div className="mx-2 p-5 border-[#707070] border-t-2  border-t-[#707070] lg:border-l-2 lg:border-t-white">
+        {/* <div className="mx-2 p-5 border-[#707070] border-t-2  border-t-[#707070] lg:border-l-2 lg:border-t-white">
           {currentUser.isAdmin || currentUser.role === "Instructor" ? (
             <>
               <h3 className="text-xl font-semibold mb-4 text-[#03001C] text-center">
@@ -214,7 +215,7 @@ export default function AdminDasAddEmp() {
           ) : (
             <p>You have no leave request yet!</p>
           )}
-        </div>
+        </div> */}
       </div>
       <Modal
         show={showModal}
