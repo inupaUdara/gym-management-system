@@ -57,7 +57,7 @@ export default function Header() {
               Memberships
             </li>
           </Link>
-          <Link to="#">
+          <Link to="/shop">
             <li className="hidden sm:inline text-[#D4D4D4] hover:underline hover:underline-offset-4 hover:text-white">
               Shop
             </li>
