@@ -2,6 +2,7 @@ import User from "../models/user.model.js";
 import { errorHandler } from "../utills/error.js";
 import bcryptjs from 'bcryptjs';
 
+
 export const test = (req, res) => {
   res.json({ message: 'API is working!' });
 };
@@ -10,6 +11,15 @@ export const updateUser = async (req, res, next) => {
 if (req.user.id !== req.params.userId){
   return next(errorHandler(403,'your not allowed to update this user'));
 }
+
+ // Validate contactNumber
+ if (req.body.contactNumber) {
+  const contactNumber = req.body.contactNumber;
+  if (!/^\d{1,10}$/.test(contactNumber)) {
+    return next(errorHandler(400, 'Contact number must contain only digits and have a maximum length of 10'));
+  }
+}
+
 if(req.body.password){
   if(req.body.password.length < 6){
     return next(errorHandler(400,'password must be atleast 6 characters'));
@@ -17,7 +27,7 @@ if(req.body.password){
   req.body.password = bcryptjs.hashSync(req.body.password, 10);
 }
 
-if (req.body.username) {
+if (req.body.username) {    
   if (req.body.username.length < 7 || req.body.username.length > 20) {
     return next(errorHandler(400, 'Username must be between 7 and 20 characters'));
   }
@@ -82,24 +92,57 @@ export const signout = (req, res, next) => {
   }
 };
 
-export const updatepost = async (req, res, next) => {
-  if (!req.user.isAdmin || req.user.id !== req.params.userId) {
-    return next(errorHandler(403, 'You are not allowed to update this post'));
+
+
+export const getusers = async (req, res, next) => {
+  if (!req.user.isAdmin) {
+    return next(errorHandler(403, 'You are not allowed to see all users'));
   }
   try {
-    const updatedPost = await Post.findByIdAndUpdate(
-      req.params.postId,
-      {
-        $set: {
-          title: req.body.title,
-          content: req.body.content,
-          category: req.body.category,
-          image: req.body.image,
-        },
-      },
-      { new: true }
+    const startIndex = parseInt(req.query.startIndex) || 0;
+    const limit = parseInt(req.query.limit) || 9;
+    const sortDirection = req.query.sort === 'asc' ? 1 : -1;
+    const searchQuery = req.query.search || ''; // Added search query parameter
+    const userId = req.query.userId;
+
+    const query = userId ? { userId } : {};
+
+    // Filter users based on search query
+    const users = await User.find({
+      username: { $regex: new RegExp(searchQuery, 'i') }, // Case-insensitive search
+      ...(req.query.userId && { _id: req.query.userId }),
+
+    }
+  )
+
+      .sort({ createdAt: sortDirection })
+      .skip(startIndex)
+      .limit(limit);
+  
+
+    const usersWithoutPassword = users.map((user) => {
+      const { password, ...rest } = user._doc;
+      return rest;
+    });
+
+    const totalUsers = await User.countDocuments();
+
+    const now = new Date();
+
+    const oneMonthAgo = new Date(
+      now.getFullYear(),
+      now.getMonth() - 1,
+      now.getDate()
     );
-    res.status(200).json(updatedPost);
+    const lastMonthUsers = await User.countDocuments({
+      createdAt: { $gte: oneMonthAgo },
+    });
+
+    res.status(200).json({
+      users: usersWithoutPassword,
+      totalUsers,
+      lastMonthUsers,
+    });
   } catch (error) {
     next(error);
   }
