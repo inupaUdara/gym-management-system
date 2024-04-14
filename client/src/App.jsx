@@ -1,6 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
+import Shop from "./pages/Shop";
+import Supplements from "./pages/Supplements";
+import LiftingAccessories from "./pages/LiftingAccessories";
+import ShakersAndBottels from "./pages/ShakersAndBottles";
+import GiftCollection from "./pages/GiflCollection";
+import OffersAndDeals from "./pages/OffersAndDeals";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Dashboard from "./pages/Dashboard";
@@ -24,6 +30,12 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/shop" element={<Shop />} />
+        <Route path="/supplements" element={<Supplements />} />
+        <Route path="/liftingaccessories" element={<LiftingAccessories />} />
+        <Route path="/shakersandbottles" element={<ShakersAndBottels />} />
+        <Route path="/giflcollection" element={<GiftCollection />} />
+        <Route path="/offersanddeals" element={<OffersAndDeals />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/employee-login" element={<EmployeeLogin />} />        
