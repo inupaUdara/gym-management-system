@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import Header from "./Header";
 import AdminDashSideBar from "./AdminDashSideBar";
+import EmployeeContact from "./EmployeeContact";
 export default function AdminViewEmployeeDetails() {
   const location = useLocation();
   // const [empId, setEmpId] = useState("");
@@ -9,6 +10,7 @@ export default function AdminViewEmployeeDetails() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [employee, setEmployee] = useState(null);
+  const [contact, setContact] = useState(false);
 
   // useEffect(() => {
   //   const urlParams = new URLSearchParams(location.search);
@@ -52,7 +54,7 @@ export default function AdminViewEmployeeDetails() {
         <AdminDashSideBar/>
       </div>
     <div className="flex-grow w-full min-h-[60vh] bg-[#d4d4d4] p-10 md:p-20 justify-center">
-      <div className="max-w-[500px] mx-auto rounded-md p-10 bg-white shadow-lg">
+      <div className="max-w-[600px] mx-auto rounded-md p-10 bg-white shadow-lg">
         <div className="flex items-center justify-center">
           <img
             src={employee && employee.profilePicture}
@@ -92,10 +94,13 @@ export default function AdminViewEmployeeDetails() {
             <p className="font-semibold">{employee && employee.address}</p>
           </div>
         </div>
-        <div className="flex items-center justify-center">
-          <button className="bg-[#a80000] text-[#d4d4d4] p-2 rounded-md font-semibold">
-            Contact
-          </button>
+        <div className="flex flex-col items-center justify-center">
+        <button onClick={() => setContact(true)}
+          className="bg-[#1f1f1f] text-white rounded-lg uppercase hover:opacity-80 p-2"
+          >
+          Contact
+         </button>
+         {contact && <EmployeeContact employee={employee}/>}
         </div>
       </div>
     </div>

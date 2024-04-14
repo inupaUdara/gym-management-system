@@ -33,7 +33,7 @@ export default function AdminDasManagers() {
   const handleShowMore = async () => {
     const startIndex = employees.length;
     try {
-      const res = await fetch(`/api/employee/getemployee?role=Manager?startIndex=${startIndex}`);
+      const res = await fetch(`/api/employee/getemployee?role=Manager&startIndex=${startIndex}`);
       const data = await res.json();
       if (res.ok) {
         setUsers((prev) => [...prev, ...data.employees]);
@@ -68,17 +68,37 @@ export default function AdminDasManagers() {
       {currentUser.isAdmin && employees.length > 0? (
         <>
           <Table hoverable className='shadow-md'>
-            <Table.Head>
-              <Table.HeadCell className='bg-[#1f1f1f] text-[#d4d4d4]'>Profile picture</Table.HeadCell>
-              <Table.HeadCell className='bg-[#1f1f1f] text-[#d4d4d4]'>First name</Table.HeadCell>
-              <Table.HeadCell className='bg-[#1f1f1f] text-[#d4d4d4]'>Last name</Table.HeadCell>
-              <Table.HeadCell className='bg-[#1f1f1f] text-[#d4d4d4]'>Username</Table.HeadCell>
-              <Table.HeadCell className='bg-[#1f1f1f] text-[#d4d4d4]'>Address</Table.HeadCell>
-              <Table.HeadCell className='bg-[#1f1f1f] text-[#d4d4d4]'>Date of register</Table.HeadCell>
-              <Table.HeadCell className='bg-[#1f1f1f] text-[#d4d4d4]'>Email</Table.HeadCell>
-              <Table.HeadCell className='bg-[#1f1f1f] text-[#d4d4d4]'>NIC</Table.HeadCell>
-              <Table.HeadCell className='bg-[#1f1f1f] text-[#d4d4d4]'>Phone</Table.HeadCell>
-              <Table.HeadCell className='bg-[#1f1f1f] text-[#d4d4d4]'>Delete</Table.HeadCell>
+          <Table.Head>
+              <Table.HeadCell className="bg-[#1f1f1f] text-[#d4d4d4]">
+                Date of register
+              </Table.HeadCell>
+              <Table.HeadCell className="bg-[#1f1f1f] text-[#d4d4d4]">
+                Profile picture
+              </Table.HeadCell>
+              <Table.HeadCell className="bg-[#1f1f1f] text-[#d4d4d4]">
+                First name
+              </Table.HeadCell>
+              <Table.HeadCell className="bg-[#1f1f1f] text-[#d4d4d4]">
+                Last name
+              </Table.HeadCell>
+              <Table.HeadCell className="bg-[#1f1f1f] text-[#d4d4d4]">
+                Username
+              </Table.HeadCell>
+              <Table.HeadCell className="bg-[#1f1f1f] text-[#d4d4d4]">
+                Address
+              </Table.HeadCell>
+              <Table.HeadCell className="bg-[#1f1f1f] text-[#d4d4d4]">
+                Email
+              </Table.HeadCell>
+              <Table.HeadCell className="bg-[#1f1f1f] text-[#d4d4d4]">
+                NIC
+              </Table.HeadCell>
+              <Table.HeadCell className="bg-[#1f1f1f] text-[#d4d4d4]">
+                Phone
+              </Table.HeadCell>
+              <Table.HeadCell className="bg-[#1f1f1f] text-[#d4d4d4]">
+                Delete
+              </Table.HeadCell>
             </Table.Head>
             {employees.map((employee) => (
               <Table.Body className='divide-y' key={employee._id}>

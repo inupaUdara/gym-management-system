@@ -96,8 +96,8 @@ export default function AdminDasInstructors() {
                   <Table.Cell>{leave.reason}</Table.Cell>
                   <Table.Cell>{leave.status}</Table.Cell>
                   <Link to={`/view-instructor-request/${leave._id}/${leave.employeeId}`}>
-                    <Table.Cell className="text-green-400 cursor-pointer hover:underline">
-                      Update
+                    <Table.Cell className="text-green-600 cursor-pointer hover:underline">
+                      Update status
                     </Table.Cell>
                   </Link>
                   <Table.Cell>
