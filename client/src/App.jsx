@@ -14,12 +14,12 @@ import CreateSubPackage from "./pages/subPackagePages/CreateSubPackage";
 import EditSubPackage from "./pages/subPackagePages/EditSubPackage";
 import ShowSubPackage from "./pages/subPackagePages/ShowSubPackage";
 
-
 import AdminViewEmployeeDetails from "./components/AdminViewEmployeeDetails";
 import ManagerInstructorLeave from "./components/ManagerInstructorLeave";
 
-
 import Payment from "./pages/Payment";
+import SubscriptionPackages from "./pages/SubscriptionPackages";
+import PromoSubPackage from "./pages/PromoSubPackage";
 
 
 export default function App() {
@@ -31,12 +31,13 @@ export default function App() {
         <Route path="/about" element={<About />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/employee-login" element={<EmployeeLogin />} />        
+        <Route path="/employee-login" element={<EmployeeLogin />} /> 
+        <Route path="/SubscriptionPackages" element={<SubscriptionPackages />}/> 
+        <Route path="/PromoSubPackage" element={<PromoSubPackage />}/>     
         <Route element={<AdminPrivateRoute />}>
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route path="/view-employee-details/:empId" element={<AdminViewEmployeeDetails />} />
           <Route path="/view-instructor-request/:leaveId/:empId" element={<ManagerInstructorLeave />} />
-
         </Route>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
