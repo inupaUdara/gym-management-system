@@ -145,6 +145,7 @@ export default function AdminDashSideBar() {
         )}
 
 
+
         {currentUser.isAdmin && (
           <Link to="/admin-dashboard?tab=instuctor-shift">
           <div
@@ -162,13 +163,23 @@ export default function AdminDashSideBar() {
           <div
             className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
               activeTab === "add-supplements" ? "bg-[#707070]" : ""
+
+{currentUser.role === "Manager" && (
+          <Link to="/admin-dashboard?tab=admin-subscripition-panel">
+          <div
+            className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
+              activeTab === "admin-subscripition-panel" ? "bg-[#707070]" : ""
+
             }`}
            
           >
             <MdSchedule color="#D4D4D4" />
 
+
             <span className="text-[15px] ml-4 text-[#D4D4D4]">Add Supplements</span>
 
+
+            <span className="text-[15px] ml-4 text-[#D4D4D4]">Subscription</span>
           </div>
         </Link>
         )}

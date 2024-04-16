@@ -11,6 +11,8 @@ import authRoutes from './routes/auth.route.js';
 import supplementsRoutes from "./routes/supplements.route.js";
 
 import cookieParser from "cookie-parser";
+import SubpackageRoutes from "./routes/subpackage_route.js";
+import cors from 'cors';
 dotenv.config();
 
 mongoose
@@ -26,6 +28,8 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
+app.use(cors());
+
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
 });
@@ -33,6 +37,7 @@ app.listen(3000, () => {
 app.use("/api/employee", employeeRoutes);
 app.use("/api/authemployee", authEmployeeRoutes);
 app.use("/api/leave", leaveRoutes);
+app.use("/api/subpackage", SubpackageRoutes);
 
 app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
