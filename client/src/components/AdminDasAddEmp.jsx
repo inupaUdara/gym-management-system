@@ -35,7 +35,9 @@ export default function AdminDasAddEmp() {
       const data = await res.json();
       if (data.success === false) {
         setLoading(false);
-        return setError("User already exists");
+        setSuccess(null);
+        return setError(data.message);
+        
       }
       setLoading(false);
       if (res.ok) {
@@ -45,8 +47,11 @@ export default function AdminDasAddEmp() {
     } catch (error) {
       setError(error.message);
       setLoading(false);
+      setSuccess(null);
     }
   };
+
+  console.log(formData);
   return (
     <div className="flex-grow w-full min-h-[60vh] bg-[#d4d4d4] p-10 md:p-20 justify-center">
       <div className=" max-w-[600px] mx-auto rounded-md p-10 bg-white shadow-lg">
@@ -66,7 +71,7 @@ export default function AdminDasAddEmp() {
                 <input
                   type="text"
                   placeholder="Enter first name"
-                  className="text-[#d4d4d4] text-sm py-2 my-2 rounded-md bg-[#707070] focus:outline-none placeholder:text-[#d4d4d4] focus:ring-[#03001C]"
+                  className="text-[#1f1f1f] text-sm py-2 my-2 rounded-md bg-[#d4d4d4] focus:outline-none placeholder:text-[#1f1f1f] focus:ring-[#03001C]"
                   id="firstname"
                   onChange={handleChange}
                 />
@@ -79,7 +84,7 @@ export default function AdminDasAddEmp() {
                 <input
                   type="text"
                   placeholder="Enter last name"
-                  className="text-[#d4d4d4] text-sm py-2 my-2 rounded-md bg-[#707070] focus:outline-none placeholder:text-[#d4d4d4] focus:ring-[#03001C]"
+                  className="text-[#1f1f1f] text-sm py-2 my-2 rounded-md bg-[#d4d4d4] focus:outline-none placeholder:text-[#1f1f1f] focus:ring-[#03001C]"
                   id="lastname"
                   onChange={handleChange}
                 />
@@ -92,7 +97,7 @@ export default function AdminDasAddEmp() {
             <input
               type="text"
               placeholder="Enter address"
-              className="text-[#d4d4d4] text-sm py-2 my-2 rounded-md bg-[#707070] focus:outline-none placeholder:text-[#d4d4d4] focus:ring-[#03001C]"
+              className="text-[#1f1f1f] text-sm py-2 my-2 rounded-md bg-[#d4d4d4] focus:outline-none placeholder:text-[#1f1f1f] focus:ring-[#03001C]"
               id="address"
               onChange={handleChange}
             />
@@ -102,7 +107,7 @@ export default function AdminDasAddEmp() {
             <input
               type="email"
               placeholder="Enter email"
-              className=" text-[#d4d4d4] text-sm py-2 my-2 rounded-md bg-[#707070] focus:outline-none placeholder:text-[#d4d4d4] focus:ring-[#03001C]"
+              className=" text-[#1f1f1f] text-sm py-2 my-2 rounded-md bg-[#d4d4d4] focus:outline-none placeholder:text-[#1f1f1f] focus:ring-[#03001C]"
               id="email"
               onChange={handleChange}
             />
@@ -115,7 +120,7 @@ export default function AdminDasAddEmp() {
                 <input
                   type="text"
                   placeholder="Enter NIC"
-                  className="text-[#d4d4d4] text-sm py-2 my-2 rounded-md bg-[#707070] focus:outline-none placeholder:text-[#d4d4d4] focus:ring-[#03001C]"
+                  className="text-[#1f1f1f] text-sm py-2 my-2 rounded-md bg-[#d4d4d4] focus:outline-none placeholder:text-[#1f1f1f] focus:ring-[#03001C]"
                   id="nic"
                   onChange={handleChange}
                 />
@@ -128,7 +133,7 @@ export default function AdminDasAddEmp() {
                 <input
                   type="text"
                   placeholder="Enter phone number"
-                  className="text-[#d4d4d4] text-sm py-2 my-2 rounded-md bg-[#707070] focus:outline-none placeholder:text-[#d4d4d4] focus:ring-[#03001C]"
+                  className="text-[#1f1f1f] text-sm py-2 my-2 rounded-md bg-[#d4d4d4] focus:outline-none placeholder:text-[#1f1f1f] focus:ring-[#03001C]"
                   id="phone"
                   onChange={handleChange}
                 />
@@ -138,16 +143,33 @@ export default function AdminDasAddEmp() {
               Role
             </label>
             <select
-              className="mt-3 rounded-md bg-[#707070] text-[#d4d4d4]"
+              className="mt-3 rounded-md bg-[#d4d4d4] text-[#1f1f1f]"
               id="role"
               onChange={(e) =>
                 setFormData({ ...formData, role: e.target.value })
               }
             >
-              <option id="none">Select a role</option>
-              <option id="manager">Manager</option>
-              <option id="instructor">Instructor</option>
+              <option>Select the role</option>
+              <option value="Manager">Manager</option>
+              <option value="Instructor">Instructor</option>
             </select>
+            {formData.role === "Instructor" && (
+              <>
+            <label htmlFor="" className="text-[#1f1f1f] mt-3">Shift</label>
+            <select
+              className="mt-3 rounded-md bg-[#d4d4d4] text-[#1f1f1f]"
+              id="shift"
+              onChange={(e) =>
+                setFormData({ ...formData, shift: e.target.value })
+              }
+            >
+              <option>Select the shift</option>
+              <option value="6am-11am">6.00 AM to 12.00 PM</option>
+              <option value="12pm-5pm">12.00 PM to 5.00 PM</option>
+              <option value="5pm-10pm">5.00 PM to 9.00 PM</option>
+            </select>
+            </>)}
+            
           </div>
           <div className="flex flex-col my-4">
             <button

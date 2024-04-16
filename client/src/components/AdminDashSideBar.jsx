@@ -6,7 +6,7 @@ import {
   HiAnnotation,
   HiChartPie,
 } from "react-icons/hi";
-import { MdSchedule } from "react-icons/md";
+import { MdSchedule, MdOutlineScheduleSend  } from "react-icons/md";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -37,26 +37,27 @@ export default function AdminDashSideBar() {
 
   
 
-  const handleSignout = async () => {
-    try {
-      const res = await fetch("api/employee/signout", {
-        method: "POST",
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        console.log(data.message);
-      } else {
-        dispatch(signoutSuccess());
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handleSignout = async () => {
+  //   try {
+  //     const res = await fetch("api/employee/signout", {
+  //       method: "POST",
+  //     });
+  //     const data = await res.json();
+  //     if (!res.ok) {
+  //       console.log(data.message);
+  //     } else {
+  //       dispatch(signoutSuccess());
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
-    <div className="h-full w-full md:w-56 drop-shadow-2xl border-b-white">
+    <div className="w-full h-full md:w-56 drop-shadow-2xl border-b-white">
       <div className="flex-col h-full overflow-x-hidden overflow-y-auto text-center bg-[#1f1f1f]">
-        <Link to="/admin-dashboard?tab=profile">
+        {currentUser.role && (
+          <Link to="/admin-dashboard?tab=profile">
           <div
             className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
               activeTab === "profile" ? "bg-[#707070]" : ""
@@ -68,16 +69,31 @@ export default function AdminDashSideBar() {
             <span className="text-[15px] ml-4 text-[#D4D4D4]">Profile</span>
           </div>
         </Link>
+        )}
+        {!currentUser.role && (
+          <Link to="/admin-dashboard?tab=member-profile">
+          <div
+            className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
+              activeTab === "member-profile" ? "bg-[#707070]" : ""
+            }`}
+           
+          >
+            <HiUser color="#D4D4D4" />
+
+            <span className="text-[15px] ml-4 text-[#D4D4D4]">Profile</span>
+          </div>
+        </Link>
+        )}
         {currentUser.role === "Instructor" && (
           
           <div
-            className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
+            className={`p-2.5 my-1 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
               activeTab === "request" ? "bg-[#707070]" : ""
             }` } onClick={() =>  toggleDropdownReq()}
            
           >
             <MdSchedule color="#D4D4D4" />
-            <div className="flex justify-between w-full items-center">
+            <div className="flex items-center justify-between w-full">
             <span className="text-[15px] ml-4 text-[#D4D4D4]">Requests</span>
             <span className="text-sm rotate-180" id="arrow">
                 {isOpenReq ? <IoIosArrowUp /> : <IoIosArrowDown />}
@@ -88,7 +104,7 @@ export default function AdminDashSideBar() {
         )}
         {isOpenReq && (
           <div
-            className="text-left text-sm font-light mt-2 w-4/5 mx-auto text-[#D4D4D4]"
+            className="text-left text-sm font-light w-4/5 mx-auto text-[#D4D4D4] p-2"
             id="submenu"
           >
             <Link to="/admin-dashboard?tab=instructor-request">
@@ -113,7 +129,7 @@ export default function AdminDashSideBar() {
             
           </div>
         )}
-        {currentUser.role === "Manager" && (
+        {currentUser.isAdmin && (
           <Link to="/admin-dashboard?tab=view-request">
           <div
             className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
@@ -128,15 +144,40 @@ export default function AdminDashSideBar() {
         </Link>
         )}
 
+
+
+        {currentUser.isAdmin && (
+          <Link to="/admin-dashboard?tab=instuctor-shift">
+          <div
+            className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
+              activeTab === "instuctor-shift" ? "bg-[#707070]" : ""
+            }`}
+           
+          >
+            <MdOutlineScheduleSend color="#D4D4D4" />
+
+            <span className="text-[15px] ml-4 text-[#D4D4D4]">Instructor Shifts</span>
+
+        {currentUser.role === "Manager" && (
+          <Link to="/admin-dashboard?tab=add-supplements">
+          <div
+            className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
+              activeTab === "add-supplements" ? "bg-[#707070]" : ""
+
 {currentUser.role === "Manager" && (
           <Link to="/admin-dashboard?tab=admin-subscripition-panel">
           <div
             className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
               activeTab === "admin-subscripition-panel" ? "bg-[#707070]" : ""
+
             }`}
            
           >
             <MdSchedule color="#D4D4D4" />
+
+
+            <span className="text-[15px] ml-4 text-[#D4D4D4]">Add Supplements</span>
+
 
             <span className="text-[15px] ml-4 text-[#D4D4D4]">Subscription</span>
           </div>
@@ -144,7 +185,7 @@ export default function AdminDashSideBar() {
         )}
         
 
-        {currentUser.role === "Admin" && (
+        {currentUser.isAdmin && (
           <div
             className={`p-2.5 my-2 mx-2  flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
               activeTab === "emp" ? "bg-[#707070]" : ""
@@ -152,7 +193,7 @@ export default function AdminDashSideBar() {
             onClick={() =>  toggleDropdownEmp()}
           >
             <HiOutlineUserGroup color="#D4D4D4" />
-            <div className="flex justify-between w-full items-center">
+            <div className="flex items-center justify-between w-full">
               <span className="text-[15px] ml-4 text-[#D4D4D4]">Employees</span>
               <span className="text-sm rotate-180" id="arrow">
               {isOpenEmp ? <IoIosArrowUp /> : <IoIosArrowDown />}
@@ -163,7 +204,7 @@ export default function AdminDashSideBar() {
 
         {isOpenEmp && (
           <div
-            className="text-left text-sm font-light mt-2 w-4/5 mx-auto text-[#D4D4D4]"
+            className="text-left text-sm font-light mt-1 w-4/5 mx-auto text-[#D4D4D4] p-2"
             id="submenu"
           >
             <Link
@@ -200,13 +241,13 @@ export default function AdminDashSideBar() {
           </div>
         )}
 
-        <div
+        {/* <div
           className="p-2.5 my-2 mx-2  flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white"
           onClick={handleSignout}
         >
           <HiArrowSmRight color="#D4D4D4" />
           <span className="text-[15px] ml-4 text-gray-200">Sign Out</span>
-        </div>
+        </div> */}
       </div>
     </div>
   );

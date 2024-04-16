@@ -11,6 +11,15 @@ import Header from "../components/Header";
 import InstructorViewLeaveRequest from "../components/InstructorViewLeaveRequest";
 import ManagerInstructorLeave from "../components/ManagerInstructorLeave";
 import AdminViewEmployeeDetails from "../components/AdminViewEmployeeDetails";
+
+
+import AdminInstructorShifts from "../components/AdminInstructorShifts";
+import MemberDashProfile from "../components/MemberDashProfile";
+
+import ManagerAddSupplements from "../components/ManagerAddSupplements";
+
+
+
 import AdminSubscriptionPanel from "../components/subpacComp/AdminSubscriptionPanel";
 export default function AdminDashboard() {
   const location = useLocation();
@@ -42,15 +51,22 @@ export default function AdminDashboard() {
       <div className="md:w-56">
         <AdminDashSideBar/>
       </div>
-      
+      {tab === 'add-supplements' && <ManagerAddSupplements/>}
       {tab === 'addemployee' && <AdminDasAddEmp/>}
       {tab === 'profile' && <DasProfile/>}
+      {tab === 'member-profile' && <MemberDashProfile/>}
       {tab === 'admin-instructors' && <AdminDasInstructors/>}
       {tab === 'admin-managers' && <AdminDasManagers/>}
       {tab === 'instructor-request' && <InstructorDasRequests/>}
       {tab === 'view-request'  && <ManagerViewLeave/>}
       {tab === 'view-instructors-request' && <InstructorViewLeaveRequest/>}
+
+      {tab === 'instuctor-shift' && <AdminInstructorShifts/>}
+      {/* {tab === 'view-instructor-request' && leaveId && <ManagerInstructorLeave/>}
+      {tab === 'view-employee-details' && empId && <AdminViewEmployeeDetails/>} */}
+
       {tab === 'admin-subscripition-panel' && <AdminSubscriptionPanel/> }
+
     </div>
     </>
     

@@ -1,16 +1,39 @@
-import { Link, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { Avatar, Dropdown, DropdownDivider } from "flowbite-react";
 import logo from "../assets/cjgym.png";
+import { signoutSuccess } from "../redux/user/userSlice";
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
   const location = useLocation();
   const isHomePage = location.pathname === "/";
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleSignoutEmp = async () => {
+    try {
+      const res = await fetch('/api/employee/signout', {
+        method: 'POST',
+      });
+      const data = await res.json();
+
+      
+      
+      if (!res.ok) {
+        console.log(data.message);
+      } else {
+        dispatch(signoutSuccess());
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
 
   return (
     // [url("./assets/homebg.png")]
     <header className={`border-b-2 border-b-black shadow-md relative ${isHomePage ? 'bg-transparent shadow-none border-none' : 'bg-gradient-to-r from-[#1f1f1f] to-[#4c0000]'}`}>
-      <div className="flex justify-between items-center max-w-7xl mx-auto p-6">
+      <div className="flex items-center justify-between p-6 mx-auto max-w-7xl">
         <Link to="/">
           {/* <h2 className="font-light text-sm sm:text-xl flex flex-wrap text-[#D4D4D4]">
             CJ Gym & Fitness Centre
@@ -34,7 +57,7 @@ export default function Header() {
               Memberships
             </li>
           </Link>
-          <Link to="#">
+          <Link to="/shop">
             <li className="hidden sm:inline text-[#D4D4D4] hover:underline hover:underline-offset-4 hover:text-white">
               Shop
             </li>
@@ -57,16 +80,16 @@ export default function Header() {
                 {currentUser.email}
               </span>
             </Dropdown.Header>
-            <Link to={"/admin-dashboard?tab=profile"}>
+            <Link to={currentUser.role ? "/admin-dashboard?tab=profile" : "/admin-dashboard?tab=member-profile"}>
               <Dropdown.Item>Profile</Dropdown.Item>
             </Link>
             <DropdownDivider />
-            <Dropdown.Item>Sign out</Dropdown.Item>
+            <Dropdown.Item onClick={handleSignoutEmp}>Sign out</Dropdown.Item>
           </Dropdown>
           
         ) : (
           <ul>
-            <Link to="/employee-login" className="flex gap-4">
+            <Link to="/sign-in" className="flex gap-4">
               <li className=" text-[#D4D4D4] font-extrabold text-xl  rounded-lg hover:text-white">
                 Sign in
               </li>
