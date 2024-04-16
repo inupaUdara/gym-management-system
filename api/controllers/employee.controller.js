@@ -54,6 +54,7 @@ export const updateEmployee = async (req, res, next) => {
             phone: req.body.phone,
             profilePicture: req.body.profilePicture,
             password: req.body.password,
+            shift: req.body.shift,
           },
         },
         { new: true }
@@ -65,6 +66,29 @@ export const updateEmployee = async (req, res, next) => {
     }
 };
 
+export const updateEmployeeByShift = async (req, res, next) => {
+  if (!req.user.isAdmin) {
+    return next(errorHandler(403, 'You are not allowed to update this user'));
+  }
+ 
+
+    try {
+      const updatedEmployee = await Employee.findByIdAndUpdate(
+        req.params.empId,
+        {
+          $set: {
+            
+            shift: req.body.shift,
+          },
+        },
+        { new: true }
+      );
+      const { password, ...rest } = updatedEmployee._doc;
+      res.status(200).json(rest);
+    } catch (error) {
+      next(error);
+    }
+};
 
 
 export const getEmployees = async (req, res, next) => {

@@ -15,11 +15,7 @@ export default function AdminDasInstructors() {
   const [loadingMonth, setLoadingMonth] = useState(false);
   const [employeeLeaves, setEmployeeLeaves] = useState([]);
 
-  const datahero = [
-    { name: "/home", value: 456 },
-    { name: "/imprint", value: 351 },
-    { name: "/cancellation", value: 51 },
-  ];
+  
 
   useEffect(() => {
     const fetchLeavesByCurrentMonth = async () => {
@@ -80,9 +76,9 @@ export default function AdminDasInstructors() {
         Instructor Leave Request
       </h1>
       <div className="items-start w-full md:max-w-sm bg-white p-3 rounded-md shadow-lg">
-        <p className="mt-4 mb-2 ml-3 text-tremor-default flex items-center justify-between font-semibold text-[#1f1f1f] dark:text-dark-tremor-content">
+        <p className="mt-4 mb-2 text-tremor-default flex items-center justify-between font-semibold text-[#1f1f1f] dark:text-dark-tremor-content">
           <span>Instructor</span>
-          <span>Leaves</span>
+          <span>Total Leaves</span>
         </p>
 
         <BarList
@@ -91,13 +87,13 @@ export default function AdminDasInstructors() {
             value: employee.totalLeaves,
           }))}
           className="mx-auto"
-          color={'teal'}
+          color={"red"}
           
         />
       </div>
-      <div className="flex-wrap flex gap-4 py-3 mx-auto justify-center">
-        <div className="flex flex-col w-full shadow-md p-2 rounded-md gap-4 bg-white ">
-          <div className="overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
+      <div className="flex-wrap flex gap-4 py-3 justify-center">
+        <div className="flex flex-col w-full shadow-md p-2 rounded-md gap-4 bg-white">
+          <div className="table-auto md:mx-auto p-3 overflow-x-scroll scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
             <h3 className="mb-3 uppercase font-semibold">
               This month leave requests
             </h3>

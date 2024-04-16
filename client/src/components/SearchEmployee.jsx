@@ -4,7 +4,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Select, TextInput } from 'flowbite-react';
 import { AiOutlineSearch } from "react-icons/ai";
 import EmployeeCard from './EmployeeCard';
+
 export default function SearchEmployee() {
+    
     const path = useLocation().pathname;
     const location = useLocation();
     const navigate = useNavigate();
@@ -87,19 +89,38 @@ export default function SearchEmployee() {
 
     }
 
-    
+    const handleShowMore = async () => {
+        const numberOfEmp = employee.length;
+        const startIndex = numberOfEmp;
+        const urlParams = new URLSearchParams(location.search);
+        urlParams.set('startIndex', startIndex);
+        const searchQuery = urlParams.toString();
+        const res = await fetch(`/api/employee/getemployee?${searchQuery}`);
+        if (!res.ok) {
+          return;
+        }
+        if (res.ok) {
+          const data = await res.json();
+          setEmployee([...employee, ...data.employees]);
+          if (data.employees.length === 9) {
+            setShowMore(true);
+          } else {
+            setShowMore(false);
+          }
+        }
+      };
 
   return (
     <div className="flex flex-col md:flex-row w-full">
-        <div className='p-7 border-b md:border-r md:min-h-screen border-gray-500'>
-            <form onSubmit={handleSubmit} className='flex flex-col gap-8'>
+        <div className='p-7 border-b md:border-r md:min-h-screen border-gray-500 '>
+            <form onSubmit={handleSubmit} className='flex flex-col gap-8 w-full'>
                 <div className="flex items-center gap-2">
-                    <label htmlFor="" className='whitespace-nowrap font-semibold'>Search Employee:</label>
+                    <label htmlFor="" className='whitespace-nowrap font-semibold'>Search:</label>
                     <TextInput
                     type='text'
                     placeholder='Search...'
                     rightIcon={AiOutlineSearch}
-                    className='m-5'
+                    className=''
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}/>
 
@@ -114,6 +135,7 @@ export default function SearchEmployee() {
                 <div className="flex items-center gap-2">
                     <label htmlFor="" className='font-semibold'>Role:</label>
                     <Select onChange={handleChange} defaultValue={sideBarData.role} id='role'>
+                        <option value="">Select Role</option>
                         <option value="Instructor">Intructors</option>
                         <option value="Manager">Managers</option>
                     </Select>
@@ -140,6 +162,14 @@ export default function SearchEmployee() {
                 {
                     !loading && employee && employee.map((emp) => <EmployeeCard key={emp._id} employee={emp} />)
                 }
+                {showMore && (
+            <button
+              onClick={handleShowMore}
+              className='text-teal-500 text-lg hover:underline p-7 w-full'
+            >
+              Show More
+            </button>
+          )}
             </div>
         </div>
     </div>

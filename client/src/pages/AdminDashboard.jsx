@@ -15,6 +15,7 @@ import AdminInstructorShifts from "../components/AdminInstructorShifts";
 import MemberDashProfile from "../components/MemberDashProfile";
 import DashboardComponent from "../components/DashboardComponent";
 import SearchEmployee from "../components/SearchEmployee";
+import InstructorShiftRequets from "../components/InstructorShiftRequets";
 export default function AdminDashboard() {
   const location = useLocation();
   const [tab,setTab] = useState('');
@@ -46,6 +47,7 @@ export default function AdminDashboard() {
         <AdminDashSideBar/>
       </div>
       {tab === 'dashboard-comp' && <DashboardComponent/>}
+      {tab === 'request-shift-change' && <InstructorShiftRequets/>}
       {tab === 'search-employee' && <SearchEmployee/>}
       {tab === 'addemployee' && <AdminDasAddEmp/>}
       {tab === 'profile' && <DasProfile/>}

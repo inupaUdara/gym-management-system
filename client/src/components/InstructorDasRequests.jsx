@@ -171,51 +171,7 @@ export default function AdminDasAddEmp() {
             </Alert>
           )}
         </div>
-        {/* <div className="mx-2 p-5 border-[#707070] border-t-2  border-t-[#707070] lg:border-l-2 lg:border-t-white">
-          {currentUser.isAdmin || currentUser.role === "Instructor" ? (
-            <>
-              <h3 className="text-xl font-semibold mb-4 text-[#03001C] text-center">
-                Your Current Leave Request
-              </h3>
-              {LeavesIns.map((leave) => (
-                <div
-                  key={leave._id}
-                  className="flex flex-row gap-4 mt-5 justify-between"
-                >
-                  <div className="flex flex-col">
-                    <p className="text-[#1f1f1f]">
-                      Leave Type: {leave.leaveType}
-                    </p>
-                    <p className="text-[#1f1f1f]">
-                      Start Date:{" "}
-                      {new Date(leave.startDate).toLocaleDateString()}
-                    </p>
-                    <div className="flex flex-row">
-                      <p className="text-[#1f1f1f] mr-2">End Date:</p>
-                      <p className="text-[#1f1f1f]">
-                        {new Date(leave.endDate).toLocaleDateString()}
-                      </p>
-                    </div>
-                    <p className="text-[#1f1f1f]">Reason: {leave.reason}</p>
-                    <div className="flex flex-row">
-                      <p className="text-[#1f1f1f] mr-2">Status: </p>
-                      <MdOutlinePendingActions className="mt-1" />
-                      <p className="text-[#1f1f1f] font-semibold"> {leave.status}</p>
-                    </div>
-                  </div>
-                  {leave.status === "Pending" ? (
-                    <p className="text-red-500" onClick={() => {
-                      setShowModal(true);
-                      setLeaveIdToDelete(leave._id);
-                    }}>Delete</p>
-                    ) : leave.status === "Approve" ? ( <p className="text-green-500">Leave request is approved</p>) :(<p className="text-red-500">Leave request is rejected</p>)}
-                </div>
-              ))}
-            </>
-          ) : (
-            <p>You have no leave request yet!</p>
-          )}
-        </div> */}
+        
       </div>
       <Modal
         show={showModal}

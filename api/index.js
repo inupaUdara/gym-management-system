@@ -6,6 +6,7 @@ import authEmployeeRoutes from "./routes/authEmployee.route.js";
 import leaveRoutes from "./routes/leave.route.js";
 import userRoutes from './routes/user.routes.js';
 import authRoutes from './routes/auth.route.js';
+import shiftChangeRoute from './routes/shift.route.js';
 import cookieParser from "cookie-parser";
 dotenv.config();
 
@@ -31,6 +32,7 @@ app.use("/api/authemployee", authEmployeeRoutes);
 app.use("/api/leave", leaveRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/shiftchange', shiftChangeRoute);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
