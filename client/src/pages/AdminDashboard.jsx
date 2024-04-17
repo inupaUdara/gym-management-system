@@ -11,6 +11,10 @@ import Header from "../components/Header";
 import InstructorViewLeaveRequest from "../components/InstructorViewLeaveRequest";
 import ManagerInstructorLeave from "../components/ManagerInstructorLeave";
 import AdminViewEmployeeDetails from "../components/AdminViewEmployeeDetails";
+import InventoryAddNew from "../components/InventoryAddNew";
+import InventoryViewItems from "../components/InventoryViewItems";
+import InventoryUpdateItems from "../components/InventoryUpdateItems";
+
 export default function AdminDashboard() {
   const location = useLocation();
   const [tab,setTab] = useState('');
@@ -48,6 +52,10 @@ export default function AdminDashboard() {
       {tab === 'admin-managers' && <AdminDasManagers/>}
       {tab === 'instructor-request' && <InstructorDasRequests/>}
       {tab === 'view-request'  && <ManagerViewLeave/>}
+      {tab === 'view-inventory' && <InventoryViewItems/>}
+      {tab === 'update-inventory' && <InventoryUpdateItems/>}
+      {tab === 'addinventory' && <InventoryAddNew/>}
+      {tab === 'add-inventory'  && <InventoryAdd/>}     
       {tab === 'view-instructors-request' && <InstructorViewLeaveRequest/>}
       {/* {tab === 'view-instructor-request' && leaveId && <ManagerInstructorLeave/>}
       {tab === 'view-employee-details' && empId && <AdminViewEmployeeDetails/>} */}

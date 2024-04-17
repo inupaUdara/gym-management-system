@@ -28,7 +28,7 @@ export default function AdminDasInstructors() {
 
   const handleDeleteLeave = async () => {
     try {
-      const res = await fetch(`/api/leave/deleteleave/${leaveIdToDelete}`, {
+      const res = await fetch('/api/leave/deleteleave/${leaveIdToDelete}', {
         method: "DELETE",
       });
       const data = await res.json();

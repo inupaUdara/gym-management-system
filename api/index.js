@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import employeeRoutes from "./routes/employee.route.js";
 import authEmployeeRoutes from "./routes/authEmployee.route.js";
+import inventoryRoutes from "./routes/inventory.route.js";
 import leaveRoutes from "./routes/leave.route.js";
 import cookieParser from "cookie-parser";
 dotenv.config();
@@ -27,6 +28,7 @@ app.listen(3000, () => {
 app.use("/api/employee", employeeRoutes);
 app.use("/api/authemployee", authEmployeeRoutes);
 app.use("/api/leave", leaveRoutes);
+app.use("/api/inventory", inventoryRoutes);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;

@@ -12,17 +12,24 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signoutSuccess } from "../redux/user/userSlice";
+
 export default function AdminDashSideBar() {
   const { currentUser } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [isOpenEmp, setIsOpenEmp] = useState(false);
   const [isOpenReq, setIsOpenReq] = useState(false);
+  const [isOpenInventory, setIsOpenInventory] = useState(false);
+
   const toggleDropdownEmp = () => {
     setIsOpenEmp(!isOpenEmp);
   };
 
   const toggleDropdownReq = () => {
     setIsOpenReq(!isOpenReq);
+  };
+
+  const toggleDropdownInventory = () => {
+    setIsOpenInventory(!isOpenInventory);
   };
 
   const [activeTab, setActiveTab] = useState("");
@@ -113,6 +120,8 @@ export default function AdminDashSideBar() {
             
           </div>
         )}
+
+
         {currentUser.role === "Manager" && (
           <Link to="/admin-dashboard?tab=view-request">
           <div
@@ -125,9 +134,63 @@ export default function AdminDashSideBar() {
 
             <span className="text-[15px] ml-4 text-[#D4D4D4]">View Requests</span>
           </div>
+          <div
+            className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
+              activeTab === "inventory" ? "bg-[#707070]" : ""
+            }`}
+            onClick={() => toggleDropdownInventory()}
+          >
+            <HiOutlineUserGroup color="#D4D4D4" />
+            <div className="flex justify-between w-full items-center">
+              <span className="text-[15px] ml-4 text-[#D4D4D4]">Inventory</span>
+              <span className="text-sm rotate-180" id="arrow">
+                {isOpenInventory ? <IoIosArrowUp /> : <IoIosArrowDown />}
+              </span>
+            </div>
+          </div>
         </Link>
         )}
-        
+
+        {isOpenInventory && currentUser.role === "Manager" && (
+          // Inventory Options
+          <div
+            className="text-left text-sm font-light mt-2 w-4/5 mx-auto text-[#D4D4D4]"
+            id="submenu"
+          >
+            <Link to="/admin-dashboard?tab=view-inventory">
+              <h1
+                className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
+              ${activeTab === "view-inventory" ? "bg-[#707070]" : ""}`}
+              >
+                View Items
+              </h1>
+            </Link>
+            <Link to="/admin-dashboard?tab=addinventory">
+              <h1
+                className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
+              ${activeTab === "addinventory" ? "bg-[#707070]" : ""}`}
+              >
+                Add New Item
+              </h1>
+            </Link>
+            <Link to="/admin-dashboard?tab=update-item">
+              <h1
+                className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
+              ${activeTab === "updateitem" ? "bg-[#707070]" : ""}`}
+              >
+                Update Item
+              </h1>
+            </Link>
+            <Link to="/admin-dashboard?tab=order-items">
+              <h1
+                className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
+              ${activeTab === "order-items" ? "bg-[#707070]" : ""}`}
+              >
+                Order New Items
+              </h1>
+            </Link>
+          </div>
+        )}
 
         {currentUser.role === "Admin" && (
           <div
@@ -182,8 +245,22 @@ export default function AdminDashSideBar() {
                 Managers
               </h1>
             </Link>
+            {/* <Link
+              to="/admin-dashboard?tab=admin-inventory-managers"
+            >
+              <h1 className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
+              ${activeTab === "admin-inventory-managers" ? "bg-[#707070]" : ""}`}
+                
+                >
+                Inventory Managers
+              </h1>
+            </Link> */}
           </div>
         )}
+
+        
+
+        
 
         <div
           className="p-2.5 my-2 mx-2  flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white"
