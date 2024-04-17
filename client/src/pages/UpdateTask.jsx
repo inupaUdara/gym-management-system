@@ -6,6 +6,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { app } from '../firebase';
 import { useSelector } from 'react-redux';
+import Header from '../components/Header';
 
 export default function UpdateTasks() {
   const [file, setFile] = useState(null);
@@ -134,6 +135,8 @@ export default function UpdateTasks() {
 
   return (
    
+    <div style={{ backgroundColor: '#1f1f1f' }}>
+      <Header />
     <div className='max-w-3xl min-h-screen p-3 mx-auto'>
       <h1 className='mb-10 text-3xl font-semibold text-center text-white ay-7'> Update a Task</h1>
       <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
@@ -151,7 +154,7 @@ export default function UpdateTasks() {
           <input
             type='text'
             id='startDate'
-            onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
+            // onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
             value={formatDate(formData.startDate)}
             className='w-full p-2 mt-1 text-black border border-gray-300 rounded-md dark:text-gray-400'
           />
@@ -159,7 +162,7 @@ export default function UpdateTasks() {
           <input
             type='text'
             id='endDate'
-            onChange={(e) => setFormData({ ...formData, endDate: e.target.value })}
+            // onChange={(e) => setFormData({ ...formData, endDate: e.target.value })}
             value={formatDate(formData.endDate)}
             className='w-full p-2 mt-1 text-black border rounded-md dark:text-gray-400'
           />
@@ -201,6 +204,7 @@ export default function UpdateTasks() {
         {submitError && <Alert className='mt-5' color='failure'>{submitError}</Alert>}
         {submitSuccess && <Alert className='mt-5' color='success'>Form Updated successfully!</Alert>}
       </form>
+    </div>
     </div>
   );
 }

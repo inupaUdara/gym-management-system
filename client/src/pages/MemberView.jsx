@@ -46,7 +46,7 @@ const MemberView = () => {
   };
 
   const navigateToDashboard = () => {
-    window.location.href = `/admin-dashboard?tab=admin-users`; // Navigate using window.location.href
+    window.location.href = `/admin-dashboard?tab=admin-users`; 
   };
 
   return (

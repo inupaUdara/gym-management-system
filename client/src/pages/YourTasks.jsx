@@ -98,70 +98,70 @@ export default function YourTasks() {
   };
 
   return (
-    <>
-    <Header />
-    <div className='max-w-3xl min-h-screen p-3 mx-auto'>
-      <h1 className='mb-10 text-3xl font-semibold text-center text-black ay-7'> Create a Tasks</h1>
-      <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
-        <TextInput type='text' placeholder='Title' required id='title' className='flex-1'
-          onChange={(e) => setFormData({...formData, title: e.target.value})}
-        />
-        <div className='flex items-center justify-between p-3 gap-7'>
-          <h3 className='text-black'> Start Date </h3>
-          <input
-            type='date'
-            id='startDate'
-            onChange={(e) => setFormData({...formData, startDate: e.target.value})}
-            className='w-full p-2 mt-1 text-black border border-gray-300 rounded-md dark:text-gray-400'
+    <div style={{ backgroundColor: '#1f1f1f' }}>
+      <Header />
+      <div className='max-w-3xl min-h-screen p-3 mx-auto'>
+        <h1 className='mb-10 text-3xl font-semibold text-center text-white ay-7'> Create a Tasks</h1>
+        <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
+          <TextInput type='text' placeholder='Title' required id='title' className='flex-1'
+            onChange={(e) => setFormData({...formData, title: e.target.value})}
           />
-          <h3 className='text-black'> End Date </h3>
-          <input
-            type='date'
-            id='endDate'
-            onChange={(e) => setFormData({...formData, endDate: e.target.value})}
-            className='w-full p-2 mt-1 text-black border rounded-md dark:text-gray-400'
-          />
-        </div>
-        <div className='flex items-center justify-between w-full gap-4'>
-          <FileInput type='file' className='w-full' accept='image/*' onChange={(e) => setFile(e.target.files[0])} />
+          <div className='flex items-center justify-between p-3 gap-7'>
+            <h3 className='text-white'> Start Date </h3>
+            <input
+              type='date'
+              id='startDate'
+              onChange={(e) => setFormData({...formData, startDate: e.target.value})}
+              className='w-full p-2 mt-1 text-black border border-gray-300 rounded-md dark:text-gray-400'
+            />
+            <h3 className='text-white'> End Date </h3>
+            <input
+              type='date'
+              id='endDate'
+              onChange={(e) => setFormData({...formData, endDate: e.target.value})}
+              className='w-full p-2 mt-1 text-black border rounded-md dark:text-gray-400'
+            />
+          </div>
+          <div className='flex items-center justify-between w-full gap-4'>
+            <FileInput type='file' className='w-full' accept='image/*' onChange={(e) => setFile(e.target.files[0])} />
+            <button
+              type='button'
+              className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+              size='sm'
+              outline='true'
+              onClick={handleUploadImage}
+              disabled={imageUploadProgress}
+            >
+              {imageUploadProgress ? (
+                <div className='w-16 h-16'>
+                  <CircularProgressbar value={imageUploadProgress} text={`${imageUploadProgress || 0}%`} />
+                </div>
+              ) : (
+                'Upload Image'
+              )}
+            </button>
+          </div>
+          {imageUploadError && <Alert color='failure'>{imageUploadError}</Alert>}
+          {formData.image && (
+            <img src={formData.image} alt='upload' className='object-cover w-full h-72' />
+          )}
           <button
-            type='button'
-            className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-            size='sm'
-            outline='true'
-            onClick={handleUploadImage}
-            disabled={imageUploadProgress}
+            type="button"
+            className={`px-4 py-2 font-bold text-white transition-colors duration-300 rounded hover:bg-${progressButtonState === 'Progress' ? 'green' : 'red'}-700 ${progressButtonState === 'Progress' ? 'bg-green-500' : 'bg-red-500'}`}
+            onClick={handleProgressButtonClick}
           >
-            {imageUploadProgress ? (
-              <div className='w-16 h-16'>
-                <CircularProgressbar value={imageUploadProgress} text={`${imageUploadProgress || 0}%`} />
-              </div>
-            ) : (
-              'Upload Image'
-            )}
+            {progressButtonState}
           </button>
-        </div>
-        {imageUploadError && <Alert color='failure'>{imageUploadError}</Alert>}
-        {formData.image && (
-          <img src={formData.image} alt='upload' className='object-cover w-full h-72' />
-        )}
-        <button
-          type="button"
-          className={`px-4 py-2 font-bold text-white transition-colors duration-300 rounded hover:bg-${progressButtonState === 'Progress' ? 'green' : 'red'}-700 ${progressButtonState === 'Progress' ? 'bg-green-500' : 'bg-red-500'}`}
-          onClick={handleProgressButtonClick}
-        >
-          {progressButtonState}
-        </button>
-        <button
-          type="submit"
-          className="px-4 py-2 font-bold text-white transition-colors duration-300 bg-blue-500 rounded hover:bg-blue-700"
-        >
-          Submit
-        </button>
-        {submitError && <Alert className='mt-5' color='failure'>{submitError}</Alert>}
-        {submitSuccess && <Alert className='mt-5' color='success'>Task created successfully!</Alert>}
-      </form>
+          <button
+            type="submit"
+            className="px-4 py-2 font-bold text-white transition-colors duration-300 bg-blue-500 rounded hover:bg-blue-700"
+          >
+            Submit
+          </button>
+          {submitError && <Alert className='mt-5' color='failure'>{submitError}</Alert>}
+          {submitSuccess && <Alert className='mt-5' color='success'>Task created successfully!</Alert>}
+        </form>
+      </div>
     </div>
-    </>
   );
 }

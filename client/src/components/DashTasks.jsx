@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
-import { Modal, Button, Alert } from 'flowbite-react'; // Import Alert component
+import { Modal, Button, Alert } from 'flowbite-react'; 
 
 export default function DashTasks() {
   const { currentUser } = useSelector((state) => state.user);
   const [userTasks, setUserTasks] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [taskIdToDelete, setTaskIdToDelete] = useState('');
-  const [deleteSuccess, setDeleteSuccess] = useState(false); // State for delete success
+  const [deleteSuccess, setDeleteSuccess] = useState(false); 
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,10 +29,10 @@ export default function DashTasks() {
       }
     };
   
-    if (currentUser && !currentUser.isAdmin) { // Check if currentUser exists and is not an admin
+    if (currentUser && !currentUser.isAdmin) { 
       fetchTasks();
     }
-  }, [currentUser, deleteSuccess]); // Update tasks when deleteSuccess changes
+  }, [currentUser, deleteSuccess]); 
 
   const handleDeleteTask = async () => {
     setShowModal(false);
@@ -47,7 +47,7 @@ export default function DashTasks() {
         setUserTasks((prev) =>
           prev.filter((task) => task._id !== taskIdToDelete)
         );
-        setDeleteSuccess(true); // Set deleteSuccess to true on successful deletion
+        setDeleteSuccess(true); 
       }
     } catch (error) {
       console.log(error.message);
@@ -55,6 +55,7 @@ export default function DashTasks() {
   };
 
   return (
+    // <div style={{ backgroundColor: '#1f1f1f' }}>
     <div className='container mt-5 ml-5'>
       <h2 className="mb-5 text-center">Your Tasks</h2>
       <div className="flex flex-wrap w-300">

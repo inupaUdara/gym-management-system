@@ -90,50 +90,7 @@ export default function SignUp() {
                 onChange={handleChange}
               />
             </div>
-            {/* <div>
-              <Label value='Name' style={{ color: 'white' }} />
-              <TextInput
-                type='text'
-                placeholder='Your Name'
-                id='name'
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <Label value='Gender' style={{ color: 'white' }} />
-              <select id='gender' onChange={handleChange} className='input-line'>
-                <option value=''>Select Gender</option>
-                <option value='male'>Male</option>
-                <option value='female'>Female</option>
-                <option value='other'>Other</option>
-              </select>
-            </div>
-            <div>
-              <Label value='Date of Birth' style={{ color: 'white' }} />
-              <TextInput
-                type='date'
-                id='dateOfBirth'
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <Label value='Address' style={{ color: 'white' }} />
-              <TextInput
-                type='text'
-                placeholder='Your Address'
-                id='address'
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <Label value='Contact Number' style={{ color: 'white' }} />
-              <TextInput
-                type='text'
-                placeholder='Your Contact Number'
-                id='contactNumber'
-                onChange={handleChange}
-              />
-            </div> */}
+          
             <button type="submit" className="text-white bg-red-900 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
            
            disabled={loading}
