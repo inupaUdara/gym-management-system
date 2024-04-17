@@ -8,7 +8,7 @@ router.post('/addItems', verifyToken, addItems);
 router.get('/getItems', verifyToken, getItems);
 router.get('/getItemIns', verifyToken, getItemIns);
 router.delete('/deleteItem/:itemId', verifyToken, deleteItem);
-router.post('/updateItem/:itemId', verifyToken, updateItem);
+router.put('/updateItem/:itemId', verifyToken, updateItem);
 
 
 export default router;

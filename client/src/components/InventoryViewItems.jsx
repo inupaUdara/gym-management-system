@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Table, Button, Modal } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function InventoryViewItems() {
+  
   const { currentUser } = useSelector((state) => state.user);
   const [items, setItems] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -81,7 +82,7 @@ export default function InventoryViewItems() {
                 <Table.Cell>{item.description}</Table.Cell>
                 <Table.Cell>{item.quantity}</Table.Cell>
                 <Table.Cell>{item.itemStatus}</Table.Cell>
-                <Link to={`/admin-dashboard?tab=update-inventory&itemId=${item.itemCode}`}>
+                <Link to={`/update-inventory/${item._id}`}>
                   <Table.Cell className="text-green-400 cursor-pointer hover:underline">
                     Update
                   </Table.Cell>

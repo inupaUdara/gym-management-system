@@ -99,33 +99,55 @@ export const deleteItem = async (req, res, next) => {
     }
 }
 
+
 export const updateItem = async (req, res, next) => {
+    if(!req.user.role === 'Admin' || !req.user.role === 'Manager'){
+        next(errorHandler(403, "You are not access to leaves"));
+    }
+
     try {
-        if (req.user.role !== 'Manager') {
-            return next(errorHandler(403, "You are not allowed to update items"));
-        }
-
-        const { itemId } = req.params;
-        const { itemCode, itemName, description, quantity, itemStatus} = req.body;
-
-        if (!itemCode || !itemName || !description || !quantity || !itemStatus) {
-            return next(errorHandler(400, "All fields are required"));
-        }
-
-        const updatedItem = await Inventory.findByIdAndUpdate(itemId, {
-            itemCode,
-            itemName,
-            description,
-            quantity,
-            itemStatus
-        }, { new: true });
-
-        if (!updatedItem) {
-            return next(errorHandler(404, "Item not found"));
-        }
-
+        const updatedItem = await Inventory.findByIdAndUpdate(req.params.itemId, 
+            {
+                $set: {
+                    itemCode: req.body.itemCode,
+                    itemName: req.body.itemName,
+                    description: req.body.description,
+                    quantity: req.body.description,
+                },
+            },
+            { new: true });
         res.status(200).json(updatedItem);
+        
     } catch (error) {
         next(error);
     }
 }
+// export const updateItem = async (req, res, next) => {
+//     try {
+//         if (req.user.role !== 'Manager') {
+//             return next(errorHandler(403, "You are not allowed to update items"));
+//         }
+
+//         const { itemId } = req.params;
+//         const { itemCode, itemName, description, quantity} = req.body;
+
+//         if (!itemCode || !itemName || !description || !quantity) {
+//             return next(errorHandler(400, "All fields are required"));
+//         }
+
+//         const updatedItem = await Inventory.findByIdAndUpdate( req.params.itemId, {
+//             itemCode,
+//             itemName,
+//             description,
+//             quantity
+//         }, { new: true });
+
+//         if (!updatedItem) {
+//             return next(errorHandler(404, "Item not found"));
+//         }
+
+//         res.status(200).json(updatedItem);
+//     } catch (error) {
+//         next(error);
+//     }
+// }

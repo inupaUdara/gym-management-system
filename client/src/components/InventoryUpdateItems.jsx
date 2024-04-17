@@ -9,7 +9,8 @@ function getItemIdFromURL() {
   }
   
 
-export default function InventoryViewItems() {
+export default function InventoryUpdateItems() {
+  const { inventoryId } = useParams();
   const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.user);
   const itemId = getItemIdFromURL();
@@ -27,19 +28,14 @@ export default function InventoryViewItems() {
   useEffect(() => {
     const fetchItems = async () => {
         try {
-            console.log(`/api/inventory/getItemIns/${itemId}`);
+            console.log(`/api/inventory/getItems?itemId=${inventoryId}`);
 
-          const res = await fetch(`/api/inventory/getItemIns?itemCode=${itemId}`);
+          const res = await fetch(`/api/inventory/getItems?itemId=${inventoryId}`);
           if (!res.ok) {
             throw new Error("Failed to fetch item");
           }
           const data = await res.json();
-          setFormData({
-            itemName: data.itemName,
-            itemCode: data.itemCode,
-            description: data.description,
-            quantity: data.quantity,
-          });
+          setFormData(data.items[0]);
         } catch (error) {
           setError(error.message);
         }
@@ -72,7 +68,7 @@ export default function InventoryViewItems() {
     try {
       setLoading(true);
       setError(null);
-      const res = await fetch(`/api/inventory/updateItem/${itemId}`, {
+      const res = await fetch(`/api/inventory/updateItem/${inventoryId}`, {   
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -92,9 +88,9 @@ export default function InventoryViewItems() {
     }
   };
 
-  if (!itemId) {
-    return <div>No itemId found!</div>; // Handle case when itemId is not available
-  }
+  // if (!itemId) {
+  //   return <div>No itemId found!</div>; // Handle case when itemId is not available
+  // }
   return (
     <div className="flex-grow w-full min-h-[60vh] bg-[#d4d4d4] p-10 md:p-20 justify-center">
       <div className="max-w-[600px] mx-auto rounded-md p-10 bg-white shadow-lg">
@@ -116,7 +112,7 @@ export default function InventoryViewItems() {
                   placeholder="Enter item code"
                   className="text-[#d4d4d4] text-sm py-2 my-2 rounded-md bg-[#707070] focus:outline-none placeholder:text-[#d4d4d4] focus:ring-[#03001C]"
                   id="itemCode"
-                  value={formData.itemCode || ""}
+                  defaultValue={formData.itemCode || ""}
                   onChange={handleChange}
                 />
               </div>
