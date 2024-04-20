@@ -8,6 +8,17 @@ export const create = async (req, res, next) => {
   const nicRegex = /^(?:[0-9]{9}[VvXx]||[0-9]{12})$/;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+  if (!nicRegex.test(nic)) {
+    next(errorHandler(401, "NIC is invalid"));
+  
+  }
+
+ 
+  if (!emailRegex.test(email)) {
+    next(errorHandler(402, "Email is invalid"));
+   
+  }
+
   if (
     !firstname ||
     !lastname ||
@@ -27,17 +38,8 @@ export const create = async (req, res, next) => {
   }
   
 
-  // Check NIC validity
-  if (!nicRegex.test(nic)) {
-    next(errorHandler(400, "NIC is invalid"));
-   // Return to avoid further execution
-  }
-
-  // Check email validity
-  if (!emailRegex.test(email)) {
-    next(errorHandler(400, "Email is invalid"));
-    // Return to avoid further execution
-  }
+  
+  
   
 
   const hashedPassword = bcryptjs.hashSync(nic, 10);
