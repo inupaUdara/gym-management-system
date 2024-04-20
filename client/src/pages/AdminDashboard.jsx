@@ -11,8 +11,12 @@ import Header from "../components/Header";
 import InstructorViewLeaveRequest from "../components/InstructorViewLeaveRequest";
 import ManagerInstructorLeave from "../components/ManagerInstructorLeave";
 import AdminViewEmployeeDetails from "../components/AdminViewEmployeeDetails";
+
+
 import AdminInstructorShifts from "../components/AdminInstructorShifts";
 import MemberDashProfile from "../components/MemberDashProfile";
+import ManagerAddSupplements from "../components/ManagerAddSupplements";
+import AdminSubscriptionPanel from "../components/subpacComp/AdminSubscriptionPanel";
 import DashboardComponent from "../components/DashboardComponent";
 import SearchEmployee from "../components/SearchEmployee";
 import InstructorShiftRequets from "../components/InstructorShiftRequets";
@@ -44,8 +48,9 @@ export default function AdminDashboard() {
     <Header/>
     <div className="min-h-screen flex flex-col md:flex-row bg-[#d4d4d4]">
       <div className="md:w-56">
-        <AdminDashSideBar/>
-      </div>
+        <AdminDashSideBar/>      </div>
+
+      {tab === 'add-supplements' && <ManagerAddSupplements/>}
       {tab === 'dashboard-comp' && <DashboardComponent/>}
       {tab === 'request-shift-change' && <InstructorShiftRequets/>}
       {tab === 'search-employee' && <SearchEmployee/>}
@@ -57,9 +62,13 @@ export default function AdminDashboard() {
       {tab === 'instructor-request' && <InstructorDasRequests/>}
       {tab === 'view-request'  && <ManagerViewLeave/>}
       {tab === 'view-instructors-request' && <InstructorViewLeaveRequest/>}
+
       {tab === 'instuctor-shift' && <AdminInstructorShifts/>}
       {/* {tab === 'view-instructor-request' && leaveId && <ManagerInstructorLeave/>}
       {tab === 'view-employee-details' && empId && <AdminViewEmployeeDetails/>} */}
+
+      {tab === 'admin-subscripition-panel' && <AdminSubscriptionPanel/> }
+
     </div>
     </>
     
