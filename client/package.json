@@ -10,11 +10,19 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.18",
+    "@headlessui/tailwindcss": "^0.2.0",
     "@reduxjs/toolkit": "^2.2.1",
+    "@remixicon/react": "^4.2.0",
+    "@tremor/react": "^3.15.0",
     "firebase": "^10.10.0",
+    "axios": "^1.6.8",
     "flowbite-react": "^0.7.2",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.8.2",
+    "notistack": "^3.0.1",
+    "html2canvas": "^1.4.1",   
+    "jspdf": "^2.5.1",
     "preline": "^2.0.3",
     "prettier": "^3.2.5",
     "react": "^18.2.0",
@@ -26,6 +34,7 @@
     "redux-persist": "^6.0.0"
   },
   "devDependencies": {
+    "@tailwindcss/forms": "^0.5.7",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@vitejs/plugin-react-swc": "^3.5.0",

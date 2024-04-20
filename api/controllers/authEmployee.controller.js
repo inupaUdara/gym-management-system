@@ -88,6 +88,7 @@ export const login = async (req, res, next) => {
         isAdmin: validEmployee.isAdmin,
         role: validEmployee.role,
         username: validEmployee.username,
+        name: validEmployee.firstname + " " + validEmployee.lastname,
       },
       process.env.JWT_SECRET_EMP
     );
