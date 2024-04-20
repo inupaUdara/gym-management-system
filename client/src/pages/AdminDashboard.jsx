@@ -15,12 +15,11 @@ import AdminViewEmployeeDetails from "../components/AdminViewEmployeeDetails";
 
 import AdminInstructorShifts from "../components/AdminInstructorShifts";
 import MemberDashProfile from "../components/MemberDashProfile";
-
 import ManagerAddSupplements from "../components/ManagerAddSupplements";
-
-
-
 import AdminSubscriptionPanel from "../components/subpacComp/AdminSubscriptionPanel";
+import DashboardComponent from "../components/DashboardComponent";
+import SearchEmployee from "../components/SearchEmployee";
+import InstructorShiftRequets from "../components/InstructorShiftRequets";
 export default function AdminDashboard() {
   const location = useLocation();
   const [tab,setTab] = useState('');
@@ -49,9 +48,12 @@ export default function AdminDashboard() {
     <Header/>
     <div className="min-h-screen flex flex-col md:flex-row bg-[#d4d4d4]">
       <div className="md:w-56">
-        <AdminDashSideBar/>
-      </div>
+        <AdminDashSideBar/>      </div>
+
       {tab === 'add-supplements' && <ManagerAddSupplements/>}
+      {tab === 'dashboard-comp' && <DashboardComponent/>}
+      {tab === 'request-shift-change' && <InstructorShiftRequets/>}
+      {tab === 'search-employee' && <SearchEmployee/>}
       {tab === 'addemployee' && <AdminDasAddEmp/>}
       {tab === 'profile' && <DasProfile/>}
       {tab === 'member-profile' && <MemberDashProfile/>}
