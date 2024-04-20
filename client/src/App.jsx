@@ -24,8 +24,12 @@ import AdminViewEmployeeDetails from "./components/AdminViewEmployeeDetails";
 import ManagerInstructorLeave from "./components/ManagerInstructorLeave";
 
 import Payment from "./pages/Payment";
+import YourTasks from "./pages/YourTasks";
+import UpdateTasks from "./pages/UpdateTask";
+import MemberView from "./pages/MemberView";
 import SubscriptionPackages from "./pages/SubscriptionPackages";
 import PromoSubPackage from "./pages/PromoSubPackage";
+
 
 
 export default function App() {
@@ -50,6 +54,12 @@ export default function App() {
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route path="/view-employee-details/:empId" element={<AdminViewEmployeeDetails />} />
           <Route path="/view-instructor-request/:leaveId/:empId" element={<ManagerInstructorLeave />} />
+
+          <Route path="/yourtasks" element={<YourTasks />} />           
+          <Route path="/update-tasks/:taskId" element={<UpdateTasks />} />
+          <Route path="/member-view/:userId" element={<MemberView />} />
+            
+
         </Route>
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
         <Route path="/payment" element={<Payment />} />

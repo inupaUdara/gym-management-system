@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema({
     name: {
         type: String,
         
-        default: 'name',
+         default: 'no name',
     },
     username: {
         type: String,
@@ -27,17 +27,17 @@ const userSchema = new mongoose.Schema({
     },
     dateOfBirth: {
         type: Date,
-        default: '03/14/2001',
+        default: '04/11/2001',
     },
     address: {
         type: String,
         
-        default: 'address',        
+         default: 'no address',        
        
     },
     contactNumber: {
         type: String,
-        default: '071 xxx xxxx',    
+         default: '07x xxx xxx',    
     },
     profilePicture:{
         type: String,

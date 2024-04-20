@@ -18,6 +18,8 @@
     "firebase": "^10.10.0",
     "axios": "^1.6.8",
     "flowbite-react": "^0.7.2",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.8.2",
     "notistack": "^3.0.1",
     "html2canvas": "^1.4.1",   
     "jspdf": "^2.5.1",

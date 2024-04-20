@@ -6,6 +6,7 @@ import authEmployeeRoutes from "./routes/authEmployee.route.js";
 import leaveRoutes from "./routes/leave.route.js";
 import userRoutes from './routes/user.routes.js';
 import authRoutes from './routes/auth.route.js';
+import taskRoutes from './routes/tasks.route.js';
 import supplementsRoutes from "./routes/supplements.route.js";
 import shiftChangeRoute from './routes/shift.route.js';
 import cookieParser from "cookie-parser";
@@ -39,10 +40,9 @@ app.use("/api/subpackage", SubpackageRoutes);
 
 app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/tasks', taskRoutes);
 app.use('/api/shiftchange', shiftChangeRoute);
-
 app.use("/api/supplements", supplementsRoutes);
-
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;

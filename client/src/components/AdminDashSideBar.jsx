@@ -8,6 +8,7 @@ import {
 } from "react-icons/hi";
 import { MdSchedule, MdOutlineScheduleSend, MdDashboard   } from "react-icons/md";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { LuUsers } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -84,6 +85,20 @@ export default function AdminDashSideBar() {
           </div>
         </Link>
         )}
+        {!currentUser.role && (
+          <Link to="/admin-dashboard?tab=member-task">
+          <div
+            className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
+              activeTab === "member-task" ? "bg-[#707070]" : ""
+            }`}
+           
+          >
+            <HiUser color="#D4D4D4" />
+
+            <span className="text-[15px] ml-4 text-[#D4D4D4]">Tasks</span>
+          </div>
+        </Link>
+        )}
         {currentUser.role === "Instructor" && (
           
           <div
@@ -138,6 +153,9 @@ export default function AdminDashSideBar() {
             
           </div>
         )}
+
+
+
         {currentUser.isAdmin && (
           <Link to="/admin-dashboard?tab=dashboard-comp">
           <div
@@ -206,6 +224,22 @@ export default function AdminDashSideBar() {
           </div>
         </Link>
         )}
+
+{currentUser.isAdmin && (
+          <Link to="/admin-dashboard?tab=admin-users">
+          <div
+            className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
+              activeTab === "admin-users" ? "bg-[#707070]" : ""
+            }`}
+           
+          >
+            <LuUsers color="#D4D4D4" />
+
+            <span className="text-[15px] ml-4 text-[#D4D4D4]">Users</span>
+          </div>
+        </Link>
+        )}
+        
         
 
         {currentUser.isAdmin && (
@@ -224,6 +258,8 @@ export default function AdminDashSideBar() {
             </div>
           </div>
         )}
+
+        
 
         {isOpenEmp && (
           <div
