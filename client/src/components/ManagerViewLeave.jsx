@@ -2,7 +2,7 @@ import { Modal, Table, Button } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BarList } from "@tremor/react";
 
 export default function AdminDasInstructors() {
@@ -14,6 +14,7 @@ export default function AdminDasInstructors() {
   const [loading, setLoading] = useState(false);
   const [loadingMonth, setLoadingMonth] = useState(false);
   const [employeeLeaves, setEmployeeLeaves] = useState([]);
+  const navigate = useNavigate();
 
   
 
@@ -62,6 +63,7 @@ export default function AdminDasInstructors() {
           prev.filter((leave) => leave._id !== leaveIdToDelete)
         );
         setShowModal(false);
+        n
       } else {
         console.log(data.message);
       }
