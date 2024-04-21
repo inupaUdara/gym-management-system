@@ -2,7 +2,7 @@ import { Modal, Table, Button, TextInput } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
-import { FaCheck, FaTimes } from 'react-icons/fa';
+import { FaUsers } from 'react-icons/fa';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
@@ -15,9 +15,29 @@ export default function DashUsers() {
   const [userIdToDelete, setUserIdToDelete] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [deleteMessage, setDeleteMessage] = useState('');
+  const [error, setError] = useState(false); // Define error state
   const navigate = useNavigate();
   const { userId } = useParams();
   const location = useLocation();
+  const [loading, setLoading] = useState(false);
+
+  // const [totalUsers, setTotalUsers] = useState(0);
+
+  // const fetchTotalUsers = async () => {
+  //   try {
+  //     const res = await fetch('/api/user/getusers/total');
+  //     const data = await res.json();
+  //     if (res.ok) {
+  //       setTotalUsers(data.totalUsers);
+  //     }
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchTotalUsers(); // Fetch total users on component mount
+  // }, []);
 
   useEffect(() => {
     const fetchUsersBySearch = async () => {
@@ -39,14 +59,13 @@ export default function DashUsers() {
         const res = await fetch(`/api/user/getusers?userId=${userId}`);
         const data = await res.json();
         if (!res.ok) {
-          // setError(true);
-          // setLoading(false);
+          setError(true);
+          setLoading(false);
           return;
         }
         if (res.ok) {
           setUsers(data.users[0]);
-          // setLoading(false);
-          // setError(false);
+          setError(false); // Reset error state
         }
       } catch (error) {
         setError(true);
@@ -56,7 +75,9 @@ export default function DashUsers() {
 
     fetchUsersBySearch();
     fetchUserById();
-  }, [searchQuery, userId]);
+  }, [searchQuery, userId]); // Only fetch users on searchQuery or userId change
+
+ 
 
   const handleSearch = (event) => {
     setSearchQuery(event.target.value);
@@ -109,7 +130,7 @@ export default function DashUsers() {
       // user.isAdmin ? 'Yes' : 'No',
     ]);
     doc.autoTable({
-      head: [['Date created', 'Username', 'Email', 'Phone Number', 'Address', 'Admin']],
+      head: [['Date created', 'Username', 'Email', 'Phone Number', 'Address']],
       body: tableData,
     });
     doc.save('user_report.pdf');
@@ -127,6 +148,10 @@ export default function DashUsers() {
           className="w-64"
         />
       </div>
+      {/* <div className="flex items-center justify-center w-20 h-20 bg-gray-200 rounded-full">
+  <FaUsers size={30} color="#555" />
+  <span className="ml-2 text-lg font-bold">{totalUsers}</span>
+</div> */}
       {deleteMessage && (
         <div className="relative px-4 py-3 mb-4 text-green-700 bg-green-100 border border-green-400 rounded" role="alert">
           <strong className="font-bold">Success!</strong>
