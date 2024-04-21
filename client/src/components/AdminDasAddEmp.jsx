@@ -164,9 +164,9 @@ export default function AdminDasAddEmp() {
               }
             >
               <option>Select the shift</option>
-              <option value="6am-11am">6.00 AM to 12.00 PM</option>
+              <option value="6am-11am">6.00 AM to 11.00 AM</option>
               <option value="12pm-5pm">12.00 PM to 5.00 PM</option>
-              <option value="5pm-10pm">5.00 PM to 9.00 PM</option>
+              <option value="5pm-10pm">5.00 PM to 10.00 PM</option>
             </select>
             </>)}
             

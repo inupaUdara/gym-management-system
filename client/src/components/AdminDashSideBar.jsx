@@ -6,7 +6,7 @@ import {
   HiAnnotation,
   HiChartPie,
 } from "react-icons/hi";
-import { MdSchedule, MdOutlineScheduleSend  } from "react-icons/md";
+import { MdSchedule, MdOutlineScheduleSend, MdDashboard   } from "react-icons/md";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { LuUsers } from "react-icons/lu";
 import { Link } from "react-router-dom";
@@ -122,6 +122,15 @@ export default function AdminDashSideBar() {
             className="text-left text-sm font-light w-4/5 mx-auto text-[#D4D4D4] p-2"
             id="submenu"
           >
+            <Link to="/admin-dashboard?tab=request-shift-change">
+              <h1
+                className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
+              ${activeTab === "request-shift-change" ? "bg-[#707070]" : ""}`}
+                
+              >
+                Request Shift Swapping
+              </h1>
+            </Link>
             <Link to="/admin-dashboard?tab=instructor-request">
               <h1
                 className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
@@ -148,6 +157,20 @@ export default function AdminDashSideBar() {
 
 
         {currentUser.isAdmin && (
+          <Link to="/admin-dashboard?tab=dashboard-comp">
+          <div
+            className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
+              activeTab === "dashboard-comp" || !activeTab ? "bg-[#707070]" : ""
+            }`}
+           
+          >
+            <MdDashboard color="#D4D4D4" />
+
+            <span className="text-[15px] ml-4 text-[#D4D4D4]">Dashboard</span>
+          </div>
+        </Link>
+        )}
+        {currentUser.isAdmin && (
           <Link to="/admin-dashboard?tab=view-request">
           <div
             className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
@@ -162,6 +185,8 @@ export default function AdminDashSideBar() {
         </Link>
         )}
 
+
+
         {currentUser.isAdmin && (
           <Link to="/admin-dashboard?tab=instuctor-shift">
           <div
@@ -173,6 +198,29 @@ export default function AdminDashSideBar() {
             <MdOutlineScheduleSend color="#D4D4D4" />
 
             <span className="text-[15px] ml-4 text-[#D4D4D4]">Instructor Shifts</span>
+
+        {currentUser.role === "Manager" && (
+          <Link to="/admin-dashboard?tab=add-supplements">
+          <div
+            className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
+              activeTab === "add-supplements" ? "bg-[#707070]" : ""
+
+{currentUser.role === "Manager" && (
+          <Link to="/admin-dashboard?tab=admin-subscripition-panel">
+          <div
+            className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
+              activeTab === "admin-subscripition-panel" ? "bg-[#707070]" : ""
+
+            }`}
+           
+          >
+            <MdSchedule color="#D4D4D4" />
+
+
+            <span className="text-[15px] ml-4 text-[#D4D4D4]">Add Supplements</span>
+
+
+            <span className="text-[15px] ml-4 text-[#D4D4D4]">Subscription</span>
           </div>
         </Link>
         )}
@@ -215,9 +263,20 @@ export default function AdminDashSideBar() {
 
         {isOpenEmp && (
           <div
-            className="text-left text-sm font-light mt-1 w-4/5 mx-auto text-[#D4D4D4] p-2"
+            className="text-left text-sm font-light w-4/5 mx-auto text-[#D4D4D4] p-2"
             id="submenu"
           >
+            <Link
+              to="/admin-dashboard?tab=search-employee"
+            >
+              <h1
+                className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md
+              ${activeTab === "search-employee" ? "bg-[#707070]" : ""}`}
+                
+              >
+                Search Employees
+              </h1>
+            </Link>
             <Link
               to="/admin-dashboard?tab=addemployee"
             >

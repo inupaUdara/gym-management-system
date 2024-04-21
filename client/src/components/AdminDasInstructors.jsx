@@ -70,6 +70,8 @@ export default function AdminDasInstructors() {
     }
   };
 
+  
+
   return (
     <div className="table-auto  md:mx-auto p-3 overflow-x-scroll scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
       {currentUser.isAdmin && employees.length > 0 ? (
@@ -154,7 +156,7 @@ export default function AdminDasInstructors() {
           )}
         </>
       ) : (
-        <p>You have no users yet!</p>
+        <p>You have no instructors yet!</p>
       )}
       <Modal
         show={showModal}
