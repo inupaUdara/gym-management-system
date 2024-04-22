@@ -21,6 +21,7 @@ import ManagerInstructorLeave from "./components/ManagerInstructorLeave";
 
 
 import Payment from "./pages/Payment";
+import ManagerUpdateSupplements from "./components/ManagerUpdateSupplements";
 
 
 export default function App() {
@@ -43,12 +44,14 @@ export default function App() {
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route path="/view-employee-details/:empId" element={<AdminViewEmployeeDetails />} />
           <Route path="/view-instructor-request/:leaveId/:empId" element={<ManagerInstructorLeave />} />
-
+          <Route path="/updateSupplements/:supplementId" element={<ManagerUpdateSupplements />} />
         </Route>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/payment" element={<Payment />} />
+        
+      
       </Routes>
       <FooterCom />
     </BrowserRouter>

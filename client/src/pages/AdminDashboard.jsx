@@ -16,6 +16,8 @@ import AdminInstructorShifts from "../components/AdminInstructorShifts";
 import MemberDashProfile from "../components/MemberDashProfile";
 
 import ManagerAddSupplements from "../components/ManagerAddSupplements";
+import ManagerShowSupplements from "../components/ManagerShowSupplements";
+
 
 
 export default function AdminDashboard() {
@@ -49,6 +51,7 @@ export default function AdminDashboard() {
         <AdminDashSideBar/>
       </div>
       {tab === 'add-supplements' && <ManagerAddSupplements/>}
+      {tab === 'show-supplements' && <ManagerShowSupplements/>}
       {tab === 'addemployee' && <AdminDasAddEmp/>}
       {tab === 'profile' && <DasProfile/>}
       {tab === 'member-profile' && <MemberDashProfile/>}

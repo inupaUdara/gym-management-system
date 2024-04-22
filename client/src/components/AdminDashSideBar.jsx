@@ -17,12 +17,17 @@ export default function AdminDashSideBar() {
   const dispatch = useDispatch();
   const [isOpenEmp, setIsOpenEmp] = useState(false);
   const [isOpenReq, setIsOpenReq] = useState(false);
+  const [isOpenSupplement, setIsOpenSupplement] = useState(false);
   const toggleDropdownEmp = () => {
     setIsOpenEmp(!isOpenEmp);
   };
 
   const toggleDropdownReq = () => {
     setIsOpenReq(!isOpenReq);
+  };
+
+  const toggleDropdownSup = () => {
+    setIsOpenSupplement(!isOpenSupplement);
   };
 
   const [activeTab, setActiveTab] = useState("");
@@ -156,22 +161,60 @@ export default function AdminDashSideBar() {
             <MdOutlineScheduleSend color="#D4D4D4" />
 
             <span className="text-[15px] ml-4 text-[#D4D4D4]">Instructor Shifts</span>
+            </div>
+            </Link>)}
 
-        {currentUser.role === "Manager" && (
-          <Link to="/admin-dashboard?tab=add-supplements">
+            {currentUser.role === "Manager" && (
+          
           <div
-            className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
-              activeTab === "add-supplements" ? "bg-[#707070]" : ""
-            }`}
+            className={`p-2.5 my-1 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
+              activeTab === "request" ? "bg-[#707070]" : ""
+            }` } onClick={() =>  toggleDropdownSup()}
            
           >
             <MdSchedule color="#D4D4D4" />
-
-            <span className="text-[15px] ml-4 text-[#D4D4D4]">Add Supplements</span>
-
+            <div className="flex items-center justify-between w-full">
+            <span className="text-[15px] ml-4 text-[#D4D4D4]">Supplement</span>
+            <span className="text-sm rotate-180" id="arrow">
+                {isOpenSupplement ? <IoIosArrowUp /> : <IoIosArrowDown />}
+              </span>
+            </div>
           </div>
-        </Link>
+        
         )}
+
+
+
+{isOpenSupplement && (
+  <div
+    className="text-left text-sm font-light w-4/5 mx-auto text-[#D4D4D4] p-2"
+    id="submenu"
+  >
+    <Link to="/admin-dashboard?tab=add-supplements">
+      <h1
+        className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
+      ${activeTab === "add-supplements" ? "bg-[#707070]" : ""}`}
+        
+      >
+       Add Supplement
+      </h1>
+    </Link>
+    <Link
+      to="/admin-dashboard?tab=show-supplements"
+    >
+      <h1 className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
+      ${activeTab === "show-supplements" ? "bg-[#707070]" : ""}`}
+        
+        >
+        Show Supplement
+      </h1>
+    </Link>
+    
+    
+  </div>
+)}
+       
+
         
 
         {currentUser.isAdmin && (
@@ -230,14 +273,9 @@ export default function AdminDashSideBar() {
           </div>
         )}
 
-        {/* <div
-          className="p-2.5 my-2 mx-2  flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white"
-          onClick={handleSignout}
-        >
-          <HiArrowSmRight color="#D4D4D4" />
-          <span className="text-[15px] ml-4 text-gray-200">Sign Out</span>
-        </div> */}
+  
       </div>
     </div>
   );
 }
+

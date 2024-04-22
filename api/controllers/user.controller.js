@@ -1,3 +1,4 @@
+import Supplements from "../models/supplements.model.js";
 import User from "../models/user.model.js";
 import { errorHandler } from "../utills/error.js";
 import bcryptjs from 'bcryptjs';
@@ -102,5 +103,18 @@ export const updatepost = async (req, res, next) => {
     res.status(200).json(updatedPost);
   } catch (error) {
     next(error);
+  }
+};
+
+export const getUserSupplements = async (req, res, next) => {
+  if (req.user.id === req.params.id) {
+    try {
+      const supplements = await Supplements.find({ userRef: req.params.id });
+      res.status(200).json(supplements);
+    } catch (error) {
+      next(error);
+    }
+  } else {
+    return next(errorHandler(401, 'You can only view your own listings!'));
   }
 };
