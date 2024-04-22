@@ -83,7 +83,7 @@ const AdminSubscriptionPanel = () => {
                       {subPackage.subPackageName}
                     </td>
                     <td className="border border-slate-700 rounded-md text-center max-md:hidden">
-                      {subPackage.price}
+                      LKR {subPackage.price}
                     </td>
                     <td className="border border-slate-700 rounded-md text-center max-md:hidden">
                       {subPackage.validTime}

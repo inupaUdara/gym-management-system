@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import BackButton from '../../components/subpacComp/BackButton';
-import { Spinner } from "flowbite-react";
+//import { Spinner } from "flowbite-react";
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
@@ -67,7 +67,6 @@ const EditSubPackage = () => {
     <div className="p-4">
       <BackButton/>
       <h1 className="text-5xl my-10 text-center font-bold">Edit Subscription Package</h1>
-      {loading ? <Spinner /> : ''}
       <div className="flex flex-col border-2 border-red-700 rounded-xl w-[600px] p-4 mx-auto">
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Pakage Name</label>

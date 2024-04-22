@@ -7,7 +7,7 @@ const SubpackageShema = mongoose.Schema(
             required: true
         },
         price: {
-            type: String,
+            type: Number,
             required: true
         },
         validTime: {
@@ -31,7 +31,7 @@ const SubpackageShema = mongoose.Schema(
             required: true
         }
         
-    }
+    },
 );
 const SubPackage = mongoose.model('subPackage', SubpackageShema);
 
