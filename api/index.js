@@ -4,12 +4,10 @@ import dotenv from "dotenv";
 import employeeRoutes from "./routes/employee.route.js";
 import authEmployeeRoutes from "./routes/authEmployee.route.js";
 import leaveRoutes from "./routes/leave.route.js";
-
 import userRoutes from './routes/user.routes.js';
 import authRoutes from './routes/auth.route.js';
-
 import supplementsRoutes from "./routes/supplements.route.js";
-
+import shiftChangeRoute from './routes/shift.route.js';
 import cookieParser from "cookie-parser";
 import SubpackageRoutes from "./routes/subpackage_route.js";
 import cors from 'cors';
@@ -41,6 +39,7 @@ app.use("/api/subpackage", SubpackageRoutes);
 
 app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/shiftchange', shiftChangeRoute);
 
 app.use("/api/supplements", supplementsRoutes);
 

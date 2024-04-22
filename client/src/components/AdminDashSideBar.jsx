@@ -6,7 +6,11 @@ import {
   HiAnnotation,
   HiChartPie,
 } from "react-icons/hi";
+<<<<<<< HEAD
 import { MdSchedule, MdOutlineScheduleSend } from "react-icons/md";
+=======
+import { MdSchedule, MdOutlineScheduleSend, MdDashboard   } from "react-icons/md";
+>>>>>>> b666f5d3068be821fa416e47f1099d7767f2c7f6
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -104,6 +108,15 @@ export default function AdminDashSideBar() {
             className="text-left text-sm font-light w-4/5 mx-auto text-[#D4D4D4] p-2"
             id="submenu"
           >
+            <Link to="/admin-dashboard?tab=request-shift-change">
+              <h1
+                className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
+              ${activeTab === "request-shift-change" ? "bg-[#707070]" : ""}`}
+                
+              >
+                Request Shift Swapping
+              </h1>
+            </Link>
             <Link to="/admin-dashboard?tab=instructor-request">
               <h1
                 className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
@@ -125,6 +138,20 @@ export default function AdminDashSideBar() {
             </Link>
 
           </div>
+        )}
+        {currentUser.isAdmin && (
+          <Link to="/admin-dashboard?tab=dashboard-comp">
+          <div
+            className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
+              activeTab === "dashboard-comp" || !activeTab ? "bg-[#707070]" : ""
+            }`}
+           
+          >
+            <MdDashboard color="#D4D4D4" />
+
+            <span className="text-[15px] ml-4 text-[#D4D4D4]">Dashboard</span>
+          </div>
+        </Link>
         )}
         {currentUser.isAdmin && (
           <Link to="/admin-dashboard?tab=view-request">
@@ -196,9 +223,20 @@ export default function AdminDashSideBar() {
 
         {isOpenEmp && (
           <div
-            className="text-left text-sm font-light mt-1 w-4/5 mx-auto text-[#D4D4D4] p-2"
+            className="text-left text-sm font-light w-4/5 mx-auto text-[#D4D4D4] p-2"
             id="submenu"
           >
+            <Link
+              to="/admin-dashboard?tab=search-employee"
+            >
+              <h1
+                className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md
+              ${activeTab === "search-employee" ? "bg-[#707070]" : ""}`}
+                
+              >
+                Search Employees
+              </h1>
+            </Link>
             <Link
               to="/admin-dashboard?tab=addemployee"
             >
