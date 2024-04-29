@@ -13,7 +13,7 @@ const SubscriptionPackages = () => {
 
   useEffect(() => {
     setLoading(true);
-    if (currentUser.isAdmin || currentUser.role === "Manager") {
+    
       axios
         .get(`/api/subpackage/getSubPackage`)
         .then((response) => {
@@ -24,8 +24,8 @@ const SubscriptionPackages = () => {
           console.log(error);
           setLoading(false);
         });
-    }
-  }, [currentUser._id]);
+    
+  }, []);
   return (
     <>
       <div className="relative">

@@ -73,9 +73,11 @@ const AdminSubscriptionPanel = () => {
                   <th className="border border-slate-600 rounded-md">Operations</th>
                 </tr>
               </thead>
-              <tbody>
                 {subPackages.map((subPackage, index) => (
+              <tbody>
+                  {subPackage.Pactype === "SubscriptionPackage" && (
                   <tr key={subPackage._id} className="h-8">
+                    <>
                     <td className="border border-slate-700 rounded-md text-center">
                       {index + 1}
                     </td>
@@ -115,9 +117,11 @@ const AdminSubscriptionPanel = () => {
                         </Link>
                       </div>
                     </td>
-                  </tr>
-                ))}
+                  </>
+                    </tr>
+                  )}
               </tbody>
+                ))}
             </table>
         </>
       ) : (
