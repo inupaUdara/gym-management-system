@@ -11,7 +11,7 @@ import { useSnackbar } from 'notistack';
 //import { response } from "express";
 
 const AdminSubscriptionPanel = () => {
-  const [subPackages, setSubPackage] = useState([]);
+  const [subPackages, setSubPackages] = useState([]);
   const { currentUser } = useSelector((state) => state.user);
   const [loading, setLoading] = useState(false);
   const [subPackageDelete, setSubPackageDelete] = useState("");
@@ -21,34 +21,37 @@ const AdminSubscriptionPanel = () => {
     setLoading(true);
     if (currentUser.isAdmin || currentUser.role === "Manager") {
       axios
-      .get(`/api/subpackage/getSubPackage`)
-      .then((response) => {
-        setSubPackage(response.data.data)
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      }); 
+        .get(`/api/subpackage/getSubPackage`)
+        .then((response) => {
+          setSubPackages(response.data.data);
+        })
+        .catch((error) => {
+          console.log(error);
+          enqueueSnackbar("Error", { variant: 'error' });
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     }
-  }, [currentUser._id]);
+  }, [currentUser._id, enqueueSnackbar]);
 
-  const handledeletePackage = () => {
+  const handleDeletePackage = (subPackageId) => {
     setLoading(true);
     axios
-      .delete(`/api/subpackage/deleteSubPackage/${subPackageDelete}`)
+      .delete(`/api/subpackage/deleteSubPackage/${subPackageId}`)
       .then(() => {
-        setSubPackage(subPackages.filter((subPackage) => subPackage._id !== subPackageDelete));
-        enqueueSnackbar("Package Deleted Successfully", {variant: 'success'});
-        setLoading(false);
+        setSubPackages(subPackages.filter((subPackage) => subPackage._id !== subPackageId));
+        enqueueSnackbar("Package Deleted Successfully", { variant: 'success' });
+        setSubPackageDelete("");
       })
       .catch((error) => {
-        setLoading(false);
-        //alert("An error happend, Please Check Console");
-        enqueueSnackbar("Error", {variant: 'error'});
+        enqueueSnackbar("Error", { variant: 'error' });
         console.log(error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
-  }
+  };
 
   return (
     <div className="p-4">
@@ -56,43 +59,34 @@ const AdminSubscriptionPanel = () => {
         <>
           <div className="p-2 m-2">
             <Link to={"/subpackages/create"}>
-                <button className="focus:outline-none font-bold text-white bg-red-700 hover:bg-red-800 focus:ring-4 rounded-lg text-sm px-5 py-3 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"> 
-                  Create New Package
-                </button>
+              <button className="focus:outline-none font-bold text-white bg-red-700 hover:bg-red-800 focus:ring-4 rounded-lg text-sm px-5 py-3 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+                Create New Package
+              </button>
             </Link>
           </div>
-            <table className="w-full border-separate border-spacing-2">
-              <thead>
-                <tr>
-                  <th className="border border-slate-600 rounded-md">No</th>
-                  <th className="border border-slate-600 rounded-md">Package Name</th>
-                  <th className="border border-slate-600 rounded-md max-md:hidden">Price</th>
-                  <th className="border border-slate-600 rounded-md max-md:hidden">Valid Time</th>
-                  <th className="border border-slate-600 rounded-md max-md:hidden">Description</th>
-                  <th className="border border-slate-600 rounded-md max-md:hidden">Specific</th>
-                  <th className="border border-slate-600 rounded-md">Operations</th>
-                </tr>
-              </thead>
-                {subPackages.map((subPackage, index) => (
-              <tbody>
-                  {subPackage.Pactype === "SubscriptionPackage" && (
-                  <tr key={subPackage._id} className="h-8">
-                    <>
-                    <td className="border border-slate-700 rounded-md text-center">
-                      {index + 1}
-                    </td>
-                    <td className="border border-slate-700 rounded-md text-center">
-                      {subPackage.subPackageName}
-                    </td>
-                    <td className="border border-slate-700 rounded-md text-center max-md:hidden">
-                      LKR {subPackage.price}
-                    </td>
-                    <td className="border border-slate-700 rounded-md text-center max-md:hidden">
-                      {subPackage.validTime}
-                    </td>
-                    <td className="border border-slate-700 rounded-md text-center max-md:hidden">
-                      {subPackage.description}
-                    </td>
+          <table className="w-full border-separate border-spacing-2">
+            <thead>
+              <tr>
+                <th className="border border-slate-600 rounded-md">No</th>
+                <th className="border border-slate-600 rounded-md">Package Name</th>
+                <th className="border border-slate-600 rounded-md max-md:hidden">Price</th>
+                <th className="border border-slate-600 rounded-md max-md:hidden">Valid Time</th>
+                <th className="border border-slate-600 rounded-md max-md:hidden">Description</th>
+                <th className="border border-slate-600 rounded-md max-md:hidden">Specific</th>
+                <th className="border border-slate-600 rounded-md">Operations</th>
+              </tr>
+            </thead>
+            <tbody>
+              {subPackages.map((subPackage, index) => (
+                <>
+                {subPackage.Pactype === "SubscriptionPackage" && (
+                <tr key={subPackage._id} className="h-8">
+              
+                    <td className="border border-slate-700 rounded-md text-center">{index + 1}</td>
+                    <td className="border border-slate-700 rounded-md text-center">{subPackage.subPackageName}</td>
+                    <td className="border border-slate-700 rounded-md text-center max-md:hidden">LKR {subPackage.price}</td>
+                    <td className="border border-slate-700 rounded-md text-center max-md:hidden">{subPackage.validTime}</td>
+                    <td className="border border-slate-700 rounded-md text-center max-md:hidden">{subPackage.description}</td>
                     <td className="border border-slate-700 rounded-md max-md:hidden">
                       <ul className="max-w-md space-y-1 list-disc list-inside">
                         <li>{subPackage.note1}</li>
@@ -108,43 +102,35 @@ const AdminSubscriptionPanel = () => {
                         <Link to={`/subpackages/edit/${subPackage._id}`}>
                           <AiOutlineEdit className="text-2xl text-yellow-600"/>
                         </Link>
-                        <Link >
-                          <MdOutlineDelete onClick={() => {
-                            setLoading(true);
+                        <MdOutlineDelete
+                          onClick={() => {
                             setSubPackageDelete(subPackage._id);
                           }}
-                          className="text-2xl text-red-600"/>
-                        </Link>
+                          className="text-2xl text-red-600 cursor-pointer"
+                        />
                       </div>
                     </td>
-                  </>
-                    </tr>
-                  )}
-              </tbody>
-                ))}
-            </table>
+                </tr>
+                )}
+                </>         
+              ))}
+            </tbody>
+          </table>
         </>
       ) : (
         <p>No packages yet!</p>
       )}
-      <Modal
-        show={loading}
-        onClose={() => setLoading(false)}
-        popup
-        size="md"
-      >
+      <Modal show={!!subPackageDelete} onClose={() => setSubPackageDelete("")} popup size="md">
         <Modal.Header/>
         <Modal.Body>
           <div className="text-center">
             <HiOutlineExclamationCircle className="h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto" />
-            <h3 className="mb-5 text-lg text-gray-500 dark:text-gray-400">
-              Are you sure you want to delete this package?
-            </h3>
+            <h3 className="mb-5 text-lg text-gray-500 dark:text-gray-400">Are you sure you want to delete this package?</h3>
             <div className="flex justify-center gap-4">
-              <Button color="failure" onClick={handledeletePackage}>
+              <Button color="failure" onClick={() => handleDeletePackage(subPackageDelete)}>
                 Yes, I'm sure
               </Button>
-              <Button color="gray" onClick={() => setLoading(false)}>
+              <Button color="gray" onClick={() => setSubPackageDelete("")}>
                 No, cancel
               </Button>
             </div>
@@ -152,6 +138,8 @@ const AdminSubscriptionPanel = () => {
         </Modal.Body>
       </Modal>
     </div>
-  )
-}
-export default AdminSubscriptionPanel
+  );
+};
+
+export default AdminSubscriptionPanel;
+

@@ -61,15 +61,16 @@ const ShowSubPackage = () => {
         </div>
         <div className="m-4">
           <span className="text-xl mr-4 text-gray-500">Create Time: </span>
-          <span>{subPackage.createdAt &&  // Check if createdAt exists
-              new Date(subPackage.createdAt * 1000).toDateString()
-            }</span>
+          <span>
+            {new Date(subPackage.createdAt).toLocaleDateString()}
+          </span>
         </div>
         <div className="m-4">
           <span className="text-xl mr-4 text-gray-500">Last Update Time: </span>
-          <span>{subPackage.updatedAt &&  // Check if updatedAt exists
-              new Date(subPackage.updatedAt * 1000).toDateString()
-            }</span>
+          <span>
+            {new Date(subPackage.updatedAt).toLocaleDateString()}
+            
+          </span>
         </div>
 
       </div>

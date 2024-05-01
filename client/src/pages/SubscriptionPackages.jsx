@@ -36,10 +36,10 @@ const SubscriptionPackages = () => {
           <p className="m-3 text-center text-white dark:text-white text-xl">Become a privileged Member of CJ Fitness today and join <br /> Sri Lanka’s most modern and exclusive fitness community!</p>
 
           <div className="w-80 mx-auto mt-5 h-20 bg-white border-2 border-gray-300 rounded-full flex items-center justify-between">
-            <Link to="" className={`w-1/2 h-full flex items-center justify-center rounded-full ${selectedTab === false ? 'bg-red-700 text-white' : 'bg-white text-black'}`} onClick={() => setSelectedTab(false)}>
+            <Link to="/SubscriptionPackages" className={`w-1/2 h-full flex items-center justify-center rounded-full ${selectedTab === false ? 'bg-red-700 text-white' : 'bg-white text-black'}`} onClick={() => setSelectedTab(false)}>
               <span className="text-xl font-bold">Stranded</span>
             </Link>
-            <Link to="" className={`w-1/2 h-full flex items-center justify-center rounded-full ${selectedTab === true ? 'bg-red-700 text-white' : 'bg-white text-black'}`} onClick={() => setSelectedTab(true)}>
+            <Link to="/PromoSubPackage" className={`w-1/2 h-full flex items-center justify-center rounded-full ${selectedTab === true ? 'bg-red-700 text-white' : 'bg-white text-black'}`} onClick={() => setSelectedTab(true)}>
               <span className="text-xl font-bold">Promotion</span>
             </Link>
           </div>
@@ -47,22 +47,26 @@ const SubscriptionPackages = () => {
 
           <div className="container mx-auto mt-4 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-4 gap-5 rounded-lg">
             {subPackages.map((subPackage) => (
-              <div key={subPackage._id} className="bg-gray-400 p-5 mx-3 rounded-3xl bg-gradient-to-r from-gray-200 to-gray-500" style={{ '--tw-gradient-from': '#9ca3af', '--tw-gradient-to': 'rgba(0,0,0,0.5)' }}>
-                <h1 className="text-4xl font-bold text-center text-white">{subPackage.subPackageName}</h1>
-                <p className="m-2 text-center text-xl text-red-600 font-bold">LKR {subPackage.price}</p>
-                <p className="m-2 text-center text-lg text-white font-extrabold">{subPackage.validTime}</p>
-                <p className="mt-2 m-3 text-center text-white font-bold text-base">{subPackage.description}</p>
-                <ul className="max-w-md space-y-1 list-disc list-inside font-bold">
-                  <li>{subPackage.note1}</li>
-                  <li>{subPackage.note2}</li>
-                  <li>{subPackage.note3}</li>
-                </ul>
-                <div className="mt-4 flex justify-center">
-                  <button className="rounded-3xl px-4 py-2 text-white font-bold bg-red-700 hover:bg-red-800">
-                    Join Us
-                  </button>
+              <>
+                {subPackage.Pactype === "SubscriptionPackage" && (
+                <div key={subPackage._id} className="bg-gray-400 p-5 mx-3 rounded-3xl bg-gradient-to-r from-gray-200 to-gray-500" style={{ '--tw-gradient-from': '#9ca3af', '--tw-gradient-to': 'rgba(0,0,0,0.5)' }}>
+                  <h1 className="text-4xl font-bold text-center text-white">{subPackage.subPackageName}</h1>
+                  <p className="m-2 text-center text-xl text-red-600 font-bold">LKR {subPackage.price}</p>
+                  <p className="m-2 text-center text-lg text-white font-extrabold">{subPackage.validTime}</p>
+                  <p className="mt-2 m-3 text-center text-white font-bold text-base">{subPackage.description}</p>
+                  <ul className="max-w-md space-y-1 list-disc list-inside font-bold">
+                    <li>{subPackage.note1}</li>
+                    <li>{subPackage.note2}</li>
+                    <li>{subPackage.note3}</li>
+                  </ul>
+                  <div className="mt-4 flex justify-center">
+                    <button className="rounded-3xl px-4 py-2 text-white font-bold bg-red-700 hover:bg-red-800">
+                      Join Us
+                    </button>
+                  </div>
                 </div>
-              </div>
+                )}
+              </>
             ))}
           </div>
         </div>
