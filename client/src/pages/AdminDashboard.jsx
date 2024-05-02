@@ -58,7 +58,7 @@ export default function AdminDashboard() {
       {tab === 'member-task' && <DashTasks/>}
       {tab === 'admin-users' && <DashUsers/>}
 
-        <AdminDashSideBar/>      </div>
+      
 
       {tab === 'add-supplements' && <ManagerAddSupplements/>}
       {tab === 'dashboard-comp' && <DashboardComponent/>}

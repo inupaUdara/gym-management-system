@@ -84,7 +84,13 @@ export default function SignIn() {
               onChange={handleChange}
             />
           </div>
-          {/* <Button
+          <div>
+          <Link to="/forgot-password" style={{ color: 'white' }}>
+  Forgot Password?
+</Link>
+          </div>
+         
+         {/* <Button
             className="text-white bg-red-900 focus:outline-none"
             type='submit'
             disabled={loading}
