@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { Table } from "flowbite-react";
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSnackbar } from "notistack";
 
 const AdminApprovePromo = () => {
   const [subPackages, setSubPackages] = useState([]);
+  const [status, setStatus] = useState('');
   const { currentUser } = useSelector((state) => state.user);
   const [loading, setLoading] = useState(false);
-  const [subPackageDelete, setSubPackageDelete] = useState("");
+  const [subStatus, setSubStatus] = useState({});
+  const navigate = useNavigate();
+  const {id} = useParams();
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
@@ -27,22 +31,24 @@ const AdminApprovePromo = () => {
     }
   }, [currentUser._id]);
 
-  const handleDeletePackage = (subPackageId) => {
+  const handleUpdatePackage = (subId) => {
+    if (!subId) {
+      console.error("Missing subPackage ID for update");
+      return;
+    }
     setLoading(true);
     axios
-      .delete(`/api/subpackage/deleteSubPackage/${subPackageId}`)
-      .then(() => {
-        setSubPackages(subPackages.filter((subPackage) => subPackage._id !== subPackageId));
-        enqueueSnackbar("Package Deleted Successfully", { variant: "success" });
-      })
-      .catch((error) => {
-        enqueueSnackbar("Error", { variant: "error" });
-        console.log(error);
-      })
-      .finally(() => {
+     .put(`/api/subpackage/updateSubPackage/${subId}`, subStatus)
+     .then(() => {
         setLoading(false);
-        setSubPackageDelete(""); // Reset the subPackageDelete state after deleting
-      });
+        enqueueSnackbar("Package edit is Successfully!", {variant: 'success'}, { anchorOrigin: { vertical: "bottom", horizontal: "right" }});
+        navigate('/admin-dashboard?tab=admin-approval-subpackage-panel');
+     })
+     .catch((error) => {
+      setLoading(false);
+      enqueueSnackbar("Error", {variant: 'error'});
+      console.log(error);
+    });
   };
 
   return (
@@ -58,7 +64,7 @@ const AdminApprovePromo = () => {
               Package Name
             </Table.HeadCell>
             <Table.HeadCell className="bg-[#1f1f1f] text-[#d4d4d4]">
-              Price
+              Price (LKR)
             </Table.HeadCell>
             <Table.HeadCell className="bg-[#1f1f1f] text-[#d4d4d4]">
               Valid Time
@@ -112,11 +118,14 @@ const AdminApprovePromo = () => {
                   <Table.Cell>
                     {new Date(subPackage.endDate).toLocaleDateString()}
                   </Table.Cell>
-                  <Table.Cell>
-                    <select>
+                  <Table.Cell className="flex items-center m-10">
+                    <select className="mr-2" onChange={(e) =>setSubStatus( {...subStatus, status: e.target.value})}>
                       <option value="Approved">Approved</option>
                       <option value="Rejected">Rejected</option>
                     </select>
+                    <button className="bg-[#a80000] text-[#d4d4d4] p-2 rounded-lg font-semibold hover:opacity-80" onClick={() => handleUpdatePackage(subPackage._id)}>
+                      Update
+                    </button>
                   </Table.Cell>
                 </Table.Row> 
               )}

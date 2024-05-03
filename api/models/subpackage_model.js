@@ -40,6 +40,10 @@ const SubpackageShema = mongoose.Schema(
         },
         endDate: {
             type: Date
+        },
+        status: {
+            type: String,
+            default: 'Pending'
         }   
     }, {timestamps: true}
 );

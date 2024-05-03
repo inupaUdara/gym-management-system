@@ -52,7 +52,7 @@ const EditSubPackage = () => {
      .put(`/api/subpackage/updateSubPackage/${id}`, data)
      .then(() => {
         setLoading(false);
-        enqueueSnackbar("Package edit is Successfully!", {variant: 'success'});
+        enqueueSnackbar("Package edit is Successfully!", {variant: 'success'}, { anchorOrigin: { vertical: "bottom", horizontal: "right" }});
         navigate('/admin-dashboard?tab=admin-subscripition-panel');
      })
      .catch((error) => {

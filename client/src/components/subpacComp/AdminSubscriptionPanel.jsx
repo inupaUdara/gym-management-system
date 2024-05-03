@@ -41,7 +41,7 @@ const AdminSubscriptionPanel = () => {
       .delete(`/api/subpackage/deleteSubPackage/${subPackageId}`)
       .then(() => {
         setSubPackages(subPackages.filter((subPackage) => subPackage._id !== subPackageId));
-        enqueueSnackbar("Package Deleted Successfully", { variant: 'success' });
+        enqueueSnackbar("Package Deleted Successfully", { variant: 'success' }, { anchorOrigin: { vertical: "bottom", horizontal: "right" }});
         setSubPackageDelete("");
       })
       .catch((error) => {
@@ -74,7 +74,7 @@ const AdminSubscriptionPanel = () => {
                   Package Name
                 </Table.HeadCell>
                 <Table.HeadCell className="bg-[#1f1f1f] text-[#d4d4d4]">
-                  Price
+                  Price (LKR)
                 </Table.HeadCell>
                 <Table.HeadCell className="bg-[#1f1f1f] text-[#d4d4d4]">
                   Valid Time

@@ -48,7 +48,7 @@ const CreateSubPackage = () => {
       .post("/api/subpackage/addSubPackage", data)
       .then(() => {
         setLoading(false);
-        enqueueSnackbar("Package Created Successfully", { variant: "success" });
+        enqueueSnackbar("Package Created Successfully", { variant: "success" }, { anchorOrigin: { vertical: "bottom", horizontal: "right" }});
         navigate("/admin-dashboard?tab=admin-subscripition-panel");
       })
       .catch((error) => {

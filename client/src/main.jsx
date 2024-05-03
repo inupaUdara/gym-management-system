@@ -10,7 +10,11 @@ import { SnackbarProvider } from 'notistack';
 ReactDOM.createRoot(document.getElementById("root")).render(
   <PersistGate persistor={persistor}>
     <Provider store={store}>
-      <SnackbarProvider>
+      <SnackbarProvider
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}>
         <App />
       </SnackbarProvider>
     </Provider>

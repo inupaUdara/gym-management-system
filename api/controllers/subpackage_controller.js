@@ -11,16 +11,8 @@ export const addSubPackage = async (req, res, next) => {
     }
 
     const newSubPackage = {
-      subPackageName: req.body.subPackageName,
-      price: req.body.price,
-      validTime: req.body.validTime,
-      description: req.body.description,
-      note1: req.body.note1,
-      note2: req.body.note2,
-      note3: req.body.note3,
-      Pactype: req.body.Pactype,
-      startDate: req.body.startDate,
-      endDate: req.body.endDate,
+     ...req.body,
+    
     };
 
     const NwSubPackage = await SubPackage.create(newSubPackage);
@@ -71,11 +63,11 @@ export const getIdSubPackage = async (req, res, next) => {
 //update the book
 export const updateSubPackage = async (req, res, next) => {
     try {
-        if(!req.body.subPackageName || !req.body.price || !req.body.validTime || !req.body.description || !req.body.note1 || !req.body.note2 || !req.body.note3){
-            return res.status(400).send({
-                message: `Send all required fields: subPackageName, price, validTime, description, note1, note2, note3`,
-            });
-        }
+        // if(!req.body.subPackageName || !req.body.price || !req.body.validTime || !req.body.description || !req.body.note1 || !req.body.note2 || !req.body.note3){
+        //     return res.status(400).send({
+        //         message: `Send all required fields: subPackageName, price, validTime, description, note1, note2, note3`,
+        //     });
+        // }
 
         const { id } = req.params;
         const result = await SubPackage.findByIdAndUpdate(id, req.body);
@@ -90,6 +82,8 @@ export const updateSubPackage = async (req, res, next) => {
         next(errorHandler(500,{message: error.message}));
     }
 }
+
+
 
 //delete the package
 export const deleteSubPackage = async (req, res, next) => {
