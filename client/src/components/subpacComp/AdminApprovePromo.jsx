@@ -84,6 +84,9 @@ const AdminApprovePromo = () => {
             <Table.HeadCell className="bg-[#1f1f1f] text-[#d4d4d4]">
               Status
             </Table.HeadCell>
+            <Table.HeadCell className="bg-[#1f1f1f] text-[#d4d4d4]">
+              Update Status
+            </Table.HeadCell>
           </Table.Head>
           {subPackages.map((subPackage, index) => (
             <>
@@ -117,6 +120,9 @@ const AdminApprovePromo = () => {
                   </Table.Cell>
                   <Table.Cell>
                     {new Date(subPackage.endDate).toLocaleDateString()}
+                  </Table.Cell>
+                  <Table.Cell>
+                    {subPackage.status}
                   </Table.Cell>
                   <Table.Cell className="flex items-center m-10">
                     <select className="mr-2" onChange={(e) =>setSubStatus( {...subStatus, status: e.target.value})}>

@@ -27,7 +27,7 @@ const AdminSubscriptionPanel = () => {
         })
         .catch((error) => {
           console.log(error);
-          enqueueSnackbar("Error", { variant: 'error' });
+          enqueueSnackbar("Error", { variant: 'error' }, { anchorOrigin: { vertical: "bottom", horizontal: "right" }});
         })
         .finally(() => {
           setLoading(false);
