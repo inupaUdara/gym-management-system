@@ -48,7 +48,7 @@ const PromoSubPackage = () => {
           <div className="container mx-auto mt-4 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-4 gap-5 rounded-lg">
             {subPackages.map((subPackage) => (
             <>
-              {subPackage.Pactype === "PromotionPackage" && (
+              {subPackage.Pactype === "PromotionPackage" && subPackage.status === "Approved" && (
               <div key={subPackage._id} className="bg-gray-400 p-5 mx-3 rounded-3xl bg-gradient-to-r from-gray-200 to-gray-500" style={{ '--tw-gradient-from': '#9ca3af', '--tw-gradient-to': 'rgba(0,0,0,0.5)' }}>
                 <h1 className="text-4xl font-bold text-center text-white">{subPackage.subPackageName}</h1>
                 <p className="m-2 text-center text-xl text-red-600 font-bold">LKR {subPackage.price}</p>

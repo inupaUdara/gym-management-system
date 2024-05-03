@@ -120,6 +120,7 @@ const AdminApprovePromo = () => {
                   </Table.Cell>
                   <Table.Cell className="flex items-center m-10">
                     <select className="mr-2" onChange={(e) =>setSubStatus( {...subStatus, status: e.target.value})}>
+                      <option value="Pending">Pending</option>
                       <option value="Approved">Approved</option>
                       <option value="Rejected">Rejected</option>
                     </select>
