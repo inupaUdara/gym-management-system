@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import OAuth from '../components/OAuth';
 import Header from "../components/Header";
-import gymImage from '../assets/gym11.jpg';
+import gymImage from '../assets/gym24.jpg';
 import {
   signInStart,
   signInSuccess,

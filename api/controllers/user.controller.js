@@ -4,7 +4,7 @@ import bcryptjs from 'bcryptjs';
 
 
 export const test = (req, res) => {
-  res.json({ message: 'API is working!' });
+  res.json({ message: 'API is working!' });z
 };
 
 export const updateUser = async (req, res, next) => {
@@ -125,7 +125,9 @@ export const getusers = async (req, res, next) => {
       return rest;
     });
 
-    const totalUsers = await User.countDocuments();
+    const totalUsers = await User.countDocuments(
+      { _id: req.query.userId }
+    );
 
     const now = new Date();
 

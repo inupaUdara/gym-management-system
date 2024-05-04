@@ -63,15 +63,15 @@ export default function DashTasks() {
           <div key={task._id} className='max-w-sm mb-5 mr-5'>
             <div className="bg-white border border-gray-200 rounded-lg shadow task-card-container dark:bg-gray-800 dark:border-gray-700">
               <div className='relative'>
-                <Link to={`/task/${task._id}`}>
+                {/* <Link to={`/task/${task._id}`}> */}
                   <img src={task.image} alt={task.title} className='rounded-t-lg' style={{ width: '100%', height: '200px' }} />
-                </Link>
+                {/* </Link> */}
                 <span className={`absolute top-0 right-0 m-2 bg-gray-200 dark:bg-gray-600 p-1 rounded-full text-xs font-semibold text-gray-800 dark:text-gray-300`}>{task.buttonState}</span>
               </div>
               <div className='p-5'>
-                <Link to={`/task/${task._id}`}>
+                {/* <Link to={`/task/${task._id}`}> */}
                   <h5 className='mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>{task.title}</h5>
-                </Link>
+                {/* </Link> */}
                 <div className='flex justify-between mb-3 '>
                   <p className='mr-1 text-gray-700 dark:text-gray-400'>Start Date: {new Date(task.startDate).toLocaleDateString()}</p>
                   <p className='ml-1 text-gray-700 dark:text-gray-400'>End Date: {new Date(task.endDate).toLocaleDateString()}</p>
