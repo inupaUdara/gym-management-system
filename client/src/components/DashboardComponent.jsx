@@ -3,7 +3,7 @@ import { HiArrowNarrowUp, HiOutlineUserGroup } from "react-icons/hi";
 import { FaUserTie } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Table, Datepicker } from "flowbite-react";
+import { Card } from "flowbite-react";
 import { MdOutlinePendingActions } from "react-icons/md";
 import { BarChart } from "@tremor/react";
 import { BarList } from "@tremor/react";
@@ -13,6 +13,7 @@ export default function DashboardComponent() {
   const [totalInstructors, setTotalInstructors] = useState(0);
   const [lastMonthInstructors, setLastMonthInstructors] = useState(0);
   const [managers, setManagers] = useState([]);
+  const [users, setUsers] = useState([]);
   const [totalManagers, setTotalManagers] = useState(0);
   const [totalPendingReq, setTotalPendingReq] = useState(0);
   const [lastMonthManagers, setLastMonthManagers] = useState(0);
@@ -60,6 +61,17 @@ export default function DashboardComponent() {
         setManagers(data.employees);
         setTotalManagers(data.totalEmployees);
         setLastMonthManagers(data.lastMonthEmployees);
+      }
+    };
+    const fetchUsers = async () => {
+      try {
+        const res = await fetch(`/api/user/getusers?limit=5`);
+        const data = await res.json();
+        if (res.ok) {
+          setUsers(data.users);
+        }
+      } catch (error) {
+        console.log(error.message);
       }
     };
 
@@ -133,13 +145,13 @@ export default function DashboardComponent() {
       fetchEmployeesAfternoonCount();
       fetchEmployeesNightCount();
       fetchLeaves();
+      fetchUsers();
     }
   }, [currentUser]);
 
   return (
     <div className="p-3 md:mx-auto">
       <div className="flex-wrap flex gap-4 justify-center">
-      {/* <Datepicker inline className="max-w-xs"/>; */}
         <div className="flex flex-col p-3 justify-between gap-4 md:w-72 w-full rounded-md shadow-md bg-white">
           <div className="flex justify-between">
             <div className="">
@@ -190,8 +202,7 @@ export default function DashboardComponent() {
       </div>
 
       <div className="flex-wrap flex gap-4 py-3 mx-auto justify-center ">
-       
-        <div className="flex flex-col w-full md:max-w-sm shadow-md p-2 rounded-md bg-white">
+        {/* <div className="flex flex-col w-full md:max-w-sm shadow-md p-2 rounded-md bg-white">
           <div className="flex justify-between p-3 text-sm font-semibold">
             <h1 className="text-center p-2 uppercase">Instructors</h1>
             <Link to={"/admin-dashboard?tab=admin-instructors"}>
@@ -205,7 +216,7 @@ export default function DashboardComponent() {
               <Table.HeadCell className="bg-[#707070] text-[#d4d4d4]">
                 Image
               </Table.HeadCell>
-              <Table.HeadCell className="bg-[#707070] text-[#d4d4d4]">
+              <Table.HeadCell className="bg-[#707070] text-[#d4d4d4] truncate">
                 Username
               </Table.HeadCell>
             </Table.Head>
@@ -219,13 +230,152 @@ export default function DashboardComponent() {
                       className="h-10 w-10 rounded-full bg-gray-500"
                     />
                   </Table.Cell>
-                  <Table.Cell>{instructor.username}</Table.Cell>
+                  <Table.Cell className="truncate">
+                    {instructor.username}
+                  </Table.Cell>
                 </Table.Row>
               </Table.Body>
             ))}
           </Table>
-        </div>
-        <div className="flex flex-col w-full md:max-w-sm shadow-md p-2 rounded-md bg-white">
+        </div> */}
+        <Card className="w-full sm:max-w-72">
+          <div className="mb-4 flex items-center justify-between">
+            <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
+            Instructors
+            </h5>
+            <Link to={"/admin-dashboard?tab=admin-instructors"}>
+              <a className="text-sm font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+                View all
+              </a>
+            </Link>
+          </div>
+          <div className="flow-root">
+            {instructors.map((instructor) => (
+              <ul
+                className="divide-y divide-gray-200 dark:divide-gray-700 border-b-2"
+                key={instructor._id}
+              >
+                <li className="py-3 sm:py-4">
+                  <div className="flex items-center space-x-4">
+                    <div className="shrink-0">
+                      <img
+                        alt="Neil image"
+                        height="32"
+                        src={instructor.profilePicture}
+                        width="32"
+                        className="rounded-full"
+                      />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm font-medium text-gray-900 dark:text-white">
+                        {instructor.firstname} {instructor.lastname}
+                      </p>
+                      <p className="truncate text-sm text-gray-500 dark:text-gray-400">
+                        {instructor.email}
+                      </p>
+                    </div>
+                    {/* <div className="inline-flex items-center text-sm font-normal text-gray-900 dark:text-white">
+                    {instructor.username}
+                    </div> */}
+                  </div>
+                </li>
+              </ul>
+            ))}
+          </div>
+        </Card>
+        <Card className="w-full sm:max-w-72 ">
+          <div className="mb-4 flex items-center justify-between">
+            <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
+            Managers
+            </h5>
+            <Link to={"/admin-dashboard?tab=admin-managers"}>
+              <a className="text-sm font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+                View all
+              </a>
+            </Link>
+          </div>
+          <div className="flow-root">
+            {managers.map((manager) => (
+              <ul
+                className="divide-y divide-gray-200 dark:divide-gray-700  border-b-2"
+                key={manager._id}
+              >
+                <li className="py-3 sm:py-4">
+                  <div className="flex items-center space-x-4">
+                    <div className="shrink-0">
+                      <img
+                        alt="Neil image"
+                        height="32"
+                        src={manager.profilePicture}
+                        width="32"
+                        className="rounded-full"
+                      />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm font-medium text-gray-900 dark:text-white">
+                        {manager.firstname} {manager.lastname}
+                      </p>
+                      <p className="truncate text-sm text-gray-500 dark:text-gray-400">
+                        {manager.email}
+                      </p>
+                    </div>
+                    {/* <div className="inline-flex items-center text-sm font-normal text-gray-900 dark:text-white">
+                    {instructor.username}
+                    </div> */}
+                  </div>
+                </li>
+              </ul>
+            ))}
+          </div>
+        </Card>
+        <Card className="w-full sm:max-w-72 ">
+          <div className="mb-4 flex items-center justify-between">
+            <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
+            Latest Members
+            </h5>
+            <Link to={"/admin-dashboard?tab=admin-users"}>
+              <a className="text-sm font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+                View all
+              </a>
+            </Link>
+          </div>
+          <div className="flow-root">
+            {users.map((user) => (
+              <ul
+                className="divide-y divide-gray-200 dark:divide-gray-700  border-b-2"
+                key={user._id}
+              >
+                <li className="py-3 sm:py-4">
+                  <div className="flex items-center space-x-4">
+                    <div className="shrink-0">
+                      <img
+                        alt="Neil image"
+                        height="32"
+                        src={user.profilePicture}
+                        width="32"
+                        className="rounded-full"
+                      />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm font-medium text-gray-900 dark:text-white">
+                        {user.name}
+                      </p>
+                      <p className="truncate text-sm text-gray-500 dark:text-gray-400">
+                        {user.email}
+                      </p>
+                    </div>
+                    {/* <div className="inline-flex items-center text-sm font-normal text-gray-900 dark:text-white">
+                    {instructor.username}
+                    </div> */}
+                  </div>
+                </li>
+              </ul>
+            ))}
+          </div>
+        </Card>
+        
+
+        {/* <div className="relative flex flex-col w-full md:max-w-sm shadow-md p-2 rounded-md bg-white">
           <div className="flex justify-between p-3 text-sm font-semibold">
             <h1 className="text-center p-2 uppercase">Managers</h1>
             <Link to={"/admin-dashboard?tab=admin-managers"}>
@@ -234,12 +384,12 @@ export default function DashboardComponent() {
               </button>
             </Link>
           </div>
-          <Table hoverable>
+          <Table hoverable className="">
             <Table.Head>
               <Table.HeadCell className="bg-[#707070] text-[#d4d4d4]">
                 Image
               </Table.HeadCell>
-              <Table.HeadCell className="bg-[#707070] text-[#d4d4d4]">
+              <Table.HeadCell className="bg-[#707070] text-[#d4d4d4] truncate">
                 Username
               </Table.HeadCell>
             </Table.Head>
@@ -253,15 +403,17 @@ export default function DashboardComponent() {
                       className="h-10 w-10 rounded-full bg-gray-500"
                     />
                   </Table.Cell>
-                  <Table.Cell>{manager.username}</Table.Cell>
+                  <Table.Cell className="truncate">
+                    {manager.username}
+                  </Table.Cell>
                 </Table.Row>
               </Table.Body>
             ))}
           </Table>
-        </div>
+        </div> */}
       </div>
       <div className="flex-wrap flex gap-4 py-3 mx-auto justify-center ">
-        <div className="p-3 bg-white rounded-md shadow-lg md:max-w-sm">
+        <div className="p-3 bg-white rounded-md shadow-lg md:max-w-md">
           <div className="flex justify-between p-3 text-sm font-semibold gap-2 items-center">
             <h1 className="font-semibold text-sm p-3 text-center uppercase">
               Number of Instructors with their shift

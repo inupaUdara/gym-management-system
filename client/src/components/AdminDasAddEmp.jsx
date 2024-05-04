@@ -1,4 +1,5 @@
 import { Alert, Spinner, Select } from "flowbite-react";
+import { enqueueSnackbar } from "notistack";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 export default function AdminDasAddEmp() {
@@ -20,7 +21,7 @@ export default function AdminDasAddEmp() {
       !formData.email ||
       !formData.nic
     ) {
-      return setError("All fiel are required");
+      return enqueueSnackbar("All fields are required", { variant: "error" });
     }
     try {
       setLoading(true);
@@ -36,13 +37,13 @@ export default function AdminDasAddEmp() {
       if (data.success === false) {
         setLoading(false);
         setSuccess(null);
-        return setError(data.message);
+        return enqueueSnackbar(data.message, { variant: "error" });
         
       }
       setLoading(false);
       if (res.ok) {
         navigate("/admin-dashboard");
-        setSuccess("Employee added successfully");
+        enqueueSnackbar("Employee added successfully", { variant: "success" });
       }
     } catch (error) {
       setError(error.message);

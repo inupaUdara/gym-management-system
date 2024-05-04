@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 export default function EmployeeCard({ employee }) {
     return (
-        <div className='group relative w-full border border-[#1f1f1f] hover:border-2 h-[400px] overflow-hidden rounded-lg sm:w-[430px] transition-all'>
+        <div className='group relative w-full border border-[#1f1f1f] hover:border-2 h-[350px] overflow-hidden rounded-lg sm:w-[350px] transition-all justify-center mx-auto'>
           <Link to={`/view-employee-details/${employee._id}`}>
             <img
               src={employee.profilePicture}

@@ -11,6 +11,7 @@ import supplementsRoutes from "./routes/supplements.route.js";
 import shiftChangeRoute from './routes/shift.route.js';
 import cookieParser from "cookie-parser";
 import SubpackageRoutes from "./routes/subpackage_route.js";
+import announcementRoutes from "./routes/announcement.route.js";
 import cors from 'cors';
 dotenv.config();
 
@@ -43,6 +44,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/shiftchange', shiftChangeRoute);
 app.use("/api/supplements", supplementsRoutes);
+app.use("/api/announcement", announcementRoutes);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;

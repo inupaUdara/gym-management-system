@@ -24,6 +24,7 @@ import AdminSubscriptionPanel from "../components/subpacComp/AdminSubscriptionPa
 import DashboardComponent from "../components/DashboardComponent";
 import SearchEmployee from "../components/SearchEmployee";
 import InstructorShiftRequets from "../components/InstructorShiftRequets";
+import AdminAnnouncement from "../components/AdminAnnouncement";
 export default function AdminDashboard() {
   const location = useLocation();
   const [tab,setTab] = useState('');
@@ -74,6 +75,7 @@ export default function AdminDashboard() {
       {tab === 'view-employee-details' && empId && <AdminViewEmployeeDetails/>} */}
 
       {tab === 'admin-subscripition-panel' && <AdminSubscriptionPanel/> }
+      {tab === 'admin-announcement' && <AdminAnnouncement/>}
 
     </div>
     </>

@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { BarList } from "@tremor/react";
+import { enqueueSnackbar } from "notistack";
 
 export default function AdminDasInstructors() {
   const { currentUser } = useSelector((state) => state.user);
@@ -61,6 +62,7 @@ export default function AdminDasInstructors() {
         setLeaves((prev) =>
           prev.filter((leave) => leave._id !== leaveIdToDelete)
         );
+        enqueueSnackbar("Leave request deleted successfully", {variant: "success"});
         setShowModal(false);
       } else {
         console.log(data.message);

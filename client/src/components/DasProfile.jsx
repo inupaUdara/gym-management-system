@@ -17,6 +17,7 @@ import {
   signoutSuccess,
 } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
+import { enqueueSnackbar } from "notistack";
 
 export default function DasProfile() {
   const { currentUser, error, loading } = useSelector((state) => state.user);
@@ -97,7 +98,7 @@ export default function DasProfile() {
     setUpdateUserError(null);
     setUpdateUserSuccess(null);
     if (Object.keys(formData).length === 0) {
-      setUpdateUserError("No changes made");
+      enqueueSnackbar("No changes made", { variant: "info" });
       return;
     }
     if (imageFileUploading) {
@@ -119,7 +120,7 @@ export default function DasProfile() {
         setUpdateUserError(data.message);
       } else {
         dispatch(updateSuccess(data));
-        setUpdateUserSuccess("Your profile updated successfully");
+        enqueueSnackbar("Profile updated successfully", { variant: "success" });
       }
     } catch (error) {
       dispatch(updateFailure(error.message));

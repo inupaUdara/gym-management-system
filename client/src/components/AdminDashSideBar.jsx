@@ -6,7 +6,7 @@ import {
   HiAnnotation,
   HiChartPie,
 } from "react-icons/hi";
-import { MdSchedule, MdOutlineScheduleSend, MdDashboard } from "react-icons/md";
+import { MdSchedule, MdOutlineScheduleSend, MdDashboard, MdAnnouncement  } from "react-icons/md";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { LuUsers } from "react-icons/lu";
 import { Link } from "react-router-dom";
@@ -146,7 +146,7 @@ export default function AdminDashSideBar() {
           <Link to="/admin-dashboard?tab=dashboard-comp">
             <div
               className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
-                activeTab === "dashboard-comp" || !activeTab
+                activeTab === "dashboard-comp"
                   ? "bg-[#707070]"
                   : ""
               }`}
@@ -291,6 +291,21 @@ export default function AdminDashSideBar() {
             </Link>
           </div>
         )}
+        
+          <Link to="/admin-dashboard?tab=admin-announcement">
+            <div
+              className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
+                activeTab === "admin-announcement"
+                  ? "bg-[#707070]"
+                  : ""
+              }`}
+            >
+              <MdAnnouncement  color="#D4D4D4" />
+
+              <span className="text-[15px] ml-4 text-[#D4D4D4]">Announcements</span>
+            </div>
+          </Link>
+   
 
         {/* <div
           className="p-2.5 my-2 mx-2  flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white"
