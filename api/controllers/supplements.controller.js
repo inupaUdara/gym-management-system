@@ -17,10 +17,7 @@ export const createSupplements = async (req, res, next) => {
 
 export const getAllSupplements = async (req, res, next) => {
     try {
-      if(!req.user.role === 'Manager') // Extract supplement IDs from query params
-        {
-            next(errorHandler(403, "You are not accss"));
-        }
+      
         const searchQuery = req.query.search || ''  ;
       // Find supplements by IDs
       const supplements = await Supplements.find({ 

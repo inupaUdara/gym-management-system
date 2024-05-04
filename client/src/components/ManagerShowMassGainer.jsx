@@ -6,7 +6,7 @@ import { Link,useNavigate } from 'react-router-dom';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
-const ManagerShowSupplements = () => {
+const ManagerShowMassGainer = () => {
   const [supplements, setSupplements] = useState([]);
   const { currentUser } = useSelector((state) => state.user);
   const [showModal, setShowModal] = useState(false);
@@ -195,7 +195,9 @@ const generatesuplementReport = () => {
 
             </Table.Head>
             {supplements.map((supplement) => (
+              <>
               <Table.Body className="divide-y" key={supplement._id}>
+                {supplement.category == "massGainers" && ( 
                 <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800 text-[#1f1f1f]">
                   <Table.Cell>
                     {new Date(supplement.createdAt).toLocaleDateString()}
@@ -231,7 +233,9 @@ const generatesuplementReport = () => {
                     </span>
                   </Table.Cell>
                 </Table.Row>
+                )}
               </Table.Body>
+              </>
             ))}
           </Table>
         </div>  
@@ -267,4 +271,4 @@ const generatesuplementReport = () => {
   );
 };
 
-export default ManagerShowSupplements;
+export default ManagerShowMassGainer;

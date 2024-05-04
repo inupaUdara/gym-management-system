@@ -17,6 +17,11 @@ import MemberDashProfile from "../components/MemberDashProfile";
 
 import ManagerAddSupplements from "../components/ManagerAddSupplements";
 import ManagerShowSupplements from "../components/ManagerShowSupplements";
+import ManagerShowMassGainer from "../components/ManagerShowMassGainer";
+import ManagerShowCreatine from "../components/ManagerShowCreatine";
+import ManagerShowPreworkout from "../components/ManagerShowPreworkout";
+import ManagerShowFatBurners from "../components/ManagerShowFatBurners";
+import ManagerShowVitamins from "../components/ManagerShowVitamins";
 
 
 
@@ -52,6 +57,11 @@ export default function AdminDashboard() {
       </div>
       {tab === 'add-supplements' && <ManagerAddSupplements/>}
       {tab === 'show-supplements' && <ManagerShowSupplements/>}
+      {tab === 'show-Mass' && <ManagerShowMassGainer/>}
+      {tab === 'show-Creatine' && <ManagerShowCreatine/>}
+      {tab === 'show-Preworkout' && <ManagerShowPreworkout/>}
+      {tab === 'show-FatBurners' && <ManagerShowFatBurners/>}
+      {tab === 'show-Vitamins' && <ManagerShowVitamins/>}
       {tab === 'addemployee' && <AdminDasAddEmp/>}
       {tab === 'profile' && <DasProfile/>}
       {tab === 'member-profile' && <MemberDashProfile/>}
