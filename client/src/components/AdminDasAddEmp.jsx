@@ -175,7 +175,7 @@ export default function AdminDasAddEmp() {
           <div className="flex flex-col my-4">
             <button
               type="submit"
-              className=" text-white text-sm my-2 bg-[#4c0000] border border-white rounded-md p-3 text-center flex items-center justify-center cursor-pointer hover:bg-[#7e1010]"
+              className=" text-white text-sm my-2 bg-cyan-600 border border-white rounded-md p-3 text-center flex items-center justify-center cursor-pointer hover:bg-cyan-900"
               disabled={loading}
             >
               {loading ? (

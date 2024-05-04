@@ -93,7 +93,7 @@ export default function ManagerInstructorLeave() {
         if (res.ok) {
           setError(null);
           enqueueSnackbar("Status updated successfully", { variant: "success" });
-          navigate(`/view-instructor-request/${data._id}/${data.employeeId}`);
+          navigate(`/admin-dashboard?tab=view-request`);
         }
       } catch (error) {
         setError("Something went wrong");

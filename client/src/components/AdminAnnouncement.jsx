@@ -7,10 +7,10 @@ import {
   Spinner,
   Button,
 } from "flowbite-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { enqueueSnackbar } from "notistack";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 
 export default function AdminAnnouncement() {
@@ -20,13 +20,11 @@ export default function AdminAnnouncement() {
   const [announcementData, setAnnouncementData] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [showUpdateModal, setUpdateShowModal] = useState(false);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [announcementIdToDelete, setAnnouncementsIdToDelete] = useState("");
-  const [announcementIdToUpdate, setAnnouncementsIdToUpdate] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -194,7 +192,7 @@ export default function AdminAnnouncement() {
         <div className="">
           <button
             onClick={() => setOpenModal(true)}
-            className="text-white text-sm my-2 bg-[#4c0000] border border-white rounded-md p-3 text-center flex items-center justify-center cursor-pointer hover:bg-[#7e1010]"
+            className="text-white text-sm my-2 bg-cyan-600 border border-white rounded-md p-3 text-center flex items-center justify-center cursor-pointer hover:bg-cyan-900"
           >
             Add Announcement
           </button>
@@ -369,7 +367,7 @@ export default function AdminAnnouncement() {
               </div>
 
               <div className="w-full">
-                <button className="text-white text-sm my-2 bg-[#4c0000] border border-white rounded-md p-3 text-center flex items-center justify-center cursor-pointer hover:bg-[#7e1010]">
+                <button className="text-white text-sm my-2 bg-cyan-600 border border-white rounded-md p-3 text-center flex items-center justify-center cursor-pointer hover:bg-cyan-900">
                   {loading ? (
                     <>
                       <Spinner size="sm" />

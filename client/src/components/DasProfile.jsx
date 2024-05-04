@@ -276,7 +276,7 @@ export default function DasProfile() {
         </div>
         <button
           type="submit"
-          className="rounded-md text-[#d4d4d4] bg-[#4c0000] p-2 font-semibold"
+          className="rounded-md text-[#d4d4d4] bg-cyan-600 p-2 font-semibold hover:bg-cyan-900"
         >
           {loading ? "Loading..." : "Update"}
         </button>

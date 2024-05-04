@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { MdOutlinePendingActions } from "react-icons/md";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
+import { enqueueSnackbar } from "notistack";
 export default function AdminDasAddEmp() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
@@ -34,10 +35,18 @@ export default function AdminDasAddEmp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
 
     try {
       setLoading(true);
       setError(null);
+      const selectedStartDate = new Date(formData.startDate);
+      if (selectedStartDate <= tomorrow) {
+        enqueueSnackbar("Start date must be greater than today", { variant: "error" });
+        setLoading(false);
+        return;
+      }
       const res = await fetch("/api/leave/createleave", {
         method: "POST",
         headers: {

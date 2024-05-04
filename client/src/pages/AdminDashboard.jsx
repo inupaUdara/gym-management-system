@@ -66,7 +66,7 @@ export default function AdminDashboard() {
       {tab === 'member-profile' && <MemberDashProfile/>}
       {tab === 'admin-instructors' && <AdminDasInstructors/>}
       {tab === 'admin-managers' && <AdminDasManagers/>}
-      {tab === 'instructor-request' && <InstructorDasRequests/>}
+      {/* {tab === 'instructor-request' && <InstructorDasRequests/>} */}
       {tab === 'view-request'  && <ManagerViewLeave/>}
       {tab === 'view-instructors-request' && <InstructorViewLeaveRequest/>}
 

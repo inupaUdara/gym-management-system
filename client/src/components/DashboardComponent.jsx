@@ -152,6 +152,7 @@ export default function DashboardComponent() {
   return (
     <div className="p-3 md:mx-auto">
       <div className="flex-wrap flex gap-4 justify-center">
+       
         <div className="flex flex-col p-3 justify-between gap-4 md:w-72 w-full rounded-md shadow-md bg-white">
           <div className="flex justify-between">
             <div className="">
@@ -202,42 +203,6 @@ export default function DashboardComponent() {
       </div>
 
       <div className="flex-wrap flex gap-4 py-3 mx-auto justify-center ">
-        {/* <div className="flex flex-col w-full md:max-w-sm shadow-md p-2 rounded-md bg-white">
-          <div className="flex justify-between p-3 text-sm font-semibold">
-            <h1 className="text-center p-2 uppercase">Instructors</h1>
-            <Link to={"/admin-dashboard?tab=admin-instructors"}>
-              <button className="border-2 border-[#a80000] rounded-md p-2 hover:bg-[#a80000] hover:text-white">
-                See all
-              </button>
-            </Link>
-          </div>
-          <Table hoverable className="">
-            <Table.Head>
-              <Table.HeadCell className="bg-[#707070] text-[#d4d4d4]">
-                Image
-              </Table.HeadCell>
-              <Table.HeadCell className="bg-[#707070] text-[#d4d4d4] truncate">
-                Username
-              </Table.HeadCell>
-            </Table.Head>
-            {instructors.map((instructor) => (
-              <Table.Body key={instructor._id} className="divide-y">
-                <Table.Row className="bg-[#d4d4d4]">
-                  <Table.Cell>
-                    <img
-                      src={instructor.profilePicture}
-                      alt="user"
-                      className="h-10 w-10 rounded-full bg-gray-500"
-                    />
-                  </Table.Cell>
-                  <Table.Cell className="truncate">
-                    {instructor.username}
-                  </Table.Cell>
-                </Table.Row>
-              </Table.Body>
-            ))}
-          </Table>
-        </div> */}
         <Card className="w-full sm:max-w-72">
           <div className="mb-4 flex items-center justify-between">
             <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
@@ -373,44 +338,6 @@ export default function DashboardComponent() {
             ))}
           </div>
         </Card>
-        
-
-        {/* <div className="relative flex flex-col w-full md:max-w-sm shadow-md p-2 rounded-md bg-white">
-          <div className="flex justify-between p-3 text-sm font-semibold">
-            <h1 className="text-center p-2 uppercase">Managers</h1>
-            <Link to={"/admin-dashboard?tab=admin-managers"}>
-              <button className="border-2 border-[#a80000] rounded-md p-2 hover:bg-[#a80000] hover:text-white">
-                See all
-              </button>
-            </Link>
-          </div>
-          <Table hoverable className="">
-            <Table.Head>
-              <Table.HeadCell className="bg-[#707070] text-[#d4d4d4]">
-                Image
-              </Table.HeadCell>
-              <Table.HeadCell className="bg-[#707070] text-[#d4d4d4] truncate">
-                Username
-              </Table.HeadCell>
-            </Table.Head>
-            {managers.map((manager) => (
-              <Table.Body key={manager._id} className="divide-y">
-                <Table.Row className="bg-[#d4d4d4]">
-                  <Table.Cell>
-                    <img
-                      src={manager.profilePicture}
-                      alt="user"
-                      className="h-10 w-10 rounded-full bg-gray-500"
-                    />
-                  </Table.Cell>
-                  <Table.Cell className="truncate">
-                    {manager.username}
-                  </Table.Cell>
-                </Table.Row>
-              </Table.Body>
-            ))}
-          </Table>
-        </div> */}
       </div>
       <div className="flex-wrap flex gap-4 py-3 mx-auto justify-center ">
         <div className="p-3 bg-white rounded-md shadow-lg md:max-w-md">

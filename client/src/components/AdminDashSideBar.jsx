@@ -120,23 +120,16 @@ export default function AdminDashSideBar() {
                 className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
               ${activeTab === "request-shift-change" ? "bg-[#707070]" : ""}`}
               >
-                Request Shift Swapping
+                Shift
               </h1>
             </Link>
-            <Link to="/admin-dashboard?tab=instructor-request">
-              <h1
-                className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
-              ${activeTab === "instructor-request" ? "bg-[#707070]" : ""}`}
-              >
-                Add Request
-              </h1>
-            </Link>
+          
             <Link to="/admin-dashboard?tab=view-instructors-request">
               <h1
                 className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
               ${activeTab === "view-instructors-request" ? "bg-[#707070]" : ""}`}
               >
-                Your Requests
+                Leave Requests
               </h1>
             </Link>
           </div>

@@ -125,34 +125,7 @@ export default function Header() {
         {currentUser ? (
           <>
             <div className="flex gap-4">
-              <Dropdown
-                arrowIcon={false}
-                inline
-                label={
-                  <Avatar alt="user" img={currentUser.profilePicture} rounded status="online" statusPosition="top-right"/>
-                }
-                style={{ zIndex: 9, marginRight: "1rem" }}
-              >
-                <Dropdown.Header>
-                  <span className="block text-sm">@{currentUser.username}</span>
-                  <span className="block text-sm font-medium truncate">
-                    {currentUser.email}
-                  </span>
-                </Dropdown.Header>
-                <Link
-                  to={
-                    currentUser.role
-                      ? "/admin-dashboard?tab=profile"
-                      : "/admin-dashboard?tab=member-profile"
-                  }
-                >
-                  <Dropdown.Item>Profile</Dropdown.Item>
-                </Link>
-                <DropdownDivider />
-                <Dropdown.Item onClick={handleSignoutEmp}>
-                  Sign out
-                </Dropdown.Item>
-              </Dropdown>
+              
               {announcementData.length > 0 && (
                 <Dropdown
                   arrowIcon={false}
@@ -204,6 +177,34 @@ export default function Header() {
                   
                 </Dropdown>
               )}
+              <Dropdown
+                arrowIcon={false}
+                inline
+                label={
+                  <Avatar alt="user" img={currentUser.profilePicture} rounded status="online" statusPosition="top-right"/>
+                }
+                style={{ zIndex: 9, marginRight: "1rem" }}
+              >
+                <Dropdown.Header>
+                  <span className="block text-sm">@{currentUser.username}</span>
+                  <span className="block text-sm font-medium truncate">
+                    {currentUser.email}
+                  </span>
+                </Dropdown.Header>
+                <Link
+                  to={
+                    currentUser.role
+                      ? "/admin-dashboard?tab=profile"
+                      : "/admin-dashboard?tab=member-profile"
+                  }
+                >
+                  <Dropdown.Item>Profile</Dropdown.Item>
+                </Link>
+                <DropdownDivider />
+                <Dropdown.Item onClick={handleSignoutEmp}>
+                  Sign out
+                </Dropdown.Item>
+              </Dropdown>
             </div>
           </>
         ) : (

@@ -148,13 +148,13 @@ export default function AdminDasInstructors() {
                         </Table.Cell>
                         <Table.Cell>{leave.reason}</Table.Cell>
                         <Table.Cell>{leave.status}</Table.Cell>
+                        <Table.Cell className="text-green-600 cursor-pointer hover:underline">
                         <Link
                           to={`/view-instructor-request/${leave._id}/${leave.employeeId}`}
                         >
-                          <Table.Cell className="text-green-600 cursor-pointer hover:underline">
-                            Update status
-                          </Table.Cell>
+                            <button className="disabled:text-slate-400" disabled={leave.status === "Approve" || leave.status === "Reject"}>Update status</button>
                         </Link>
+                          </Table.Cell>
                         <Table.Cell>
                           <span
                             onClick={() => {
