@@ -36,10 +36,13 @@ const SubscriptionPackages = () => {
           <p className="m-3 text-center text-white dark:text-white text-xl">Become a privileged Member of CJ Fitness today and join <br /> Sri Lanka’s most modern and exclusive fitness community!</p>
 
           <div className="w-80 mx-auto mt-5 h-20 bg-white border-2 border-gray-300 rounded-full flex items-center justify-between">
-            <Link to="/SubscriptionPackages" className={`w-1/2 h-full flex items-center justify-center rounded-full ${selectedTab === false ? 'bg-red-700 text-white' : 'bg-white text-black'}`} onClick={() => setSelectedTab(false)}>
+            
+            <Link to="/SubscriptionPackages" className={`w-1/2 h-full flex items-center justify-center rounded-full ${selectedTab === false ? 'bg-red-700 text-white' : 'bg-white text-black'}`} onClick={() =>
+              setSelectedTab(false)}>
               <span className="text-xl font-bold">Stranded</span>
             </Link>
-            <Link to="/PromoSubPackage" className={`w-1/2 h-full flex items-center justify-center rounded-full ${selectedTab === true ? 'bg-red-700 text-white' : 'bg-white text-black'}`} onClick={() => setSelectedTab(true)}>
+            <Link to="/PromoSubPackage" className={`w-1/2 h-full flex items-center justify-center rounded-full ${selectedTab === true ? 'bg-red-700 text-white' : 'bg-white text-black'}`} onClick={() =>
+              setSelectedTab(true)}>
               <span className="text-xl font-bold">Promotion</span>
             </Link>
           </div>
