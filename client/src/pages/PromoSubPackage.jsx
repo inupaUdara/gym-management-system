@@ -48,19 +48,23 @@ const PromoSubPackage = () => {
           {/* w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 */}
 
           <div className="container mx-auto mt-4 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-4 gap-5 rounded-lg">
+            
             {subPackages.map((subPackage) => (
             <>
-              {subPackage.Pactype === "PromotionPackage" && subPackage.status === "Approved" && new Date(subPackage.startDate) <= new Date() && (
+              {subPackage.Pactype === "PromotionPackage" && subPackage.status === "Approved" && new Date(subPackage.startDate) <= new Date() && new Date(subPackage.endDate) >= new Date() && (
               <div key={subPackage._id} className="p-5 mx-3 rounded-3xl border border-solid border-gray-600 bg-gray-600 bg-opacity-50 hover:bg-gray-600">
                 <h1 className="text-4xl font-bold text-center text-white">{subPackage.subPackageName}</h1>
                 <p className="m-2 text-center text-xl text-red-600 font-bold">LKR {subPackage.price}</p>
                 <p className="m-2 text-center text-lg text-white font-extrabold">{subPackage.validTime}</p>
-                <p className="mt-2 m-3 text-center text-white font-bold text-base">{subPackage.description}</p>
-                <ul className="max-w-md space-y-1 list-disc list-inside font-bold text-white justify-center">
-                  <li>{subPackage.note1}</li>
-                  <li>{subPackage.note2}</li>
-                  <li>{subPackage.note3}</li>
-                </ul>
+                <p className="mt-2 m-3 text-center text-[#f5cb5c] font-bold text-base">{subPackage.description}</p>
+                <div className="flex justify-center">
+                  <ul className="max-w-md space-y-1 list-disc list-inside font-bold text-white justify-center">
+                    <li>{subPackage.note1}</li>
+                    <li>{subPackage.note2}</li>
+                    <li>{subPackage.note3}</li>
+                  </ul>
+                </div>
+                <p className="mt-2 m-4 text-center text-[#f5cb5c] font-bold text-base">Valid until:{new Date(subPackage.endDate).toLocaleDateString()}</p>
                 <div className="mt-4 flex justify-center">
                   <button className="rounded-3xl px-4 py-2 text-white font-bold bg-red-700 hover:bg-red-800 h-15 w-40 text-xl">
                     Join Us
