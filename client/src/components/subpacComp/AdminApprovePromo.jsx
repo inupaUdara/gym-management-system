@@ -103,7 +103,7 @@ const AdminApprovePromo = () => {
                     {subPackage.price}
                   </Table.Cell>
                   <Table.Cell>
-                    {subPackage.validTime}
+                    per {subPackage.validTime}
                   </Table.Cell>
                   <Table.Cell>
                     {subPackage.description}

@@ -86,12 +86,17 @@ const CreateSubPackage = () => {
         </div>
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Valid Time</label>
-          <input
-            type="text"
-            value={validTime}
-            onChange={(e) => setValidTime(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2 w-full"
-          />
+            <select
+              className="border-2 border-gray-500 px-4 py-2 w-full"
+              value={validTime}
+              onChange={(e) => setValidTime(e.target.value)}
+            >
+              <option value=" ">select time</option>
+              <option value="1 Month">1 Month</option>
+              <option value="3 Month">3 Month</option>
+              <option value="1 Year">1 Year</option>
+              <option value="Week">Week</option>
+            </select>
         </div>
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Description</label>

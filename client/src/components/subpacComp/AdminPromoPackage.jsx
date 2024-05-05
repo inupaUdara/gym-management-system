@@ -184,7 +184,7 @@ export default function AdminPromoPackage() {
                         <Table.Cell>{index + 1}</Table.Cell>
                         <Table.Cell>{subPackage.subPackageName}</Table.Cell>
                         <Table.Cell>{subPackage.price}</Table.Cell>
-                        <Table.Cell>{subPackage.validTime}</Table.Cell>
+                        <Table.Cell>per {subPackage.validTime}</Table.Cell>
                         <Table.Cell>{subPackage.description}</Table.Cell>
                         <Table.Cell>
                           <ul className="max-w-md space-y-1 list-disc list-inside">

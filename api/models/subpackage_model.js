@@ -13,6 +13,7 @@ const SubpackageShema = mongoose.Schema(
         validTime: {
             type: String,
             required: true,
+            default: '1 Month',
         },
         description: {
             type: String,
