@@ -93,7 +93,6 @@ export const signout = (req, res, next) => {
 };
 
 
-
 export const getusers = async (req, res, next) => {
   if (!req.user.isAdmin) {
     return next(errorHandler(403, 'You are not allowed to see all users'));
@@ -102,47 +101,33 @@ export const getusers = async (req, res, next) => {
     const startIndex = parseInt(req.query.startIndex) || 0;
     const limit = parseInt(req.query.limit) || 9;
     const sortDirection = req.query.sort === 'asc' ? 1 : -1;
-    const searchQuery = req.query.search || ''; // Added search query parameter
+    const searchQuery = req.query.search || '';
     const userId = req.query.userId;
 
     const query = userId ? { userId } : {};
 
-    // Filter users based on search query
     const users = await User.find({
-      username: { $regex: new RegExp(searchQuery, 'i') }, // Case-insensitive search
+      username: { $regex: new RegExp(searchQuery, 'i') },
       ...(req.query.userId && { _id: req.query.userId }),
+    })
+    .sort({ createdAt: sortDirection })
+    .skip(startIndex)
+    .limit(limit);
 
-    }
-  )
-
-      .sort({ createdAt: sortDirection })
-      .skip(startIndex)
-      .limit(limit);
-  
+    const totalUsers = await User.countDocuments(); // Count total users
 
     const usersWithoutPassword = users.map((user) => {
       const { password, ...rest } = user._doc;
       return rest;
     });
 
-    const totalUsers = await User.countDocuments(
-      { _id: req.query.userId }
-    );
-
     const now = new Date();
-
-    const oneMonthAgo = new Date(
-      now.getFullYear(),
-      now.getMonth() - 1,
-      now.getDate()
-    );
-    const lastMonthUsers = await User.countDocuments({
-      createdAt: { $gte: oneMonthAgo },
-    });
+    const oneMonthAgo = new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
+    const lastMonthUsers = await User.countDocuments({ createdAt: { $gte: oneMonthAgo } });
 
     res.status(200).json({
       users: usersWithoutPassword,
-      totalUsers,
+      totalUsers, // Include totalUsers in response
       lastMonthUsers,
     });
   } catch (error) {
