@@ -105,23 +105,37 @@ export default function DashUsers() {
 
   const generateUserReport = () => {
     const doc = new jsPDF();
-    const tableData = users.map((user) => [
-      new Date(user.createdAt).toLocaleDateString(),
-      user.username,
-      user.email,
-      user.contactNumber,
-      user.address,
-    ]);
-    doc.autoTable({
-      head: [['Date created', 'Username', 'Email', 'Phone Number', 'Address']],
-      body: tableData,
-    });
+
+    // Set left margin
+    const leftMargin = 80;
+    const leftMargin1 = 50;
+
+    // Print the title
+    doc.text('CJ GYM & Fitness Center Member Report', leftMargin1, 20);
 
     // Print total user count
-    doc.text(`Total Users: ${totalUsers}`, 14, 10);
+    doc.text(`Total Users: ${totalUsers}`, leftMargin, 30);
 
+    // Generate table data
+    const tableData = users.map((user) => [
+        new Date(user.createdAt).toLocaleDateString(),
+        user.username,
+        user.email,
+        user.contactNumber,
+        user.address,
+    ]);
+
+    // Print the table
+    doc.autoTable({
+        head: [['Date created', 'Username', 'Email', 'Phone Number', 'Address']],
+        body: tableData,
+        startY: 40 // Start table below the title and total user count
+    });
+
+    // Save the document
     doc.save('user_report.pdf');
-  };
+};
+
 
   return (
     <div className="p-3 overflow-x-scroll table-auto md:mx-auto scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
