@@ -54,7 +54,6 @@ const SubscriptionPackages = () => {
             <span className="text-white">Membership</span> Plans
           </h1>
           <p className="m-3 text-center text-white dark:text-white text-base">
-
             Become a privileged Member of CJ Fitness today and join <br /> Sri
             Lanka’s most modern and exclusive fitness community!
           </p>
@@ -138,14 +137,15 @@ const SubscriptionPackages = () => {
                       <li>{subPackage.note3}</li>
                     </ul>
                     <div className="mt-4 flex justify-center">
-                      <button className="rounded-3xl px-4 py-2 text-white font-bold bg-red-700 hover:bg-red-800 h-15 w-40 text-xl">
-                        Join Us
-                      </button>
+                      <Link to={`/Checkout/payment`}>
+                        <button className="rounded-3xl px-4 py-2 text-white font-bold bg-red-700 hover:bg-red-800 h-15 w-40 text-xl">
+                          Join Us
+                        </button>
+                      </Link>
                     </div>
                   </div>
                 )}
               </>
-
             ))}
           </div>
         </div>

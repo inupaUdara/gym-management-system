@@ -8,7 +8,8 @@ const PaymentReview = ({ selectedShippingCost }) => {
   const calculateTotal = () => {
     return productSubTotal + shippingCost;
   };
-  const isShippingPage = window.location.pathname === "/shipping";
+  const isShippingPage =
+    window.location.pathname === "/Checkout/payment/shipping";
   return (
     <div className="p-4 rounded-md shadow-md bg-[#1F1F1F]">
       {/* Product details section */}
