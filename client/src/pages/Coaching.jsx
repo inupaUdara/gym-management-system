@@ -29,7 +29,7 @@ export default function Coaching() {
         <div style={{ backgroundImage: `url(${gymImg})`, backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '100vh' }}>
             <Header />
             <div className="container mx-auto py-8 text-white">
-                <h1 className="text-3xl font-bold text-center mb-8">Welcome to Our Gym</h1>
+                <h1 className="text-3xl font-bold text-center mb-8">Welcome to CJ GYM</h1>
                 <div className="flex justify-center space-x-4 mb-8">
                     <Link to="/scheduleSession" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Book an Appointment</Link>
                     <Link to="/viewSessions" className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">View Appointments</Link>
