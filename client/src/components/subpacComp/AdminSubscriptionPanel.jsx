@@ -21,7 +21,7 @@ const AdminSubscriptionPanel = () => {
   const [totalWeek, setTotalWeek] = useState(0);
   const [subPackageDelete, setSubPackageDelete] = useState("");
   const { enqueueSnackbar } = useSnackbar();
-  const chartdata=[
+  const chartdata = [
     { name: "Monthly", "Number of Packages": totalMonthly },
     { name: "Quarterly", "Number of Packages": totalQuarterly },
     { name: "Yearly", "Number of Packages": totalYearly },
@@ -56,8 +56,7 @@ const AdminSubscriptionPanel = () => {
     }
   }, [currentUser._id, enqueueSnackbar]);
 
-
-  console.log(totalMonthly)
+  console.log(totalMonthly);
   const handleDeletePackage = (subPackageId) => {
     setLoading(true);
     axios
@@ -87,21 +86,24 @@ const AdminSubscriptionPanel = () => {
       {currentUser.isAdmin || currentUser.role === "Manager" ? (
         <>
           <h1 className="text-center m-5 font-bold text-2xl uppercase">
-            Package Valid Time Chart
+            All Package Valid Time Chart
           </h1>
           <div className="p-3 bg-white rounded-md shadow-lg w-full md:max-w-md">
-            <h3 className="text-lg font-medium text-center text-tremor-content-strong dark:text-dark-tremor-content-strong ">
-              Number of Packages by Valid Time
-            </h3>
-            <BarChart
-              className="mt-6 sm:max-w-full mx-auto bg-white"
-              data={chartdata}
-              index="name"
-              categories={["Number of Packages"]}
-              colors={["red"]}
-              valueFormatter={dataFormatter}
-              yAxisWidth={50}
-            />
+            <div className="w-full">
+              <h3 className="text-lg font-medium text-center text-tremor-content-strong dark:text-dark-tremor-content-strong">
+                Number of All Packages by Valid Time
+              </h3>
+              <div className="mt-6">
+                <BarChart
+                  data={chartdata}
+                  index="name"
+                  categories={["Number of Packages"]}
+                  colors={["red"]}
+                  valueFormatter={dataFormatter}
+                  yAxisWidth={50}
+                />
+              </div>
+            </div>
           </div>
           <div className="p-2 m-2">
             <Link to={"/subpackages/create"}>

@@ -180,10 +180,10 @@ export default function AdminPromoPackage() {
               </div>
             </div>
           </div>
-          <div className="p-2 m-2">
-            <Button className="mt-4" onClick={generatePDF}>
+          <div className="p-3">
+            <button className="focus:outline-none font-bold text-white bg-red-700 hover:bg-red-800 focus:ring-4 rounded-lg text-sm px-4 py-3 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" onClick={generatePDF}>
               Generate Report
-            </Button>
+            </button>
           </div>
           <div className="table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
             <Table hoverable className="shadow-md">
