@@ -35,6 +35,9 @@ import UpdateTasks from "./pages/UpdateTask";
 import MemberView from "./pages/MemberView";
 import SubscriptionPackages from "./pages/SubscriptionPackages";
 import PromoSubPackage from "./pages/PromoSubPackage";
+import ForgotPassword from "./pages/ForgotPassword";
+import OTPVerification from "./pages/OTPVerification";
+import ResetPassword from "./pages/ResetPassword";
 
 export default function App() {
   return (
@@ -51,12 +54,12 @@ export default function App() {
         <Route path="/offersanddeals" element={<OffersAndDeals />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/employee-login" element={<EmployeeLogin />} />
-        <Route
-          path="/SubscriptionPackages"
-          element={<SubscriptionPackages />}
-        />
-        <Route path="/PromoSubPackage" element={<PromoSubPackage />} />
+        <Route path="/employee-login" element={<EmployeeLogin />} /> 
+        <Route path="/SubscriptionPackages" element={<SubscriptionPackages />}/> 
+        <Route path="/PromoSubPackage" element={<PromoSubPackage />}/>     
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/otp-verify" element={<OTPVerification />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route element={<AdminPrivateRoute />}>
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route
@@ -75,6 +78,7 @@ export default function App() {
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
       </Routes>
       <Routes>
+
         <Route path="/subpackages/create" element={<CreateSubPackage />} />
         <Route path="/subpackages/details/:id" element={<ShowSubPackage />} />
         <Route path="/subpackages/edit/:id" element={<EditSubPackage />} />
@@ -89,6 +93,7 @@ export default function App() {
         <Route path="/Checkout/payment/success" element={<PaymentSuccess />} />
         <Route path="/shipping/create" element={<CreateShippingMethod />} />
         <Route path="/shipping/edit/:id" element={<EditShipping />} />
+
       </Routes>
       <FooterCom />
     </BrowserRouter>
