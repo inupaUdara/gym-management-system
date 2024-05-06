@@ -19,12 +19,21 @@ export default function AdminDashSideBar() {
   const dispatch = useDispatch();
   const [isOpenEmp, setIsOpenEmp] = useState(false);
   const [isOpenReq, setIsOpenReq] = useState(false);
+  const [isOpenPayment, setIsOpenPayment] = useState(false);
+  const [isOpenSubscription, setIsOpenSubscription] = useState(false);
   const toggleDropdownEmp = () => {
     setIsOpenEmp(!isOpenEmp);
   };
 
   const toggleDropdownReq = () => {
     setIsOpenReq(!isOpenReq);
+  };
+  const toggleDropdownPayment = () => {
+    setIsOpenPayment(!isOpenPayment);
+  };
+
+  const toggleDropdownSubscription = () => {
+    setIsOpenSubscription(!isOpenSubscription);
   };
 
   const [activeTab, setActiveTab] = useState("");
@@ -183,7 +192,7 @@ export default function AdminDashSideBar() {
               <span className="text-[15px] ml-4 text-[#D4D4D4]">Add Supplements</span>
             </div></Link>)}
 
-        {currentUser.role === "Manager" && (
+        {currentUser.isAdmin && (
           <Link to="/admin-dashboard?tab=admin-approval-subpackage-panel">
             <div
               className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${activeTab === "admin-approval-subpackage-panel" ? "bg-[#707070]" : ""
@@ -210,24 +219,24 @@ export default function AdminDashSideBar() {
           </Link>
         )}
 
-        {currentUser.isAdmin && (
+        {currentUser.role === "Manager" && (
          
           <div
           className={`p-2.5 my-2 mx-2  flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${activeTab === "sub" ? "bg-[#707070]" : ""
             }`}
-          onClick={() => toggleDropdownEmp()}
+          onClick={() => toggleDropdownSubscription()}
           >
             <MdOutlineCardMembership color="#D4D4D4" />
             <div className="flex items-center justify-between w-full">
               <span className="text-[15px] ml-4 text-[#D4D4D4]">Subscription</span>
               <span className="text-sm rotate-180" id="arrow">
-                {isOpenEmp ? <IoIosArrowUp /> : <IoIosArrowDown />}
+                {isOpenSubscription ? <IoIosArrowUp /> : <IoIosArrowDown />}
               </span>
             </div>
           </div>
         )}
 
-        {isOpenEmp && (
+        {isOpenSubscription && (
           <div
             className="text-left text-sm font-light w-4/5 mx-auto text-[#D4D4D4] p-2"
             id="submenu"
@@ -323,9 +332,9 @@ export default function AdminDashSideBar() {
         {currentUser.isAdmin && (
           <div
             className={`p-2.5 my-2 mx-2  flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
-              activeTab === "emp" ? "bg-[#707070]" : ""
+              activeTab === "pay" ? "bg-[#707070]" : ""
             }`}
-            onClick={() => toggleDropdownEmp()}
+            onClick={() => toggleDropdownPayment()}
           >
             <HiOutlineCurrencyDollar color="#D4D4D4" />
             <div className="flex items-center justify-between w-full">
@@ -333,13 +342,13 @@ export default function AdminDashSideBar() {
                 Manage Finance
               </span>
               <span className="text-sm rotate-180" id="arrow">
-                {isOpenEmp ? <IoIosArrowUp /> : <IoIosArrowDown />}
+                {isOpenPayment ? <IoIosArrowUp /> : <IoIosArrowDown />}
               </span>
             </div>
           </div>
         )}
 
-        {isOpenEmp && (
+        {isOpenPayment && (
           <div
             className="text-left text-sm font-light w-4/5 mx-auto text-[#D4D4D4] p-2"
             id="submenu"
