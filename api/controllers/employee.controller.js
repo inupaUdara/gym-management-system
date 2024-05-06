@@ -105,12 +105,12 @@ export const getEmployees = async (req, res, next) => {
       ...(req.query.shift && { shift: req.query.shift }),
       ...(req.query.searchTerm && {
         $or: [
-          { firstname: { $regex: req.query.searchTerm, $options: 'i' } },
-          { lastname: { $regex: req.query.searchTerm, $options: 'i' } },
-          { username: { $regex: req.query.searchTerm, $options: 'i' } },
-          { email: { $regex: req.query.searchTerm, $options: 'i' } },
-          { nic: { $regex: req.query.searchTerm, $options: 'i' } },
-          { address: { $regex: req.query.searchTerm, $options: 'i' } },
+          { firstname: { $regex: req.query.searchTerm, $options: 'i' }},
+          { lastname: { $regex: req.query.searchTerm, $options: 'i' }},
+          { username: { $regex: req.query.searchTerm, $options: 'i' }},
+          { email: { $regex: req.query.searchTerm, $options: 'i' }},
+          { nic: { $regex: req.query.searchTerm, $options: 'i' }},
+          { address: { $regex: req.query.searchTerm, $options: 'i' }},
         ],
       }),
     })

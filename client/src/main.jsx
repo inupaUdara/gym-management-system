@@ -16,6 +16,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           horizontal: "right",
         }}
       >
+
         <App />
       </SnackbarProvider>
     </Provider>
