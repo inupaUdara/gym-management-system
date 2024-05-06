@@ -44,6 +44,11 @@ export default function Header() {
               Inventory
             </li>
           </Link>
+          <Link to="/coaching">
+            <li className="hidden sm:inline text-[#D4D4D4] hover:underline hover:underline-offset-4 hover:text-white">
+              Coaching
+            </li>
+          </Link>
         </ul>
 
         {currentUser ? (

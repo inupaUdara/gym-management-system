@@ -12,6 +12,11 @@ import AdminPrivateRoute from "./components/AdminPrivateRoute";
 import FooterCom from "./components/Footer";
 import AdminViewEmployeeDetails from "./components/AdminViewEmployeeDetails";
 import ManagerInstructorLeave from "./components/ManagerInstructorLeave";
+import Coaching from "./pages/Coaching";
+import CoachingFormPage from "./pages/CoachingFormPage";
+import CoachingBookingsVIewPage from "./pages/CoachingBookingsVIewPage";
+import CoachingMainPage from "./pages/CoachingMainPage";
+import CoachingUpdate from "./pages/CoachingUpdate";
 
 
 export default function App() {
@@ -22,6 +27,13 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/inventory" element={<Inventory />} />
+        <Route path="/coaching" element={<Coaching />} />
+
+        <Route path="/scheduleSession" element={<CoachingFormPage/>}></Route>
+        <Route path="/viewSessions" element={<CoachingBookingsVIewPage/>}></Route>
+        <Route path="/coachin-page" element={<CoachingMainPage/>}></Route>
+        <Route path="/coachin-update" element={<CoachingUpdate/>}></Route>
+
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/employee-login" element={<EmployeeLogin />} />        

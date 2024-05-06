@@ -11,7 +11,10 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.1",
+    "axios": "^1.6.8",
     "flowbite-react": "^0.7.2",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.8.2",
     "preline": "^2.0.3",
     "prettier": "^3.2.5",
     "react": "^18.2.0",
@@ -32,6 +35,6 @@
     "eslint-plugin-react-refresh": "^0.4.5",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
-    "vite": "^5.2.7"
+    "vite": "^5.2.11"
   }
 }
