@@ -50,16 +50,7 @@ export default function MemberDashProfile() {
   }, [imageFile]);
 
   const uploadImage = async () => {
-    // service firebase.storage {
-    //   match /b/{bucket}/o {
-    //     match /{allPaths=**} {
-    //       allow read;
-    //       allow write: if
-    //       request.resource.size < 2 * 1024 * 1024 &&
-    //       request.resource.contentType.matches('image/.*')
-    //     }
-    //   }
-    // }
+ 
     setImageFileUploading(true);
     setImageFileUploadError(null);
     const storage = getStorage(app);
@@ -298,24 +289,6 @@ export default function MemberDashProfile() {
            </button>
         </Link>
         
-
-       
-
-      
-        {/* {currentUser.isAdmin && (
-          <Link to={'/yourtasks'}>
-            <Button
-              type='button'
-              gradientDuoTone='purpleToPink'
-              className='w-full'
-            >
-              Create a Task
-            </Button>
-          </Link>
-        )} */}
-
-               
-
 
       </form>
       <div className='flex justify-between mt-5 text-red-500'>

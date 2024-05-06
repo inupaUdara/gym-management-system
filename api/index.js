@@ -4,13 +4,16 @@ import dotenv from "dotenv";
 import employeeRoutes from "./routes/employee.route.js";
 import authEmployeeRoutes from "./routes/authEmployee.route.js";
 import leaveRoutes from "./routes/leave.route.js";
-import userRoutes from './routes/user.routes.js';
-import authRoutes from './routes/auth.route.js';
+import userRoutes from "./routes/user.routes.js";
+import authRoutes from "./routes/auth.route.js";
+import taskRoutes from "./routes/tasks.route.js";
 import supplementsRoutes from "./routes/supplements.route.js";
-import shiftChangeRoute from './routes/shift.route.js';
+import shiftChangeRoute from "./routes/shift.route.js";
 import cookieParser from "cookie-parser";
 import SubpackageRoutes from "./routes/subpackage_route.js";
-import cors from 'cors';
+import checkoutShopRoutes from "./routes/checkoutShop.route.js";
+import shippingRoutes from "./routes/shipping.route.js";
+import cors from "cors";
 dotenv.config();
 
 mongoose
@@ -37,19 +40,25 @@ app.use("/api/authemployee", authEmployeeRoutes);
 app.use("/api/leave", leaveRoutes);
 app.use("/api/subpackage", SubpackageRoutes);
 
-app.use('/api/user', userRoutes);
-app.use('/api/auth', authRoutes);
-app.use('/api/shiftchange', shiftChangeRoute);
+app.use("/api/user", userRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/tasks", taskRoutes);
+app.use("/api/shiftchange", shiftChangeRoute);
+app.use("/api/user", userRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/shiftchange", shiftChangeRoute);
 
 app.use("/api/supplements", supplementsRoutes);
 
+app.use("/api/pay", checkoutShopRoutes);
+app.use("/api/shipping", shippingRoutes);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || "Internal Server Error";
-  res.status(statusCode).json({ 
+  res.status(statusCode).json({
     success: false,
     statusCode,
-    message
-   });
-})
+    message,
+  });
+});

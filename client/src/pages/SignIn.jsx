@@ -79,7 +79,7 @@ export default function SignIn() {
             <Label value='Password' style={{ color: 'white' }}/>
             <TextInput
               type='password'
-              placeholder='**********'
+              placeholder='****'
               id='password'
               onChange={handleChange}
             />
