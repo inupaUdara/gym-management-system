@@ -54,6 +54,7 @@ export default function AdminDashboard() {
   return (
     <>
 
+
       <Header />
       <div className="min-h-screen flex flex-col md:flex-row bg-[#d4d4d4]">
         <div className="md:w-56">
@@ -61,12 +62,10 @@ export default function AdminDashboard() {
         </div>
         {tab === "member-task" && <DashTasks />}
         {tab === "admin-users" && <DashUsers />}
-
         {tab === "add-supplements" && <ManagerAddSupplements />}
         {tab === "dashboard-comp" && <DashboardComponent />}
         {tab === "request-shift-change" && <InstructorShiftRequets />}
         {tab === "search-employee" && <SearchEmployee />}
-
         {tab === "addemployee" && <AdminDasAddEmp />}
         {tab === "profile" && <DasProfile />}
         {tab === "member-profile" && <MemberDashProfile />}

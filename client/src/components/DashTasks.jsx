@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
-import { Modal, Button, Alert } from 'flowbite-react'; 
+import { Modal, Button, Alert } from 'flowbite-react';
 
 export default function DashTasks() {
   const { currentUser } = useSelector((state) => state.user);
   const [userTasks, setUserTasks] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [taskIdToDelete, setTaskIdToDelete] = useState('');
-  const [deleteSuccess, setDeleteSuccess] = useState(false); 
+  const [deleteSuccess, setDeleteSuccess] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,20 +19,18 @@ export default function DashTasks() {
           const res = await fetch(`/api/tasks/gettasks`);
           const data = await res.json();
           if (res.ok) {
-            // Filter tasks to only include tasks created by the current user
-            const userTasks = data.tasks.filter(task => task.userId === currentUser._id);
-            setUserTasks(userTasks);
+            setUserTasks(data.tasks.filter(task => task.userId === currentUser._id));
           }
         }
       } catch (error) {
         console.log(error.message);
       }
     };
-  
-    if (currentUser && !currentUser.isAdmin) { 
+
+    if (currentUser && !currentUser.isAdmin) {
       fetchTasks();
     }
-  }, [currentUser, deleteSuccess]); 
+  }, [currentUser, deleteSuccess]);
 
   const handleDeleteTask = async () => {
     setShowModal(false);
@@ -44,34 +42,52 @@ export default function DashTasks() {
       if (!res.ok) {
         console.log(data.message);
       } else {
-        setUserTasks((prev) =>
-          prev.filter((task) => task._id !== taskIdToDelete)
-        );
-        setDeleteSuccess(true); 
+        setUserTasks(prev => prev.filter(task => task._id !== taskIdToDelete));
+        setDeleteSuccess(true);
       }
     } catch (error) {
       console.log(error.message);
     }
   };
 
+  const filterTasks = (status) => {
+    switch (status) {
+      case 'All':
+        setUserTasks(userTasks);
+         break;
+      case 'Progress':
+      case 'Complete':
+        setUserTasks(userTasks.filter(task => task.buttonState === status));
+         break;
+      default:
+        setUserTasks([]);
+    }
+  };
+
   return (
-    // <div style={{ backgroundColor: '#1f1f1f' }}>
     <div className='container mt-5 ml-5'>
       <h2 className="mb-5 text-center">Your Tasks</h2>
+      <div className="flex justify-center mb-5">
+        <button className="px-4 py-2 mr-3 text-white bg-blue-500 rounded-md" onClick={() => filterTasks('All')}>
+          All
+        </button>
+        <button className="px-4 py-2 mr-3 text-white bg-blue-500 rounded-md" onClick={() => filterTasks('Progress')}>
+          In Progress
+        </button>
+        <button className="px-4 py-2 text-white bg-blue-500 rounded-md" onClick={() => filterTasks('Complete')}>
+          Complete
+        </button>
+      </div>
       <div className="flex flex-wrap w-300">
         {userTasks.map((task) => (
           <div key={task._id} className='max-w-sm mb-5 mr-5'>
             <div className="bg-white border border-gray-200 rounded-lg shadow task-card-container dark:bg-gray-800 dark:border-gray-700">
               <div className='relative'>
-                <Link to={`/task/${task._id}`}>
-                  <img src={task.image} alt={task.title} className='rounded-t-lg' style={{ width: '100%', height: '200px' }} />
-                </Link>
+                <img src={task.image} alt={task.title} className='rounded-t-lg' style={{ width: '100%', height: '200px' }} />
                 <span className={`absolute top-0 right-0 m-2 bg-gray-200 dark:bg-gray-600 p-1 rounded-full text-xs font-semibold text-gray-800 dark:text-gray-300`}>{task.buttonState}</span>
               </div>
               <div className='p-5'>
-                <Link to={`/task/${task._id}`}>
-                  <h5 className='mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>{task.title}</h5>
-                </Link>
+                <h5 className='mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>{task.title}</h5>
                 <div className='flex justify-between mb-3 '>
                   <p className='mr-1 text-gray-700 dark:text-gray-400'>Start Date: {new Date(task.startDate).toLocaleDateString()}</p>
                   <p className='ml-1 text-gray-700 dark:text-gray-400'>End Date: {new Date(task.endDate).toLocaleDateString()}</p>

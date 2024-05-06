@@ -57,7 +57,7 @@ const MemberView = () => {
       <div className="mx-auto" style={{ height: '700px' }}>
         <div className="flex justify-center h-full px-6 py-12">
           <div className="flex w-full h-full xl:w-3/4 lg:w-11/12">
-            <div className="hidden bg-gray-400 rounded-l-lg dark:bg-gray-800 lg:block lg:w-5/12" style={{ backgroundImage: `url(${user && user.profilePicture})`, backgroundSize: 'cover', width: '200px', height: '200px' }}>
+            <div className="hidden bg-gray-400 rounded-l-lg dark:bg-gray-800 lg:block lg:w-5/12" style={{ backgroundImage: `url(${user && user.profilePicture})`, backgroundSize: 'cover', width: '300px', height: '400px' }}>
             </div>
 
             <div className="w-full p-5 bg-white rounded-lg lg:w-7/12 dark:bg-black lg:rounded-l-none" ref={componentRef}>

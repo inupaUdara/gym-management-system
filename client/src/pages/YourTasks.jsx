@@ -81,7 +81,10 @@ export default function YourTasks() {
       if (res.ok) {
         setSubmitError(null);
         setSubmitSuccess(true); // Set submitSuccess to true on success
-        navigate(`/admin-dashboard?tab=member-task`);
+        setTimeout(() => {
+          navigate(`/admin-dashboard?tab=member-task`);
+        }, 1000);
+        // navigate(`/admin-dashboard?tab=member-task`);
       }
     } catch (error) {
       setSubmitError('Something went wrong');
@@ -143,7 +146,7 @@ export default function YourTasks() {
           </div>
           {imageUploadError && <Alert color='failure'>{imageUploadError}</Alert>}
           {formData.image && (
-            <img src={formData.image} alt='upload' className='object-cover w-full h-72' />
+            <img src={formData.image} alt='upload' className='object-cover w-full h-72 ' />
           )}
           <button
             type="button"
