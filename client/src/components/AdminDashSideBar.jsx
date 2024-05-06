@@ -7,7 +7,7 @@ import {
   HiChartPie,
   HiOutlineCurrencyDollar,
 } from "react-icons/hi";
-import { MdSchedule, MdOutlineScheduleSend, MdDashboard } from "react-icons/md";
+import { MdSchedule, MdOutlineScheduleSend, MdDashboard, MdOutlineCardMembership    } from "react-icons/md";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { LuUsers } from "react-icons/lu";
 import { Link } from "react-router-dom";
@@ -37,21 +37,6 @@ export default function AdminDashSideBar() {
     }
   }, [location.search]);
 
-  // const handleSignout = async () => {
-  //   try {
-  //     const res = await fetch("api/employee/signout", {
-  //       method: "POST",
-  //     });
-  //     const data = await res.json();
-  //     if (!res.ok) {
-  //       console.log(data.message);
-  //     } else {
-  //       dispatch(signoutSuccess());
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   return (
     <div className="w-full h-full md:w-56 drop-shadow-2xl border-b-white">
@@ -96,6 +81,7 @@ export default function AdminDashSideBar() {
           </Link>
         )}
         {currentUser.role === "Instructor" && (
+
           <div
             className={`p-2.5 my-1 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
               activeTab === "request" ? "bg-[#707070]" : ""
@@ -110,6 +96,7 @@ export default function AdminDashSideBar() {
               </span>
             </div>
           </div>
+
         )}
         {isOpenReq && (
           <div
@@ -128,6 +115,7 @@ export default function AdminDashSideBar() {
               <h1
                 className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
               ${activeTab === "instructor-request" ? "bg-[#707070]" : ""}`}
+
               >
                 Add Request
               </h1>
@@ -136,10 +124,12 @@ export default function AdminDashSideBar() {
               <h1
                 className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
               ${activeTab === "view-instructors-request" ? "bg-[#707070]" : ""}`}
+
               >
                 Your Requests
               </h1>
             </Link>
+
           </div>
         )}
 
@@ -161,6 +151,7 @@ export default function AdminDashSideBar() {
         {currentUser.isAdmin && (
           <Link to="/admin-dashboard?tab=view-request">
             <div
+
               className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
                 activeTab === "view-request" ? "bg-[#707070]" : ""
               }`}
@@ -177,6 +168,7 @@ export default function AdminDashSideBar() {
         {currentUser.isAdmin && (
           <Link to="/admin-dashboard?tab=instuctor-shift">
             <div
+
               className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
                 activeTab === "instuctor-shift" ? "bg-[#707070]" : ""
               }`}
@@ -193,54 +185,66 @@ export default function AdminDashSideBar() {
         {currentUser.role === "Manager" && (
           <Link to="/admin-dashboard?tab=add-supplements">
             <div
-              className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
-                activeTab === "add-supplements" ? "bg-[#707070]" : ""
-              } `}
-            >
+              className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${activeTab === "add-supplements" ? "bg-[#707070]" : ""}`}>
               <MdSchedule color="#D4D4D4" />
 
-              <span className="text-[15px] ml-4 text-[#D4D4D4]">
-                Add Supplements
-              </span>
-            </div>
-          </Link>
-        )}
+
+              <span className="text-[15px] ml-4 text-[#D4D4D4]">Add Supplements</span>
+            </div></Link>)}
 
         {currentUser.role === "Manager" && (
-          <Link to="/admin-dashboard?tab=admin-subscripition-panel">
+          <Link to="/admin-dashboard?tab=admin-approval-subpackage-panel">
             <div
-              className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
-                activeTab === "admin-subscripition-panel" ? "bg-[#707070]" : ""
-              }`}
+              className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${activeTab === "admin-approval-subpackage-panel" ? "bg-[#707070]" : ""
+                }`}
             >
-              <span className="text-[15px] ml-4 text-[#D4D4D4]">
-                Subscription
-              </span>
-            </div>
-          </Link>
-        )}
+              <MdSchedule color="#D4D4D4" />
+              <span className="text-[13px] ml-4 text-[#D4D4D4]">Approval Promotion</span>
 
-        {currentUser.isAdmin && (
-          <Link to="/admin-dashboard?tab=admin-users">
-            <div
-              className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
-                activeTab === "admin-users" ? "bg-[#707070]" : ""
-              }`}
-            >
-              <LuUsers color="#D4D4D4" />
-
-              <span className="text-[15px] ml-4 text-[#D4D4D4]">Users</span>
             </div>
           </Link>
         )}
 
         {currentUser.isAdmin && (
           <div
-            className={`p-2.5 my-2 mx-2  flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
-              activeTab === "emp" ? "bg-[#707070]" : ""
+          className={`p-2.5 my-2 mx-2  flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${activeTab === "sub" ? "bg-[#707070]" : ""
             }`}
-            onClick={() => toggleDropdownEmp()}
+          onClick={() => toggleDropdownEmp()}
           >
+            <MdOutlineCardMembership color="#D4D4D4" />
+            <div className="flex items-center justify-between w-full">
+              <span className="text-[15px] ml-4 text-[#D4D4D4]">Subscription</span>
+              <span className="text-sm rotate-180" id="arrow">
+                {isOpenEmp ? <IoIosArrowUp /> : <IoIosArrowDown />}
+              </span>
+            </div>
+          </div>
+        )}
+
+        {isOpenEmp && (
+          <div
+            className="text-left text-sm font-light w-4/5 mx-auto text-[#D4D4D4] p-2"
+            id="submenu"
+            >
+            <Link to ="/admin-dashboard?tab=admin-subscripition-panel">
+              <h1 className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1 ${activeTab === "admin-subscripition-panel" ? "bg-[#707070]" : ""}`}>
+                Create Subscription
+              </h1>
+            </Link>
+            <Link to ="/admin-dashboard?tab=admin-promo-subscripition-panel">
+              <h1 className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1 ${activeTab === "admin-promo-subscripition-panel" ? "bg-[#707070]" : ""}`}>
+                Promotion Package
+              </h1>
+            </Link>
+          </div>
+        )}
+
+
+        {currentUser.isAdmin && (
+          <div
+            className={`p-2.5 my-2 mx-2  flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${activeTab === "emp" ? "bg-[#707070]" : ""}`}
+            onClick={() => toggleDropdownEmp()}>
+
             <HiOutlineUserGroup color="#D4D4D4" />
             <div className="flex items-center justify-between w-full">
               <span className="text-[15px] ml-4 text-[#D4D4D4]">Employees</span>
@@ -268,6 +272,7 @@ export default function AdminDashSideBar() {
               <h1
                 className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
               ${activeTab === "addemployee" ? "bg-[#707070]" : ""}`}
+
               >
                 Add Employees
               </h1>
@@ -276,6 +281,7 @@ export default function AdminDashSideBar() {
               <h1
                 className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
               ${activeTab === "admin-instructors" ? "bg-[#707070]" : ""}`}
+
               >
                 Instructors
               </h1>
@@ -284,6 +290,7 @@ export default function AdminDashSideBar() {
               <h1
                 className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
               ${activeTab === "admin-managers" ? "bg-[#707070]" : ""}`}
+
               >
                 Managers
               </h1>
@@ -360,5 +367,5 @@ export default function AdminDashSideBar() {
         </div> */}
       </div>
     </div>
-  );
-}
+
+)}
