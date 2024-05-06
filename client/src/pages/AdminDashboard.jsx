@@ -5,7 +5,6 @@ import AdminDasAddEmp from "../components/AdminDasAddEmp";
 import DasProfile from "../components/DasProfile";
 import AdminDasInstructors from "../components/AdminDasInstructors";
 import AdminDasManagers from "../components/AdminDasManagers";
-import InstructorDasRequests from "../components/InstructorDasRequests";
 import ManagerViewLeave from "../components/ManagerViewLeave";
 import Header from "../components/Header";
 import InstructorViewLeaveRequest from "../components/InstructorViewLeaveRequest";
