@@ -65,6 +65,12 @@ export const getSubPackage = async (req, res, next) => {
     const totalRejected = await getPromoPackageCount("Rejected");
     const totalPending = await getPendingPromoPackageCount();
 
+    //count for valid time
+    const totalMonthly = await SubPackage.countDocuments({ validTime: "1 Month" });
+    const totalQuarterly = await SubPackage.countDocuments({ validTime: "3 Month" });
+    const totalYearly = await SubPackage.countDocuments({ validTime: "1 Year" });
+    const totalWeek = await SubPackage.countDocuments({ validTime: "Week" });
+
     const NwSubPackages = await SubPackage.find({});
 
     const now = new Date();
@@ -84,6 +90,10 @@ export const getSubPackage = async (req, res, next) => {
       totalApproved,
       totalRejected,
       totalPending,
+      totalMonthly,
+      totalQuarterly,
+      totalYearly,
+      totalWeek,
       lastMonthSubPackage,
     });
   } catch (error) {

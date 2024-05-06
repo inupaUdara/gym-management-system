@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Modal, Button, Table } from "flowbite-react";
 import axios from "axios";
@@ -9,6 +9,8 @@ import { MdOutlineDelete, MdPendingActions } from "react-icons/md";
 import { RiFileCloseLine } from "react-icons/ri";
 import { HiOutlineExclamationCircle, HiArrowNarrowUp } from "react-icons/hi";
 import { useSnackbar } from "notistack";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 export default function AdminPromoPackage() {
   const [subPackages, setSubPackages] = useState([]);
@@ -20,10 +22,9 @@ export default function AdminPromoPackage() {
   const [totalPending, setTotalPending] = useState(0);
   const { enqueueSnackbar } = useSnackbar();
 
-
   useEffect(() => {
     setLoading(true);
-    if (currentUser.isAdmin || currentUser.role === "Manager" ) {
+    if (currentUser.isAdmin || currentUser.role === "Manager") {
       axios
         .get(`/api/subpackage/getSubPackage`)
         .then((response) => {
@@ -70,6 +71,55 @@ export default function AdminPromoPackage() {
       });
   };
 
+  const generatePDF = () => {
+    const doc = new jsPDF();
+    doc.text("Promotion Packages Report", 14, 10);
+    const promotionPackages = subPackages.filter((subPackage) => subPackage.Pactype === "PromotionPackage");
+    doc.autoTable({
+      head: [
+        [
+          "No",
+          "Package Name",
+          "Price (LKR)",
+          "Valid Time",
+          "Description",
+          "Specific",
+          "Start Date",
+          "End Date",
+          "Status",
+        ],
+      ],
+      body: promotionPackages.map((subPackage, index) => [
+        
+        index + 1,
+        subPackage.subPackageName,
+        subPackage.price,
+        `per ${subPackage.validTime}`,
+        subPackage.description,
+        `${subPackage.note1}\n${subPackage.note2}\n${subPackage.note3}`,
+        new Date(subPackage.startDate).toLocaleDateString(),
+        new Date(subPackage.endDate).toLocaleDateString(),
+        subPackage.status,
+      ]),
+    });
+    doc.text(
+      `Total Approved: ${totalApproved}`,
+      14,
+      doc.autoTable.previous.finalY + 10
+    );
+    doc.text(
+      `Total Rejected: ${totalRejected}`,
+      14,
+      doc.autoTable.previous.finalY + 20
+    );
+    doc.text(
+      `Total Pending: ${totalPending}`,
+      14,
+      doc.autoTable.previous.finalY + 30
+    );
+    doc.save("promotion_packages_report.pdf");
+  };
+
   return (
     <div className="p-4">
       {currentUser.isAdmin || currentUser.role === "Manager" ? (
@@ -81,18 +131,14 @@ export default function AdminPromoPackage() {
                   <h3 className="text-[#1f1f1f] text-md uppercase">
                     Total Approved
                   </h3>
-                  <p className="text-2xl font-semibold">
-                    {totalApproved}
-                  </p>
+                  <p className="text-2xl font-semibold">{totalApproved}</p>
                 </div>
-                < AiOutlineFileDone className="bg-green-600 text-white rounded-full text-5xl p-3 shadow-lg"/>
+                <AiOutlineFileDone className="bg-green-600 text-white rounded-full text-5xl p-3 shadow-lg" />
               </div>
               <div className="flex gap-2 text-sm">
                 <span className="text-green-500 flex items-center">
                   <HiArrowNarrowUp />
-                  <p>
-                    {totalApproved}
-                  </p>
+                  <p>{totalApproved}</p>
                 </span>
                 <div className="text-[#707070]">Last month</div>
               </div>
@@ -103,18 +149,14 @@ export default function AdminPromoPackage() {
                   <h3 className="text-[#1f1f1f] text-md uppercase">
                     Total Rejected
                   </h3>
-                  <p className="text-2xl font-semibold">
-                    {totalRejected}
-                  </p>
+                  <p className="text-2xl font-semibold">{totalRejected}</p>
                 </div>
-                < RiFileCloseLine className="bg-red-600 text-white rounded-full text-5xl p-3 shadow-lg"/>
+                <RiFileCloseLine className="bg-red-600 text-white rounded-full text-5xl p-3 shadow-lg" />
               </div>
               <div className="flex gap-2 text-sm">
                 <span className="text-green-500 flex items-center">
                   <HiArrowNarrowUp />
-                  <p>
-                    {totalRejected}
-                  </p>
+                  <p>{totalRejected}</p>
                 </span>
                 <div className="text-[#707070]">Last month</div>
               </div>
@@ -125,22 +167,23 @@ export default function AdminPromoPackage() {
                   <h3 className="text-[#1f1f1f] text-md uppercase">
                     Total Pending
                   </h3>
-                  <p className="text-2xl font-semibold">
-                    {totalPending}
-                  </p>
+                  <p className="text-2xl font-semibold">{totalPending}</p>
                 </div>
-                <MdPendingActions  className="bg-teal-600 text-white rounded-full text-5xl p-3 shadow-lg"/>
+                <MdPendingActions className="bg-teal-600 text-white rounded-full text-5xl p-3 shadow-lg" />
               </div>
               <div className="flex gap-2 text-sm">
                 <span className="text-green-500 flex items-center">
                   <HiArrowNarrowUp />
-                  <p>
-                    {totalPending}
-                  </p>
+                  <p>{totalPending}</p>
                 </span>
                 <div className="text-[#707070]">Last month</div>
               </div>
             </div>
+          </div>
+          <div className="p-2 m-2">
+            <Button className="mt-4" onClick={generatePDF}>
+              Generate Report
+            </Button>
           </div>
           <div className="table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
             <Table hoverable className="shadow-md">

@@ -4,6 +4,7 @@ import BackButton from "../../components/subpacComp/BackButton";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSnackbar } from "notistack";
+import { set } from "mongoose";
 
 const EditSubPackage = () => {
   const [subPackageName, setSubPackageName] = useState("");
@@ -13,6 +14,8 @@ const EditSubPackage = () => {
   const [note1, setNote1] = useState("");
   const [note2, setNote2] = useState("");
   const [note3, setNote3] = useState("");
+  const [Pactype, setPactype] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -30,6 +33,8 @@ const EditSubPackage = () => {
         setNote1(response.data.note1);
         setNote2(response.data.note2);
         setNote3(response.data.note3);
+        setPactype(response.data.Pactype);
+        setEndDate(response.data.endDate);
         setLoading(false);
       })
       .catch((error) => {
@@ -48,6 +53,7 @@ const EditSubPackage = () => {
       note1,
       note2,
       note3,
+      endDate,
     };
     setLoading(true);
     axios
@@ -59,6 +65,7 @@ const EditSubPackage = () => {
           { variant: "success" },
           { anchorOrigin: { vertical: "bottom", horizontal: "right" } }
         );
+        
         navigate("/admin-dashboard?tab=admin-subscripition-panel");
       })
       .catch((error) => {
@@ -143,6 +150,19 @@ const EditSubPackage = () => {
             className="border-2 border-gray-500 px-4 py-2 w-full"
           />
         </div>
+        {
+          Pactype === "PromotionPackage" && (
+            <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">End Date</label>
+          <input
+            type="date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+            className="border-2 border-gray-500 px-4 py-2 w-full"
+          />
+        </div>
+          )
+        }
         <button
           className="focus:outline-none font-bold text-white bg-red-700 hover:bg-red-800 rounded-lg text-sm px-5 py-3 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700"
           onClick={handleEditPackage}

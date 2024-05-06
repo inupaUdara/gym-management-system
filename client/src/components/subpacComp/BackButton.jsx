@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { BsArrowLeft } from "react-icons/bs";
 
-const BackButton = ({ destination = "/SubscriptionPackages" }) => {
+const BackButton = ({ destination = "/admin-dashboard?tab=admin-subscripition-panel" }) => {
   return (
     <div className="flex">
       <Link
