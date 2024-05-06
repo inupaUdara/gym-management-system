@@ -5,7 +5,6 @@ import AdminDasAddEmp from "../components/AdminDasAddEmp";
 import DasProfile from "../components/DasProfile";
 import AdminDasInstructors from "../components/AdminDasInstructors";
 import AdminDasManagers from "../components/AdminDasManagers";
-import InstructorDasRequests from "../components/InstructorDasRequests";
 import ManagerViewLeave from "../components/ManagerViewLeave";
 import Header from "../components/Header";
 import InstructorViewLeaveRequest from "../components/InstructorViewLeaveRequest";
@@ -27,6 +26,7 @@ import AdminSubscriptionPanel from "../components/subpacComp/AdminSubscriptionPa
 import DashboardComponent from "../components/DashboardComponent";
 import SearchEmployee from "../components/SearchEmployee";
 import InstructorShiftRequets from "../components/InstructorShiftRequets";
+import AdminAnnouncement from "../components/AdminAnnouncement";
 import AdminPromoPackage from "../components/subpacComp/AdminPromoPackage";
 import AdminApprovePromo from "../components/subpacComp/AdminApprovePromo";
 export default function AdminDashboard() {
@@ -53,6 +53,7 @@ export default function AdminDashboard() {
 
   return (
     <>
+
       <Header />
       <div className="min-h-screen flex flex-col md:flex-row bg-[#d4d4d4]">
         <div className="md:w-56">
@@ -82,6 +83,7 @@ export default function AdminDashboard() {
       {tab === 'admin-subscripition-panel' && <AdminSubscriptionPanel/> }
       {tab === 'admin-promo-subscripition-panel' &&  <AdminPromoPackage />}
       {tab === 'admin-approval-subpackage-panel' && <AdminApprovePromo />}
+      {tab === 'admin-announcement' && <AdminAnnouncement/>}
 
         {tab === "finance-summary" && <FinanceSum />}
         {tab === "all-transactions" && <TransacTable />}

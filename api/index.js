@@ -11,6 +11,8 @@ import supplementsRoutes from "./routes/supplements.route.js";
 import shiftChangeRoute from "./routes/shift.route.js";
 import cookieParser from "cookie-parser";
 import SubpackageRoutes from "./routes/subpackage_route.js";
+import announcementRoutes from "./routes/announcement.route.js";
+
 import checkoutShopRoutes from "./routes/checkoutShop.route.js";
 import shippingRoutes from "./routes/shipping.route.js";
 import cors from "cors";
@@ -49,6 +51,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/shiftchange", shiftChangeRoute);
 
 app.use("/api/supplements", supplementsRoutes);
+app.use("/api/announcement", announcementRoutes);
 
 app.use("/api/pay", checkoutShopRoutes);
 app.use("/api/shipping", shippingRoutes);

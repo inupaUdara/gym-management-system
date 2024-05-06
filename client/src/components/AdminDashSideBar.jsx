@@ -7,7 +7,7 @@ import {
   HiChartPie,
   HiOutlineCurrencyDollar,
 } from "react-icons/hi";
-import { MdSchedule, MdOutlineScheduleSend, MdDashboard, MdOutlineCardMembership    } from "react-icons/md";
+import { MdSchedule, MdOutlineScheduleSend, MdDashboard, MdOutlineCardMembership ,MdAnnouncement   } from "react-icons/md";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { LuUsers } from "react-icons/lu";
 import { Link } from "react-router-dom";
@@ -108,25 +108,16 @@ export default function AdminDashSideBar() {
                 className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
               ${activeTab === "request-shift-change" ? "bg-[#707070]" : ""}`}
               >
-                Request Shift Swapping
+                Shift
               </h1>
             </Link>
-            <Link to="/admin-dashboard?tab=instructor-request">
-              <h1
-                className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
-              ${activeTab === "instructor-request" ? "bg-[#707070]" : ""}`}
-
-              >
-                Add Request
-              </h1>
-            </Link>
+          
             <Link to="/admin-dashboard?tab=view-instructors-request">
               <h1
                 className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
               ${activeTab === "view-instructors-request" ? "bg-[#707070]" : ""}`}
-
               >
-                Your Requests
+                Leave Requests
               </h1>
             </Link>
 
@@ -137,7 +128,7 @@ export default function AdminDashSideBar() {
           <Link to="/admin-dashboard?tab=dashboard-comp">
             <div
               className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
-                activeTab === "dashboard-comp" || !activeTab
+                activeTab === "dashboard-comp"
                   ? "bg-[#707070]"
                   : ""
               }`}
@@ -151,7 +142,6 @@ export default function AdminDashSideBar() {
         {currentUser.isAdmin && (
           <Link to="/admin-dashboard?tab=view-request">
             <div
-
               className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
                 activeTab === "view-request" ? "bg-[#707070]" : ""
               }`}
@@ -168,12 +158,12 @@ export default function AdminDashSideBar() {
         {currentUser.isAdmin && (
           <Link to="/admin-dashboard?tab=instuctor-shift">
             <div
-
               className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
                 activeTab === "instuctor-shift" ? "bg-[#707070]" : ""
               }`}
             >
               <MdOutlineScheduleSend color="#D4D4D4" />
+
 
               <span className="text-[15px] ml-4 text-[#D4D4D4]">
                 Instructor Shifts
@@ -185,6 +175,7 @@ export default function AdminDashSideBar() {
         {currentUser.role === "Manager" && (
           <Link to="/admin-dashboard?tab=add-supplements">
             <div
+
               className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${activeTab === "add-supplements" ? "bg-[#707070]" : ""}`}>
               <MdSchedule color="#D4D4D4" />
 
@@ -206,6 +197,21 @@ export default function AdminDashSideBar() {
         )}
 
         {currentUser.isAdmin && (
+          <Link to="/admin-dashboard?tab=admin-users">
+            <div
+              className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
+                activeTab === "admin-users" ? "bg-[#707070]" : ""
+              }`}
+            >
+              <LuUsers color="#D4D4D4" />
+
+              <span className="text-[15px] ml-4 text-[#D4D4D4]">Users</span>
+            </div>
+          </Link>
+        )}
+
+        {currentUser.isAdmin && (
+         
           <div
           className={`p-2.5 my-2 mx-2  flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${activeTab === "sub" ? "bg-[#707070]" : ""
             }`}
@@ -297,6 +303,21 @@ export default function AdminDashSideBar() {
             </Link>
           </div>
         )}
+        
+          <Link to="/admin-dashboard?tab=admin-announcement">
+            <div
+              className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
+                activeTab === "admin-announcement"
+                  ? "bg-[#707070]"
+                  : ""
+              }`}
+            >
+              <MdAnnouncement  color="#D4D4D4" />
+
+              <span className="text-[15px] ml-4 text-[#D4D4D4]">Announcements</span>
+            </div>
+          </Link>
+   
 
         {/* Financial Management  */}
         {currentUser.isAdmin && (

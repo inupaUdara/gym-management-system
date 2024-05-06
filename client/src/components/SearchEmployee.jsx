@@ -4,6 +4,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Select, TextInput } from 'flowbite-react';
 import { AiOutlineSearch } from "react-icons/ai";
 import EmployeeCard from './EmployeeCard';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 export default function SearchEmployee() {
     
@@ -19,7 +21,7 @@ export default function SearchEmployee() {
     const [employee, setEmployee] = useState([]);
     const [loading, setLoading] = useState(false);
     const [showMore, setShowMore] = useState(false);
-
+    const [startIndex, setStartIndex] = useState(0);
     console.log(sideBarData)
 
     useEffect(() => {
@@ -27,6 +29,7 @@ export default function SearchEmployee() {
         const searchTermFromUrl = urlParams.get('searchTerm');
         const sortFromUrl = urlParams.get('sort');
         const roleFromUrl = urlParams.get('role');
+        const startIndexFromUrl = parseInt(urlParams.get('startIndex')) || 0;
         if (searchTermFromUrl || sortFromUrl || roleFromUrl) {
             setSearchTerm(searchTermFromUrl)
             setSideBarData({
@@ -37,7 +40,7 @@ export default function SearchEmployee() {
             
             })
         }
-
+        setStartIndex(startIndexFromUrl);
         const fetchEmployee = async () => {
             setLoading(true);
             const searchQuery = urlParams.toString();
@@ -69,6 +72,7 @@ export default function SearchEmployee() {
         urlParams.set('searchTerm', searchTerm);
         urlParams.set('sort', sideBarData.sort);
         urlParams.set('role', sideBarData.role);
+        urlParams.set('startIndex', 0);
         const searchQuery = urlParams.toString();
         navigate(`${path}?${searchQuery}`);
         
@@ -83,7 +87,7 @@ export default function SearchEmployee() {
         }
 
         if(e.target.id === 'role') {
-            const role = e.target.value || 'Instructor';
+            const role = e.target.value || '';
             setSideBarData({ ...sideBarData, role: role });
         }
 
@@ -110,31 +114,52 @@ export default function SearchEmployee() {
         }
       };
 
+      const generateUserReport = () => {
+        const doc = new jsPDF();
+        const tableData = employee.map((employee) => [
+          new Date(employee.createdAt).toLocaleDateString(),
+          employee.firstname + ' ' + employee.lastname,
+          employee.username,
+          employee.address,
+          employee.email,
+          employee.nic,
+          employee.phone,
+          employee.role,
+          employee.shift,
+          // user.isAdmin ? 'Yes' : 'No',
+        ]);
+        doc.autoTable({
+          head: [['Registered Date', 'Name', 'username', 'Address', 'email', 'nic', 'phone', 'role', 'shift']],
+          body: tableData,
+        });
+        doc.save('employee_report.pdf');
+      };
+
   return (
     <div className="flex flex-col md:flex-row w-full">
-        <div className='p-7 border-b md:border-r md:min-h-screen border-gray-500 '>
-            <form onSubmit={handleSubmit} className='flex flex-col gap-8 w-full'>
+        <div className='p-5 border-b md:border-r md:min-h-screen border-gray-500 md:w-1/3'>
+            <form onSubmit={handleSubmit} className='flex flex-col gap-6 w-full'>
                 <div className="flex items-center gap-2">
                     <label htmlFor="" className='whitespace-nowrap font-semibold'>Search:</label>
                     <TextInput
                     type='text'
                     placeholder='Search...'
                     rightIcon={AiOutlineSearch}
-                    className=''
+                    className='w-full'
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}/>
 
                 </div>
                 <div className="flex items-center gap-2">
                     <label htmlFor="" className='font-semibold'>Sort:</label>
-                    <Select onChange={handleChange} defaultValue={sideBarData.sort} id='sort'>
+                    <Select onChange={handleChange} defaultValue={sideBarData.sort} id='sort' className='w-full'>
                         <option value="desc">Descending</option>
                         <option value="asc">Ascending</option>
                     </Select>
                 </div>
                 <div className="flex items-center gap-2">
                     <label htmlFor="" className='font-semibold'>Role:</label>
-                    <Select onChange={handleChange} defaultValue={sideBarData.role} id='role'>
+                    <Select onChange={handleChange} defaultValue={sideBarData.role} id='role' className='w-full'>
                         <option value="">Select Role</option>
                         <option value="Instructor">Intructors</option>
                         <option value="Manager">Managers</option>
@@ -143,6 +168,7 @@ export default function SearchEmployee() {
                 <button type="submit" className="border-2 border-[#a80000] rounded-md p-2 hover:bg-[#a80000] hover:text-white">
                     Search
                 </button>
+                <button onClick={generateUserReport} className="border-2 border-[#1f1f1f] rounded-md p-2 hover:bg-[#1f1f1f] hover:text-white">Download Employee List</button>
             </form>
         </div>
         <div className="w-full">
