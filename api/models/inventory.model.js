@@ -21,11 +21,14 @@ const inventorySchema = new mongoose.Schema({
     itemStatus: {
         type: String,
         required: true,
+        default:"available"
     },
     itemPicture: {
-        type: String,
-        default: "https://i.pngimg.me/thumb/f/720/m2H7G6b1A0A0G6Z5.jpg",
+        type: Array,
+        required: true
+
     },
+
 }, { timestamps: true });
 
 const Inventory = mongoose.model("Inventory", inventorySchema);

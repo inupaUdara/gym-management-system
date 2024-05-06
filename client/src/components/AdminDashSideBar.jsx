@@ -76,23 +76,38 @@ export default function AdminDashSideBar() {
           </div>
         </Link>
         {currentUser.role === "Instructor" && (
-          
+  <>
+    <Link to="/admin-dashboard?tab=view-instructors-service-request">
           <div
             className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
-              activeTab === "request" ? "bg-[#707070]" : ""
-            }` } onClick={() =>  toggleDropdownReq()}
+              activeTab === "profile" ? "bg-[#707070]" : ""
+            }`}
            
           >
-            <MdSchedule color="#D4D4D4" />
-            <div className="flex justify-between w-full items-center">
-            <span className="text-[15px] ml-4 text-[#D4D4D4]">Requests</span>
-            <span className="text-sm rotate-180" id="arrow">
-                {isOpenReq ? <IoIosArrowUp /> : <IoIosArrowDown />}
-              </span>
-            </div>
+            <HiUser color="#D4D4D4" />
+
+            <span className="text-[15px] ml-4 text-[#D4D4D4]">Service Request</span>
           </div>
-        
-        )}
+        </Link>
+    <div
+      className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
+        activeTab === "request" ? "bg-[#707070]" : ""
+      }`}
+      onClick={toggleDropdownReq}
+    >
+      <MdSchedule color="#D4D4D4" />
+      <div className="flex justify-between w-full items-center">
+        <span className="text-[15px] ml-4 text-[#D4D4D4]">Requests</span>
+        <span className="text-sm rotate-180" id="arrow">
+          {isOpenReq ? <IoIosArrowUp /> : <IoIosArrowDown />}
+        </span>
+      </div>
+    </div>
+
+    
+  </>
+)}
+
         {isOpenReq && (
           <div
             className="text-left text-sm font-light mt-2 w-4/5 mx-auto text-[#D4D4D4]"
@@ -173,14 +188,7 @@ export default function AdminDashSideBar() {
                 Add New Item
               </h1>
             </Link>
-            <Link to="/admin-dashboard?tab=update-item">
-              <h1
-                className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
-              ${activeTab === "updateitem" ? "bg-[#707070]" : ""}`}
-              >
-                Update Item
-              </h1>
-            </Link>
+            
             <Link to="/admin-dashboard?tab=order-items">
               <h1
                 className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1

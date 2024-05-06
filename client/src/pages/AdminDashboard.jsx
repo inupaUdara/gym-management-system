@@ -14,6 +14,8 @@ import AdminViewEmployeeDetails from "../components/AdminViewEmployeeDetails";
 import InventoryAddNew from "../components/InventoryAddNew";
 import InventoryViewItems from "../components/InventoryViewItems";
 import InventoryUpdateItems from "../components/InventoryUpdateItems";
+import InstructorServiceRequest from "../components/InstructorServiceRequest";
+import InstructorAddServiceReq from "../components/InstructorAddServiceReq";
 
 export default function AdminDashboard() {
   const location = useLocation();
@@ -57,6 +59,8 @@ export default function AdminDashboard() {
       {tab === 'addinventory' && <InventoryAddNew/>}
       {tab === 'add-inventory'  && <InventoryAdd/>}     
       {tab === 'view-instructors-request' && <InstructorViewLeaveRequest/>}
+      {tab === 'view-instructors-service-request' && <InstructorServiceRequest/>}
+      {tab === 'add-service-request' && <InstructorAddServiceReq/>}
       {/* {tab === 'view-instructor-request' && leaveId && <ManagerInstructorLeave/>}
       {tab === 'view-employee-details' && empId && <AdminViewEmployeeDetails/>} */}
     </div>

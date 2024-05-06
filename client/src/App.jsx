@@ -13,6 +13,7 @@ import FooterCom from "./components/Footer";
 import AdminViewEmployeeDetails from "./components/AdminViewEmployeeDetails";
 import ManagerInstructorLeave from "./components/ManagerInstructorLeave";
 import InventoryUpdateItems from "./components/InventoryUpdateItems";
+import InstructorAddServiceReq from "./components/InstructorAddServiceReq";
 
 export default function App() {
   return (
@@ -30,6 +31,7 @@ export default function App() {
           <Route path="/view-employee-details/:empId" element={<AdminViewEmployeeDetails />} />
           <Route path="/view-instructor-request/:leaveId/:empId" element={<ManagerInstructorLeave/>} /> 
           <Route path="/update-inventory/:inventoryId" element={<InventoryUpdateItems/>}/>
+          <Route path="/add-service-request/:inventoryId" element={<InstructorAddServiceReq/>} />
         </Route>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />

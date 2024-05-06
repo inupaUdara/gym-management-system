@@ -5,6 +5,7 @@ import employeeRoutes from "./routes/employee.route.js";
 import authEmployeeRoutes from "./routes/authEmployee.route.js";
 import inventoryRoutes from "./routes/inventory.route.js";
 import leaveRoutes from "./routes/leave.route.js";
+import addServiceRequest from "./routes/serviceRequest.route.js";
 import cookieParser from "cookie-parser";
 dotenv.config();
 
@@ -29,6 +30,7 @@ app.use("/api/employee", employeeRoutes);
 app.use("/api/authemployee", authEmployeeRoutes);
 app.use("/api/leave", leaveRoutes);
 app.use("/api/inventory", inventoryRoutes);
+app.use("/api/serviceRequest", addServiceRequest);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;

@@ -7,9 +7,9 @@ export const addItems = async (req, res, next) => {
             return next(errorHandler(403, "You are not allowed to add items"));
         }
 
-        const { itemCode, itemName, description, quantity, itemStatus } = req.body;
+        const { itemCode, itemName, description, quantity, itemStatus, itemPicture } = req.body;
 
-        if (!itemCode || !itemName || !description || !quantity || !itemStatus) {
+        if (!itemCode || !itemName || !description || !quantity || !itemStatus || !itemPicture) {
             return next(errorHandler(400, "All fields are required"));
         }
 
@@ -18,7 +18,8 @@ export const addItems = async (req, res, next) => {
             itemName,
             description,
             quantity,
-            itemStatus
+            itemStatus,
+            itemPicture,
         });
 
         const savedItem = await item.save();
@@ -69,24 +70,6 @@ export const getItemIns =async (req, res, next) => {
     }
 }       
 
-
-
-// export const getItemIns =async (req, res, next) => {	
-//     if(!req.user.role === 'Manager' || !req.user.role === 'Admin'){
-//         next(errorHandler(403, "You are not access to items"));
-//     }
-
-//     try {
-//         const itemId = req.inventory.itemId;
-//         const item = await Inventory.find(req.params.itemId);
-//         res.status(200).json({item});
-//     } catch (error) {
-//         next(error);
-//     }
-// }
-
-
-
 export const deleteItem = async (req, res, next) => {
     if (!req.user.role === 'Admin' || !req.user.role === 'Manager') {
         next(errorHandler(403, "You are not allowed to delete items"));
@@ -112,7 +95,9 @@ export const updateItem = async (req, res, next) => {
                     itemCode: req.body.itemCode,
                     itemName: req.body.itemName,
                     description: req.body.description,
-                    quantity: req.body.description,
+                    quantity: req.body.quantity,
+                    itemStatus: req.body.itemStatus,
+                    
                 },
             },
             { new: true });
@@ -122,32 +107,3 @@ export const updateItem = async (req, res, next) => {
         next(error);
     }
 }
-// export const updateItem = async (req, res, next) => {
-//     try {
-//         if (req.user.role !== 'Manager') {
-//             return next(errorHandler(403, "You are not allowed to update items"));
-//         }
-
-//         const { itemId } = req.params;
-//         const { itemCode, itemName, description, quantity} = req.body;
-
-//         if (!itemCode || !itemName || !description || !quantity) {
-//             return next(errorHandler(400, "All fields are required"));
-//         }
-
-//         const updatedItem = await Inventory.findByIdAndUpdate( req.params.itemId, {
-//             itemCode,
-//             itemName,
-//             description,
-//             quantity
-//         }, { new: true });
-
-//         if (!updatedItem) {
-//             return next(errorHandler(404, "Item not found"));
-//         }
-
-//         res.status(200).json(updatedItem);
-//     } catch (error) {
-//         next(error);
-//     }
-// }
