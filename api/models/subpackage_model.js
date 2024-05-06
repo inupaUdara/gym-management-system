@@ -7,12 +7,13 @@ const SubpackageShema = mongoose.Schema(
             required: true
         },
         price: {
-            type: String,
+            type: Number,
             required: true
         },
         validTime: {
             type: String,
             required: true,
+            default: '1 Month',
         },
         description: {
             type: String,
@@ -29,9 +30,23 @@ const SubpackageShema = mongoose.Schema(
         note3: {
             type: String,
             required: true
-        }
-        
-    }
+        },
+        Pactype: {
+            type: String,
+            //required: true,
+            default: 'SubscriptionPackage'
+        },
+        startDate: {
+            type: Date
+        },
+        endDate: {
+            type: Date
+        },
+        status: {
+            type: String,
+            default: 'Pending'
+        }   
+    }, {timestamps: true}
 );
 const SubPackage = mongoose.model('subPackage', SubpackageShema);
 

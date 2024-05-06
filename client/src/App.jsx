@@ -11,8 +11,8 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 
 import EmployeeLogin from "./pages/EmployeeLogin";
-import AdminDashboard from "./pages/AdminDashboard";
 import Header from "./components/Header";
+import AdminDashboard from "./pages/AdminDashboard";
 import AdminPrivateRoute from "./components/AdminPrivateRoute";
 import FooterCom from "./components/Footer";
 import CreateSubPackage from "./pages/subPackagePages/CreateSubPackage";
@@ -23,7 +23,13 @@ import ShowSubPackage from "./pages/subPackagePages/ShowSubPackage";
 import AdminViewEmployeeDetails from "./components/AdminViewEmployeeDetails";
 import ManagerInstructorLeave from "./components/ManagerInstructorLeave";
 
-import Payment from "./pages/Payment";
+import Payment from "./pages/Checkout/Payment";
+import ShippingPage from "./pages/Checkout/ShippingPage";
+import PaymentSelection from "./pages/Checkout/PaymentSelect";
+import PaymentSuccess from "./pages/Checkout/PaymentSuccess";
+import CreateShippingMethod from "./components/PaymentComponents/Admin Components/ManageShipping";
+import EditShipping from "./pages/Checkout/EditShipping";
+
 import YourTasks from "./pages/YourTasks";
 import UpdateTasks from "./pages/UpdateTask";
 import MemberView from "./pages/MemberView";
@@ -32,8 +38,6 @@ import PromoSubPackage from "./pages/PromoSubPackage";
 import ForgotPassword from "./pages/ForgotPassword";
 import OTPVerification from "./pages/OTPVerification";
 import ResetPassword from "./pages/ResetPassword";
-
-
 
 export default function App() {
   return (
@@ -56,33 +60,42 @@ export default function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/otp-verify" element={<OTPVerification />} />
         <Route path="/reset-password" element={<ResetPassword />} />
-
-
-
-
         <Route element={<AdminPrivateRoute />}>
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
-          <Route path="/view-employee-details/:empId" element={<AdminViewEmployeeDetails />} />
-          <Route path="/view-instructor-request/:leaveId/:empId" element={<ManagerInstructorLeave />} />
+          <Route
+            path="/view-employee-details/:empId"
+            element={<AdminViewEmployeeDetails />}
+          />
+          <Route
+            path="/view-instructor-request/:leaveId/:empId"
+            element={<ManagerInstructorLeave />}
+          />
 
-          <Route path="/yourtasks" element={<YourTasks />} />           
+          <Route path="/yourtasks" element={<YourTasks />} />
           <Route path="/update-tasks/:taskId" element={<UpdateTasks />} />
           <Route path="/member-view/:userId" element={<MemberView />} />
-
-            
-
         </Route>
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
-        <Route path="/payment" element={<Payment />} />
       </Routes>
       <Routes>
-          <Route path="/subpackages/create" element={ <CreateSubPackage /> }/>
-          <Route path="/subpackages/details/:id" element={ <ShowSubPackage /> }/>
-          <Route path="/subpackages/edit/:id" element={ <EditSubPackage /> }/>
-          
+
+        <Route path="/subpackages/create" element={<CreateSubPackage />} />
+        <Route path="/subpackages/details/:id" element={<ShowSubPackage />} />
+        <Route path="/subpackages/edit/:id" element={<EditSubPackage />} />
+      </Routes>
+      <Routes>
+        <Route path="/Checkout/payment" element={<Payment />} />
+        <Route path="/Checkout/payment/shipping" element={<ShippingPage />} />
+        <Route
+          path="/Checkout/payment/paymentSelect"
+          element={<PaymentSelection />}
+        />
+        <Route path="/Checkout/payment/success" element={<PaymentSuccess />} />
+        <Route path="/shipping/create" element={<CreateShippingMethod />} />
+        <Route path="/shipping/edit/:id" element={<EditShipping />} />
+
       </Routes>
       <FooterCom />
     </BrowserRouter>
-
   );
 }
