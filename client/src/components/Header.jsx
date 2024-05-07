@@ -1,18 +1,14 @@
 import { Link, useLocation } from "react-router-dom";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Avatar, Dropdown, DropdownDivider } from "flowbite-react";
 import logo from "../assets/cjgym.png";
-import {
-  signoutSuccess,
-} from "../redux/user/userSlice";
+import { signoutSuccess } from "../redux/user/userSlice";
 import { useEffect, useState } from "react";
 import { IoIosNotifications } from "react-icons/io";
 import { MdNotificationsActive } from "react-icons/md";
 export default function Header() {
-  const { currentUser } = useSelector(
-    (state) => state.user
-  );
- 
+  const { currentUser } = useSelector((state) => state.user);
+
   const [announcementData, setAnnouncementData] = useState([]);
   const location = useLocation();
   const isHomePage = location.pathname === "/";
@@ -37,14 +33,10 @@ export default function Header() {
     }
   };
   useEffect(() => {
-    
     if (currentUser) {
       fetchUpdatedAnnouncementData();
- 
     }
   }, [currentUser]);
-
-
 
   const fetchUpdatedAnnouncementData = async () => {
     try {
@@ -76,7 +68,10 @@ export default function Header() {
         setAnnouncementData((prevData) => {
           return prevData.map((announcement) => {
             if (announcement._id === announcementId) {
-              return { ...announcement, seenBy: [...announcement.seenBy, currentUser._id] };
+              return {
+                ...announcement,
+                seenBy: [...announcement.seenBy, currentUser._id],
+              };
             }
             return announcement;
           });
@@ -90,7 +85,6 @@ export default function Header() {
   console.log(announcementData);
 
   return (
-    
     <header
       className={`border-b-2 border-b-black shadow-md relative ${isHomePage ? "bg-transparent shadow-none border-none" : "bg-gradient-to-r from-[#1f1f1f] to-[#4c0000]"}`}
     >
@@ -115,30 +109,44 @@ export default function Header() {
               Memberships
             </li>
           </Link>
-          {(!currentUser || (!currentUser.role && !currentUser.isAdmin)) && (  //hide shop from admin
-          <Link to="/shop">
-            <li className="hidden sm:inline text-[#D4D4D4] hover:underline hover:underline-offset-4 hover:text-white">
-              Shop
-            </li>
-          </Link>
-        )} 
+          {(!currentUser || (!currentUser.role && !currentUser.isAdmin)) && ( //hide shop from admin
+            <Link to="/shop">
+              <li className="hidden sm:inline text-[#D4D4D4] hover:underline hover:underline-offset-4 hover:text-white">
+                Shop
+              </li>
+            </Link>
+          )}
+          {currentUser && ( //hide shop from admin
+            <Link to="">
+              <li className="hidden sm:inline text-[#D4D4D4] hover:underline hover:underline-offset-4 hover:text-white">
+                Request Refund
+              </li>
+            </Link>
+          )}
         </ul>
 
         {currentUser ? (
           <>
             <div className="flex gap-4">
-              
               {announcementData.length > 0 && (
                 <Dropdown
                   arrowIcon={false}
                   inline
-                  label={<div>
-                    {announcementData[0].seenBy.length === 0 || !announcementData[0].seenBy.includes(currentUser._id) ? (
-                      <MdNotificationsActive color="#E49B0F" size={36}  status="online" statusPosition="top-right"/>
-                    ) : (
-                      <IoIosNotifications color="white" size={36} />
-                    )}
-                  </div>}
+                  label={
+                    <div>
+                      {announcementData[0].seenBy.length === 0 ||
+                      !announcementData[0].seenBy.includes(currentUser._id) ? (
+                        <MdNotificationsActive
+                          color="#E49B0F"
+                          size={36}
+                          status="online"
+                          statusPosition="top-right"
+                        />
+                      ) : (
+                        <IoIosNotifications color="white" size={36} />
+                      )}
+                    </div>
+                  }
                   style={{ zIndex: 9 }}
                 >
                   <DropdownDivider />
@@ -147,8 +155,8 @@ export default function Header() {
                       <Dropdown.Item
                         stopPropagation
                         key={announcement._id}
-                        onClick={(e) =>{ 
-                          markAsSeen(announcement._id)
+                        onClick={(e) => {
+                          markAsSeen(announcement._id);
                           e.stopPropagation();
                         }}
                         className={` ${announcement.seenBy.includes(currentUser._id) ? "font-thin text-[#707070]" : "font-bold  text-[#1f1f1f] bg-[#d4d4d4] hover:bg-[#707070]"}`}
@@ -167,23 +175,29 @@ export default function Header() {
                       <DropdownDivider />
                     </>
                   ))}
-                  <Link to="/admin-dashboard?tab=admin-announcement" className="flex gap-4">
-                  <div className="flex flex-col mx-auto justify-center">
-                  <button
-                    className="mx-4 text-xs text-center"
+                  <Link
+                    to="/admin-dashboard?tab=admin-announcement"
+                    className="flex gap-4"
                   >
-                    See more
-                  </button>
-                  </div>
+                    <div className="flex flex-col mx-auto justify-center">
+                      <button className="mx-4 text-xs text-center">
+                        See more
+                      </button>
+                    </div>
                   </Link>
-                  
                 </Dropdown>
               )}
               <Dropdown
                 arrowIcon={false}
                 inline
                 label={
-                  <Avatar alt="user" img={currentUser.profilePicture} rounded status="online" statusPosition="top-right"/>
+                  <Avatar
+                    alt="user"
+                    img={currentUser.profilePicture}
+                    rounded
+                    status="online"
+                    statusPosition="top-right"
+                  />
                 }
                 style={{ zIndex: 9, marginRight: "1rem" }}
               >

@@ -8,12 +8,9 @@ import AdminDasManagers from "../components/AdminDasManagers";
 import ManagerViewLeave from "../components/ManagerViewLeave";
 import Header from "../components/Header";
 import InstructorViewLeaveRequest from "../components/InstructorViewLeaveRequest";
-import ManagerInstructorLeave from "../components/ManagerInstructorLeave";
-import AdminViewEmployeeDetails from "../components/AdminViewEmployeeDetails";
 
 import AdminInstructorShifts from "../components/AdminInstructorShifts";
 import MemberDashProfile from "../components/MemberDashProfile";
-
 
 import ManagerAddSupplements from "../components/ManagerAddSupplements";
 import ManagerShowSupplements from "../components/ManagerShowSupplements";
@@ -27,12 +24,10 @@ import ManagerShowProtein from "../components/ManagerShowProtein";
 import DashUsers from "../components/DashUsers";
 import DashTasks from "../components/DashTasks";
 
-
 import FinanceSum from "../components/PaymentComponents/Admin Components/FinanceSummary";
 import TransacTable from "../components/PaymentComponents/Admin Components/TransactionTable";
 import ManageShippingMethods from "../components/PaymentComponents/Admin Components/DisplayShipping";
 
-import ManagerAddSupplements from "../components/ManagerAddSupplements";
 import AdminSubscriptionPanel from "../components/subpacComp/AdminSubscriptionPanel";
 import DashboardComponent from "../components/DashboardComponent";
 import SearchEmployee from "../components/SearchEmployee";
@@ -71,7 +66,6 @@ export default function AdminDashboard() {
         </div>
         {tab === "member-task" && <DashTasks />}
         {tab === "admin-users" && <DashUsers />}
-        {tab === "add-supplements" && <ManagerAddSupplements />}
         {tab === "dashboard-comp" && <DashboardComponent />}
         {tab === "request-shift-change" && <InstructorShiftRequets />}
         {tab === "search-employee" && <SearchEmployee />}
@@ -80,7 +74,6 @@ export default function AdminDashboard() {
         {tab === "member-profile" && <MemberDashProfile />}
         {tab === "admin-instructors" && <AdminDasInstructors />}
         {tab === "admin-managers" && <AdminDasManagers />}
-        {tab === "instructor-request" && <InstructorDasRequests />}
         {tab === "view-request" && <ManagerViewLeave />}
         {tab === "view-instructors-request" && <InstructorViewLeaveRequest />}
 
@@ -89,23 +82,23 @@ export default function AdminDashboard() {
 
       {tab === 'view-employee-details' && empId && <AdminViewEmployeeDetails/>} */}
 
-      {tab === 'admin-subscripition-panel' && <AdminSubscriptionPanel/> }
-      {tab === 'admin-promo-subscripition-panel' &&  <AdminPromoPackage />}
-      {tab === 'admin-approval-subpackage-panel' && <AdminApprovePromo />}
-      {tab === 'admin-announcement' && <AdminAnnouncement/>}
+        {tab === "admin-subscripition-panel" && <AdminSubscriptionPanel />}
+        {tab === "admin-promo-subscripition-panel" && <AdminPromoPackage />}
+        {tab === "admin-approval-subpackage-panel" && <AdminApprovePromo />}
+        {tab === "admin-announcement" && <AdminAnnouncement />}
 
         {tab === "finance-summary" && <FinanceSum />}
         {tab === "all-transactions" && <TransacTable />}
         {tab === "manage-shipping" && <ManageShippingMethods />}
-        
-        {tab === 'add-supplements' && <ManagerAddSupplements/>}
-      {tab === 'show-supplements' && <ManagerShowSupplements/>}
-      {tab === 'show-Mass' && <ManagerShowMassGainer/>}
-      {tab === 'show-Creatine' && <ManagerShowCreatine/>}
-      {tab === 'show-Preworkout' && <ManagerShowPreworkout/>}
-      {tab === 'show-FatBurners' && <ManagerShowFatBurners/>}
-      {tab === 'show-Vitamins' && <ManagerShowVitamins/>}
-      {tab === 'show-Protein' && <ManagerShowProtein/>}
+
+        {tab === "add-supplements" && <ManagerAddSupplements />}
+        {tab === "show-supplements" && <ManagerShowSupplements />}
+        {tab === "show-Mass" && <ManagerShowMassGainer />}
+        {tab === "show-Creatine" && <ManagerShowCreatine />}
+        {tab === "show-Preworkout" && <ManagerShowPreworkout />}
+        {tab === "show-FatBurners" && <ManagerShowFatBurners />}
+        {tab === "show-Vitamins" && <ManagerShowVitamins />}
+        {tab === "show-Protein" && <ManagerShowProtein />}
       </div>
     </>
   );

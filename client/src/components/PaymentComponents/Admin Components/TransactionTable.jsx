@@ -74,11 +74,11 @@ function TransacTable() {
     { key: "firstName", title: "First Name" },
     { key: "lastName", title: "Last Name" },
     { key: "productName", title: "Product Name" },
-    { key: "description", title: "Product Info" },
     { key: "sellingPrice", title: "Product Price" },
     { key: "shippingfee", title: "Shipping Fee" },
     { key: "totalPrice", title: "Total Price" },
-    { key: "actions", title: "Actions" },
+    { key: "shippingMethod", title: "Shipping Method" },
+    { key: "totalPrice", title: "Total Price" },
   ];
 
   const handleChangePage = (event, newPage) => {
