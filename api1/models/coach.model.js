@@ -1,36 +1,35 @@
 import mongoose from "mongoose";
 
-const leaveSchema = new mongoose.Schema({
-    employeeId: {
+const coachSchema = new mongoose.Schema({
+    name: {
         type: String,
         required: true,
     },
-    empUsername: {
+    email: {
+        type: String,
+        required: true,
+        // unique: true,
+    },
+    age: {
+        type: Number,
+        required: true,
+    },
+    cname: {
         type: String,
         required: true,
     },
-    leaveType: {
+    date: {
         type: String,
         required: true,
     },
-    startDate: {
-        type: Date,
-        required: true,
-    },
-    endDate: {
-        type: Date,
-        required: true,
-    },
-    reason: {
+    time: {
         type: String,
         required: true,
     },
-    status: {
+    msg: {
         type: String,
-        default: "Pending",
     },
 }, { timestamps: true });
 
-const Leave = mongoose.model("Leave", leaveSchema);
-
-export default Leave;
+const Employee = mongoose.model("Coach", coachSchema);
+export default Coach;

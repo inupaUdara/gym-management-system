@@ -32,17 +32,17 @@ export default function CoachingUpdate() {
     const updateAppointment = (e) => {
         e.preventDefault();
         const updatedUser = { name, email, age, cname, date, time, msg };
-        axios.put(`http://localhost:3001/updateUser/${id}`, updatedUser)
+        axios.put(`http://localhost:3000/updateUser/${id}`, updatedUser)
             .then(result => {
                 console.log(result);
-                navigate('/');
+                navigate('/viewSessions');
             })
             .catch(err => console.log(err));
     };
 
     return (
-        
-            
+         <div>  
+            <Header/>
         <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
             <h2 className="text-2xl font-semibold mb-6">Reschedule</h2>
             <form onSubmit={updateAppointment}>
@@ -58,10 +58,99 @@ export default function CoachingUpdate() {
                         required
                     />
                 </div>
-                {/* Other input fields */}
+                <div className="mb-4">
+                    <label className="block text-gray-700 mb-2" htmlFor="email">Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={email}
+                        onChange={(e)=>setEmail(e.target.value )}
+                        className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                        required
+                    />
+                </div>
+                <div className="mb-4">
+                    <label className="block text-gray-700 mb-2" htmlFor="contactNumber">Contact Number</label>
+                    <input
+                        type="tel"
+                        id="contactNumber"
+                        name="contactNumber"
+                        value={age}
+                        onChange={(e)=>setAge(e.target.value )}
+                        className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                        required
+                    />
+                </div>
+                <div className="mb-4">
+                    <label className="block text-gray-700 mb-2" htmlFor="coachName">Coach Name</label>
+                    <select
+                        id="coachName"
+                        name="coachName"
+                        value={cname}
+                        onChange={(e)=>setCName(e.target.value )}
+                        className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                        required
+                    >
+                        <option value="">Select Coach</option>
+                        <option value="Coach 1">Coach 1</option>
+                        <option value="Coach 2">Coach 2</option>
+                        <option value="Coach 3">Coach 3</option>
+                        <option value="Coach 4">Coach 4</option>
+                        <option value="Coach 5">Coach 5</option>
+                    </select>
+                </div>
+                <div className="mb-4">
+                    <label className="block text-gray-700 mb-2" htmlFor="date">Date</label>
+                    <input
+                        type="date"
+                        id="date"
+                        name="date"
+                        value={date}
+                        onChange={(e)=>setDate(e.target.value )}
+                        className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                        required
+                    />
+                </div>
+                <div className="mb-4">
+                    <label className="block text-gray-700 mb-2" htmlFor="timeSlot">Time Slot</label>
+                    <select
+                        id="timeSlot"
+                        name="timeSlot"
+                        value={time}
+                        onChange={(e)=>setTime(e.target.value )}
+                        className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                        required
+                    >
+                        <option value="">Select Time Slot</option>
+                        <option value="18:00">6:00 PM</option>
+                        <option value="18:30">6:30 PM</option>
+                        <option value="19:00">7:00 PM</option>
+                        <option value="19:30">7:30 PM</option>
+                        <option value="20:00">8:00 PM</option>
+                        <option value="20:30">8:30 PM</option>
+                        <option value="21:00">9:00 PM</option>
+                        <option value="21:30">9:30 PM</option>
+                        <option value="22:00">10:00 PM</option>
+                        <option value="22:30">10:30 PM</option>
+                        <option value="23:00">11:00 PM</option>
+                    </select>
+                </div>
+                <div className="mb-4">
+                    <label className="block text-gray-700 mb-2" htmlFor="specialMessage">Special Messages</label>
+                    <textarea
+                        id="specialMessage"
+                        name="specialMessage"
+                        value={msg}
+                        onChange={(e)=>setMsg(e.target.value )}
+                        className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                        rows="4"
+                    ></textarea>
+                </div>
                 <button type="submit" className="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Submit</button>
             </form>
         
         </div>
+        </div> 
     );
 }

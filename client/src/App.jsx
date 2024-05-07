@@ -32,7 +32,7 @@ export default function App() {
         <Route path="/scheduleSession" element={<CoachingFormPage/>}></Route>
         <Route path="/viewSessions" element={<CoachingBookingsVIewPage/>}></Route>
         <Route path="/coachin-page" element={<CoachingMainPage/>}></Route>
-        <Route path="/coachin-update" element={<CoachingUpdate/>}></Route>
+        <Route path="/updateUser/:id" element={<CoachingUpdate/>}></Route>
 
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />

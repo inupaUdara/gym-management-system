@@ -1,39 +1,41 @@
-import express from "express";
-import mongoose from "mongoose";
-import dotenv from "dotenv";
-import employeeRoutes from "./routes/employee.route.js";
-import authEmployeeRoutes from "./routes/authEmployee.route.js";
-import leaveRoutes from "./routes/leave.route.js";
-import cookieParser from "cookie-parser";
-dotenv.config();
-
-mongoose
-  .connect(process.env.MONGO_DB)
-  .then(() => {
-    console.log("MongoDB is connected");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+import express from 'express';
+import { PORT, mongoDBURL } from './config.js';
+import mongoose from 'mongoose';
+import booksRoute from './routes/booksRoute.js';
+import cors from 'cors';
 
 const app = express();
-app.use(express.json());
-app.use(cookieParser());
 
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
+// Middleware for parsing request body
+app.use(express.json());
+
+// Middleware for handling CORS POLICY
+// Option 1: Allow All Origins with Default of cors(*)
+app.use(cors());
+// Option 2: Allow Custom Origins
+// app.use(
+//   cors({
+//     origin: 'http://localhost:3000',
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//     allowedHeaders: ['Content-Type'],
+//   })
+// );
+
+app.get('/', (request, response) => {
+  console.log(request);
+  return response.status(234).send('Welcome To MERN Stack Tutorial');
 });
 
-app.use("/api/employee", employeeRoutes);
-app.use("/api/authemployee", authEmployeeRoutes);
-app.use("/api/leave", leaveRoutes);
+app.use('/books', booksRoute);
 
-app.use((err, req, res, next) => {
-  const statusCode = err.statusCode || 500;
-  const message = err.message || "Internal Server Error";
-  res.status(statusCode).json({ 
-    success: false,
-    statusCode,
-    message
-   });
-})
+mongoose
+  .connect(mongoDBURL)
+  .then(() => {
+    console.log('App connected to database');
+    app.listen(PORT, () => {
+      console.log(`App is listening to port: ${PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.log(error);
+  });
