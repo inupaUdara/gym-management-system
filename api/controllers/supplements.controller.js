@@ -1,6 +1,6 @@
 import Supplements from "../models/supplements.model.js";
 import { errorHandler } from "../utills/error.js";
-// import User from "../models/user.model.js";
+
 
 export const createSupplements = async (req, res, next) => {
 
@@ -19,13 +19,29 @@ export const getAllSupplements = async (req, res, next) => {
     try {
       
         const searchQuery = req.query.search || ''  ;
+
+        const supplementId = req.query.supplementId;
+
+    const query = supplementId ? { supplementId } : {};
+
       // Find supplements by IDs
       const supplements = await Supplements.find({ 
         productName:{$regex:new RegExp(searchQuery,'i')},
-        ...(req.query.supplementId && { _id: req.query.supplementId})
+        ...(req.query.supplementId && { _id: req.query.supplementId}),
+        ...(req.query.productName && { productName: req.query.productName}),
+        ...(req.query.sellingPrice && { sellingPrice: req.query.sellingPrice}),
+        ...(req.query.imageUrl && { imageUrls: req.query.imageUrl}),
        });
+
+
+       const totalSupplements = await Supplements.countDocuments(); // Count total supplements
+
   
-      res.status(200).json({ supplements });
+      res.status(200).json({ 
+        supplements ,
+        totalSupplements,
+    
+    });
     } catch (error) {
       next(error);
     }
@@ -33,10 +49,15 @@ export const getAllSupplements = async (req, res, next) => {
 
   export const getAllSupplementsById = async (req, res, next) => {
     try {
+
+        const query = supplementId ? { supplementId } : {};
       const supplements = await Supplements.findById(req.params.id);
+    
+
       if (!supplements) {
         return next(errorHandler(404, 'Listing not found!'));
       }
+      
       res.status(200).json(supplements);
     } catch (error) {
       next(error);

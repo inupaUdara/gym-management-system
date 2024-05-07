@@ -193,7 +193,16 @@ export default function AdminDashSideBar() {
                 className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
                 ${activeTab === "show-supplements" ? "bg-[#707070]" : ""}`}
               >
-                Show Supplement
+                All Supplements
+              </h1>
+            </Link>
+
+            <Link to="/admin-dashboard?tab=show-Protein">
+              <h1
+                className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
+                ${activeTab === "show-Protein" ? "bg-[#707070]" : ""}`}
+              >
+                Protein
               </h1>
             </Link>
             

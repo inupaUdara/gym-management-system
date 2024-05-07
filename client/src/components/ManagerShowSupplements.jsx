@@ -12,6 +12,8 @@ const ManagerShowSupplements = () => {
   const [showModal, setShowModal] = useState(false);
   const [supplemetIdToDelete, setSupplementToDelete] = useState("");
   const [searchQuery, setSearchQuery] = useState(""); // State for search query
+  const [totalSupplements, setTotalSupplements] = useState(0); // State for total supplements
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,6 +36,7 @@ const ManagerShowSupplements = () => {
         const data = await res.json();
         if (res.ok){
             setSupplements(data.supplements);
+            setTotalSupplements(data.totalSupplements);
         }
 
         }catch (error){
@@ -48,16 +51,6 @@ const ManagerShowSupplements = () => {
   const handleSearch =(event) =>{
     setSearchQuery(event.target.value);
   };
-
-//    // Function to handle search query change
-//    const handleSearch = (event) => {
-//     setSearchQuery(event.target.value);
-//   };
-
-//   // Function to filter supplements based on search query
-//   const filteredSupplements = supplements.filter((supplement) =>
-//     supplement.productName.toLowerCase().includes(searchQuery.toLowerCase())
-//     );
 
   const handleDeleteSupplemet = async () => {
     try {
@@ -78,25 +71,12 @@ const ManagerShowSupplements = () => {
       }
   }
 
-    // Function to generate PDF report
-//   const generatePDF = () => (
-//     <Document>
-//       <Page size="A4" style={styles.page}>
-//         <View style={styles.section}>
-//           <Text style={styles.heading}>Supplements Report</Text>
-//           {supplements.map((supplement) => (
-//             <View key={supplement._id}>
-//               <Text>Product Name: {supplement.productName}</Text>
-//               <Text>Description: {supplement.description}</Text>
-//               {/* Include other supplement details as needed */}
-//             </View>
-//           ))}
-//         </View>
-//       </Page>
-//     </Document>
-//   );
 const generatesuplementReport = () => {
     const doc = new jsPDF();
+
+    const leftMargin = 80;
+    doc.text(`Total Supplements: ${totalSupplements}`, leftMargin, 30);
+
     const tableData = supplements.map((supplement) => [
       new Date(supplement.createdAt).toLocaleDateString(),
       supplement.productName,
@@ -110,38 +90,13 @@ const generatesuplementReport = () => {
     doc.autoTable({
       head: [['productName', 'brandName', 'description', 'category', 'price', 'sellingPrice']],
       body: tableData,
+      startY: 40
     });
     doc.save('supplement_report.pdf');
   };
 
   return (
     
-    // <div className='container mt-5 ml-5'>
-    //   <h2 className="mb-5 text-center">Manager Supplements</h2>
-    //   <div className="flex flex-wrap">
-    //     {supplements.map((supplement) => (
-    //       <div key={supplement._id} className='max-w-sm mb-5 mr-5'>
-    //         <div className="bg-white border border-gray-200 rounded-lg shadow task-card-container">
-    //           <div className='relative'>
-    //             <Link to={`/supplements/${supplement._id}`}>
-    //               <img src={supplement.imageUrls[0]} alt="Supplement" className='rounded-t-lg' style={{ width: '100%', height: '200px' }} />
-    //             </Link>
-    //           </div>
-    //           <div className='p-5'>
-    //             <Link to={`/supplements/${supplement._id}`}>
-    //               <h5 className='mb-2 text-2xl font-bold tracking-tight text-gray-900'>{supplement.productName}</h5>
-    //             </Link>
-    //             <div className='flex justify-between mb-3'>
-    //               <p className='text-gray-700'>Price: ${supplement.price}</p>
-    //               <p className='text-gray-700'>Selling Price: ${supplement.sellingPrice}</p>
-    //             </div>
-    //             <p className='text-gray-700'>{supplement.description}</p>
-    //           </div>
-    //         </div>
-    //       </div>
-    //     ))}
-    //   </div>
-    // </div>
     <div className="table-auto md:mx-auto p-3 overflow-x-scroll scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
       {/* Search Bar for search supplementes*/}
       <div className="p-3">
@@ -154,11 +109,16 @@ const generatesuplementReport = () => {
         />
     </div>
 
-    {currentUser.isAdmin && supplements.length > 0 ? (
+    {currentUser.role === "Manager" && supplements.length > 0 ? (
         <>
     <div className='p-3'>
       <Button onClick={generatesuplementReport}>Download Supplements as PDF</Button>
     </div>
+
+    <p className="mb-4 text-center text-gray-700 text-m dark:text-gray-800 ">
+        Total totalSupplements: {totalSupplements}
+      </p>
+
         <div className='p-3 mt-4'>
           <Table hoverable className="shadow-md ">
             <Table.Head>
@@ -194,6 +154,8 @@ const generatesuplementReport = () => {
               </Table.HeadCell>
 
             </Table.Head>
+
+            
             {supplements.map((supplement) => (
               <Table.Body className="divide-y" key={supplement._id}>
                 <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800 text-[#1f1f1f]">

@@ -154,7 +154,7 @@ const generatesuplementReport = () => {
         />
     </div>
 
-    {currentUser.isAdmin && supplements.length > 0 ? (
+    {currentUser.role === "Manager" && supplements.length > 0 ? (
         <>
     <div className='p-3'>
       <Button onClick={generatesuplementReport}>Download Supplements as PDF</Button>

@@ -22,6 +22,7 @@ import ManagerShowCreatine from "../components/ManagerShowCreatine";
 import ManagerShowPreworkout from "../components/ManagerShowPreworkout";
 import ManagerShowFatBurners from "../components/ManagerShowFatBurners";
 import ManagerShowVitamins from "../components/ManagerShowVitamins";
+import ManagerShowProtein from "../components/ManagerShowProtein";
 
 
 
@@ -62,6 +63,7 @@ export default function AdminDashboard() {
       {tab === 'show-Preworkout' && <ManagerShowPreworkout/>}
       {tab === 'show-FatBurners' && <ManagerShowFatBurners/>}
       {tab === 'show-Vitamins' && <ManagerShowVitamins/>}
+      {tab === 'show-Protein' && <ManagerShowProtein/>}
       {tab === 'addemployee' && <AdminDasAddEmp/>}
       {tab === 'profile' && <DasProfile/>}
       {tab === 'member-profile' && <MemberDashProfile/>}

@@ -116,32 +116,6 @@ const generatesuplementReport = () => {
 
   return (
     
-    // <div className='container mt-5 ml-5'>
-    //   <h2 className="mb-5 text-center">Manager Supplements</h2>
-    //   <div className="flex flex-wrap">
-    //     {supplements.map((supplement) => (
-    //       <div key={supplement._id} className='max-w-sm mb-5 mr-5'>
-    //         <div className="bg-white border border-gray-200 rounded-lg shadow task-card-container">
-    //           <div className='relative'>
-    //             <Link to={`/supplements/${supplement._id}`}>
-    //               <img src={supplement.imageUrls[0]} alt="Supplement" className='rounded-t-lg' style={{ width: '100%', height: '200px' }} />
-    //             </Link>
-    //           </div>
-    //           <div className='p-5'>
-    //             <Link to={`/supplements/${supplement._id}`}>
-    //               <h5 className='mb-2 text-2xl font-bold tracking-tight text-gray-900'>{supplement.productName}</h5>
-    //             </Link>
-    //             <div className='flex justify-between mb-3'>
-    //               <p className='text-gray-700'>Price: ${supplement.price}</p>
-    //               <p className='text-gray-700'>Selling Price: ${supplement.sellingPrice}</p>
-    //             </div>
-    //             <p className='text-gray-700'>{supplement.description}</p>
-    //           </div>
-    //         </div>
-    //       </div>
-    //     ))}
-    //   </div>
-    // </div>
     <div className="table-auto md:mx-auto p-3 overflow-x-scroll scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
       {/* Search Bar for search supplementes*/}
       <div className="p-3">
@@ -154,7 +128,7 @@ const generatesuplementReport = () => {
         />
     </div>
 
-    {currentUser.isAdmin && supplements.length > 0 ? (
+    {currentUser.role === "Manager" && supplements.length > 0 ? (
         <>
     <div className='p-3'>
       <Button onClick={generatesuplementReport}>Download Supplements as PDF</Button>
