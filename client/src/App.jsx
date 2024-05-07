@@ -2,16 +2,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Shop from "./pages/Shop";
-import Supplements from "./pages/Supplements";
-import LiftingAccessories from "./pages/LiftingAccessories";
-import ShakersAndBottels from "./pages/ShakersAndBottles";
-import GiftCollection from "./pages/GiflCollection";
-import OffersAndDeals from "./pages/OffersAndDeals";
+
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 
 import EmployeeLogin from "./pages/EmployeeLogin";
+
 import Header from "./components/Header";
+
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminPrivateRoute from "./components/AdminPrivateRoute";
 import FooterCom from "./components/Footer";
@@ -30,6 +28,14 @@ import PaymentSuccess from "./pages/Checkout/PaymentSuccess";
 import CreateShippingMethod from "./components/PaymentComponents/Admin Components/ManageShipping";
 import EditShipping from "./pages/Checkout/EditShipping";
 
+import Payment from "./pages/Payment";
+import ManagerUpdateSupplements from "./components/ManagerUpdateSupplements";
+// import Protein from "./pages/Protein";
+import Shopping from "./pages/Cart";
+
+import SupplementProuductView from "./pages/SupplementProuductView";
+// import CartScreen from "./pages/Cart";
+
 import YourTasks from "./pages/YourTasks";
 import UpdateTasks from "./pages/UpdateTask";
 import MemberView from "./pages/MemberView";
@@ -39,6 +45,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import OTPVerification from "./pages/OTPVerification";
 import ResetPassword from "./pages/ResetPassword";
 
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -47,11 +54,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/shop" element={<Shop />} />
-        <Route path="/supplements" element={<Supplements />} />
-        <Route path="/liftingaccessories" element={<LiftingAccessories />} />
-        <Route path="/shakersandbottles" element={<ShakersAndBottels />} />
-        <Route path="/giflcollection" element={<GiftCollection />} />
-        <Route path="/offersanddeals" element={<OffersAndDeals />} />
+       
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/employee-login" element={<EmployeeLogin />} /> 
@@ -62,6 +65,9 @@ export default function App() {
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route element={<AdminPrivateRoute />}>
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
+         
+          <Route path="/updateSupplements/:supplementId" element={<ManagerUpdateSupplements />} />
+
           <Route
             path="/view-employee-details/:empId"
             element={<AdminViewEmployeeDetails />}
@@ -74,8 +80,19 @@ export default function App() {
           <Route path="/yourtasks" element={<YourTasks />} />
           <Route path="/update-tasks/:taskId" element={<UpdateTasks />} />
           <Route path="/member-view/:userId" element={<MemberView />} />
+
         </Route>
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
+
+        <Route path="/dashboard" element={<Dashboard />} />      
+        {/* <Route path ="/protein" element={<Protein/>} /> */}
+        <Route path="/shoppingCart/:SupplementProuductId" element={<Shopping/>}/>
+        
+       
+        <Route path ="/SupplementProuductView/:SupplementProuductId" element={<SupplementProuductView/>} />
+      
+      
+
       </Routes>
       <Routes>
 
