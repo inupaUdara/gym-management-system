@@ -83,11 +83,11 @@ const ShoppingCart = ({ supplements }) => {
         {!supplements.length && <div>Your cart is currently empty.</div>}
       </div>
       <div className="flex items-center justify-between pt-6 border-t border-gray-200">
-        <span className="text-gray-500">Total</span>
+        <span className="text-lg font-semibold text-black-500">Total</span>
         <span className="text-lg font-semibold">Rs {(total).toFixed(2)}</span>
       </div>
       <div className="flex items-center justify-end mt-4">
-        <button className="text-white bg-blue-500 py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+        <button className="bg-[#4c0000] hover:bg-[#7e1010] text-white py-2 px-4 rounded-m focus:outline-none focus:ring-2 focus:ring-offset-2">
           Check Out
         </button>
       </div>

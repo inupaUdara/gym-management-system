@@ -214,9 +214,12 @@ const Shop = () => {
 
         {/* Cart icon */}
         <div className="text-3xl text-white relative">
+        <Link to={`/shoppingCart/gvsh2hsg672haw`} //fake id
+          >
           <span>
              <MdOutlineShoppingCart />
           </span>
+          </Link>
           <div className="bg-white text-black w-5 h-5 rounded-full p-1 flex items-center justify-center absolute -top-2 -right-2">
             <p className="text-sm">{cartCount}</p>
           </div>
@@ -252,7 +255,7 @@ const Shop = () => {
                   <p className="text-gray-900 dark:text-gray-300 mb-1">
                     <span className="line-through">Rs {supplement.price}</span>
                   </p>
-                  <p className="text-gray-600 dark:text-gray-400">
+                  <p className="text-gray-600 dark:text-gray-400 font-semibold">
                     Rs {supplement.sellingPrice}
                   </p>
                   <div className="flex mt-4">
@@ -279,13 +282,13 @@ const Shop = () => {
                             JSON.stringify(currentCartList)
                           );
                         }}
-                        className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 mr-2 rounded"
+                        className=" bg-red-900 hover:bg-red-800 text-white font-semibold px-4 py-2 mr-2 rounded"
                       >
                         Add to Cart
                       </button>
                     </Link>
 
-                    <button className="bg-green-500 hover:bg-green-600 text-white font-semibold px-4 py-2 rounded">
+                    <button className="bg-[#4c0000] hover:bg-[#7e1010] text-white font-semibold px-4 py-2 rounded">
                       Buy Now
                     </button>
                   </div>

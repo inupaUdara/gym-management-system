@@ -51,12 +51,10 @@ const SupplementProductView = () => {
                 {supplement.brandName} {supplement.productName}
               </h1>
               <div className="mb-4">
-                <p className="text-gray-700">{supplement.price}</p>
+                <p className="line-through text-gray-700">Rs {supplement.price}</p>
               </div>
               <div className="mb-4">
-                <p className="text-gray-700">
-                  {supplement.sellingPrice}
-                </p>
+                <p className="text-gray-700 font-semibold">Rs {supplement.sellingPrice}</p>
               </div>
               <div className="mb-6 flex">
               <Link to={`/shoppingCart/${supplement._id}`}
