@@ -185,7 +185,7 @@ export default function InventoryAddNew() {
               <option value="none">Select Status</option>
               <option value="in_use">In Use</option>
               <option value="in_service">In Service</option>
-              <option value="not_good_for_use">Not Good for Use</option>
+              <option value="not_good_for_use">Unusable</option>
             </select>
 
             <div className="flex flex-col gap-4">

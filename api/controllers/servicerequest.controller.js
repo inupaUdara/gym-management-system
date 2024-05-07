@@ -3,13 +3,10 @@ import { errorHandler } from "../utills/error.js";
 
 export const addServiceRequest = async (req, res, next) => {
     try {
-        // if (req.user.role !== 'Instructor' || req.user.role !== 'Manager') {
-        //     return next(errorHandler(403, "You are not allowed to add items"));
-        // }
 
-        const { itemCode, serviceType, serviceDescription, itemName} = req.body;
+        const { itemCode, serviceType, serviceDescription, itemName, _id} = req.body;
 
-        if (!itemCode || !serviceType || !serviceDescription || !itemName) {
+        if (!itemCode || !serviceType || !serviceDescription || !itemName || !_id) {
             return next(errorHandler(400, "All fields are required"));
         }
 
@@ -18,6 +15,7 @@ export const addServiceRequest = async (req, res, next) => {
             serviceType,
             serviceDescription,
             itemName,
+            _id,
         });
 
         const savedRequest = await servicerequest.save();
@@ -30,54 +28,70 @@ export const addServiceRequest = async (req, res, next) => {
 
 
 
-// export const getItems= async (req, res, next) => {
-//     if(!req.user.role === 'Manager'){
-//         next(errorHandler(403, "You are not access to items"));
-//     } 
+export const getRequests= async (req, res, next) => {
 
-//     try {
-//         const sortDirection = req.query.sort === 'asc' ? 1 : -1;
-//         const items = await Inventory.find({
-//             ...(req.query.itemId && { _id: req.query.itemId })
-//         })
-//             .sort({ createdAt: sortDirection });
+    try {
+        const sortDirection = req.query.sort === 'asc' ? 1 : -1;
+        const requests = await ServiceRequest.find({
+            ...(req.query.requestId && { _id: req.query.requestId })
+        })
+            .sort({ createdAt: sortDirection });
 
-//         res.status(200).json({items});
+        res.status(200).json({requests});
         
-//     } catch (error) {
-//         next(error);
-//     }
-// }
+    } catch (error) {
+        next(error);
+    }
+}
 
 
-// export const getItemIns =async (req, res, next) => {	
-//     if(!req.user.role === 'Manager' || !req.user.role === 'Admin'){
-//         next(errorHandler(403, "You are not access to items"));
-//     }
+export const getRequestIns =async (req, res, next) => {	
 
-//     try {
-//         const { id } = req.params;
-//         const item = await Inventory.findById(id);
+    try {
+        const {requestId} = req.params;
+        const request = await ServiceRequest.findById(requestId);
 
-//         if(!item) {
-//             return res.status(404).json({message: 'Item Package not found'});
-//         }
-//         return res.status(200).json(item);
+        if(!request) {
+            return res.status(404).json({message: 'Service Recrod not found'});
+        }
+        return res.status(200).json(request);
 
-//     } catch (error) {
-//         console.log(error.message);
-//         next(errorHandler(500,{message: error.message}));
-//     }
-// }       
+    } catch (error) {
+        console.log(error.message);
+        next(errorHandler(500,{message: error.message}));
+    }
+}       
 
-// export const deleteItem = async (req, res, next) => {
-//     if (!req.user.role === 'Admin' || !req.user.role === 'Manager') {
-//         next(errorHandler(403, "You are not allowed to delete items"));
-//     }
-//     try {
-//         await Inventory.findByIdAndDelete(req.params.itemId)
-//         res.status(200).json("Item deletedee successfully");
-//     } catch (error) {
-//         next(error);
-//     }
-// }
+export const deleteRequest = async (req, res, next) => {
+    try {
+        const {requestId} = req.params;
+        const result = await ServiceRequest.findByIdAndDelete(requestId);
+        if (!result){
+            return res.status(404).json({ message: `Package not Found` });
+        }
+        res.status(200).json("Service Record deleted successfully");
+    } catch (error) {
+        next(error);
+    }
+}
+
+export const updateRequest = async (req, res, next) => {
+
+    try {
+        const updatedRequest = await ServiceRequest.findByIdAndUpdate(req.params.requestId, 
+            {
+                $set: {
+                    itemCode: req.body.itemCode,
+                    serviceType: req.body.itemName,
+                    serviceDescription: req.body.description,
+                    itemName: req.body.quantity,
+                    serviceStatus: req.body.status
+                },
+            },
+            { new: true });
+        res.status(200).json(updatedRequest);
+        
+    } catch (error) {
+        next(error);
+    }
+}

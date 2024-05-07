@@ -5,8 +5,10 @@ import employeeRoutes from "./routes/employee.route.js";
 import authEmployeeRoutes from "./routes/authEmployee.route.js";
 import inventoryRoutes from "./routes/inventory.route.js";
 import leaveRoutes from "./routes/leave.route.js";
-import addServiceRequest from "./routes/serviceRequest.route.js";
+import ServiceRequestRoutes from "./routes/serviceRequest.route.js";
 import cookieParser from "cookie-parser";
+import emailRoutes from './routes/email.route.js';
+
 dotenv.config();
 
 mongoose
@@ -26,11 +28,14 @@ app.listen(3000, () => {
   console.log("Server is running on port 3000");
 });
 
+app.use('/api/email', emailRoutes);
+
+
 app.use("/api/employee", employeeRoutes);
 app.use("/api/authemployee", authEmployeeRoutes);
 app.use("/api/leave", leaveRoutes);
 app.use("/api/inventory", inventoryRoutes);
-app.use("/api/serviceRequest", addServiceRequest);
+app.use("/api/serviceRequest", ServiceRequestRoutes);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;

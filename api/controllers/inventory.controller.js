@@ -56,8 +56,8 @@ export const getItemIns =async (req, res, next) => {
     }
 
     try {
-        const { id } = req.params;
-        const item = await Inventory.findById(id);
+        const { itemId } = req.params;
+        const item = await Inventory.findById(itemId);
 
         if(!item) {
             return res.status(404).json({message: 'Item Package not found'});
@@ -98,6 +98,23 @@ export const updateItem = async (req, res, next) => {
                     quantity: req.body.quantity,
                     itemStatus: req.body.itemStatus,
                     
+                },
+            },
+            { new: true });
+        res.status(200).json(updatedItem);
+        
+    } catch (error) {
+        next(error);
+    }
+}
+
+export const updateItemStatus = async (req, res, next) => {
+
+    try {
+        const updatedItem = await Inventory.findByIdAndUpdate(req.params.inventory_id, 
+            {
+                $set: {
+                    itemStatus: 'in_service',
                 },
             },
             { new: true });

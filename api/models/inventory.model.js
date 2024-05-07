@@ -21,7 +21,6 @@ const inventorySchema = new mongoose.Schema({
     itemStatus: {
         type: String,
         required: true,
-        default:"available"
     },
     itemPicture: {
         type: Array,

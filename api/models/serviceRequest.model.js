@@ -4,6 +4,7 @@ const serviceRequestSchema = new mongoose.Schema({
     itemCode: {
         type: String,
         required: true,
+        unique: true,
     },
     serviceType: {
         type: String,
@@ -17,6 +18,16 @@ const serviceRequestSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    serviceStatus:{
+        type:String,
+        default: "in_service",
+    },
+    _id:{
+        type:String,
+        required: true,
+    },
+    
+
 }, { timestamps: true });
 
 const ServiceRequest = mongoose.model("ServiceRequest", serviceRequestSchema);

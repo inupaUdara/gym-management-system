@@ -172,7 +172,7 @@ export default function InventoryUpdateItems() {
               <option value="">Select Status</option>
               <option value="in_use">In Use</option>
               <option value="in_service">In Service</option>
-              <option value="not_good_for_use">Not Good for Use</option>
+              <option value="unusable">Unusable</option>
             </select>
 
           </div>

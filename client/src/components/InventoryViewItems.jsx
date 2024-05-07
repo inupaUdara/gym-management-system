@@ -11,6 +11,9 @@ export default function InventoryViewItems() {
   const [showModal, setShowModal] = useState(false);
   const [itemIdToDelete, setItemToDelete] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [inUseCount, setInUseCount] = useState(0);
+  const [inServiceCount, setInServiceCount] = useState(0);
+  const [notForUseCount, setNotForUseCount] = useState(0);
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -19,6 +22,12 @@ export default function InventoryViewItems() {
         const data = await res.json();
         if (res.ok) {
           setItems(data.items);
+          const inUse = data.items.filter(item => item.itemStatus === 'in_use').length;
+          const inService = data.items.filter(item => item.itemStatus === 'in_service').length;
+          const notForUse = data.items.filter(item => item.itemStatus === 'unusable').length;
+          setInUseCount(inUse);
+          setInServiceCount(inService);
+          setNotForUseCount(notForUse);
         }
       } catch (error) {
         console.log(error.message);
@@ -60,8 +69,25 @@ export default function InventoryViewItems() {
   };
 
   return (
+    
     <div className="table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
-      <div className="relative mb-3">
+      {/* Dashboard section */}
+      <div className="flex justify-around p-4 bg-gray-100 rounded-lg shadow-md">
+        <div className="text-center">
+          <p className="font-semibold text-lg">In Use</p>
+          <p className="text-2xl text-blue-500">{inUseCount}</p>
+        </div>
+        <div className="text-center">
+          <p className="font-semibold text-lg">In Service</p>
+          <p className="text-2xl text-green-500">{inServiceCount}</p>
+        </div>
+        <div className="text-center">
+          <p className="font-semibold text-lg">Not for Use</p>
+          <p className="text-2xl text-red-500">{notForUseCount}</p>
+        </div>
+      </div>
+
+    <div className="relative mb-3">
     <input
       type="text"
       placeholder="Search by Item Code or Item Name"

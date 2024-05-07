@@ -17,13 +17,20 @@ export default function AdminDashSideBar() {
   const { currentUser } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [isOpenEmp, setIsOpenEmp] = useState(false);
+  const [isOpenServ, setIsOpenServ] = useState(false);
   const [isOpenReq, setIsOpenReq] = useState(false);
   const [isOpenInventory, setIsOpenInventory] = useState(false);
+  
+
+
+  const toggleDropdownServ = () => {
+    setIsOpenServ(!isOpenServ);
+  };
 
   const toggleDropdownEmp = () => {
     setIsOpenEmp(!isOpenEmp);
   };
-
+  
   const toggleDropdownReq = () => {
     setIsOpenReq(!isOpenReq);
   };
@@ -77,38 +84,19 @@ export default function AdminDashSideBar() {
         </Link>
         {currentUser.role === "Instructor" && (
   <>
-    <Link to="/admin-dashboard?tab=view-instructors-service-request">
-          <div
-            className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
-              activeTab === "profile" ? "bg-[#707070]" : ""
-            }`}
-           
-          >
-            <HiUser color="#D4D4D4" />
-
-            <span className="text-[15px] ml-4 text-[#D4D4D4]">Service Request</span>
-          </div>
-        </Link>
-    <div
-      className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
-        activeTab === "request" ? "bg-[#707070]" : ""
-      }`}
-      onClick={toggleDropdownReq}
-    >
-      <MdSchedule color="#D4D4D4" />
-      <div className="flex justify-between w-full items-center">
-        <span className="text-[15px] ml-4 text-[#D4D4D4]">Requests</span>
-        <span className="text-sm rotate-180" id="arrow">
-          {isOpenReq ? <IoIosArrowUp /> : <IoIosArrowDown />}
-        </span>
-      </div>
-    </div>
-
-    
-  </>
-)}
-
-        {isOpenReq && (
+            <div
+              className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${activeTab === "request"? "bg-[#707070]": ""}`}
+              onClick={toggleDropdownReq}
+            >
+              <MdSchedule color="#D4D4D4" />
+              <div className="flex justify-between w-full items-center">
+                <span className="text-[15px] ml-4 text-[#D4D4D4]">Request</span>
+                <span className="text-sm rotate-180" id="arrow">
+                  {isOpenReq ? <IoIosArrowUp /> : <IoIosArrowDown />}
+                </span>
+              </div>
+            </div>
+            {isOpenReq && (
           <div
             className="text-left text-sm font-light mt-2 w-4/5 mx-auto text-[#D4D4D4]"
             id="submenu"
@@ -123,7 +111,51 @@ export default function AdminDashSideBar() {
               </h1>
             </Link>
             <Link
-              to="/admin-dashboard?tab=view-instructors-request"
+              to="/admin-dashboard?tab=instructors-request"
+            >
+              <h1 className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
+              ${activeTab === "instructors-request" ? "bg-[#707070]" : ""}`}
+                
+                >
+                Your Requests
+              </h1>
+            </Link>
+            
+          </div>
+        )}
+
+
+              <div
+                className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${activeTab === "request" ? "bg-[#707070]" : ""}`}
+                onClick={toggleDropdownServ}
+              >
+                <MdSchedule color="#D4D4D4" />
+                <div className="flex justify-between w-full items-center">
+                  <span className="text-[15px] ml-4 text-[#D4D4D4]">Service</span>
+                  <span className="text-sm rotate-180" id="arrow">
+                    {isOpenServ ? <IoIosArrowUp /> : <IoIosArrowDown />}
+                  </span>
+                </div>
+    
+            </div>
+            </>
+)}
+        {isOpenServ && (
+          <div
+            className="text-left text-sm font-light mt-2 w-4/5 mx-auto text-[#D4D4D4]"
+            id="submenu"
+          >
+            <Link to="/admin-dashboard?tab=view-instructors-service-request">
+              <h1
+                className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
+              ${activeTab === "instructor-request" ? "bg-[#707070]" : ""}`}
+                
+              >
+                Make Service Request
+              </h1>
+            </Link>
+            <Link
+              to="/admin-dashboard?tab=view-instructor-service-request"
             >
               <h1 className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
               ${activeTab === "view-instructors-request" ? "bg-[#707070]" : ""}`}
@@ -188,15 +220,15 @@ export default function AdminDashSideBar() {
                 Add New Item
               </h1>
             </Link>
-            
-            <Link to="/admin-dashboard?tab=order-items">
+            <Link to="/admin-dashboard?tab=view-manager-service-request">
               <h1
                 className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
-              ${activeTab === "order-items" ? "bg-[#707070]" : ""}`}
+              ${activeTab === "view-manager-service-request" ? "bg-[#707070]" : ""}`}
               >
-                Order New Items
+                View Service Requests
               </h1>
             </Link>
+          
           </div>
         )}
 

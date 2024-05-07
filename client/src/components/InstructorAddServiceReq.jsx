@@ -41,33 +41,83 @@ export default function InstructorAddServiceReq() {
     }));
   };
 
+const inventory_id = formData._id;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.serviceType || !formData.serviceDescription || !formData.itemCode) {
+    if (!formData.serviceType || !formData.serviceDescription || !formData.itemCode || !formData._id) {
       return setError("All fields are required");
     }
     try {
       setLoading(true);
       setError(null);
-      const res = await fetch("/api/serviceRequest/addServiceRequest", {
+  
+      // Step 1: Add service request
+      const serviceRequestRes = await fetch("/api/serviceRequest/addServiceRequest", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
-      const data = await res.json();
-      setLoading(false);
-      if (res.ok) {
-        setSuccess("Service request added successfully");
-      } else {
-        setError(data.message || "Failed to add service request");
+      const serviceRequestData = await serviceRequestRes.json();
+  
+      if (!serviceRequestRes.ok) {
+        throw new Error(serviceRequestData.message || "Failed to add service request");
       }
+  
+      // Step 2: Update item status
+      const updateItemRes = await fetch(`/api/inventory/updateItemStatus/${inventory_id}`, {
+        method: "PUT", // Assuming you use PATCH method to update item status
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ itemStatus: "in_service" }), // Assuming formData includes itemStatus
+      });
+      const updateItemData = await updateItemRes.json();
+  
+      if (!updateItemRes.ok) {
+        throw new Error(updateItemData.message || "Failed to update item status");
+      }
+  
+      // Both actions succeeded
+      setLoading(false);
+      setSuccess("Service request added successfully");
+  
     } catch (error) {
       setError(error.message || "Failed to add service request");
       setLoading(false);
     }
   };
+  
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (!formData.serviceType || !formData.serviceDescription || !formData.itemCode) {
+  //     return setError("All fields are required");
+  //   }
+  //   try {
+  //     setLoading(true);
+  //     setError(null);
+  //     const res = await fetch("/api/serviceRequest/addServiceRequest",{
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(formData),
+  //     });
+  //     const data = await res.json();
+  //     setLoading(false);
+  //     if (res.ok) {
+  //       setSuccess("Service request added successfully");
+  //     } else {
+  //       setError(data.message || "Failed to add service request");
+  //     }
+  //   } catch (error) {
+  //     setError(error.message || "Failed to add service request");
+  //     setLoading(false);
+  //   }
+  // };
 
   return (
     <>
@@ -107,6 +157,15 @@ export default function InstructorAddServiceReq() {
                   value={formData.serviceType || ""}
                   onChange={handleChange}
                 />
+               <input
+                  type="text"
+                  placeholder="Enter service type"
+                  className="text-[#d4d4d4] text-sm py-2 my-2 rounded-md bg-[#707070] focus:outline-none placeholder:text-[#d4d4d4] focus:ring-[#03001C]"
+                  id="item_ID"
+                  value={formData._id || ""}
+                  onChange={handleChange}
+                />
+
                 <label htmlFor="serviceDescription" className="text-[#1f1f1f] mt-3">
                   Service Description
                 </label>

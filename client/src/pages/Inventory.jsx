@@ -28,9 +28,8 @@ export default function InventoryViewItems() {
         console.log(error.message);
       }
     };
-    if (currentUser.isAdmin || currentUser.role === "Manager") {
       fetchItems();
-    }
+
   }, [currentUser]);
 
   const toggleDetails = (itemId) => {
@@ -76,7 +75,7 @@ export default function InventoryViewItems() {
                   {showDetails[item._id] && (
                     <p className="text-sm text-gray-600 dark:text-gray-300">{item.description}</p>
                   )}
-                  <button className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => toggleDetails(item._id)}>
+                  <button className="p-3 text-[#d4d4d4] font-semibold uppercase rounded-full bg-[#A80000] hover:bg-[#4c0000]" onClick={() => toggleDetails(item._id)}>
                     {showDetails[item._id] ? 'Hide Details' : 'View More'}
                   </button>
                 </div>

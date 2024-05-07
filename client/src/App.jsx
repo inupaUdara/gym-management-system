@@ -14,6 +14,8 @@ import AdminViewEmployeeDetails from "./components/AdminViewEmployeeDetails";
 import ManagerInstructorLeave from "./components/ManagerInstructorLeave";
 import InventoryUpdateItems from "./components/InventoryUpdateItems";
 import InstructorAddServiceReq from "./components/InstructorAddServiceReq";
+import ServiceRequestView from "./components/ManagerServiceRequestView";
+import EmailForm from "./components/EmailForm";
 
 export default function App() {
   return (
@@ -32,6 +34,8 @@ export default function App() {
           <Route path="/view-instructor-request/:leaveId/:empId" element={<ManagerInstructorLeave/>} /> 
           <Route path="/update-inventory/:inventoryId" element={<InventoryUpdateItems/>}/>
           <Route path="/add-service-request/:inventoryId" element={<InstructorAddServiceReq/>} />
+          <Route path="/email-form/:requestId" element={<EmailForm/>} />
+          {/* <Route path="/service-request-view/:serviceRequesrId" element={<ServiceRequestView/>} /> */}
         </Route>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
