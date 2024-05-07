@@ -19,6 +19,7 @@ export default function AdminDashSideBar() {
   const dispatch = useDispatch();
   const [isOpenEmp, setIsOpenEmp] = useState(false);
   const [isOpenReq, setIsOpenReq] = useState(false);
+  const [isOpenSupplement, setIsOpenSupplement] = useState(false);
   const [isOpenPayment, setIsOpenPayment] = useState(false);
   const [isOpenSubscription, setIsOpenSubscription] = useState(false);
   const toggleDropdownEmp = () => {
@@ -34,6 +35,10 @@ export default function AdminDashSideBar() {
 
   const toggleDropdownSubscription = () => {
     setIsOpenSubscription(!isOpenSubscription);
+  };
+
+  const toggleDropdownSup = () => {
+    setIsOpenSupplement(!isOpenSupplement);
   };
 
   const [activeTab, setActiveTab] = useState("");
@@ -75,6 +80,7 @@ export default function AdminDashSideBar() {
               <span className="text-[15px] ml-4 text-[#D4D4D4]">Profile</span>
             </div>
           </Link>
+
         )}
         {!currentUser.role && (
           <Link to="/admin-dashboard?tab=member-task">
@@ -120,7 +126,7 @@ export default function AdminDashSideBar() {
                 Shift
               </h1>
             </Link>
-          
+
             <Link to="/admin-dashboard?tab=view-instructors-request">
               <h1
                 className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
@@ -223,8 +229,7 @@ export default function AdminDashSideBar() {
           </Link>
         )}
 
-        {currentUser.role === "Manager" && (
-         
+        {currentUser.role === "Manager" && (         
           <div
           className={`p-2.5 my-2 mx-2  flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${activeTab === "sub" ? "bg-[#707070]" : ""
             }`}
@@ -235,10 +240,99 @@ export default function AdminDashSideBar() {
               <span className="text-[15px] ml-4 text-[#D4D4D4]">Subscription</span>
               <span className="text-sm rotate-180" id="arrow">
                 {isOpenSubscription ? <IoIosArrowUp /> : <IoIosArrowDown />}
+
               </span>
             </div>
           </div>
         )}
+
+
+        {isOpenSupplement && (
+          <div
+            className="text-left text-sm font-light w-4/5 mx-auto text-[#D4D4D4] p-2"
+            id="submenu"
+          >
+            <Link to="/admin-dashboard?tab=add-supplements">
+              <h1
+                className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
+                ${activeTab === "add-supplements" ? "bg-[#707070]" : ""}`}
+              >
+                Add Supplement
+              </h1>
+            </Link>
+            <Link to="/admin-dashboard?tab=show-supplements">
+              <h1
+                className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
+                ${activeTab === "show-supplements" ? "bg-[#707070]" : ""}`}
+              >
+                All Supplements
+              </h1>
+            </Link>
+
+            <Link to="/admin-dashboard?tab=show-Protein">
+              <h1
+                className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
+                ${activeTab === "show-Protein" ? "bg-[#707070]" : ""}`}
+              >
+                Protein
+              </h1>
+            </Link>
+            
+            <Link to="/admin-dashboard?tab=show-Mass">
+              <h1
+                className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
+                ${activeTab === "show-Mass" ? "bg-[#707070]" : ""}`}
+              >
+                Mass Gainers
+              </h1>
+            </Link>
+
+            <Link to="/admin-dashboard?tab=show-Creatine">
+              <h1
+                className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
+                ${activeTab === "show-Creatine" ? "bg-[#707070]" : ""}`}
+              >
+                Creatine
+              </h1>
+            </Link>
+
+            <Link to="/admin-dashboard?tab=show-Preworkout">
+              <h1
+                className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
+                ${activeTab === "show-Preworkout" ? "bg-[#707070]" : ""}`}
+              >
+                Pre Workout
+              </h1>
+            </Link>
+
+            <Link to="/admin-dashboard?tab=show-FatBurners">
+              <h1
+                className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
+                ${activeTab === "show-FatBurners" ? "bg-[#707070]" : ""}`}
+              >
+                Fat Burners
+              </h1>
+            </Link>
+
+            <Link to="/admin-dashboard?tab=show-Vitamins">
+              <h1
+                className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
+                ${activeTab === "show-Vitamins" ? "bg-[#707070]" : ""}`}
+              >
+                Vitamins And FishOils
+              </h1>
+            </Link>
+            
+          </div>
+        )}
+
+        {currentUser.isAdmin && (
+          <div
+            className={`p-2.5 my-2 mx-2  flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
+              activeTab === "emp" ? "bg-[#707070]" : ""
+            }`}
+            onClick={() => toggleDropdownEmp()}
+          >
 
         {isOpenSubscription && (
           <div
@@ -279,14 +373,6 @@ export default function AdminDashSideBar() {
             className="text-left text-sm font-light w-4/5 mx-auto text-[#D4D4D4] p-2"
             id="submenu"
           >
-            <Link to="/admin-dashboard?tab=search-employee">
-              <h1
-                className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md
-              ${activeTab === "search-employee" ? "bg-[#707070]" : ""}`}
-              >
-                Search Employees
-              </h1>
-            </Link>
             <Link to="/admin-dashboard?tab=addemployee">
               <h1
                 className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
@@ -316,6 +402,7 @@ export default function AdminDashSideBar() {
             </Link>
           </div>
         )}
+
         
           <Link to="/admin-dashboard?tab=admin-announcement">
             <div
@@ -399,6 +486,7 @@ export default function AdminDashSideBar() {
           <HiArrowSmRight color="#D4D4D4" />
           <span className="text-[15px] ml-4 text-gray-200">Sign Out</span>
         </div> */}
+
       </div>
     
     </div>

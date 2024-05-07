@@ -14,8 +14,19 @@ import AdminViewEmployeeDetails from "../components/AdminViewEmployeeDetails";
 import AdminInstructorShifts from "../components/AdminInstructorShifts";
 import MemberDashProfile from "../components/MemberDashProfile";
 
+
+import ManagerAddSupplements from "../components/ManagerAddSupplements";
+import ManagerShowSupplements from "../components/ManagerShowSupplements";
+import ManagerShowMassGainer from "../components/ManagerShowMassGainer";
+import ManagerShowCreatine from "../components/ManagerShowCreatine";
+import ManagerShowPreworkout from "../components/ManagerShowPreworkout";
+import ManagerShowFatBurners from "../components/ManagerShowFatBurners";
+import ManagerShowVitamins from "../components/ManagerShowVitamins";
+import ManagerShowProtein from "../components/ManagerShowProtein";
+
 import DashUsers from "../components/DashUsers";
 import DashTasks from "../components/DashTasks";
+
 
 import FinanceSum from "../components/PaymentComponents/Admin Components/FinanceSummary";
 import TransacTable from "../components/PaymentComponents/Admin Components/TransactionTable";
@@ -53,8 +64,6 @@ export default function AdminDashboard() {
 
   return (
     <>
-
-
       <Header />
       <div className="min-h-screen flex flex-col md:flex-row bg-[#d4d4d4]">
         <div className="md:w-56">
@@ -77,6 +86,7 @@ export default function AdminDashboard() {
 
         {tab === "instuctor-shift" && <AdminInstructorShifts />}
         {/* {tab === 'view-instructor-request' && leaveId && <ManagerInstructorLeave/>}
+
       {tab === 'view-employee-details' && empId && <AdminViewEmployeeDetails/>} */}
 
       {tab === 'admin-subscripition-panel' && <AdminSubscriptionPanel/> }
@@ -87,6 +97,15 @@ export default function AdminDashboard() {
         {tab === "finance-summary" && <FinanceSum />}
         {tab === "all-transactions" && <TransacTable />}
         {tab === "manage-shipping" && <ManageShippingMethods />}
+        
+        {tab === 'add-supplements' && <ManagerAddSupplements/>}
+      {tab === 'show-supplements' && <ManagerShowSupplements/>}
+      {tab === 'show-Mass' && <ManagerShowMassGainer/>}
+      {tab === 'show-Creatine' && <ManagerShowCreatine/>}
+      {tab === 'show-Preworkout' && <ManagerShowPreworkout/>}
+      {tab === 'show-FatBurners' && <ManagerShowFatBurners/>}
+      {tab === 'show-Vitamins' && <ManagerShowVitamins/>}
+      {tab === 'show-Protein' && <ManagerShowProtein/>}
       </div>
     </>
   );
