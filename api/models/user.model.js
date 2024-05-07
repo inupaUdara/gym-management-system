@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema({
     name: {
         type: String,
         
-        default: 'name',
+         default: 'no name',
     },
     username: {
         type: String,
@@ -23,26 +23,31 @@ const userSchema = new mongoose.Schema({
     gender: {
         type: String,
         enum: ['male', 'female', 'other'],
-        default: 'male', // Set a default value to ensure the field always has a valid value
+        default: 'male', 
     },
     dateOfBirth: {
         type: Date,
-        default: '03/14/2001',
+        default: '04/11/2001',
     },
     address: {
         type: String,
         
-        default: 'address',        
+         default: 'no address',        
        
     },
     contactNumber: {
         type: String,
-        default: '071 xxx xxxx',    
+         default: '07x xxx xxx',    
     },
     profilePicture:{
         type: String,
         default: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
     },
+
+    otp:{
+      type : String,
+    },
+
     isAdmin: {
         type: Boolean,
         default: false,

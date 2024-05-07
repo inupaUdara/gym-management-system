@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import { enqueueSnackbar } from "notistack";
 
 export default function AdminDasInstructors() {
   const { currentUser } = useSelector((state) => state.user);
@@ -61,6 +62,7 @@ export default function AdminDasInstructors() {
         setUsers((prev) =>
           prev.filter((employee) => employee._id !== empIdToDelete)
         );
+        enqueueSnackbar("Instructor deleted successfully", { variant: "success" });
         setShowModal(false);
       } else {
         console.log(data.message);
@@ -70,8 +72,13 @@ export default function AdminDasInstructors() {
     }
   };
 
+  
+
   return (
     <div className="table-auto  md:mx-auto p-3 overflow-x-scroll scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
+      <h1 className="text-center m-5 font-bold text-2xl uppercase">
+        Instructors
+      </h1>
       {currentUser.isAdmin && employees.length > 0 ? (
         <>
           <Table hoverable className="shadow-md ">
@@ -154,7 +161,7 @@ export default function AdminDasInstructors() {
           )}
         </>
       ) : (
-        <p>You have no users yet!</p>
+        <p>You have no instructors yet!</p>
       )}
       <Modal
         show={showModal}

@@ -31,13 +31,91 @@ export const getLeaves = async (req, res, next) => {
     }
 
     try {
+        const now = new Date();
+        const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1); 
+        const lastDayOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0); 
+
+
         const sortDirection = req.query.sort === 'asc' ? 1 : -1;
         const leaves = await Leave.find({
-            ...(req.query.leaveId && { _id: req.query.leaveId })
-        })
-            .sort({ createdAt: sortDirection });
+            createdAt: { $gte: new Date(1970, 0, 1), $lt: firstDayOfMonth },
+            ...(req.query.leaveId && { _id: req.query.leaveId }),
+            ...(req.query.employeeId && { employeeId: req.query.employeeId }),
+            ...(req.query.status && { status: req.query.status }),
+        }).sort({ createdAt: sortDirection });
 
-        res.status(200).json({leaves});
+        const allLeaves = await Leave.find({
+            // createdAt: { $gte: new Date(1970, 0, 1), $lt: firstDayOfMonth },
+            ...(req.query.leaveId && { _id: req.query.leaveId }),
+            ...(req.query.employeeId && { employeeId: req.query.employeeId }),
+            ...(req.query.status && { status: req.query.status }),
+        }).sort({ createdAt: sortDirection });
+
+        const leavesByCurrentMonth = await Leave.find({
+            createdAt: { $gte: firstDayOfMonth, $lte: lastDayOfMonth },
+            ...(req.query.leaveId && { _id: req.query.leaveId }),
+            ...(req.query.employeeId && { employeeId: req.query.employeeId }),
+            ...(req.query.status && { status: req.query.status }),
+        }).sort({ createdAt: sortDirection});
+
+
+        
+        const AllTotalLeavesByStatus = await Leave.countDocuments(
+            { 
+                status: req.query.status,
+            }
+            );
+
+        const totalLeaves = await Leave.countDocuments(
+        { 
+            status: req.query.status,
+            employeeId: req.query.employeeId, 
+        }
+        );
+
+        const allTotalLeaves = await Leave.countDocuments({
+            employeeId: req.query.employeeId,
+        });
+
+        const employees = await Leave.aggregate([
+            {
+                $group: {
+                    _id: "$empUsername",
+                    totalLeaves: { $sum: 1 }
+                }
+            }
+        ]);
+
+        
+
+        const oneMonthAgo = new Date(
+            now.getFullYear(),
+            now.getMonth() - 1,
+            now.getDate()
+        );
+
+        const lastMonthLeavesByStatus = await Leave.countDocuments({
+            createdAt: { $gte: firstDayOfMonth , $lte: lastDayOfMonth },
+            status: req.query.status,
+            employeeId: req.query.employeeId,
+        });
+
+        const lastMonthLeaves = await Leave.countDocuments({
+            createdAt: { $gte: firstDayOfMonth , $lte: lastDayOfMonth },
+            employeeId: req.query.employeeId,
+        });
+
+        res.status(200).json({
+            allLeaves,
+            leaves,
+            leavesByCurrentMonth,
+            totalLeaves,
+            lastMonthLeaves,
+            allTotalLeaves,
+            lastMonthLeavesByStatus,
+            AllTotalLeavesByStatus,
+            employees,
+        });
         
     } catch (error) {
         next(error);

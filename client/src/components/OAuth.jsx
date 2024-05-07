@@ -36,9 +36,9 @@ export default function OAuth() {
   return (
     
     <button type='button' className='px-4 py-1 mb-2 font-medium text-white bg-red-600 border border-red-800 rounded rounded-lg bottom-2 hover:bg-red-800' onClick={handleGoogleClick}>
-    <div className="flex items-center justify-center"> {/* Wrap both elements in a flex container */}
+    <div className="flex items-center justify-center"> 
         <AiFillGoogleCircle className='w-6 h-9' />
-        <p className='ml-2 '>Continue with Google</p> {/* Add margin to create space between the icon and text */}
+        <p className='ml-2 '>Continue with Google</p> 
     </div>
 </button>
   )

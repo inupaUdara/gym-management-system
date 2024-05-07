@@ -4,6 +4,7 @@ import { verifyToken } from "../utills/verifyUser.js";
 
 const router = express.Router();
 
+
 router.post('/createSupplements', verifyToken, createSupplements);
  router.get('/getAllSupplements', getAllSupplements);
  router.delete('/deleteSupplement/:supplementId', deleteSupplement);
@@ -11,3 +12,8 @@ router.post('/createSupplements', verifyToken, createSupplements);
 // router.get('/getAllSupplements', getAllSupplements);
 
 export default router;
+
+
+router.post('/create', verifyToken, createSupplements);
+export default router; 
+

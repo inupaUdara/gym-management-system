@@ -4,6 +4,7 @@ import Header from "./Header";
 import AdminDashSideBar from "./AdminDashSideBar";
 import { Select } from "flowbite-react";
 import EmployeeContact from "./EmployeeContact";
+import { enqueueSnackbar } from "notistack";
 export default function ManagerInstructorLeave() {
   const { leaveId } = useParams();
   const { empId } = useParams();
@@ -34,8 +35,8 @@ export default function ManagerInstructorLeave() {
           return;
         }
         if (res.ok) {
-          setLeaveData(data.leaves[0]);
-          setLeaveIns(data.leaves[0]);
+          setLeaveData(data.allLeaves[0]);
+          setLeaveIns(data.allLeaves[0]);
           setLoading(false);
           setError(false);
         }
@@ -91,8 +92,8 @@ export default function ManagerInstructorLeave() {
   
         if (res.ok) {
           setError(null);
-          setSuccess("Leave request State updated successfully. Refresh the page to see changes.")
-          navigate(`/view-instructor-request/${data._id}/${data.employeeId}`);
+          enqueueSnackbar("Status updated successfully", { variant: "success" });
+          navigate(`/admin-dashboard?tab=view-request`);
         }
       } catch (error) {
         setError("Something went wrong");
@@ -113,7 +114,7 @@ export default function ManagerInstructorLeave() {
           <img
             src={employee && employee.profilePicture}
             alt={employee && employee.username}
-            className="mt-10 p-3 rounded-full w-32 border-4 object-center"
+            className="mt-10  rounded-full w-32 h-32 border-4 object-center object-cover shadow-md"
           />
         </div>
         <div className="flex flex-col mt-5 p-2">
