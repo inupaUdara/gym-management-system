@@ -37,7 +37,6 @@ export default function InstructorServiceRequestView() {
     request.serviceDescription.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-
   const handleDeleteRequest = async () => {
     try {
       const res = await fetch(`/api/serviceRequest/deleteRequest/${requestIdToDelete}`, {

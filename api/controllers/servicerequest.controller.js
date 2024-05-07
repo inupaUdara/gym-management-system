@@ -3,29 +3,27 @@ import { errorHandler } from "../utills/error.js";
 
 export const addServiceRequest = async (req, res, next) => {
     try {
-
-        const { itemCode, serviceType, serviceDescription, itemName, _id} = req.body;
+        const { itemCode, serviceType, serviceDescription,itemName, _id } = req.body;
 
         if (!itemCode || !serviceType || !serviceDescription || !itemName || !_id) {
             return next(errorHandler(400, "All fields are required"));
         }
 
-        const servicerequest = new ServiceRequest({
+        const serviceRequest = new ServiceRequest({
             itemCode,
             serviceType,
             serviceDescription,
             itemName,
-            _id,
+            itemID: _id, // Correcting to "itemId" based on your model
         });
 
-        const savedRequest = await servicerequest.save();
+        const savedRequest = await serviceRequest.save();
 
         res.status(201).json(savedRequest);
     } catch (error) {
         next(error);
     }
 }
-
 
 
 export const getRequests= async (req, res, next) => {

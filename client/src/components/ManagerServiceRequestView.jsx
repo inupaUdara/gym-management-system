@@ -40,7 +40,9 @@ export default function ServiceRequestView() {
     request.serviceDescription.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleUpdateStatus = async (requestId) => {
+
+
+  const handleUpdateStatus = async (requestId, inventoryId) => {
     try {
       const res = await fetch(`/api/serviceRequest/updateRequest/${requestId}`, {
         method: "PUT",
@@ -57,19 +59,21 @@ export default function ServiceRequestView() {
             request._id === requestId ? { ...request, serviceStatus: selectedStatus } : request
           )
         );
-  
-        const updateItemRes = await fetch(`/api/inventory/updateItemStatus/${inventory_id}`, {
+        
+        const updateItemRes = await fetch(`/api/inventory/updateItemStatus/${inventoryId}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ itemStatus: "in_use" }),
+          body: JSON.stringify({ itemStatus: selectedStatus }),
         });
         const updateItemData = await updateItemRes.json();
-  
+
         if (!updateItemRes.ok) {
           throw new Error(updateItemData.message || "Failed to update item status");
         }
+        
+        console.log("Updated item status successfully");
       } else {
         throw new Error(data.message || "Failed to update request status");
       }
@@ -77,6 +81,55 @@ export default function ServiceRequestView() {
       console.log(error.message);
     }
   };
+
+
+
+
+
+  // const handleUpdateStatus = async (requestId) => {
+  //   try {
+  //     const res = await fetch(`/api/serviceRequest/updateRequest/${requestId}`, {
+  //       method: "PUT",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ status: selectedStatus }),
+  //     });
+  //     const data = await res.json();
+      
+  //     if (res.ok) {
+  //       setRequests((prevRequests) =>
+  //         prevRequests.map((request) =>
+  //           request._id === requestId ? { ...request, serviceStatus: selectedStatus } : request
+  //         )
+  //       );
+
+        
+  //       const inventory_id = request.itemID;
+
+  // const updateItemRes = async(inventory_id) =>{
+  //   try {
+  //       const res = await fetch(`/api/inventory/updateItemStatus/${inventory_id}`, {
+  //       method: "PUT",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ itemStatus: "in_use" }),
+  //       });
+  //       const updateItemData = await updateItemRes.json();
+  
+  //       if (!updateItemRes.ok) {
+  //         throw new Error(updateItemData.message || "Failed to update item status");
+  //       }
+  //     } else {
+  //       throw new Error(data.message || "Failed to update request status");
+  //     }
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+
+  //       console.log("Gell");
+  // };
   
 
   return (
@@ -160,18 +213,18 @@ export default function ServiceRequestView() {
                     onChange={(e) => setSelectedStatus(e.target.value)}
                   >
                     <option value="">Select Status</option>
-                    <option value="Waiting for Service">Waiting for Service</option>
-                    <option value="Pending">Pending</option>
+                    <option value="in_service">In Service</option>
+                    <option value="unusable">Unusable</option>
                     <option value="in_use">In Use</option>
                   </select>
                 </Table.Cell>
                 <Table.Cell>
                 <button
-                  className="p-4 text-[#d4d4d4] font-semibold uppercase rounded-full bg-[#A80000] hover:bg-[#4c0000]"
-                  onClick={() => handleUpdateStatus(request._id)}
-                >
-                  Update
-                </button>
+                    className="p-4 text-[#d4d4d4] font-semibold uppercase rounded-full bg-[#A80000] hover:bg-[#4c0000]"
+                    onClick={() => handleUpdateStatus(request._id, request.itemID)}
+                  >
+                    Update
+                  </button>
 
                 </Table.Cell>
                 <Table.Cell>

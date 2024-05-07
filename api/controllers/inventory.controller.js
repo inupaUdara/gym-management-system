@@ -1,4 +1,5 @@
 import Inventory from "../models/inventory.model.js";
+import ServiceRequest from "../models/serviceRequest.model.js";
 import { errorHandler } from "../utills/error.js";
 
 export const addItems = async (req, res, next) => {
@@ -114,7 +115,7 @@ export const updateItemStatus = async (req, res, next) => {
         const updatedItem = await Inventory.findByIdAndUpdate(req.params.inventory_id, 
             {
                 $set: {
-                    itemStatus: 'in_service',
+                    itemStatus: req.body.itemStatus,
                 },
             },
             { new: true });

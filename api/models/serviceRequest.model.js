@@ -22,7 +22,7 @@ const serviceRequestSchema = new mongoose.Schema({
         type:String,
         default: "in_service",
     },
-    _id:{
+    itemID:{
         type:String,
         required: true,
     },
