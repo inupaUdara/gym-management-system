@@ -73,7 +73,7 @@ export default function ServiceRequestView() {
           throw new Error(updateItemData.message || "Failed to update item status");
         }
         
-        console.log("Updated item status successfully");
+        alert("Updated item status successfully");
       } else {
         throw new Error(data.message || "Failed to update request status");
       }
@@ -81,56 +81,6 @@ export default function ServiceRequestView() {
       console.log(error.message);
     }
   };
-
-
-
-
-
-  // const handleUpdateStatus = async (requestId) => {
-  //   try {
-  //     const res = await fetch(`/api/serviceRequest/updateRequest/${requestId}`, {
-  //       method: "PUT",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({ status: selectedStatus }),
-  //     });
-  //     const data = await res.json();
-      
-  //     if (res.ok) {
-  //       setRequests((prevRequests) =>
-  //         prevRequests.map((request) =>
-  //           request._id === requestId ? { ...request, serviceStatus: selectedStatus } : request
-  //         )
-  //       );
-
-        
-  //       const inventory_id = request.itemID;
-
-  // const updateItemRes = async(inventory_id) =>{
-  //   try {
-  //       const res = await fetch(`/api/inventory/updateItemStatus/${inventory_id}`, {
-  //       method: "PUT",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({ itemStatus: "in_use" }),
-  //       });
-  //       const updateItemData = await updateItemRes.json();
-  
-  //       if (!updateItemRes.ok) {
-  //         throw new Error(updateItemData.message || "Failed to update item status");
-  //       }
-  //     } else {
-  //       throw new Error(data.message || "Failed to update request status");
-  //     }
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-
-  //       console.log("Gell");
-  // };
-  
 
   return (
     <div className="table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
@@ -166,6 +116,9 @@ export default function ServiceRequestView() {
       {filteredRequest.length > 0 ? (
         <Table hoverable className="shadow-md bg">
           <Table.Head>
+          <Table.HeadCell className="bg-[#1f1f1f] text-[#d4d4d4]">
+            Request Add Date
+          </Table.HeadCell>
             <Table.HeadCell className="bg-[#1f1f1f] text-[#d4d4d4]">
               Item Code
             </Table.HeadCell>
@@ -193,6 +146,7 @@ export default function ServiceRequestView() {
           <Table.Body>
             {filteredRequest.map((request) => (
               <Table.Row className="bg-[white] dark:border-gray-500 dark:bg-gray-800 text-[#1f1f1f]" key={request._id}>
+                <Table.Cell>{new Date(request.createdAt).toLocaleDateString()}</Table.Cell>
                 <Table.Cell>{request.itemCode}</Table.Cell>
                 <Table.Cell>{request.itemName}</Table.Cell>
                 <Table.Cell>{request.serviceType}</Table.Cell>

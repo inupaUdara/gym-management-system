@@ -91,6 +91,9 @@ export default function InstructorServiceRequestView() {
         <Table hoverable className="shadow-md bg">
           <Table.Head>
           <Table.HeadCell className="bg-[#1f1f1f] text-[#d4d4d4]">
+            Request Add Date
+          </Table.HeadCell>
+          <Table.HeadCell className="bg-[#1f1f1f] text-[#d4d4d4]">
               Item Code
             </Table.HeadCell>
             <Table.HeadCell className="bg-[#1f1f1f] text-[#d4d4d4]">
@@ -110,6 +113,7 @@ export default function InstructorServiceRequestView() {
           <Table.Body>
             {filteredRequest.map((request) => (
               <Table.Row className="bg-[white] dark:border-gray-500 dark:bg-gray-800 text-[#1f1f1f]" key={request._id}>
+                <Table.Cell>{new Date(request.createdAt).toLocaleDateString()}</Table.Cell>
                 <Table.Cell>{request.itemCode}</Table.Cell>
                 <Table.Cell>{request.serviceType}</Table.Cell>
                 <Table.Cell>{request.serviceDescription}</Table.Cell>

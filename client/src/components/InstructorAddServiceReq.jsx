@@ -163,7 +163,7 @@ const inventory_id = formData._id;
                   className="text-[#d4d4d4] text-sm py-2 my-2 rounded-md bg-[#707070] focus:outline-none placeholder:text-[#d4d4d4] focus:ring-[#03001C]"
                   id="item_ID"
                   value={formData._id || ""}
-                  onChange={handleChange}
+                  onChange={handleChange} hidden={true}
                 />
                 <input
                   type="text"
@@ -171,7 +171,7 @@ const inventory_id = formData._id;
                   className="text-[#d4d4d4] text-sm py-2 my-2 rounded-md bg-[#707070] focus:outline-none placeholder:text-[#d4d4d4] focus:ring-[#03001C]"
                   id="itemName"
                   value={formData.itemName || ""}
-                  onChange={handleChange}
+                  onChange={handleChange} hidden={true}
                 />
 
                 <label htmlFor="serviceDescription" className="text-[#1f1f1f] mt-3">

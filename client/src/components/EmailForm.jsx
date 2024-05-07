@@ -123,7 +123,7 @@ export default function EmailForm() {
               </div>
               <button
                 type="submit"
-                className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                className="block mx-auto bg-[#A80000] text-white px-4 py-2 rounded-md hover:bg-[#4c0000]"
               >
                 Send Email
               </button>

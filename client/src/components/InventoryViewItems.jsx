@@ -3,6 +3,8 @@ import { Table, Button, Modal } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { saveAs } from "file-saver";
+import jsPDF from "jspdf";
 
 export default function InventoryViewItems() {
   
@@ -14,6 +16,75 @@ export default function InventoryViewItems() {
   const [inUseCount, setInUseCount] = useState(0);
   const [inServiceCount, setInServiceCount] = useState(0);
   const [notForUseCount, setNotForUseCount] = useState(0);
+
+
+  const rowHeight = 7; // Adjust as needed
+  const categorySpacing = 20; // Adjust as needed
+  const columnWidth = 40; // Adjust as needed
+  const tableWidth = 190; // Adjust as needed
+  let y = 20;
+
+
+  const prepareDownloadReport = () => {
+    const reportData = {
+      inUse: inUseCount,
+      inService: inServiceCount,
+      notForUse: notForUseCount,
+      items: {
+        inUse: items.filter(item => item.itemStatus === 'in_use'),
+        inService: items.filter(item => item.itemStatus === 'in_service'),
+        notForUse: items.filter(item => item.itemStatus === 'unusable')
+      }
+    };
+    return reportData;
+  };
+
+  // Function to handle download report
+  const handleDownloadReport = () => {
+    const reportData = prepareDownloadReport();
+
+    // Create a new PDF document
+    const doc = new jsPDF();
+
+    // Define table headers and columns
+    const tableHeaders = ['Item Code', 'Item Name', 'Description', 'Quantity', 'Status'];
+
+    // Set initial y position for the table
+    let y = 20;
+
+    // Add content to the PDF document for each category
+    Object.keys(reportData.items).forEach(category => {
+      // Add category heading
+      doc.setFontSize(16).setTextColor(0, 0, 0).setFont('bold');
+      doc.text(category, 10, y + 10);
+    
+      // Add table headers
+      doc.setFillColor(200, 200, 200);
+      doc.setFontSize(12).setTextColor(0, 0, 0).setFont('bold');
+      doc.rect(10, y + 15, tableWidth, rowHeight, 'F');
+      tableHeaders.forEach((header, index) => {
+        doc.text(header, 15 + (index * columnWidth), y + 22);
+      });
+
+      // Add table rows
+      reportData.items[category].forEach((item, rowIndex) => {
+        const fillColor = rowIndex % 2 === 0 ? [255, 255, 255] : [230, 230, 230];
+        doc.setFillColor.apply(undefined, fillColor);
+        doc.setFontSize(10).setTextColor(0, 0, 0).setFont('normal');
+        doc.rect(10, y + 25 + (rowIndex * rowHeight), tableWidth, rowHeight, 'F');
+        Object.values(item).forEach((value, columnIndex) => {
+          doc.text(value.toString(), 15 + (columnIndex * columnWidth), y + 30 + (rowIndex * rowHeight));
+        });
+      });
+
+      // Increment y position for the next category
+      y += 30 + (reportData.items[category].length * rowHeight) + categorySpacing;
+    });
+    // Save PDF document as file
+    doc.save("inventory_report.pdf");
+  };
+
+
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -169,6 +240,7 @@ export default function InventoryViewItems() {
             ))}
           </Table.Body>
         </Table>
+        
       ) : (
         <p>No items found.</p>
       )}
@@ -196,6 +268,11 @@ export default function InventoryViewItems() {
           </div>
         </Modal.Body>
       </Modal>
+
+      <div className="flex justify-center mt-4">
+        <Button onClick={handleDownloadReport} style={{ backgroundColor: '#A80000', color: '#ffffff' }}>Download Report</Button>
+      </div>
+
     </div>
   );
 }
