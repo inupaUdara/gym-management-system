@@ -20,6 +20,7 @@ export default function PaymentPage() {
     try {
       const paymentData = {
         shippingMethod: formData.selectedMethod,
+        paymentId: formData.formData.paymentId,
         email: formData.formData.email,
         phoneNumber: formData.formData.phone,
         firstName: formData.formData.firstName,

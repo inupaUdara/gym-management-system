@@ -47,7 +47,7 @@ const PaymentSuccess = () => {
             <div className="w-1/2 pr-4">
               <div className="p-4 bg-[#1F1F1F] rounded-lg shadow-md border-b border-white">
                 <p className="text-white">Ref Number:</p>
-                <p> {paymentData ? paymentData._id : "Loading..."}</p>
+                <p> {paymentData ? paymentData.paymentId : "Loading..."}</p>
               </div>
             </div>
             <div className="w-1/2 pl-4">

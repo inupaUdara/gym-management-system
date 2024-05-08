@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -24,6 +24,9 @@ function TransacTable() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [filteredData, setFilteredData] = useState([]);
+  const [productNames, setProductNames] = useState([]);
+  const [paymentMethods, setPaymentMethods] = useState([]);
+  const [shippingMethods, setShippingMethods] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,17 +44,68 @@ function TransacTable() {
   }, []);
 
   useEffect(() => {
+    const fetchProductNames = async () => {
+      try {
+        const response = await axios.get("/api/pay/getPayments");
+        const uniqueProductNames = Array.from(
+          new Set(response.data.data.map((item) => item.productName))
+        );
+        setProductNames(uniqueProductNames);
+      } catch (error) {
+        console.error("Error fetching product names:", error);
+      }
+    };
+
+    fetchProductNames();
+  }, []);
+
+  useEffect(() => {
+    const fetchPaymentMethods = async () => {
+      try {
+        const response = await axios.get("/api/pay/getPayments");
+        const uniquePaymentMethods = Array.from(
+          new Set(response.data.data.map((item) => item.paymentMethod))
+        );
+        setPaymentMethods(uniquePaymentMethods);
+      } catch (error) {
+        console.error("Error fetching payment methods:", error);
+      }
+    };
+
+    fetchPaymentMethods();
+  }, []);
+
+  useEffect(() => {
+    const fetchShippingMethods = async () => {
+      try {
+        const response = await axios.get("/api/pay/getPayments");
+        const uniqueShippingMethods = Array.from(
+          new Set(response.data.data.map((item) => item.shippingMethod))
+        );
+        setShippingMethods(uniqueShippingMethods);
+      } catch (error) {
+        console.error("Error fetching shipping methods:", error);
+      }
+    };
+
+    fetchShippingMethods();
+  }, []);
+
+  useEffect(() => {
     const filterData = () => {
       const filtered = data.filter((item) => {
+        const formattedCreatedAt = new Date(item.createdAt)
+          .toISOString()
+          .split("T")[0];
         return (
-          item._id.toLowerCase().includes(searchText.toLowerCase()) &&
+          item.paymentId.toLowerCase().includes(searchText.toLowerCase()) &&
           (filterProduct === "" || item.productName === filterProduct) &&
           (filterPaymentType === "" ||
-            item.paymentType === filterPaymentType) &&
+            item.paymentMethod === filterPaymentType) &&
           (filterShippingMethod === "" ||
             item.shippingMethod === filterShippingMethod) &&
-          (startDate === "" || new Date(item.date) >= new Date(startDate)) &&
-          (endDate === "" || new Date(item.date) <= new Date(endDate))
+          (startDate === "" || formattedCreatedAt >= startDate) &&
+          (endDate === "" || formattedCreatedAt <= endDate)
         );
       });
       setFilteredData(filtered);
@@ -68,7 +122,7 @@ function TransacTable() {
   ]);
 
   const columns = [
-    { key: "_id", title: "Payment ID" },
+    { key: "paymentId", title: "Payment ID" },
     { key: "email", title: "Email" },
     { key: "phoneNumber", title: "Phone Number" },
     { key: "firstName", title: "First Name" },
@@ -78,7 +132,15 @@ function TransacTable() {
     { key: "shippingfee", title: "Shipping Fee" },
     { key: "totalPrice", title: "Total Price" },
     { key: "shippingMethod", title: "Shipping Method" },
-    { key: "totalPrice", title: "Total Price" },
+    { key: "paymentMethod", title: "Payment Method" },
+    {
+      key: "createdAt",
+      title: "Purchase Date",
+      render: (createdAt) => {
+        const date = new Date(createdAt);
+        return date.toISOString();
+      },
+    },
   ];
 
   const handleChangePage = (event, newPage) => {
@@ -139,10 +201,19 @@ function TransacTable() {
             variant="outlined"
             value={filterProduct}
             onChange={handleFilterProductChange}
-            style={{ marginRight: "16px" }}
+            style={{ marginRight: "16px", width: "200px" }} // Adjust width as needed
+            SelectProps={{
+              MenuProps: {
+                style: { width: "200px" }, // Adjust width of the dropdown menu as well if needed
+              },
+            }}
           >
             <MenuItem value="">All Products</MenuItem>
-            {/* Add your product options here */}
+            {productNames.map((productName) => (
+              <MenuItem key={productName} value={productName}>
+                {productName}
+              </MenuItem>
+            ))}
           </TextField>
           <TextField
             select
@@ -150,10 +221,19 @@ function TransacTable() {
             variant="outlined"
             value={filterPaymentType}
             onChange={handleFilterPaymentTypeChange}
-            style={{ marginRight: "16px" }}
+            style={{ marginRight: "16px", width: "200px" }}
+            SelectProps={{
+              MenuProps: {
+                style: { width: "200px" }, // Adjust width of the dropdown menu as well if needed
+              },
+            }}
           >
             <MenuItem value="">All Payment Types</MenuItem>
-            {/* Add your payment type options here */}
+            {paymentMethods.map((paymentMethod) => (
+              <MenuItem key={paymentMethod} value={paymentMethod}>
+                {paymentMethod}
+              </MenuItem>
+            ))}
           </TextField>
           <TextField
             select
@@ -161,10 +241,19 @@ function TransacTable() {
             variant="outlined"
             value={filterShippingMethod}
             onChange={handleFilterShippingMethodChange}
-            style={{ marginRight: "16px" }}
+            style={{ marginRight: "16px", width: "200px" }} // Adjust width as needed
+            SelectProps={{
+              MenuProps: {
+                style: { width: "200px" }, // Adjust width of the dropdown menu as well if needed
+              },
+            }}
           >
             <MenuItem value="">All Shipping Methods</MenuItem>
-            {/* Add your shipping method options here */}
+            {shippingMethods.map((method) => (
+              <MenuItem key={method} value={method}>
+                {method}
+              </MenuItem>
+            ))}
           </TextField>
           <TextField
             type="date"

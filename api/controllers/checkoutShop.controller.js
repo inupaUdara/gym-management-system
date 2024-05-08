@@ -5,6 +5,7 @@ import { errorHandler } from "../utills/error.js";
 export const addPaymentShop = async (req, res, next) => {
   try {
     const requiredFields = [
+      "paymentId",
       "email",
       "phoneNumber",
       "firstName",
@@ -23,6 +24,7 @@ export const addPaymentShop = async (req, res, next) => {
     }
 
     const {
+      paymentId,
       email,
       phoneNumber,
       firstName,
@@ -36,6 +38,7 @@ export const addPaymentShop = async (req, res, next) => {
     // Additional validation (like regex checks) can be performed here
 
     const newPaymentShop = {
+      paymentId,
       email,
       phoneNumber,
       firstName,

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 export default function PayForm() {
   const [formData, setFormData] = useState({
+    paymentId: "",
     email: "",
     phone: "",
     country: "",
@@ -20,6 +21,11 @@ export default function PayForm() {
 
   const navigate = useNavigate(); // Initialize useNavigate
 
+  const generatePaymentId = () => {
+    const randomNumber = Math.floor(Math.random() * 900) + 100; // Generate a random 3-digit number
+    return `PAY${randomNumber}`;
+  };
+
   const handleChange = (event) => {
     const { id, value, type, checked } = event.target;
     setFormData((prevData) => ({
@@ -29,7 +35,14 @@ export default function PayForm() {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
+    const paymentId = generatePaymentId();
+    console.log("Generated Payment ID:", paymentId);
+    setFormData((prevData) => ({
+      ...prevData,
+      paymentId,
+    }));
     console.log(formData);
+    console.log("Form Data after setting paymentId:", formData);
     navigate("/Checkout/payment/shipping", { state: formData });
   };
   return (
