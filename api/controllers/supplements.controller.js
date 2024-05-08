@@ -66,9 +66,9 @@ export const getAllSupplements = async (req, res, next) => {
   
 
 export const deleteSupplement = async (req, res, next) => {
-    if(!req.user.role === 'Admin' || !req.user.role === 'Manager'){
-        next(errorHandler(403, "You are not access to leaves"));
-    }
+    // if(!req.user.role === 'Manager'){
+    //     next(errorHandler(403, "You are not access to leaves"));
+    // }
 
     try {
         await Supplements.findByIdAndDelete(req.params.supplementId)
