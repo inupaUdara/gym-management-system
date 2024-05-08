@@ -32,9 +32,9 @@ export const addItems = async (req, res, next) => {
 }
 
 export const getItems= async (req, res, next) => {
-    if(!req.user.role === 'Manager'){
-        next(errorHandler(403, "You are not access to items"));
-    } 
+    // if(!req.user.role === 'Manager'){
+    //     next(errorHandler(403, "You are not access to items"));
+    // } 
 
     try {
         const sortDirection = req.query.sort === 'asc' ? 1 : -1;
@@ -52,9 +52,9 @@ export const getItems= async (req, res, next) => {
 
 
 export const getItemIns =async (req, res, next) => {	
-    if(!req.user.role === 'Manager' || !req.user.role === 'Admin'){
-        next(errorHandler(403, "You are not access to items"));
-    }
+    // if(!req.user.role === 'Manager' || !req.user.role === 'Admin'){
+    //     next(errorHandler(403, "You are not access to items"));
+    // }
 
     try {
         const { itemId } = req.params;

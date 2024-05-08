@@ -8,7 +8,7 @@ export default function InventoryViewItems() {
   const { currentUser } = useSelector((state) => state.user);
   const [items, setItems] = useState([]);
   const [showDetails, setShowDetails] = useState({});
-  const [searchTerm, setSearchTerm] = useState(""); // State for search term
+  const [searchTerm, setSearchTerm] = useState(""); 
   const itemsRef = useRef(null);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function InventoryViewItems() {
         console.log(error.message);
       }
     };
-      fetchItems();
+  fetchItems();
 
   }, [currentUser]);
 
@@ -39,7 +39,6 @@ export default function InventoryViewItems() {
     }));
   };
 
-  // Filter items based on search term
   const filteredItems = items.filter(item =>
     item.itemName.toLowerCase().includes(searchTerm.toLowerCase())
   );
