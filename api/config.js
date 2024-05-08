@@ -1,7 +1,7 @@
 export const PORT = 3000;
 
 export const mongoDBURL =
-  'mongodb+srv://root:rootitp@book-store-mern.7m0fktu.mongodb.net/books-collection?retryWrites=true&w=majority&appName=Book-Store-MERN';
+  'mongodb+srv://inupaudara:inupa3767@cj-gym.q83bvqs.mongodb.net/cj?retryWrites=true&w=majority&appName=CJ-Gym';
 
 // Please create a free database for yourself.
 // This database will be deleted after tutorial
