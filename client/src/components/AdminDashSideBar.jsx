@@ -28,6 +28,12 @@ export default function AdminDashSideBar() {
   const [isOpenSupplement, setIsOpenSupplement] = useState(false);
   const [isOpenPayment, setIsOpenPayment] = useState(false);
   const [isOpenSubscription, setIsOpenSubscription] = useState(false);
+
+  const [isOpenServ, setIsOpenServ] = useState(false);
+  const [isOpenInventory, setIsOpenInventory] = useState(false);
+  const [isOpenSerReq, setIsOpenSerReq] = useState(false);
+
+
   const toggleDropdownEmp = () => {
     setIsOpenEmp(!isOpenEmp);
   };
@@ -45,6 +51,19 @@ export default function AdminDashSideBar() {
 
   const toggleDropdownSupplement = () => {
     setIsOpenSupplement(!isOpenSupplement);
+  };
+
+//Inventory parts
+  const toggleDropdownServ = () => {
+    setIsOpenServ(!isOpenServ);
+  };
+
+  const toggleDropdownSerReq = () => {
+    setIsOpenSerReq(!isOpenSerReq);
+  };
+
+  const toggleDropdownInventory = () => {
+    setIsOpenInventory(!isOpenInventory);
   };
 
   const [activeTab, setActiveTab] = useState("");
@@ -485,6 +504,59 @@ export default function AdminDashSideBar() {
             </Link>
           </div>
         )}
+        {currentUser.role === "Manager" && (
+          <Link to="/admin-dashboard?tab=view-request">
+          <div
+            className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
+              activeTab === "inventory" ? "bg-[#707070]" : ""
+            }`}
+            onClick={() => toggleDropdownInventory()}
+          >
+            <HiOutlineUserGroup color="#D4D4D4" />
+            <div className="flex justify-between w-full items-center">
+              <span className="text-[15px] ml-4 text-[#D4D4D4]">Inventory</span>
+              <span className="text-sm rotate-180" id="arrow">
+                {isOpenInventory ? <IoIosArrowUp /> : <IoIosArrowDown />}
+              </span>
+            </div>
+          </div>
+        </Link>
+        )}
+
+        {isOpenInventory && currentUser.role === "Manager" && (
+          // Inventory Options
+          <div
+            className="text-left text-sm font-light mt-2 w-4/5 mx-auto text-[#D4D4D4]"
+            id="submenu"
+          >
+            <Link to="/admin-dashboard?tab=view-inventory">
+              <h1
+                className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
+              ${activeTab === "view-inventory" ? "bg-[#707070]" : ""}`}
+              >
+                View Items
+              </h1>
+            </Link>
+            <Link to="/admin-dashboard?tab=addinventory">
+              <h1
+                className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
+              ${activeTab === "addinventory" ? "bg-[#707070]" : ""}`}
+              >
+                Add New Item
+              </h1>
+            </Link>
+            <Link to="/admin-dashboard?tab=view-manager-service-request">
+              <h1
+                className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
+              ${activeTab === "view-manager-service-request" ? "bg-[#707070]" : ""}`}
+              >
+                View Service Requests
+              </h1>
+            </Link>
+          
+          </div>
+        )}
+        
       </div>
     </div>
   );

@@ -44,6 +44,14 @@ import ForgotPassword from "./pages/ForgotPassword";
 import OTPVerification from "./pages/OTPVerification";
 import ResetPassword from "./pages/ResetPassword";
 
+
+//import inventory management
+import Inventory from "./pages/Inventory";
+import InstructorAddServiceReq from "./components/InstructorAddServiceReq";
+import InventoryUpdateItems from "./components/InventoryUpdateItems";
+import EmailForm from "./components/EmailForm";
+
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -60,6 +68,10 @@ export default function App() {
           path="/SubscriptionPackages"
           element={<SubscriptionPackages />}
         />
+        {/* inventory */}
+        <Route path="/inventory" element={<Inventory />} />
+
+
         <Route path="/PromoSubPackage" element={<PromoSubPackage />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/otp-verify" element={<OTPVerification />} />
@@ -84,6 +96,11 @@ export default function App() {
           <Route path="/yourtasks" element={<YourTasks />} />
           <Route path="/update-tasks/:taskId" element={<UpdateTasks />} />
           <Route path="/member-view/:userId" element={<MemberView />} />
+
+          <Route path="/update-inventory/:inventoryId" element={<InventoryUpdateItems/>}/>
+          <Route path="/add-service-request/:inventoryId" element={<InstructorAddServiceReq/>} />
+          <Route path="/email-form/:requestId" element={<EmailForm/>} />
+
         </Route>
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
 
