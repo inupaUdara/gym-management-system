@@ -31,7 +31,6 @@ export default function AdminDashSideBar() {
 
   const [isOpenServ, setIsOpenServ] = useState(false);
   const [isOpenInventory, setIsOpenInventory] = useState(false);
-  const [isOpenSerReq, setIsOpenSerReq] = useState(false);
 
 
   const toggleDropdownEmp = () => {
@@ -58,9 +57,7 @@ export default function AdminDashSideBar() {
     setIsOpenServ(!isOpenServ);
   };
 
-  const toggleDropdownSerReq = () => {
-    setIsOpenSerReq(!isOpenSerReq);
-  };
+
 
   const toggleDropdownInventory = () => {
     setIsOpenInventory(!isOpenInventory);
@@ -505,7 +502,7 @@ export default function AdminDashSideBar() {
           </div>
         )}
         {currentUser.role === "Manager" && (
-          <Link to="/admin-dashboard?tab=view-request">
+          
           <div
             className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
               activeTab === "inventory" ? "bg-[#707070]" : ""
@@ -520,7 +517,6 @@ export default function AdminDashSideBar() {
               </span>
             </div>
           </div>
-        </Link>
         )}
 
         {isOpenInventory && currentUser.role === "Manager" && (
@@ -554,6 +550,53 @@ export default function AdminDashSideBar() {
               </h1>
             </Link>
           
+          </div>
+        )}
+
+
+        {currentUser.role === "Instructor" && (
+          <>
+
+              <div
+                className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${activeTab === "request" ? "bg-[#707070]" : ""}`}
+                onClick={toggleDropdownServ}
+              >
+                <MdSchedule color="#D4D4D4" />
+                <div className="flex justify-between w-full items-center">
+                  <span className="text-[15px] ml-4 text-[#D4D4D4]">Service</span>
+                  <span className="text-sm rotate-180" id="arrow">
+                    {isOpenServ ? <IoIosArrowUp /> : <IoIosArrowDown />}
+                  </span>
+                </div>
+    
+            </div>
+            </>
+        )}
+        {isOpenServ && (
+          <div
+            className="text-left text-sm font-light mt-2 w-4/5 mx-auto text-[#D4D4D4]"
+            id="submenu"
+          >
+            <Link to="/admin-dashboard?tab=view-instructors-service-request">
+              <h1
+                className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
+              ${activeTab === "instructor-request" ? "bg-[#707070]" : ""}`}
+                
+              >
+                Make Service Request
+              </h1>
+            </Link>
+            <Link
+              to="/admin-dashboard?tab=view-instructor-service-request"
+            >
+              <h1 className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
+              ${activeTab === "view-instructors-request" ? "bg-[#707070]" : ""}`}
+                
+                >
+                Your Requests
+              </h1>
+            </Link>
+            
           </div>
         )}
         

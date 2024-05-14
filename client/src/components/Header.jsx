@@ -123,6 +123,11 @@ export default function Header() {
               </li>
             </Link>
           )}
+          <Link to="/inventory">
+            <li className="hidden sm:inline text-[#D4D4D4] hover:underline hover:underline-offset-4 hover:text-white">
+              Inventory
+            </li>
+          </Link>
         </ul>
 
         {currentUser ? (
