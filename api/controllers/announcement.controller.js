@@ -9,7 +9,7 @@ export const createAnnouncement = async (req, res, next) => {
   if (!req.body.title || !req.body.message) {
     return next(errorHandler(400, "All field are required"));
   }
-
+// Test
   const announcement = new Announcement({
     ...req.body,
   });
