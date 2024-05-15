@@ -16,7 +16,7 @@ export default function CoachingFormPage() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:3000/books", { name, email, age, cname, date, time, msg })
+        axios.post("http://localhost:3000/api/books/bookAdd", { name, email, age, cname, date, time, msg })
             .then(result => {
                 console.log(result);
                 navigate('/viewSessions');

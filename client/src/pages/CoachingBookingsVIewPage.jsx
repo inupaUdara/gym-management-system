@@ -12,13 +12,13 @@ export default function CoachingBookingsViewPage() {
     const [searchDate, setSearchDate] = useState('');
 
     useEffect(() => {
-        axios.get('http://localhost:3000/books')
+        axios.get('http://localhost:3000/api/books/getAllBooks')
             .then(result => setUsers(result.data.bookArray[0]))
             .catch(err => console.log(err));
     }, []);
 
     const handleDelete = (id) => {
-        axios.delete(`http://localhost:3000/books/${id}`)
+        axios.delete(`http://localhost:3000/api/books/deleteBook/${id}`)
             .then(res => {
                 console.log(res);
                 window.location.reload();

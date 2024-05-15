@@ -174,7 +174,7 @@ export default function CoachingUpdate() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get('http://localhost:3000/books/'+id)
+        axios.get('http://localhost:3000/api/books/getOneBook/'+id)
             .then(result => {
                 const userData = result.data;
                 setName(userData.name);
@@ -191,7 +191,7 @@ export default function CoachingUpdate() {
     const updateAppointment = (e) => {
         e.preventDefault();
         const updatedUser = { name, email, age, cname, date, time, msg };
-        axios.put("http://localhost:3000/books/"+id, updatedUser)
+        axios.put('http://localhost:3000/api/books/updateBook/'+id, updatedUser)
             .then(result => {
                 console.log(result);
                 navigate('/viewSessions');

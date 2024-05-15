@@ -1,41 +1,81 @@
-import express from 'express';
-import { PORT, mongoDBURL } from './config.js';
-import mongoose from 'mongoose';
-import booksRoute from './routes/booksRoute.js';
-import cors from 'cors';
+// import express from 'express';
+// import { PORT, mongoDBURL } from './config.js';
+// import mongoose from 'mongoose';
+// import booksRoute from './routes/booksRoute.js';
+// import cors from 'cors';
 
-const app = express();
+// const app = express();
+// dotenv.config();
 
-// Middleware for parsing request body
-app.use(express.json());
+// app.use(express.json());
 
-// Middleware for handling CORS POLICY
-// Option 1: Allow All Origins with Default of cors(*)
-app.use(cors());
-// Option 2: Allow Custom Origins
-// app.use(
-//   cors({
-//     origin: 'http://localhost:3000',
-//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-//     allowedHeaders: ['Content-Type'],
+// app.use(cors());
+
+// app.get('/', (request, response) => {
+//   console.log(request);
+//   return response.status(234).send('Welcome To MERN Stack Tutorial');
+// });
+
+// app.use('/books', booksRoute);
+
+// mongoose
+//   .connect(mongoDBURL)
+//   .then(() => {
+//     console.log('App connected to database');
+//     app.listen(PORT, () => {
+//       console.log(`App is listening to port: ${PORT}`);
+//     });
 //   })
-// );
+//   .catch((error) => {
+//     console.log(error);
+//   });
 
-app.get('/', (request, response) => {
-  console.log(request);
-  return response.status(234).send('Welcome To MERN Stack Tutorial');
-});
+import express from "express";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import booksRoute from "./routes/booksRoute.js";
+import cors from 'cors';
+// import {config} from 'dotenv';
 
-app.use('/books', booksRoute);
+
+dotenv.config();
+
+
 
 mongoose
-  .connect(mongoDBURL)
+  .connect(process.env.MONGO_DB)
   .then(() => {
-    console.log('App connected to database');
-    app.listen(PORT, () => {
-      console.log(`App is listening to port: ${PORT}`);
-    });
+    console.log("MongoDB is connected");
   })
-  .catch((error) => {
-    console.log(error);
+  .catch((err) => {
+    console.log(err);
   });
+
+const app = express();
+app.use(express.json());
+
+
+app.use(cors());
+
+app.listen(3000, () => {
+  console.log("Server is running on port 3000");
+});
+
+app.use("/api/books",booksRoute);
+// app.use("/getAllBooks",booksRoute);
+// app.use("/getOneBook",booksRoute);
+// app.use("/updateBook",booksRoute);
+// app.use("/deleteBook",booksRoute);
+
+
+
+app.use((err, request, response, next) => {
+  const statusCode = err.statusCode || 500;
+  const message = err.message || "Internal Server Error";
+  res.status(statusCode).json({
+    success: false,
+    statusCode,
+    message,
+  });
+});
+
