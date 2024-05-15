@@ -35,6 +35,8 @@ import PaymentSuccess from "./pages/Checkout/PaymentSuccess";
 import CreateShippingMethod from "./components/PaymentComponents/Admin Components/ManageShipping";
 import EditShipping from "./pages/Checkout/EditShipping";
 import Refund from "./pages/Checkout/RefundPage";
+import PaymentPackage from "./pages/Checkout/PaymentPackage";
+import PCKPayment from "./pages/Checkout/PackagePaymentSelect";
 
 import ManagerUpdateSupplements from "./components/ManagerUpdateSupplements";
 // import Protein from "./pages/Protein";
@@ -52,13 +54,17 @@ import ForgotPassword from "./pages/ForgotPassword";
 import OTPVerification from "./pages/OTPVerification";
 import ResetPassword from "./pages/ResetPassword";
 
-
 //import inventory management
 import Inventory from "./pages/Inventory";
 import InstructorAddServiceReq from "./components/InstructorAddServiceReq";
 import InventoryUpdateItems from "./components/InventoryUpdateItems";
 import EmailForm from "./components/EmailForm";
 
+import Coaching from "./pages/Coaching";
+import CoachingFormPage from "./pages/CoachingFormPage";
+import CoachingBookingsVIewPage from "./pages/CoachingBookingsVIewPage";
+import CoachingMainPage from "./pages/CoachingMainPage";
+import CoachingUpdate from "./pages/CoachingUpdate";
 
 export default function App() {
   return (
@@ -71,7 +77,7 @@ export default function App() {
 
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/employee-login" element={<EmployeeLogin />} />      
+        <Route path="/employee-login" element={<EmployeeLogin />} />
 
         <Route
           path="/SubscriptionPackages"
@@ -79,7 +85,6 @@ export default function App() {
         />
         {/* inventory */}
         <Route path="/inventory" element={<Inventory />} />
-
 
         <Route path="/PromoSubPackage" element={<PromoSubPackage />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -110,20 +115,24 @@ export default function App() {
             path="/create-workout/:userId"
             element={<InstructorWorkout />}
           />
-          
+
           <Route path="/WorkoutPlans" element={<WorkoutPlans />} />
           <Route path="/MealPlans" element={<MealPlans />} />
-             <Route path="/yourtasks" element={<YourTasks />} />
+          <Route path="/yourtasks" element={<YourTasks />} />
           <Route path="/update-tasks/:taskId" element={<UpdateTasks />} />
           <Route path="/member-view/:userId" element={<MemberView />} />
 
-          <Route path="/update-inventory/:inventoryId" element={<InventoryUpdateItems/>}/>
-          <Route path="/add-service-request/:inventoryId" element={<InstructorAddServiceReq/>} />
-          <Route path="/email-form/:requestId" element={<EmailForm/>} />
-
+          <Route
+            path="/update-inventory/:inventoryId"
+            element={<InventoryUpdateItems />}
+          />
+          <Route
+            path="/add-service-request/:inventoryId"
+            element={<InstructorAddServiceReq />}
+          />
+          <Route path="/email-form/:requestId" element={<EmailForm />} />
         </Route>
-        
-        
+
         <Route path="/Bmi" element={<Bmi />} />
 
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
@@ -155,6 +164,20 @@ export default function App() {
         <Route path="/shipping/create" element={<CreateShippingMethod />} />
         <Route path="/shipping/edit/:id" element={<EditShipping />} />
         <Route path="/refundRequests" element={<Refund />} />
+        <Route path="/Checkout/paymentPCKG" element={<PaymentPackage />} />
+        <Route
+          path="/Checkout/paymentPCKG/paymentSelect"
+          element={<PCKPayment />}
+        />
+      </Routes>
+
+      <Routes>
+        <Route path="/coaching" element={<Coaching />} />
+
+        <Route path="/scheduleSession" element={<CoachingFormPage />}></Route>
+
+        <Route path="/coachin-page" element={<CoachingMainPage />}></Route>
+        <Route path="/updateUser/:id" element={<CoachingUpdate />}></Route>
       </Routes>
       <FooterCom />
     </BrowserRouter>

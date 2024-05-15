@@ -12,6 +12,7 @@ import land3 from "../assets/land3.png";
 import land4 from "../assets/land4.png";
 import land5 from "../assets/land5.png";
 import land6 from "../assets/land6.png";
+import Header from "../components/Header";
 
 const WorkoutPlans = () => {
   const [page, setPage] = useState(0);
@@ -38,11 +39,10 @@ const WorkoutPlans = () => {
     addi: "",
   });
 
-
   const updateData = (key, value) => {
-    setData(prevData => ({
+    setData((prevData) => ({
       ...prevData,
-      [key]: value
+      [key]: value,
     }));
   };
 
@@ -97,51 +97,54 @@ const WorkoutPlans = () => {
   };
 
   return (
-    <div className="flex-1 flex">
-      <div className="w-1/2 bg-black">
-        <div className="p-10">
-          <h1 className="text-white font-extrabold text-3xl lg:text-6xl">
-            {titles[page]}
-          </h1>
-        </div>
-        <div>{pageDisplay()}</div>
-        <div className="flex flex-row gap-5 p-10 py-0 ">
-          <button
-            disabled={page === 0}
-            onClick={() => setPage((prevPage) => Math.max(0, prevPage - 1))}
-            className={`flex cursor-pointer rounded-lg border border-transparent py-2 px-5 text-3xl lg:text-3xl font-semibold text-white ${page === 0 && "opacity-50 cursor-not-allowed"}`}
-            type="button"
-          >
-            Prev
-          </button>
-          {page === 5 ? (
+    <>
+      <Header />
+      <div className="flex-1 flex">
+        <div className="w-1/2 bg-black">
+          <div className="p-10">
+            <h1 className="text-white font-extrabold text-3xl lg:text-6xl">
+              {titles[page]}
+            </h1>
+          </div>
+          <div>{pageDisplay()}</div>
+          <div className="flex flex-row gap-5 p-10 py-0 ">
             <button
-              onClick={postWorkoutData}
-              className="flex cursor-pointer rounded-lg border border-transparent py-2 px-5 text-3xl lg:text-3xl font-semibold bg-red-600 text-white"
-              type="submit"
-            >
-              Submit
-            </button>
-          ) : (
-            <button
-              onClick={workoutDetails}
-              className="flex cursor-pointer rounded-lg border border-transparent py-2 px-5 text-3xl lg:text-3xl font-semibold text-white bg-red-600"
+              disabled={page === 0}
+              onClick={() => setPage((prevPage) => Math.max(0, prevPage - 1))}
+              className={`flex cursor-pointer rounded-lg border border-transparent py-2 px-5 text-3xl lg:text-3xl font-semibold text-white ${page === 0 && "opacity-50 cursor-not-allowed"}`}
               type="button"
             >
-              Next
+              Prev
             </button>
-          )}
+            {page === 5 ? (
+              <button
+                onClick={postWorkoutData}
+                className="flex cursor-pointer rounded-lg border border-transparent py-2 px-5 text-3xl lg:text-3xl font-semibold bg-red-600 text-white"
+                type="submit"
+              >
+                Submit
+              </button>
+            ) : (
+              <button
+                onClick={workoutDetails}
+                className="flex cursor-pointer rounded-lg border border-transparent py-2 px-5 text-3xl lg:text-3xl font-semibold text-white bg-red-600"
+                type="button"
+              >
+                Next
+              </button>
+            )}
+          </div>
+        </div>
+        <div className="w-2/3 relative">
+          <img
+            className="w-full h-screen bg-center bg-cover"
+            src={images[page]}
+            alt={`Background ${page}`}
+          />
+          <div className="absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center"></div>
         </div>
       </div>
-      <div className="w-2/3 relative">
-        <img
-          className="w-full h-screen bg-center bg-cover"
-          src={images[page]}
-          alt={`Background ${page}`}
-        />
-        <div className="absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center"></div>
-      </div>
-    </div>
+    </>
   );
 };
 

@@ -5,7 +5,7 @@ const FinanceSum = () => {
         <div className="flex justify-between items-center self-center">
           <div>
             <p className="font-bold text-gray-400">Earnings</p>
-            <p className="text-2xl">$63,448.78</p>
+            <p className="text-2xl">Rs.174,000.00</p>
           </div>
         </div>
         <div className="mt-6">
@@ -45,7 +45,7 @@ const FinanceSum = () => {
             </svg>
           </button>
           <p className="mt-3">
-            <span className="text-lg font-semibold">39,354</span>
+            <span className="text-lg font-semibold">6</span>
             <span className="text-sm text-red-600 ml-2">-4%</span>
           </p>
           <p className="text-sm text-gray-400 mt-1">Customers</p>
@@ -73,7 +73,7 @@ const FinanceSum = () => {
             </svg>
           </button>
           <p className="mt-3">
-            <span className="text-lg font-semibold">4,396</span>
+            <span className="text-lg font-semibold">6</span>
             <span className="text-sm text-red-600 ml-2">-23%</span>
           </p>
           <p className="text-sm text-gray-400 mt-1">Products</p>
@@ -135,7 +135,7 @@ const FinanceSum = () => {
           <p className="text-sm text-gray-400 mt-1">Refunds</p>
         </div>
 
-        <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56 p-4 pt-9 rounded-2xl shadow-xl hover:drop-shadow-xl cursor-pointer">
+        {/* <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56 p-4 pt-9 rounded-2xl shadow-xl hover:drop-shadow-xl cursor-pointer">
           <button
             type="button"
             className="text-2xl opacity-0.9 rounded-full p-4 hover:drop-shadow-xl"
@@ -161,7 +161,7 @@ const FinanceSum = () => {
             <span className="text-sm text-green-600 ml-2">+87%</span>
           </p>
           <p className="text-sm text-gray-400 mt-1">Employees</p>
-        </div>
+        </div> */}
       </div>
     </div>
   );
