@@ -12,6 +12,12 @@ import InstructorViewLeaveRequest from "../components/InstructorViewLeaveRequest
 import AdminInstructorShifts from "../components/AdminInstructorShifts";
 import MemberDashProfile from "../components/MemberDashProfile";
 
+import InstructorWorkout from "../components/InstructorWorkout";
+import InstructorMealPlan from "../components/InstructorMealPlan";
+import MemberRequests from "../components/MemberRequests";
+import PlansProfile from "../components/PlansProfile";
+
+
 import ManagerAddSupplements from "../components/ManagerAddSupplements";
 import ManagerShowSupplements from "../components/ManagerShowSupplements";
 import ManagerShowMassGainer from "../components/ManagerShowMassGainer";
@@ -27,6 +33,8 @@ import DashTasks from "../components/DashTasks";
 import FinanceSum from "../components/PaymentComponents/Admin Components/FinanceSummary";
 import TransacTable from "../components/PaymentComponents/Admin Components/TransactionTable";
 import ManageShippingMethods from "../components/PaymentComponents/Admin Components/DisplayShipping";
+import RefundMemberTable from "../components/PaymentComponents/refundTableMember";
+import RefundAdminTable from "../components/PaymentComponents/Admin Components/refundAdminTable";
 
 import AdminSubscriptionPanel from "../components/subpacComp/AdminSubscriptionPanel";
 import DashboardComponent from "../components/DashboardComponent";
@@ -69,6 +77,7 @@ export default function AdminDashboard() {
 
   return (
     <>
+
       <Header />
       <div className="min-h-screen flex flex-col md:flex-row bg-[#d4d4d4]">
         <div className="md:w-56">
@@ -100,6 +109,8 @@ export default function AdminDashboard() {
         {tab === "finance-summary" && <FinanceSum />}
         {tab === "all-transactions" && <TransacTable />}
         {tab === "manage-shipping" && <ManageShippingMethods />}
+        {tab === "refund-member" && <RefundMemberTable />}
+        {tab === "refund-admin" && <RefundAdminTable />}
 
         {tab === "add-supplements" && <ManagerAddSupplements />}
         {tab === "show-supplements" && <ManagerShowSupplements />}
@@ -118,6 +129,11 @@ export default function AdminDashboard() {
         {tab === 'view-instructors-service-request' && <InstructorServiceRequest/>}
         {tab === 'view-manager-service-request' && <ServiceRequestView/>}
         {tab === 'view-instructor-service-request' && <InstructorServiceRequestView/>}
+
+        
+        {tab === 'member-plan-profile' && <PlansProfile/>}
+      {tab === 'member-request' && <MemberRequests/>}
+      {tab === 'create-mealplan' && <InstructorMealPlan/>}
 
       </div>
     </>

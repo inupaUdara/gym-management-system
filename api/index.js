@@ -4,6 +4,10 @@ import dotenv from "dotenv";
 import employeeRoutes from "./routes/employee.route.js";
 import authEmployeeRoutes from "./routes/authEmployee.route.js";
 import leaveRoutes from "./routes/leave.route.js";
+
+import createWorkoutRoutes from  './routes/CreateWorkout.route.js';
+import workoutRoutes from './routes/workoutplans.route.js';
+
 import userRoutes from "./routes/user.routes.js";
 import authRoutes from "./routes/auth.route.js";
 import taskRoutes from "./routes/tasks.route.js";
@@ -20,12 +24,13 @@ import inventoryRoutes from "./routes/inventory.route.js";
 import ServiceRequestRoutes from "./routes/serviceRequest.route.js";
 import emailRoutes from './routes/email.route.js';
 
+import refundRoutes from "./routes/refundRequest.route.js";
 
 import cors from "cors";
+
 dotenv.config();
 
-mongoose
-  .connect(process.env.MONGO_DB)
+mongoose.connect(process.env.MONGO_DB)
   .then(() => {
     console.log("MongoDB is connected");
   })
@@ -46,6 +51,10 @@ app.listen(3000, () => {
 app.use("/api/employee", employeeRoutes);
 app.use("/api/authemployee", authEmployeeRoutes);
 app.use("/api/leave", leaveRoutes);
+
+app.use('/api/workoutplans', workoutRoutes);
+app.use('/api/createworkoutplans', createWorkoutRoutes);
+
 app.use("/api/subpackage", SubpackageRoutes);
 
 app.use("/api/user", userRoutes);
@@ -61,6 +70,8 @@ app.use("/api/announcement", announcementRoutes);
 
 app.use("/api/pay", checkoutShopRoutes);
 app.use("/api/shipping", shippingRoutes);
+app.use("/api/refunds", refundRoutes);
+
 
 app.use('/api/email', emailRoutes);
 app.use("/api/inventory", inventoryRoutes);

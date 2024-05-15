@@ -13,6 +13,13 @@ import Header from "./components/Header";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminPrivateRoute from "./components/AdminPrivateRoute";
 import FooterCom from "./components/Footer";
+
+import WorkoutPlans from "./pages/WorkoutPlans";
+import MealPlans from "./pages/MealPlans";
+import Bmi from "./pages/Bmi";
+import UpdateWorkout from "./components/UpdateWorkout";
+import InstructorWorkout from "./components/InstructorWorkout";
+
 import CreateSubPackage from "./pages/subPackagePages/CreateSubPackage";
 
 import EditSubPackage from "./pages/subPackagePages/EditSubPackage";
@@ -27,6 +34,7 @@ import PaymentSelection from "./pages/Checkout/PaymentSelect";
 import PaymentSuccess from "./pages/Checkout/PaymentSuccess";
 import CreateShippingMethod from "./components/PaymentComponents/Admin Components/ManageShipping";
 import EditShipping from "./pages/Checkout/EditShipping";
+import Refund from "./pages/Checkout/RefundPage";
 
 import ManagerUpdateSupplements from "./components/ManagerUpdateSupplements";
 // import Protein from "./pages/Protein";
@@ -63,7 +71,8 @@ export default function App() {
 
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/employee-login" element={<EmployeeLogin />} />
+        <Route path="/employee-login" element={<EmployeeLogin />} />      
+
         <Route
           path="/SubscriptionPackages"
           element={<SubscriptionPackages />}
@@ -93,7 +102,18 @@ export default function App() {
             element={<ManagerInstructorLeave />}
           />
 
-          <Route path="/yourtasks" element={<YourTasks />} />
+          <Route
+            path="/update-workout/:workoutId"
+            element={<UpdateWorkout />}
+          />
+          <Route
+            path="/create-workout/:userId"
+            element={<InstructorWorkout />}
+          />
+          
+          <Route path="/WorkoutPlans" element={<WorkoutPlans />} />
+          <Route path="/MealPlans" element={<MealPlans />} />
+             <Route path="/yourtasks" element={<YourTasks />} />
           <Route path="/update-tasks/:taskId" element={<UpdateTasks />} />
           <Route path="/member-view/:userId" element={<MemberView />} />
 
@@ -102,6 +122,10 @@ export default function App() {
           <Route path="/email-form/:requestId" element={<EmailForm/>} />
 
         </Route>
+        
+        
+        <Route path="/Bmi" element={<Bmi />} />
+
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
 
         {/* <Route path ="/protein" element={<Protein/>} /> */}
@@ -130,6 +154,7 @@ export default function App() {
         <Route path="/Checkout/payment/success" element={<PaymentSuccess />} />
         <Route path="/shipping/create" element={<CreateShippingMethod />} />
         <Route path="/shipping/edit/:id" element={<EditShipping />} />
+        <Route path="/refundRequests" element={<Refund />} />
       </Routes>
       <FooterCom />
     </BrowserRouter>
