@@ -51,7 +51,7 @@ npm run dev
   <img width="12" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@master/icons/react/react-original-wordmark.svg" height="40" alt="react-logo"  />
   <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@master/icons/nodejs/nodejs-plain-wordmark.svg" height="40" alt="node-logo"  />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@master/icons/nodejs/nodejs-plain-wordmark.svg" height="40" alt="node-logo"  color="white" />
   <img width="12" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@master/icons/express/express-original-wordmark.svg" height="40" alt="express-logo"  />
   <img width="12" />
