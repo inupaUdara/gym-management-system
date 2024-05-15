@@ -434,7 +434,7 @@ export default function AdminDashSideBar() {
                 Manage Shipping
               </h1>
             </Link>
-            <Link to="">
+            <Link to="/admin-dashboard?tab=refund-admin">
               <h1
                 className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
               ${activeTab === "admin-managers" ? "bg-[#707070]" : ""}`}
@@ -443,6 +443,20 @@ export default function AdminDashSideBar() {
               </h1>
             </Link>
           </div>
+        )}
+
+        {!currentUser.role && (
+          <Link to="/admin-dashboard?tab=refund-member">
+            <div
+              className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
+                activeTab === "member-task" ? "bg-[#707070]" : ""
+              }`}
+            >
+              <HiUser color="#D4D4D4" />
+
+              <span className="text-[15px] ml-4 text-[#D4D4D4]">Refunds</span>
+            </div>
+          </Link>
         )}
 
         {currentUser.role === "Manager" && (

@@ -27,6 +27,8 @@ import DashTasks from "../components/DashTasks";
 import FinanceSum from "../components/PaymentComponents/Admin Components/FinanceSummary";
 import TransacTable from "../components/PaymentComponents/Admin Components/TransactionTable";
 import ManageShippingMethods from "../components/PaymentComponents/Admin Components/DisplayShipping";
+import RefundMemberTable from "../components/PaymentComponents/refundTableMember";
+import RefundAdminTable from "../components/PaymentComponents/Admin Components/refundAdminTable";
 
 import AdminSubscriptionPanel from "../components/subpacComp/AdminSubscriptionPanel";
 import DashboardComponent from "../components/DashboardComponent";
@@ -90,6 +92,8 @@ export default function AdminDashboard() {
         {tab === "finance-summary" && <FinanceSum />}
         {tab === "all-transactions" && <TransacTable />}
         {tab === "manage-shipping" && <ManageShippingMethods />}
+        {tab === "refund-member" && <RefundMemberTable />}
+        {tab === "refund-admin" && <RefundAdminTable />}
 
         {tab === "add-supplements" && <ManagerAddSupplements />}
         {tab === "show-supplements" && <ManagerShowSupplements />}

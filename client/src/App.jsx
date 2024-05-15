@@ -27,6 +27,7 @@ import PaymentSelection from "./pages/Checkout/PaymentSelect";
 import PaymentSuccess from "./pages/Checkout/PaymentSuccess";
 import CreateShippingMethod from "./components/PaymentComponents/Admin Components/ManageShipping";
 import EditShipping from "./pages/Checkout/EditShipping";
+import Refund from "./pages/Checkout/RefundPage";
 
 import ManagerUpdateSupplements from "./components/ManagerUpdateSupplements";
 // import Protein from "./pages/Protein";
@@ -113,6 +114,7 @@ export default function App() {
         <Route path="/Checkout/payment/success" element={<PaymentSuccess />} />
         <Route path="/shipping/create" element={<CreateShippingMethod />} />
         <Route path="/shipping/edit/:id" element={<EditShipping />} />
+        <Route path="/refundRequests" element={<Refund />} />
       </Routes>
       <FooterCom />
     </BrowserRouter>

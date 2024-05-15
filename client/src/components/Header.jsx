@@ -117,7 +117,7 @@ export default function Header() {
             </Link>
           )}
           {currentUser && ( //hide shop from admin
-            <Link to="">
+            <Link to="/refundRequests">
               <li className="hidden sm:inline text-[#D4D4D4] hover:underline hover:underline-offset-4 hover:text-white">
                 Request Refund
               </li>
