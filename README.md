@@ -59,9 +59,9 @@ npm run dev
   <img width="12" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@master/icons/redux/redux-original.svg" height="40" alt="redux-logo"  />
   <img width="12" />
-  <img src="https://flowbite.com/docs/images/logo.svg" height="40" alt="java logo"  />
+  <img src="https://flowbite.com/docs/images/logo.svg" height="40" alt="flowbite"  />
   <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" height="40" alt="flutter logo"  />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@master/icons/materialui/materialui-plain.svg" height="40" alt="maeterial ui"  />
   <img width="12" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" height="40" alt="dart logo"  />
   <img width="12" />
