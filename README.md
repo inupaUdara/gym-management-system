@@ -37,7 +37,6 @@ npm install
 To start `server`and `client` run:
 
 ```bash
-# In the root directory (mern):
 npm run dev
 cd client
 npm run dev
