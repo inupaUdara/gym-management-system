@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import OAuth from '../components/OAuth';
 import Header from "../components/Header";
-import gymImage from '../assets/gym11.jpg';
+import gymImage from '../assets/gym24.jpg';
 import {
   signInStart,
   signInSuccess,
@@ -79,12 +79,18 @@ export default function SignIn() {
             <Label value='Password' style={{ color: 'white' }}/>
             <TextInput
               type='password'
-              placeholder='**********'
+              placeholder='****'
               id='password'
               onChange={handleChange}
             />
           </div>
-          {/* <Button
+          <div>
+          <Link to="/forgot-password" style={{ color: 'white' }}>
+  Forgot Password?
+</Link>
+          </div>
+         
+         {/* <Button
             className="text-white bg-red-900 focus:outline-none"
             type='submit'
             disabled={loading}

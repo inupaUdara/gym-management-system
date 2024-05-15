@@ -1,4 +1,5 @@
 import { Alert, Spinner, Select } from "flowbite-react";
+import { enqueueSnackbar } from "notistack";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 export default function AdminDasAddEmp() {
@@ -20,7 +21,7 @@ export default function AdminDasAddEmp() {
       !formData.email ||
       !formData.nic
     ) {
-      return setError("All fiel are required");
+      return enqueueSnackbar("All fields are required", { variant: "error" });
     }
     try {
       setLoading(true);
@@ -36,13 +37,13 @@ export default function AdminDasAddEmp() {
       if (data.success === false) {
         setLoading(false);
         setSuccess(null);
-        return setError(data.message);
+        return enqueueSnackbar(data.message, { variant: "error" });
         
       }
       setLoading(false);
       if (res.ok) {
         navigate("/admin-dashboard");
-        setSuccess("Employee added successfully");
+        enqueueSnackbar("Employee added successfully", { variant: "success" });
       }
     } catch (error) {
       setError(error.message);
@@ -164,9 +165,9 @@ export default function AdminDasAddEmp() {
               }
             >
               <option>Select the shift</option>
-              <option value="6am-11am">6.00 AM to 12.00 PM</option>
+              <option value="6am-11am">6.00 AM to 11.00 AM</option>
               <option value="12pm-5pm">12.00 PM to 5.00 PM</option>
-              <option value="5pm-10pm">5.00 PM to 9.00 PM</option>
+              <option value="5pm-10pm">5.00 PM to 10.00 PM</option>
             </select>
             </>)}
             
@@ -174,7 +175,7 @@ export default function AdminDasAddEmp() {
           <div className="flex flex-col my-4">
             <button
               type="submit"
-              className=" text-white text-sm my-2 bg-[#4c0000] border border-white rounded-md p-3 text-center flex items-center justify-center cursor-pointer hover:bg-[#7e1010]"
+              className=" text-white text-sm my-2 bg-cyan-600 border border-white rounded-md p-3 text-center flex items-center justify-center cursor-pointer hover:bg-cyan-900"
               disabled={loading}
             >
               {loading ? (

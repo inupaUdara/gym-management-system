@@ -66,6 +66,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
+          <Link to="/SubscriptionPackages">
             <div className="p-2 relative flex items-center">
               <img src={membershipCover} alt="" className="opacity-75" />
               <div className="absolute bottom-5 left-0  text-[#d4d4d4] p-4">
@@ -73,6 +74,7 @@ export default function Home() {
                 <p className=" text-2xl font-bold">Membership Plans</p>
               </div>
             </div>
+          </Link>
           </div>
         </div>
       </div>

@@ -7,6 +7,7 @@ export const create = async (req, res, next) => {
 
   const nicRegex = /^(?:[0-9]{9}[VvXx]||[0-9]{12})$/;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const phoneRegex = /^[0-9]{10}$/;
 
   if (
     !firstname ||
@@ -27,17 +28,29 @@ export const create = async (req, res, next) => {
   }
   
 
-  // Check NIC validity
-  if (!nicRegex.test(nic)) {
-    next(errorHandler(400, "NIC is invalid"));
-   // Return to avoid further execution
+   // Check NIC validity
+   if (!nicRegex.test(nic)) {
+    return next(errorHandler(400, "NIC is invalid"));
   }
 
   // Check email validity
   if (!emailRegex.test(email)) {
-    next(errorHandler(400, "Email is invalid"));
-    // Return to avoid further execution
+    return next(errorHandler(400, "Email is invalid"));
   }
+
+  // Check phone number validity
+  if (!phoneRegex.test(phone)) {
+    return next(errorHandler(400, "Phone number is invalid"));
+  }
+
+   // Check if data already exists in the database
+   const existingEmployeeByEmail = await Employee.findOne({ email });
+   const existingEmployeeByPhone = await Employee.findOne({ phone });
+   const existingEmployeeByNIC = await Employee.findOne({ nic });
+
+   if (existingEmployeeByEmail || existingEmployeeByPhone || existingEmployeeByNIC) {
+    return next(errorHandler(400,"Employee with this email, phone number, or NIC already exists"));
+   }
   
 
   const hashedPassword = bcryptjs.hashSync(nic, 10);
@@ -88,6 +101,7 @@ export const login = async (req, res, next) => {
         isAdmin: validEmployee.isAdmin,
         role: validEmployee.role,
         username: validEmployee.username,
+        name: validEmployee.firstname + " " + validEmployee.lastname,
       },
       process.env.JWT_SECRET_EMP
     );
