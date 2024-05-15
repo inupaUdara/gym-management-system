@@ -6,11 +6,13 @@ import authEmployeeRoutes from "./routes/authEmployee.route.js";
 import leaveRoutes from "./routes/leave.route.js";
 import userRoutes from './routes/user.routes.js';
 import authRoutes from './routes/auth.route.js';
+import createWorkoutRoutes from  './routes/CreateWorkout.route.js';
+import workoutRoutes from './routes/workoutplans.route.js';
 import cookieParser from "cookie-parser";
+
 dotenv.config();
 
-mongoose
-  .connect(process.env.MONGO_DB)
+mongoose.connect(process.env.MONGO_DB)
   .then(() => {
     console.log("MongoDB is connected");
   })
@@ -31,6 +33,8 @@ app.use("/api/authemployee", authEmployeeRoutes);
 app.use("/api/leave", leaveRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/workoutplans', workoutRoutes);
+app.use('/api/createworkoutplans', createWorkoutRoutes);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
@@ -39,5 +43,5 @@ app.use((err, req, res, next) => {
     success: false,
     statusCode,
     message
-   });
-})
+  });
+});

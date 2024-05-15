@@ -3,6 +3,7 @@ import workoutCover from "../assets/workoutCover.png";
 import membershipCover from "../assets/membershipCover.png";
 import mealCover from "../assets/mealCover.png";
 import Header from "../components/Header";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
@@ -46,7 +47,9 @@ export default function Home() {
             </div>
             <div className="flex flex-col justify-between">
               <div className="p-2 relative flex items-center">
-                <img src={workoutCover} alt="" className="opacity-75" />
+                <Link to="/WorkoutPlans">
+                  <img src={workoutCover} alt="" className="opacity-75" />
+                </Link>
                 <div className="absolute bottom-5 left-0  text-[#d4d4d4] p-4">
                   <h2 className="text-lg md:text-xl">Request a</h2>
                   <p className="text-2xl font-bold">Work-out Plan</p>
@@ -54,7 +57,9 @@ export default function Home() {
               </div>
 
               <div className="p-2 relative flex items-center">
-                <img src={mealCover} alt="" className="opacity-75" />
+                <Link to="/MealPlans">
+                  <img src={mealCover} alt="" className="opacity-75" />
+                </Link>
                 <div className="absolute bottom-5 left-0  text-[#d4d4d4] p-4">
                   <h2 className="text-lg md:text-xl">Request a</h2>
                   <p className="text-2xl font-bold">Meal Plan</p>
@@ -104,15 +109,18 @@ export default function Home() {
       <div className="bg-[#d4d4d4]">
         <div className="flex flex-col gap-2 p-10 px-4 max-w-full items-center mx-auto">
           <h1 className="text-[#1f1f1f] font-bold text-xl lg:text-4xl mt-6">
-          CALCULATE YOUR BODY MASS INDEX (BMI)
+            CALCULATE YOUR BODY MASS INDEX (BMI)
           </h1>
           <div className="text-[#1f1f1f] text-sm sm:text-base text-center">
-          BMI, based on height and weight, measures body fat in adults for assessing health risks
+            BMI, based on height and weight, measures body fat in adults for
+            assessing health risks
           </div>
           <div className="">
-            <button className="bg-[#A80000] py-1.5 px-6 rounded-full text-[#d4d4d4] font-semibold">
-            Calculate your BMI
-            </button>
+            <Link to="/Bmi">
+              <button className="bg-[#A80000] py-1.5 px-6 rounded-full text-[#d4d4d4] font-semibold">
+                Calculate your BMI
+              </button>
+            </Link>
           </div>
         </div>
       </div>

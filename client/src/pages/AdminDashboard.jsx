@@ -13,6 +13,10 @@ import ManagerInstructorLeave from "../components/ManagerInstructorLeave";
 import AdminViewEmployeeDetails from "../components/AdminViewEmployeeDetails";
 import AdminInstructorShifts from "../components/AdminInstructorShifts";
 import MemberDashProfile from "../components/MemberDashProfile";
+import InstructorWorkout from "../components/InstructorWorkout";
+import InstructorMealPlan from "../components/InstructorMealPlan";
+import MemberRequests from "../components/MemberRequests";
+import PlansProfile from "../components/PlansProfile";
 export default function AdminDashboard() {
   const location = useLocation();
   const [tab,setTab] = useState('');
@@ -43,7 +47,11 @@ export default function AdminDashboard() {
       <div className="md:w-56">
         <AdminDashSideBar/>
       </div>
-      
+
+      {tab === 'member-plan-profile' && <PlansProfile/>}
+      {tab === 'member-request' && <MemberRequests/>}
+      {tab === 'create-mealplan' && <InstructorMealPlan/>}
+      {/* {tab === 'create-workout' && <InstructorWorkout/>} */}
       {tab === 'addemployee' && <AdminDasAddEmp/>}
       {tab === 'profile' && <DasProfile/>}
       {tab === 'member-profile' && <MemberDashProfile/>}
