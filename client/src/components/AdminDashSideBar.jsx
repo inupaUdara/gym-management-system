@@ -25,9 +25,14 @@ export default function AdminDashSideBar() {
   const dispatch = useDispatch();
   const [isOpenEmp, setIsOpenEmp] = useState(false);
   const [isOpenReq, setIsOpenReq] = useState(false);
+
+  const [isOpenPlan, setIsOpenPlan] = useState(false);
+  const [isOpenMemberPlan, setIsOpenMemberPlan] = useState(false);
+
   const [isOpenSupplement, setIsOpenSupplement] = useState(false);
   const [isOpenPayment, setIsOpenPayment] = useState(false);
   const [isOpenSubscription, setIsOpenSubscription] = useState(false);
+
   const toggleDropdownEmp = () => {
     setIsOpenEmp(!isOpenEmp);
   };
@@ -47,6 +52,13 @@ export default function AdminDashSideBar() {
     setIsOpenSupplement(!isOpenSupplement);
   };
 
+  const toggleDropdownPlans = () => {
+    setIsOpenPlan(!isOpenPlan);
+  };
+  const toggleDropdownMemberPlans = () => {
+    setIsOpenMemberPlan(!isOpenMemberPlan);
+  };
+
   const [activeTab, setActiveTab] = useState("");
 
   useEffect(() => {
@@ -56,6 +68,7 @@ export default function AdminDashSideBar() {
       setActiveTab(tabFromUrl);
     }
   }, [location.search]);
+
 
   return (
     <div className="w-full h-full md:w-56 drop-shadow-2xl border-b-white">
@@ -99,6 +112,45 @@ export default function AdminDashSideBar() {
             </div>
           </Link>
         )}
+        {!currentUser.role && (
+          <div
+            className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
+              activeTab === "plan" ? "bg-[#707070]" : ""
+            }`}
+            onClick={() =>  toggleDropdownMemberPlans()}
+           
+          >
+            <HiUser color="#D4D4D4" />
+            <div className="flex items-center justify-between w-full">
+            <span className="text-[15px] ml-4 text-[#D4D4D4]">Plans</span>
+            <span className="text-sm rotate-180" id="arrow">
+                {isOpenMemberPlan ? <IoIosArrowUp /> : <IoIosArrowDown />}
+              </span>
+              </div>
+          </div>
+        )}
+        {isOpenMemberPlan && (
+          <div
+            className="text-left text-sm font-light w-4/5 mx-auto text-[#D4D4D4] p-2"
+            id="submenu"
+          >
+            <Link to="/admin-dashboard?tab=member-plan-profile">
+           
+              <h1
+                className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
+              ${activeTab === "member-plan-profile" ? "bg-[#707070]" : ""}`}
+                
+              >
+                Plan Profile
+              </h1>
+             
+            </Link>
+           
+            
+          </div>
+        )}
+
+
         {currentUser.role === "Instructor" && (
           <div
             className={`p-2.5 my-1 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
@@ -128,8 +180,7 @@ export default function AdminDashSideBar() {
                 Shift
               </h1>
             </Link>
-
-            <Link to="/admin-dashboard?tab=view-instructors-request">
+              <Link to="/admin-dashboard?tab=view-instructors-request">
               <h1
                 className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
               ${activeTab === "view-instructors-request" ? "bg-[#707070]" : ""}`}
@@ -137,6 +188,52 @@ export default function AdminDashSideBar() {
                 Leave Requests
               </h1>
             </Link>
+           </div>
+        )}
+
+{currentUser.role === "Instructor" && (
+          
+          <div
+            className={`p-2.5 my-1 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
+              activeTab === "plans" ? "bg-[#707070]" : ""
+            }` } onClick={() =>  toggleDropdownPlans()}
+           
+          >
+            <MdSchedule color="#D4D4D4" />
+            <div className="flex items-center justify-between w-full">
+            <span className="text-[15px] ml-4 text-[#D4D4D4]">Plans</span>
+            <span className="text-sm rotate-180" id="arrow">
+                {isOpenReq ? <IoIosArrowUp /> : <IoIosArrowDown />}
+              </span>
+            </div>
+          </div>
+        
+        )}
+        {isOpenPlan && (
+          <div
+            className="text-left text-sm font-light w-4/5 mx-auto text-[#D4D4D4] p-2"
+            id="submenu"
+          >
+            <Link to="/admin-dashboard?tab=member-request">
+              <h1
+                className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
+              ${activeTab === "member-request" ? "bg-[#707070]" : ""}`}
+                
+              >
+                Request
+              </h1>
+            </Link>
+            {/* <Link
+              to="/admin-dashboard?tab=create-workout"
+            >
+              <h1 className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
+              ${activeTab === "create-workout" ? "bg-[#707070]" : ""}`}
+                
+                >
+                Create Plan
+              </h1>
+            </Link> */}     
+
           </div>
         )}
 

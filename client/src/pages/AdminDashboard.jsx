@@ -12,6 +12,12 @@ import InstructorViewLeaveRequest from "../components/InstructorViewLeaveRequest
 import AdminInstructorShifts from "../components/AdminInstructorShifts";
 import MemberDashProfile from "../components/MemberDashProfile";
 
+import InstructorWorkout from "../components/InstructorWorkout";
+import InstructorMealPlan from "../components/InstructorMealPlan";
+import MemberRequests from "../components/MemberRequests";
+import PlansProfile from "../components/PlansProfile";
+
+
 import ManagerAddSupplements from "../components/ManagerAddSupplements";
 import ManagerShowSupplements from "../components/ManagerShowSupplements";
 import ManagerShowMassGainer from "../components/ManagerShowMassGainer";
@@ -61,6 +67,7 @@ export default function AdminDashboard() {
 
   return (
     <>
+
       <Header />
       <div className="min-h-screen flex flex-col md:flex-row bg-[#d4d4d4]">
         <div className="md:w-56">
@@ -103,6 +110,10 @@ export default function AdminDashboard() {
         {tab === "show-FatBurners" && <ManagerShowFatBurners />}
         {tab === "show-Vitamins" && <ManagerShowVitamins />}
         {tab === "show-Protein" && <ManagerShowProtein />}
+        
+        {tab === 'member-plan-profile' && <PlansProfile/>}
+      {tab === 'member-request' && <MemberRequests/>}
+      {tab === 'create-mealplan' && <InstructorMealPlan/>}
       </div>
     </>
   );

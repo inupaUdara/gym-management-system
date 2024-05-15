@@ -13,6 +13,13 @@ import Header from "./components/Header";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminPrivateRoute from "./components/AdminPrivateRoute";
 import FooterCom from "./components/Footer";
+
+import WorkoutPlans from "./pages/WorkoutPlans";
+import MealPlans from "./pages/MealPlans";
+import Bmi from "./pages/Bmi";
+import UpdateWorkout from "./components/UpdateWorkout";
+import InstructorWorkout from "./components/InstructorWorkout";
+
 import CreateSubPackage from "./pages/subPackagePages/CreateSubPackage";
 
 import EditSubPackage from "./pages/subPackagePages/EditSubPackage";
@@ -56,7 +63,8 @@ export default function App() {
 
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/employee-login" element={<EmployeeLogin />} />
+        <Route path="/employee-login" element={<EmployeeLogin />} />      
+
         <Route
           path="/SubscriptionPackages"
           element={<SubscriptionPackages />}
@@ -82,10 +90,25 @@ export default function App() {
             element={<ManagerInstructorLeave />}
           />
 
-          <Route path="/yourtasks" element={<YourTasks />} />
+          <Route
+            path="/update-workout/:workoutId"
+            element={<UpdateWorkout />}
+          />
+          <Route
+            path="/create-workout/:userId"
+            element={<InstructorWorkout />}
+          />
+          
+          <Route path="/WorkoutPlans" element={<WorkoutPlans />} />
+          <Route path="/MealPlans" element={<MealPlans />} />
+             <Route path="/yourtasks" element={<YourTasks />} />
           <Route path="/update-tasks/:taskId" element={<UpdateTasks />} />
           <Route path="/member-view/:userId" element={<MemberView />} />
         </Route>
+        
+        
+        <Route path="/Bmi" element={<Bmi />} />
+
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
 
         {/* <Route path ="/protein" element={<Protein/>} /> */}
