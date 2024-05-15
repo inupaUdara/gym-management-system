@@ -22,6 +22,7 @@
     "axios": "^1.6.8",
     "firebase": "^10.10.0",
     "flowbite-react": "^0.7.2",
+    "got": "^14.2.1",
     "html2canvas": "^1.4.1",
     "js-cookie": "^3.0.5",
     "jspdf": "^2.5.1",

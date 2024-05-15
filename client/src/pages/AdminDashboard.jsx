@@ -17,7 +17,6 @@ import InstructorMealPlan from "../components/InstructorMealPlan";
 import MemberRequests from "../components/MemberRequests";
 import PlansProfile from "../components/PlansProfile";
 
-
 import ManagerAddSupplements from "../components/ManagerAddSupplements";
 import ManagerShowSupplements from "../components/ManagerShowSupplements";
 import ManagerShowMassGainer from "../components/ManagerShowMassGainer";
@@ -51,7 +50,7 @@ import InstructorServiceRequest from "../components/InstructorServiceRequest";
 import InstructorAddServiceReq from "../components/InstructorAddServiceReq";
 import ServiceRequestView from "../components/ManagerServiceRequestView";
 import InstructorServiceRequestView from "../components/InstructorViewRequests";
-
+import CoachingBookingsViewPage from "./CoachingBookingsVIewPage";
 
 export default function AdminDashboard() {
   const location = useLocation();
@@ -77,7 +76,6 @@ export default function AdminDashboard() {
 
   return (
     <>
-
       <Header />
       <div className="min-h-screen flex flex-col md:flex-row bg-[#d4d4d4]">
         <div className="md:w-56">
@@ -121,20 +119,22 @@ export default function AdminDashboard() {
         {tab === "show-Vitamins" && <ManagerShowVitamins />}
         {tab === "show-Protein" && <ManagerShowProtein />}
 
-        {tab === 'view-inventory' && <InventoryViewItems/>}
-        {tab === 'update-inventory' && <InventoryUpdateItems/>}
-        {tab === 'addinventory' && <InventoryAddNew/>}
-        {tab === 'add-inventory'  && <InventoryAdd/>}     
-        {tab === 'view-instructors-request' && <InstructorViewLeaveRequest/>}
-        {tab === 'view-instructors-service-request' && <InstructorServiceRequest/>}
-        {tab === 'view-manager-service-request' && <ServiceRequestView/>}
-        {tab === 'view-instructor-service-request' && <InstructorServiceRequestView/>}
+        {tab === "view-inventory" && <InventoryViewItems />}
+        {tab === "update-inventory" && <InventoryUpdateItems />}
+        {tab === "addinventory" && <InventoryAddNew />}
+        {tab === "view-instructors-service-request" && (
+          <InstructorServiceRequest />
+        )}
+        {tab === "view-manager-service-request" && <ServiceRequestView />}
+        {tab === "view-instructor-service-request" && (
+          <InstructorServiceRequestView />
+        )}
 
-        
-        {tab === 'member-plan-profile' && <PlansProfile/>}
-      {tab === 'member-request' && <MemberRequests/>}
-      {tab === 'create-mealplan' && <InstructorMealPlan/>}
+        {tab === "member-plan-profile" && <PlansProfile />}
+        {tab === "member-request" && <MemberRequests />}
+        {tab === "create-mealplan" && <InstructorMealPlan />}
 
+        {tab === "viewSessions" && <CoachingBookingsViewPage />}
       </div>
     </>
   );

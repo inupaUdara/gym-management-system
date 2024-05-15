@@ -25,14 +25,12 @@ export default function AdminDashSideBar() {
   const dispatch = useDispatch();
   const [isOpenEmp, setIsOpenEmp] = useState(false);
   const [isOpenReq, setIsOpenReq] = useState(false);
-
-  const [isOpenPlan, setIsOpenPlan] = useState(false);
-  const [isOpenMemberPlan, setIsOpenMemberPlan] = useState(false);
-
   const [isOpenSupplement, setIsOpenSupplement] = useState(false);
   const [isOpenPayment, setIsOpenPayment] = useState(false);
   const [isOpenSubscription, setIsOpenSubscription] = useState(false);
 
+  const [isOpenPlan, setIsOpenPlan] = useState(false);
+  const [isOpenMemberPlan, setIsOpenMemberPlan] = useState(false);
 
   const [isOpenServ, setIsOpenServ] = useState(false);
   const [isOpenInventory, setIsOpenInventory] = useState(false);
@@ -56,22 +54,18 @@ export default function AdminDashSideBar() {
     setIsOpenSupplement(!isOpenSupplement);
   };
 
-
-//Inventory parts
-  const toggleDropdownServ = () => {
-    setIsOpenServ(!isOpenServ);
-  };
-
-
-
-  const toggleDropdownInventory = () => {
-    setIsOpenInventory(!isOpenInventory);
-
   const toggleDropdownPlans = () => {
     setIsOpenPlan(!isOpenPlan);
   };
   const toggleDropdownMemberPlans = () => {
     setIsOpenMemberPlan(!isOpenMemberPlan);
+  };
+  const toggleDropdownServ = () => {
+    setIsOpenServ(!isOpenServ);
+  };
+
+  const toggleDropdownInventory = () => {
+    setIsOpenInventory(!isOpenInventory);
   };
 
   const [activeTab, setActiveTab] = useState("");
@@ -83,7 +77,6 @@ export default function AdminDashSideBar() {
       setActiveTab(tabFromUrl);
     }
   }, [location.search]);
-
 
   return (
     <div className="w-full h-full md:w-56 drop-shadow-2xl border-b-white">
@@ -127,45 +120,6 @@ export default function AdminDashSideBar() {
             </div>
           </Link>
         )}
-        {!currentUser.role && (
-          <div
-            className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
-              activeTab === "plan" ? "bg-[#707070]" : ""
-            }`}
-            onClick={() =>  toggleDropdownMemberPlans()}
-           
-          >
-            <HiUser color="#D4D4D4" />
-            <div className="flex items-center justify-between w-full">
-            <span className="text-[15px] ml-4 text-[#D4D4D4]">Plans</span>
-            <span className="text-sm rotate-180" id="arrow">
-                {isOpenMemberPlan ? <IoIosArrowUp /> : <IoIosArrowDown />}
-              </span>
-              </div>
-          </div>
-        )}
-        {isOpenMemberPlan && (
-          <div
-            className="text-left text-sm font-light w-4/5 mx-auto text-[#D4D4D4] p-2"
-            id="submenu"
-          >
-            <Link to="/admin-dashboard?tab=member-plan-profile">
-           
-              <h1
-                className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
-              ${activeTab === "member-plan-profile" ? "bg-[#707070]" : ""}`}
-                
-              >
-                Plan Profile
-              </h1>
-             
-            </Link>
-           
-            
-          </div>
-        )}
-
-
         {currentUser.role === "Instructor" && (
           <div
             className={`p-2.5 my-1 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
@@ -195,7 +149,8 @@ export default function AdminDashSideBar() {
                 Shift
               </h1>
             </Link>
-              <Link to="/admin-dashboard?tab=view-instructors-request">
+
+            <Link to="/admin-dashboard?tab=view-instructors-request">
               <h1
                 className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
               ${activeTab === "view-instructors-request" ? "bg-[#707070]" : ""}`}
@@ -203,26 +158,24 @@ export default function AdminDashSideBar() {
                 Leave Requests
               </h1>
             </Link>
-           </div>
+          </div>
         )}
 
-{currentUser.role === "Instructor" && (
-          
+        {currentUser.role === "Instructor" && (
           <div
             className={`p-2.5 my-1 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
               activeTab === "plans" ? "bg-[#707070]" : ""
-            }` } onClick={() =>  toggleDropdownPlans()}
-           
+            }`}
+            onClick={() => toggleDropdownPlans()}
           >
             <MdSchedule color="#D4D4D4" />
             <div className="flex items-center justify-between w-full">
-            <span className="text-[15px] ml-4 text-[#D4D4D4]">Plans</span>
-            <span className="text-sm rotate-180" id="arrow">
+              <span className="text-[15px] ml-4 text-[#D4D4D4]">Plans</span>
+              <span className="text-sm rotate-180" id="arrow">
                 {isOpenReq ? <IoIosArrowUp /> : <IoIosArrowDown />}
               </span>
             </div>
           </div>
-        
         )}
         {isOpenPlan && (
           <div
@@ -233,7 +186,6 @@ export default function AdminDashSideBar() {
               <h1
                 className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
               ${activeTab === "member-request" ? "bg-[#707070]" : ""}`}
-                
               >
                 Request
               </h1>
@@ -247,8 +199,7 @@ export default function AdminDashSideBar() {
                 >
                 Create Plan
               </h1>
-            </Link> */}     
-
+            </Link> */}
           </div>
         )}
 
@@ -549,7 +500,7 @@ export default function AdminDashSideBar() {
             <Link to="/admin-dashboard?tab=refund-admin">
               <h1
                 className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
-              ${activeTab === "admin-managers" ? "bg-[#707070]" : ""}`}
+              ${activeTab === "manage-shipping" ? "bg-[#707070]" : ""}`}
               >
                 Manage Refunds
               </h1>
@@ -557,7 +508,7 @@ export default function AdminDashSideBar() {
           </div>
         )}
 
-          {!currentUser.role && (
+        {!currentUser.role && (
           <Link to="/admin-dashboard?tab=refund-member">
             <div
               className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
@@ -611,8 +562,8 @@ export default function AdminDashSideBar() {
             </Link>
           </div>
         )}
+
         {currentUser.role === "Manager" && (
-          
           <div
             className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${
               activeTab === "inventory" ? "bg-[#707070]" : ""
@@ -659,28 +610,24 @@ export default function AdminDashSideBar() {
                 View Service Requests
               </h1>
             </Link>
-          
           </div>
         )}
 
-
         {currentUser.role === "Instructor" && (
           <>
-
-              <div
-                className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${activeTab === "request" ? "bg-[#707070]" : ""}`}
-                onClick={toggleDropdownServ}
-              >
-                <MdSchedule color="#D4D4D4" />
-                <div className="flex justify-between w-full items-center">
-                  <span className="text-[15px] ml-4 text-[#D4D4D4]">Service</span>
-                  <span className="text-sm rotate-180" id="arrow">
-                    {isOpenServ ? <IoIosArrowUp /> : <IoIosArrowDown />}
-                  </span>
-                </div>
-    
+            <div
+              className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${activeTab === "request" ? "bg-[#707070]" : ""}`}
+              onClick={toggleDropdownServ}
+            >
+              <MdSchedule color="#D4D4D4" />
+              <div className="flex justify-between w-full items-center">
+                <span className="text-[15px] ml-4 text-[#D4D4D4]">Service</span>
+                <span className="text-sm rotate-180" id="arrow">
+                  {isOpenServ ? <IoIosArrowUp /> : <IoIosArrowDown />}
+                </span>
+              </div>
             </div>
-            </>
+          </>
         )}
         {isOpenServ && (
           <div
@@ -691,25 +638,37 @@ export default function AdminDashSideBar() {
               <h1
                 className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
               ${activeTab === "instructor-request" ? "bg-[#707070]" : ""}`}
-                
               >
                 Make Service Request
               </h1>
             </Link>
-            <Link
-              to="/admin-dashboard?tab=view-instructor-service-request"
-            >
-              <h1 className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
+            <Link to="/admin-dashboard?tab=view-instructor-service-request">
+              <h1
+                className={`cursor-pointer p-2 hover:bg-[#707070] rounded-md mt-1
               ${activeTab === "view-instructors-request" ? "bg-[#707070]" : ""}`}
-                
-                >
+              >
                 Your Requests
               </h1>
             </Link>
-            
           </div>
         )}
-        
+
+        {currentUser.role === "Instructor" && (
+          <>
+            <Link to="/admin-dashboard?tab=viewSessions">
+              <div
+                className={`p-2.5 my-2 mx-2 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-[#707070] text-white ${activeTab === "request" ? "bg-[#707070]" : ""}`}
+              >
+                <MdSchedule color="#D4D4D4" />
+                <div className="flex justify-between w-full items-center">
+                  <span className="text-[15px] ml-4 text-[#D4D4D4]">
+                    View Appointments
+                  </span>
+                </div>
+              </div>
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );

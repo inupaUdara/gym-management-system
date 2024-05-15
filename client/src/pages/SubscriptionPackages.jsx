@@ -137,7 +137,7 @@ const SubscriptionPackages = () => {
                       <li>{subPackage.note3}</li>
                     </ul>
                     <div className="mt-4 flex justify-center">
-                      <Link to={`/Checkout/payment`}>
+                      <Link to={`/Checkout/paymentPCKG`}>
                         <button className="rounded-3xl px-4 py-2 text-white font-bold bg-red-700 hover:bg-red-800 h-15 w-40 text-xl">
                           Join Us
                         </button>

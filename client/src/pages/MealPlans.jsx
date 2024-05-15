@@ -16,6 +16,7 @@ import m5 from "../assets/m5.png";
 import m6 from "../assets/m6.png";
 import m7 from "../assets/m7.png";
 import m8 from "../assets/m8.png";
+import Header from "../components/Header";
 
 const MealPlans = () => {
   const [page, setPage] = useState(0);
@@ -84,6 +85,7 @@ const MealPlans = () => {
 
   return (
     <>
+      <Header />
       <div className="flex-1 flex">
         <div className="w-1/2 bg-black">
           <div className="p-10">
