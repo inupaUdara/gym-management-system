@@ -43,6 +43,16 @@ import InstructorShiftRequets from "../components/InstructorShiftRequets";
 import AdminAnnouncement from "../components/AdminAnnouncement";
 import AdminPromoPackage from "../components/subpacComp/AdminPromoPackage";
 import AdminApprovePromo from "../components/subpacComp/AdminApprovePromo";
+
+import InventoryAddNew from "../components/InventoryAddNew";
+import InventoryViewItems from "../components/InventoryViewItems";
+import InventoryUpdateItems from "../components/InventoryUpdateItems";
+import InstructorServiceRequest from "../components/InstructorServiceRequest";
+import InstructorAddServiceReq from "../components/InstructorAddServiceReq";
+import ServiceRequestView from "../components/ManagerServiceRequestView";
+import InstructorServiceRequestView from "../components/InstructorViewRequests";
+
+
 export default function AdminDashboard() {
   const location = useLocation();
   const [tab, setTab] = useState("");
@@ -110,10 +120,21 @@ export default function AdminDashboard() {
         {tab === "show-FatBurners" && <ManagerShowFatBurners />}
         {tab === "show-Vitamins" && <ManagerShowVitamins />}
         {tab === "show-Protein" && <ManagerShowProtein />}
+
+        {tab === 'view-inventory' && <InventoryViewItems/>}
+        {tab === 'update-inventory' && <InventoryUpdateItems/>}
+        {tab === 'addinventory' && <InventoryAddNew/>}
+        {tab === 'add-inventory'  && <InventoryAdd/>}     
+        {tab === 'view-instructors-request' && <InstructorViewLeaveRequest/>}
+        {tab === 'view-instructors-service-request' && <InstructorServiceRequest/>}
+        {tab === 'view-manager-service-request' && <ServiceRequestView/>}
+        {tab === 'view-instructor-service-request' && <InstructorServiceRequestView/>}
+
         
         {tab === 'member-plan-profile' && <PlansProfile/>}
       {tab === 'member-request' && <MemberRequests/>}
       {tab === 'create-mealplan' && <InstructorMealPlan/>}
+
       </div>
     </>
   );

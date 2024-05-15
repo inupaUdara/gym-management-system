@@ -19,7 +19,13 @@ import announcementRoutes from "./routes/announcement.route.js";
 
 import checkoutShopRoutes from "./routes/checkoutShop.route.js";
 import shippingRoutes from "./routes/shipping.route.js";
+
+import inventoryRoutes from "./routes/inventory.route.js";
+import ServiceRequestRoutes from "./routes/serviceRequest.route.js";
+import emailRoutes from './routes/email.route.js';
+
 import refundRoutes from "./routes/refundRequest.route.js";
+
 import cors from "cors";
 
 dotenv.config();
@@ -66,6 +72,10 @@ app.use("/api/pay", checkoutShopRoutes);
 app.use("/api/shipping", shippingRoutes);
 app.use("/api/refunds", refundRoutes);
 
+
+app.use('/api/email', emailRoutes);
+app.use("/api/inventory", inventoryRoutes);
+app.use("/api/serviceRequest", ServiceRequestRoutes);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
