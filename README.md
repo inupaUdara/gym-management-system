@@ -65,7 +65,7 @@ npm run dev
   <img width="12" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@master/icons/firebase/firebase-original-wordmark.svg" height="40" alt="firebase logo"  />
   <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" height="40" alt="angularjs logo"  />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@master/icons/postman/postman-original-wordmark.svg" height="40" alt="postman logo"  />
 </div>
 
 <div align="left">
