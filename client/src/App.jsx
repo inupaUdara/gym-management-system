@@ -48,9 +48,10 @@ export default function App() {
           />
           
           <Route path="/WorkoutPlans" element={<WorkoutPlans />} />
+          <Route path="/MealPlans" element={<MealPlans />} />
         </Route>
         
-        <Route path="/MealPlans" element={<MealPlans />} />
+        
         <Route path="/Bmi" element={<Bmi />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
