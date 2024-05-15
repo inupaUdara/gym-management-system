@@ -43,6 +43,7 @@ npm run dev
 
 ```
 
+## Technologies 
 
 
 
