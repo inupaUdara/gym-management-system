@@ -29,7 +29,7 @@ import refundRoutes from "./routes/refundRequest.route.js";
 import booksRoute from "./routes/booksRoute.js";
 
 import cors from "cors";
-
+import path from "path";
 dotenv.config();
 
 mongoose
@@ -40,6 +40,8 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+  
+  const __dirname = path.resolve();
 
 const app = express();
 app.use(express.json());
@@ -80,6 +82,12 @@ app.use("/api/inventory", inventoryRoutes);
 app.use("/api/serviceRequest", ServiceRequestRoutes);
 
 app.use("/api/books", booksRoute);
+
+app.use(express.static(path.join(__dirname, "/client/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+})
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
